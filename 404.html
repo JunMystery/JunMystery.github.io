@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Not Found</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #05070a;
+            color: #8b949e;
+            font-family: "Fira Code", "Cascadia Code", "JetBrains Mono", "Consolas", monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+        .term-window {
+            background: #0d1117;
+            border: 1px solid #21262d;
+            border-radius: 8px;
+            max-width: 520px;
+            width: 100%;
+            overflow: hidden;
+        }
+        .term-header {
+            background: #161b22;
+            padding: 0.6rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid #21262d;
+        }
+        .term-dots { display: flex; gap: 6px; }
+        .term-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-red { background: #ff6b6b; }
+        .dot-yellow { background: #ffd93d; }
+        .dot-green { background: #6bcb77; }
+        .term-title { font-size: 0.75rem; color: #8b949e; margin-left: 0.5rem; }
+        .term-body { padding: 1.5rem; }
+        .prompt { color: #58a6ff; font-weight: 700; }
+        .error { color: #ff6b6b; }
+        .muted { color: #484f58; margin: 0.3rem 0; }
+        .btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.4rem 1rem;
+            border: 1px solid #58a6ff;
+            border-radius: 4px;
+            color: #58a6ff;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: background 0.15s;
+        }
+        .btn:hover { background: rgba(88, 166, 255, 0.1); }
+        .cursor { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+    <div class="term-window">
+        <div class="term-header">
+            <div class="term-dots">
+                <span class="term-dot dot-red"></span>
+                <span class="term-dot dot-yellow"></span>
+                <span class="term-dot dot-green"></span>
+            </div>
+            <span class="term-title">404 — not_found.sh</span>
+        </div>
+        <div class="term-body">
+            <p><span class="prompt">$</span> <span id="path-display">curl -I /unknown</span></p>
+            <p><span class="error">HTTP/1.1 404 Not Found</span></p>
+            <p class="muted">...</p>
+            <p><span class="prompt">$</span> <span id="msg">redirecting to / <span class="cursor">█</span></span></p>
+            <p><a href="/index.html" class="btn">> cd ~ && return</a></p>
+        </div>
+    </div>
+    <script>
+        var pathEl = document.getElementById('path-display');
+        if (pathEl) {
+            pathEl.textContent = 'curl -I ' + window.location.pathname;
+        }
+        var redirectMsg = document.getElementById('msg');
+        if (redirectMsg) {
+            redirectMsg.textContent = 'redirecting to / ...';
+        }
+        setTimeout(function () {
+            window.location.replace('/index.html');
+        }, 800);
+    </script>
+</body>
+</html>

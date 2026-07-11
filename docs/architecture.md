@@ -13,7 +13,8 @@ JunMystery.github.io/
 ├── style.css           # Entry point — imports all CSS layers
 ├── theme.css           # Design tokens, color system, base resets
 ├── layout.css          # Structural layout: navbar, hero, grid, footer, breakpoints
-├── components.css      # UI components: buttons, terminal frames, cards, grids
+├── components.css      # UI components: buttons, terminal frames, skills (under 300 LOC)
+├── content.css         # Section components: projects, certifications, education
 ├── print.css           # A4 CV print layout (media print)
 ├── script.js           # Interactive JS: theme toggle, skill filter, nav toggle, print
 └── docs/

@@ -1,6 +1,7 @@
 /* 
    components.css
-   Clean Developer UI: Buttons, Bento grids, Terminal mock views, syntax tokens
+   Clean Developer UI: Buttons, Terminal mock views, Hero Objective, Skills
+   Under 300 LOC — contains core interactive components only.
 */
 
 /* Buttons */
@@ -34,6 +35,29 @@
 .btn-secondary:hover {
     background: var(--bg-tertiary);
     border-color: var(--text-secondary);
+}
+
+/* Hero Objective & Availability */
+.hero-objective {
+    margin-bottom: 1.5rem;
+}
+
+.hero-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--accent-secondary);
+    color: var(--accent-secondary);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 0.5rem;
+}
+
+.hero-tagline {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    max-width: 580px;
+    font-style: italic;
 }
 
 /* Terminal Mock Frame */
@@ -102,7 +126,7 @@
 .terminal-comment { color: var(--text-muted); }
 .terminal-orange { color: var(--accent-orange); }
 
-/* Skills Bento Grid */
+/* Skills — Filter Tabs */
 .skills-tabs {
     display: flex;
     gap: 0.5rem;
@@ -115,58 +139,54 @@
     font-size: 0.75rem;
     padding: 0.35rem 0.75rem;
     border-radius: var(--border-radius-sm);
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
+    border: 1px solid var(--bg-tertiary);
+    color: var(--text-muted);
+    background: transparent;
     transition: var(--transition);
+    cursor: pointer;
 }
 
-.skills-tab-btn:hover, .skills-tab-btn.active {
+.skills-tab-btn:hover {
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+.skills-tab-btn.active {
     border-color: var(--accent-primary);
     color: var(--text-primary);
     background: var(--bg-tertiary);
 }
 
-.skills-grid {
-    display: grid;
-    grid-template-cols: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
-}
-
-.skill-card {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    padding: 1.25rem;
+/* Skills — Category Groups */
+.skill-groups {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1.25rem;
 }
 
-.skill-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.skill-title {
+.skill-group-title {
     font-family: var(--font-mono);
+    font-size: 0.85rem;
     font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--text-primary);
+    color: var(--accent-primary);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
-.skill-category {
-    font-size: 0.7rem;
-    font-family: var(--font-mono);
-    color: var(--accent-orange);
+.sgt-hash {
+    color: var(--text-muted);
+    font-weight: 400;
 }
 
-.skill-tags {
+.skill-group-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.35rem;
 }
 
+/* Skills — Tag Pills */
 .skill-tag {
     font-family: var(--font-mono);
     font-size: 0.7rem;
@@ -177,219 +197,60 @@
     border: 1px solid var(--border-color);
 }
 
-/* Projects Bento Grid Layout */
-.projects-grid {
-    display: grid;
-    grid-template-cols: 1fr;
-    gap: 1.25rem;
+/* Scroll Reveal (Apple-style) */
+:root {
+    --reveal-duration: 0.7s;
+    --reveal-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --reveal-offset: 24px;
 }
 
-.project-card {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    padding: 1.5rem;
-    display: grid;
-    grid-template-cols: 1.1fr 0.9fr;
-    gap: 1.5rem;
-    align-items: center;
+.reveal {
+    opacity: 0;
+    transform: translateY(var(--reveal-offset));
+    transition: opacity var(--reveal-duration) var(--reveal-easing),
+                transform var(--reveal-duration) var(--reveal-easing);
 }
 
-.project-info h3 {
-    font-family: var(--font-mono);
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.project-type {
-    font-family: var(--font-mono);
-    color: var(--accent-orange);
-    font-size: 0.75rem;
-    margin-bottom: 1rem;
-    display: block;
+.reveal-hero {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s var(--reveal-easing) 0.5s,
+                transform 0.8s var(--reveal-easing) 0.5s;
 }
 
-.project-desc {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-    text-align: justify;
+.reveal-hero.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.project-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
+.reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s var(--reveal-easing),
+                transform 0.5s var(--reveal-easing);
 }
 
-.project-meta-item {
-    display: flex;
-    gap: 0.75rem;
-    font-size: 0.85rem;
+.reveal-stagger.visible > * {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.project-meta-item strong {
-    font-family: var(--font-mono);
-    color: var(--text-primary);
-    min-width: 100px;
-}
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.05s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.1s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.15s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.2s; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.25s; }
 
-.project-meta-item span {
-    color: var(--text-secondary);
-}
-
-.project-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-}
-
-.project-tech-tag {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--accent-secondary);
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
-    padding: 0.15rem 0.5rem;
-    border-radius: var(--border-radius-sm);
-}
-
-.project-visual {
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    padding: 1.5rem;
-}
-
-.project-architecture {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.arch-node {
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
-    padding: 0.5rem;
-    border-radius: var(--border-radius-sm);
-    font-size: 0.75rem;
-    text-align: center;
-    font-family: var(--font-mono);
-}
-
-.arch-arrow {
-    display: flex;
-    justify-content: center;
-    color: var(--accent-primary);
-    font-size: 0.8rem;
-    font-family: var(--font-mono);
-}
-
-/* Certifications Bento */
-.certifications-grid {
-    display: grid;
-    grid-template-cols: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 0.75rem;
-}
-
-.cert-card {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.cert-info h4 {
-    font-family: var(--font-mono);
-    font-weight: 700;
-    font-size: 0.85rem;
-    color: var(--text-primary);
-}
-
-.cert-info p {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-}
-
-.cert-link {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--accent-primary);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-/* Education */
-.edu-grid {
-    display: grid;
-    grid-template-cols: 1fr 1fr;
-    gap: 1rem;
-}
-
-.edu-card {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    padding: 1.5rem;
-}
-
-.edu-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-}
-
-.edu-institution {
-    font-size: 1rem;
-    font-weight: 700;
-}
-
-.edu-period {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--accent-orange);
-}
-
-.edu-degree {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    margin-bottom: 0.75rem;
-}
-
-.edu-bullets {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-}
-
-.edu-bullets li {
-    position: relative;
-    padding-left: 1rem;
-}
-
-.edu-bullets li::before {
-    content: '-';
-    position: absolute;
-    left: 0;
-    color: var(--accent-purple);
-}
-
-@media (max-width: 768px) {
-    .project-card {
-        grid-template-cols: 1fr;
-        padding: 1.5rem;
-    }
-    .edu-grid {
-        grid-template-cols: 1fr;
+@media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-hero, .reveal-stagger > * {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
     }
 }

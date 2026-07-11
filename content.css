@@ -1,0 +1,248 @@
+/* 
+   content.css
+   Section-level components: Projects, Certifications, Education
+   Split from components.css to stay under 300 LOC per file.
+*/
+
+/* Projects Bento Grid Layout */
+.projects-grid {
+    display: grid;
+    grid-template-cols: 1fr;
+    gap: 0.85rem;
+}
+
+.project-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 1rem 1.25rem;
+}
+
+.project-info h3 {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.project-gh-link {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.project-gh-link:hover {
+    color: var(--accent-primary);
+}
+
+.project-type {
+    font-family: var(--font-mono);
+    color: var(--accent-orange);
+    font-size: 0.7rem;
+    margin-bottom: 0.3rem;
+    display: block;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.project-desc {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 0.65rem;
+    line-height: 1.55;
+}
+
+.project-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 0.65rem;
+    padding: 0.6rem 0.75rem;
+    border-left: 2px solid var(--border-color);
+    background: var(--bg-tertiary);
+    border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+
+.project-meta-item {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    line-height: 1.4;
+}
+
+.project-meta-item strong {
+    font-family: var(--font-mono);
+    color: var(--accent-primary);
+    min-width: 80px;
+    flex-shrink: 0;
+}
+
+.project-meta-item span {
+    color: var(--text-secondary);
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.project-tech-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent-secondary);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--border-radius-sm);
+}
+
+.project-flow {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.2rem 0.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1.5;
+}
+
+.flow-node {
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 0.1rem 0.4rem;
+    white-space: nowrap;
+}
+
+.flow-arrow {
+    color: var(--accent-primary);
+    font-weight: 700;
+    opacity: 0.7;
+    margin: 0 0.1rem;
+}
+
+/* Certifications — Compact Terminal List */
+.cert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.cert-line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.cert-prompt {
+    color: var(--accent-primary);
+    font-weight: 700;
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
+.cert-name {
+    color: var(--text-primary);
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.cert-sep {
+    color: var(--text-muted);
+    opacity: 0.4;
+    flex-shrink: 0;
+}
+
+.cert-issuer {
+    color: var(--text-secondary);
+    font-size: 0.72rem;
+    flex-shrink: 0;
+}
+
+.cert-link {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+}
+
+/* Education */
+.edu-grid {
+    display: grid;
+    grid-template-cols: 1fr 1fr;
+    gap: 1rem;
+}
+
+.edu-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 1.5rem;
+}
+
+.edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.edu-institution {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.edu-period {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-orange);
+}
+
+.edu-degree {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.edu-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.edu-bullets li {
+    position: relative;
+    padding-left: 1rem;
+}
+
+.edu-bullets li::before {
+    content: '-';
+    position: absolute;
+    left: 0;
+    color: var(--accent-purple);
+}
+
+@media (max-width: 768px) {
+    .project-card {
+        grid-template-cols: 1fr;
+        padding: 1.5rem;
+    }
+    .edu-grid {
+        grid-template-cols: 1fr;
+    }
+}

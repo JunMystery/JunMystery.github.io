@@ -8,9 +8,17 @@
 }
 
 @media print {
+    /* Disable all scroll reveal animations */
+    .reveal, .reveal-hero, .reveal-stagger > * {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
     /* Hide all interactive and screen-only elements */
     .navbar, 
     .hero, 
+    .hero-objective,
     .skills-tabs, 
     .footer, 
     button, 
@@ -87,26 +95,37 @@
     }
 
     /* About/Summary Section */
-    .summary-grid {
-        display: block !important;
+    .term-session {
+        margin-bottom: 6px;
     }
 
-    .summary-card {
+    .term-line {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+        font-size: 10px !important;
+        line-height: 1.4 !important;
+        color: #334155 !important;
+    }
+
+    .term-prompt, .term-fn, .term-kw, .term-type, .term-str, .term-cmt {
+        color: #0f172a !important;
+        font-weight: 600 !important;
+    }
+
+    .term-tag {
+        display: inline !important;
         background: transparent !important;
         border: none !important;
         padding: 0 !important;
-        box-shadow: none !important;
-        margin-bottom: 0.4rem;
+        font-size: 9px !important;
+        color: #475569 !important;
     }
 
-    .summary-card i, .summary-card h3 {
-        display: none !important;
+    .term-tag::after {
+        content: ", ";
     }
 
-    .summary-card p {
-        color: #334155 !important;
-        font-size: 10px !important;
-        text-align: justify;
+    .term-tag:last-child::after {
+        content: "";
     }
 
     /* Skills Grid */
@@ -216,26 +235,31 @@
     }
 
     /* Certifications */
-    .certifications-grid {
-        grid-template-cols: 1fr 1fr !important;
-        gap: 6px !important;
+    .cert-list {
+        gap: 2px !important;
     }
 
-    .cert-card {
-        background: transparent !important;
-        border: none !important;
-        padding: 0 !important;
-        box-shadow: none !important;
-        gap: 4px !important;
+    .cert-line {
+        font-size: 9px !important;
+        color: #334155 !important;
     }
 
-    .cert-info h4 {
-        font-size: 9.5px !important;
+    .cert-prompt {
+        display: none !important;
+    }
+
+    .cert-name {
         color: #0f172a !important;
+        font-weight: 700 !important;
     }
 
-    .cert-info p {
-        font-size: 8.5px !important;
+    .cert-sep {
+        opacity: 0.4 !important;
+        color: #94a3b8 !important;
+    }
+
+    .cert-issuer {
+        color: #475569 !important;
     }
 
     .cert-link {

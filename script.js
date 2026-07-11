@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Skills Interactive Tab Filtering
     const tabBtns = document.querySelectorAll('.skills-tab-btn');
-    const skillCards = document.querySelectorAll('.skill-card');
+    const skillGroups = document.querySelectorAll('.skill-group');
 
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -35,9 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const filter = btn.getAttribute('data-filter');
 
-            skillCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-                card.style.display = (filter === 'all' || category === filter) ? 'flex' : 'none';
+            skillGroups.forEach(group => {
+                const category = group.getAttribute('data-category');
+                group.style.display = (filter === 'all' || category === filter) ? '' : 'none';
             });
         });
     });
@@ -57,12 +57,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Close menu when a link is clicked
+        // Close menu when a link is clicked + smooth scroll without URL hash
         navLinks.forEach(link => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
                 navMenu.classList.remove('active');
                 const icon = navToggle.querySelector('i');
                 if (icon) icon.className = 'fas fa-bars';
+                const targetId = link.getAttribute('href');
+                if (targetId && targetId.startsWith('#')) {
+                    const targetEl = document.querySelector(targetId);
+                    if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+                }
             });
         });
 
@@ -169,4 +175,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { threshold: 0.4 });
         obs.observe(footerEl);
     }
+
+    // Scroll reveal observer (Apple-style)
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-stagger, .reveal-hero').forEach(el => {
+        revealObserver.observe(el);
+    });
 });
