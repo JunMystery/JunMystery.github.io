@@ -1,6 +1,6 @@
 /**
  * script.js
- * Interactive logic for portfolio site
+ * Interactive logic for portfolio site (Refactored)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,9 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove active from all btns
             tabBtns.forEach(b => b.classList.remove('active'));
-            // Add active to clicked btn
             btn.classList.add('active');
 
             const filter = btn.getAttribute('data-filter');
@@ -53,39 +51,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Print CV Modal Controls
-    const printBtn = document.getElementById('btn-print');
-    const printBtnNav = document.getElementById('btn-print-nav');
-    const printOverlay = document.getElementById('print-overlay');
-    const printClose = document.getElementById('print-close');
-    const printTrigger = document.getElementById('print-trigger');
+    // Directly trigger print/save dialog on click
+    const printBtns = [
+        document.getElementById('btn-print'),
+        document.getElementById('btn-print-nav')
+    ];
 
-    function openPrintView() {
-        printOverlay.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closePrintView() {
-        printOverlay.style.display = 'none';
-        document.body.style.overflow = '';
-    }
-
-    if (printBtn) printBtn.addEventListener('click', openPrintView);
-    if (printBtnNav) printBtnNav.addEventListener('click', openPrintView);
-    if (printClose) printClose.addEventListener('click', closePrintView);
-    
-    if (printTrigger) {
-        printTrigger.addEventListener('click', () => {
-            window.print();
-        });
-    }
-
-    // Close on overlay click
-    if (printOverlay) {
-        printOverlay.addEventListener('click', (e) => {
-            if (e.target === printOverlay) {
-                closePrintView();
-            }
-        });
-    }
+    printBtns.forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', () => {
+                window.print();
+            });
+        }
+    });
 });
