@@ -199,6 +199,10 @@
         page-break-inside: avoid;
     }
 
+    .project-card::before {
+        display: none !important;
+    }
+
     .project-info h3 {
         font-size: 11px !important;
         color: #0f172a !important;

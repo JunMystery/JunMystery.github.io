@@ -37,7 +37,7 @@
     border: 1px solid var(--border-color);
     overflow: hidden;
     width: 100%;
-    max-width: 180px;
+    max-width: 205px;
     background-image: url('../../docs/images/profile.jpg');
     background-size: cover;
     background-position: center;
@@ -133,6 +133,7 @@
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
+
     .hero-title {
         font-size: 2.25rem;
     }
