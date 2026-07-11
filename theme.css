@@ -92,7 +92,7 @@ ul {
 }
 
 .section {
-    padding: 5rem 0;
+    padding: 2.5rem 0;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -100,7 +100,7 @@ ul {
     font-family: var(--font-mono);
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
     letter-spacing: -0.01em;
     color: var(--accent-purple);
     display: flex;
