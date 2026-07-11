@@ -36,11 +36,12 @@
 .cv-photo {
     width: 7rem;
     height: 9rem;
-    object-fit: cover;
-    object-position: center;
     border: 1px solid var(--color-gray-300);
     border-radius: 0.25rem;
     flex-shrink: 0;
+    background-image: url('../../../docs/images/profile.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 .cv-name-title {

@@ -31,23 +31,16 @@
 }
 
 .hero-avatar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     aspect-ratio: 1;
     align-self: center;
     border-radius: 50%;
     border: 1px solid var(--border-color);
     overflow: hidden;
     width: 100%;
-    max-width: 150px;
-}
-
-.hero-avatar-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+    max-width: 180px;
+    background-image: url('../../docs/images/profile.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 .hero-subtitle {
