@@ -100,6 +100,7 @@
 .terminal-string { color: var(--accent-secondary); }
 .terminal-variable { color: var(--accent-primary); }
 .terminal-comment { color: var(--text-muted); }
+.terminal-orange { color: var(--accent-orange); }
 
 /* Skills Bento Grid */
 .skills-tabs {
