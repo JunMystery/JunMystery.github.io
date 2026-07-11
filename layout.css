@@ -3,6 +3,11 @@
    Clean Developer Layout: Top Nav, Split Hero Grid, Summary panel, and Footer
 */
 
+/* Scroll offset for fixed navbar */
+.section[id] {
+    scroll-margin-top: 5rem;
+}
+
 /* Top Navigation Bar */
 .navbar {
     position: fixed;
