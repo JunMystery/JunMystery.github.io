@@ -5,22 +5,23 @@ Static GitHub Pages site. No build step, no framework, no dependencies beyond Go
 
 ---
 
-## File Structure (MVC — Refactored)
+## File Structure
 
 ```
 JunMystery.github.io/
-├── index.html              # View Shell — single-page markup
+├── index.html              # Portfolio — single-page markup (source of truth for content)
 ├── 404.html                # Catch-all redirect to index.html
+├── cv.html                 # Redirect → cv/index.html (preserves legacy /cv/ path)
 │
 ├── styles/
 │   ├── main.css            # Entry point — @import chain for all layers
 │   ├── base/
-│   │   ├── typography.css  # Google Fonts import (Fira Code + Inter)
+│   │   ├── typography.css  # Google Fonts import (Noto Sans, Noto Sans Mono, Noto Serif)
 │   │   ├── tokens.css      # CSS custom properties, dark/light variables
 │   │   └── reset.css       # Universal reset, base body/html/a/ul styles
 │   ├── layout/
 │   │   ├── nav.css         # Fixed navbar, mobile drawer, breakpoints
-│   │   ├── hero.css        # Hero section layout, title, subtitle
+│   │   ├── hero.css        # Hero section layout, photo avatar, name, CTA
 │   │   ├── sections.css    # Container, section padding, section-title
 │   │   └── footer.css      # Footer layout, typewriter cursor
 │   ├── components/
@@ -32,14 +33,36 @@ JunMystery.github.io/
 │   ├── content/
 │   │   ├── about.css       # Terminal session output (.term-session, .term-tag)
 │   │   ├── skills.css      # Skill groups, category titles, tag pills
-│   │   ├── projects.css    # Project cards, metadata, tech stacks
+│   │   ├── projects.css    # Project cards, metadata, tech stacks, subsection-title
 │   │   ├── certifications.css  # Compact cert list (.cert-line, .cert-prompt)
 │   │   └── education.css   # Education cards (.edu-grid, .edu-card)
 │   └── print/
-│       └── print.css       # A4 CV print layout (@media print)
+│       └── print.css       # A4 CV print layout (@media print) for portfolio
 │
-├── src/
-│   ├── app.js              # Bootstrap — imports all controllers (ES module source)
+├── cv/
+│   ├── index.html          # Standalone printable CV page (synced with portfolio)
+│   ├── styles/
+│   │   ├── main.css        # CV-specific @import chain
+│   │   ├── base/
+│   │   │   ├── reset.css   # Print-safe reset
+│   │   │   └── tokens.css  # CV color tokens (print-friendly)
+│   │   ├── layout/
+│   │   │   ├── header.css  # CV header grid (photo + contact info)
+│   │   │   └── page.css    # A4 page sizing, margins
+│   │   ├── content/
+│   │   │   ├── summary.css # Section base, header grid, photo, name, meta, social
+│   │   │   ├── skills.css  # Skills rows, categories
+│   │   │   ├── experience.css # Work experience entries
+│   │   │   ├── projects.css   # Project entries
+│   │   │   ├── education.css  # Education items, certs list
+│   │   │   └── print.css   # Print-specific overrides
+│   │   └── print/
+│   │       └── print.css   # Screen print button styling
+│   └── src/
+│       └── print.js        # Print button binding (window.print)
+│
+├── src/                    # Portfolio JavaScript (ES modules → bundle.js)
+│   ├── app.js              # Bootstrap — imports all controllers
 │   ├── bundle.js           # Offline-friendly single-file build (no import/export)
 │   ├── controllers/
 │   │   ├── theme.controller.js   # Dark/light toggle + localStorage
@@ -52,7 +75,6 @@ JunMystery.github.io/
 │   │   └── navigation.model.js   # Nav link configuration
 │   ├── services/
 │   │   ├── theme.service.js      # get/set/apply theme
-│   │   ├── print.service.js      # window.print trigger
 │   │   └── scroll.service.js     # IntersectionObserver factory
 │   └── utils/
 │       ├── constants.js          # CSS selectors, timing values
@@ -60,7 +82,9 @@ JunMystery.github.io/
 │
 └── docs/
     ├── architecture.md       # This file
-    └── ui-ux-style.md        # Design system and UI/UX guidelines
+    ├── ui-ux-style.md        # Design system and UI/UX guidelines
+    └── images/
+        └── profile.jpg       # Profile photo (used by portfolio hero + CV header)
 ```
 
 ---
@@ -112,7 +136,7 @@ Single scrollable page. Organized as:
   <!-- Fixed top navigation bar -->
   <nav class="navbar">
 
-  <!-- Hero section: name, title, career objective, CTA buttons, socials -->
+  <!-- Hero section: photo avatar, name, title, career objective, CTA buttons, socials -->
   <header class="hero" id="home">
 
   <!-- About: Professional paradigm in terminal session format -->
@@ -121,7 +145,7 @@ Single scrollable page. Organized as:
   <!-- Skills: filterable tag clouds by category, wrapped in terminal frame -->
   <section id="skills">
 
-  <!-- Projects: project cards with flow diagrams, wrapped in terminal frame -->
+  <!-- Projects: Personal + Work subsections, project cards with flow diagrams -->
   <section id="projects">
 
   <!-- Certifications: compact terminal list, wrapped in terminal frame -->
@@ -134,6 +158,20 @@ Single scrollable page. Organized as:
   <script src="src/bundle.js">
 </body>
 ```
+
+### Section key: Projects
+
+The projects section is split into two subsections:
+
+```
+<h3 class="subsection-title"># Personal Projects</h3>
+<div class="projects-grid">...</div>
+
+<h3 class="subsection-title"># Work Projects</h3>
+<div class="projects-grid">...</div>
+```
+
+`.subsection-title` is styled in `styles/content/projects.css` with a left accent border and monospace font.
 
 ### Terminal Window Pattern
 
@@ -169,7 +207,7 @@ Vanilla JS organized as **Model-View-Controller**. Code is authored as ES module
 |---|---|---|---|
 | **Controllers** | `src/controllers/` | 5 | Handle DOM events, user interaction |
 | **Models** | `src/models/` | 2 | Static data definitions (footer lines, nav config) |
-| **Services** | `src/services/` | 3 | Pure logic (theme get/set, print, IntersectionObserver factory) |
+| **Services** | `src/services/` | 2 | Pure logic (theme get/set, IntersectionObserver factory) |
 | **Utils** | `src/utils/` | 2 | DOM helpers (`$`, `$$`), app constants |
 
 ### Controller Responsibilities
@@ -197,6 +235,32 @@ User Click → Controller.handle()
 
 ---
 
+## CV Architecture (`cv/`)
+
+The `cv/` folder is a completely separate static site, no JavaScript framework. It renders a single A4-printable page.
+
+- **CV is a sync mirror of the portfolio** — content structure (skills categories, projects split, certifications list) is manually kept in sync with `index.html`.
+- **No interactive features** — no editors, no config panels, no modals.
+- **Print button** (`src/print.js`) — 8 lines, calls `window.print()`.
+- **Photo** is shared from `docs/images/profile.jpg` via `../docs/images/profile.jpg`.
+
+---
+
+## Print / CV Mode (`styles/print/print.css`)
+
+Triggered by `window.print()` from the portfolio. Key behaviors:
+
+- Hides navbar, hero, social links, filter buttons, print buttons.
+- Reveals `<div class="print-only-header">` with full contact info row.
+- Converts all sections to flat, A4-optimized single-column layouts.
+- Removes shadows, borders, and terminal chrome frames.
+- Forces black text on white paper background.
+- Page-break safe with `break-inside: avoid` on cards.
+
+The standalone CV at `cv/index.html` provides a more polished print experience with its own dedicated print stylesheet.
+
+---
+
 ## Responsive Breakpoints
 
 Defined in `styles/layout/nav.css` and `styles/content/*.css`:
@@ -208,16 +272,3 @@ Defined in `styles/layout/nav.css` and `styles/content/*.css`:
 | `<= 768px` | Education grid stacks to single column |
 
 > **Note on Windows High-DPI Scaling:** At 150% OS display scaling, a `994px` browser window maps to `~662px` CSS viewport width. All layout stacking thresholds are set at `768px` to correctly remain side-by-side on standard scaled screens.
-
----
-
-## Print / CV Mode (`styles/print/print.css`)
-
-Triggered by `window.print()`. Key behaviors:
-
-- Hides navbar, hero, social links, filter buttons, print buttons.
-- Reveals `<div class="print-only-header">` with full contact info row.
-- Converts all sections to flat, A4-optimized single-column layouts.
-- Removes shadows, borders, and terminal chrome frames.
-- Forces black text on white paper background.
-- Page-break safe with `break-inside: avoid` on cards.

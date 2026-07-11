@@ -17,6 +17,7 @@ Core principles:
 4. **Compact content** — tag clouds, single-line lists, terminal session output replace heavy cards.
 5. **No decorative noise** — no gradients on content, no rounded pills on layout elements.
 6. **Apple-style scroll animations** — fade + translateY reveal with stagger delays.
+7. **Photo integration** — real profile photo in hero (circular crop) and CV (passport-style rectangular).
 
 ---
 
@@ -66,25 +67,26 @@ Two typefaces are imported from Google Fonts:
 
 | Font | Variable | Usage |
 |---|---|---|
-| **Inter** | `--font-sans` | All body copy, descriptions, card text |
-| **Fira Code** | `--font-mono` | Section titles, nav links, hero subtitle, terminal labels, skill names, buttons |
+| **Noto Sans** | `--font-sans` | All body copy, descriptions, card text |
+| **Noto Sans Mono** | `--font-mono` | Section titles, nav links, hero subtitle, terminal labels, skill names, buttons |
 
-**Fira Code** is used deliberately for any UI element that conveys developer semantics (navigation items, labels, titles, tags). This blurs the boundary between "portfolio site" and "code editor."
+**Noto Sans Mono** is used deliberately for any UI element that conveys developer semantics (navigation items, labels, titles, tags). This blurs the boundary between "portfolio site" and "code editor."
 
 ### Type Scale
 
 | Element | Size | Weight | Font |
 |---|---|---|---|
-| Hero Name | `3rem` | 800 | Inter |
-| Hero Name (mobile) | `2.25rem` | 800 | Inter |
-| Section Title | `1.5rem` | 700 | Fira Code |
-| Project Title | `1.1rem` | 700 | Fira Code |
-| Skill Group Title | `0.85rem` | 700 | Fira Code |
-| Body / Description | `0.9rem` | 400 | Inter |
-| Nav Links | `0.85rem` | 400 | Fira Code |
-| Tags / Metadata | `0.7–0.75rem` | 400 | Fira Code |
-| Terminal label | `0.75rem` | 400 | Fira Code |
-| Footer | `0.75rem` | 400 | Fira Code |
+| Hero Name | `3rem` | 800 | Noto Sans |
+| Hero Name (mobile) | `2.25rem` | 800 | Noto Sans |
+| Section Title | `1.5rem` | 700 | Noto Sans Mono |
+| Subsection Title | `0.85rem` | 600 | Noto Sans Mono |
+| Project Title | `1.1rem` | 700 | Noto Sans Mono |
+| Skill Group Title | `0.85rem` | 700 | Noto Sans Mono |
+| Body / Description | `0.9rem` | 400 | Noto Sans |
+| Nav Links | `0.85rem` | 400 | Noto Sans Mono |
+| Tags / Metadata | `0.7–0.75rem` | 400 | Noto Sans Mono |
+| Terminal label | `0.75rem` | 400 | Noto Sans Mono |
+| Footer | `0.75rem` | 400 | Noto Sans Mono |
 
 ---
 
@@ -124,14 +126,14 @@ The primary visual container for all major sections.
 ```
 
 - Traffic light dots: hardcoded macOS colors (`#ff5f56`, `#ffbd2e`, `#27c93f`).
-- Filename label centered in header, Fira Code `0.75rem`, `text-secondary`.
+- Filename label centered in header, Noto Sans Mono `0.75rem`, `text-secondary`.
 - Terminal file labels match content type: `skills.yaml`, `projects.py`, `certifications.json`, `education.sh`.
 
 ### Section Titles
 
 ```css
 .section-title {
-  font-family: Fira Code;
+  font-family: Noto Sans Mono;
   color: --accent-purple;
 }
 .section-title::before {
@@ -141,6 +143,46 @@ The primary visual container for all major sections.
 ```
 
 Renders as: `## Technical Expertise` — mimicking a Markdown H2 inside a code file.
+
+### Subsection Titles (Projects)
+
+Used to split project lists into Personal / Work categories:
+
+```css
+.subsection-title {
+  font-family: Noto Sans Mono;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: --accent-primary;
+  border-left: 2px solid --accent-primary;
+  padding-left: 0.5rem;
+}
+```
+
+Renders as: `# Personal Projects` — mimicking a Markdown H3 with a left accent bar.
+
+### Hero — Photo + Text
+
+Two-column grid layout:
+
+```
+┌──────────────┬──────────────────────────────┐
+│   ╭──────╮   │  ~ systems_engineer &        │
+│   │      │   │    ai_workflow_architect      │
+│   │ Photo│   │                              │
+│   │(circ)│   │  NGUYEN HOANG                │
+│   │ 180px│   │  THANH TU                    │
+│   ╰──────╯   │                              │
+│              │  A forward-thinking IT...     │
+│  Info Card   │                              │
+│  (dob, loc,  │  [View Work] [Interactive CV] │
+│   email...)  │  [social icons]               │
+└──────────────┴──────────────────────────────┘
+```
+
+- Avatar: `max-width: 180px`, `aspect-ratio: 1`, `border-radius: 50%`, `object-fit: cover`.
+- `align-items: start` on the grid so columns sit at their natural height.
+- Photo file: `docs/images/profile.jpg`.
 
 ### About — Terminal Session
 
@@ -165,25 +207,32 @@ function NguyenHoangThanhTu() {
 No card boxes. Skills are grouped by category with a **tag cloud** layout:
 
 ```
-### AI-Ops             ### Infrastructure      ### Dev
-[OpenAI API]           [Docker]               [TypeScript]
-[LangChain]            [K8s]                  [Python]
-[Vector DB]            [CI/CD]                [Kotlin]
+### AI-Ops             ### Infrastructure        ### Dev
+[PromptOps]            [Windows Server]          [Database Admin & SQL]
+[Multi-Agent]          [Active Directory]        [REST API Development]
+[System Architecture]  [DNS/DHCP]                [Scripting & Automation]
+[Git/GitHub]           [Linux]                   [Structured AI-Assisted Dev]
+                       [VMware]
+                       [LAN/WAN] [VPN/P2P]
+                       [Firewalls]
 ```
 
-- Group titles: Fira Code `0.85rem` bold, `accent-primary` with `###` prefix.
+- Group titles: Noto Sans Mono `0.85rem` bold, `accent-primary` with `###` prefix.
 - Tags: monospace pills, `accent-primary` text on `bg-tertiary`.
 - Filter tabs above the grid toggle visibility by `data-category`.
+- Dev category uses professional descriptors (no raw language names).
 
 ### Projects — Single Column with Flow Diagram
 
 Each `.project-card` is a single column layout containing:
-- **Title row**: project name (Fira Code, bold) + optional GitHub link icon.
+- **Title row**: project name (Noto Sans Mono, bold) + optional GitHub link icon.
 - **Type label**: uppercase monospace label in `accent-orange`.
 - **Description**: paragraph in `text-secondary`.
 - **Metadata**: bordered left-accent panel with key-value rows.
 - **Tech stack**: monospace tags in `accent-secondary`.
 - **Flow diagram**: horizontal `[node] → [node] → [node]` chain representing architecture.
+
+Projects split into two subsections with `.subsection-title` — `# Personal Projects` and `# Work Projects`.
 
 ### Certifications — Compact Terminal List
 
@@ -261,3 +310,18 @@ Controlled by `src/controllers/scroll.controller.js` via `IntersectionObserver` 
 The navbar drawer is `260px` wide, positioned fixed from the right, hidden at `right: -100%` and shown at `right: 0` via `.active` class.
 
 > **High-DPI note:** At Windows 150% display scaling, a 994px physical window = ~662px CSS viewport. All breakpoints are calibrated to `768px` to keep layouts correct at standard Windows scaling.
+
+---
+
+## CV Design (`cv/index.html`)
+
+The CV is a separate static page, designed for A4 PDF export:
+
+- **Fonts**: Same Noto Sans family as portfolio, loaded via Google Fonts.
+- **Layout**: 210mm A4 width with `@page { size: A4; margin: ... }`.
+- **Photo**: `7rem × 9rem` rectangular, `object-fit: cover`, placed in a left-column grid alongside contact info.
+- **Skills**: Uses row-based format (not tag clouds) for print readability.
+- **Projects**: Mirrors portfolio Personal/Work split with compact bullet-point entries.
+- **Certifications**: Flat list with Coursera verify links.
+- **Print button**: Fixed-position button hidden via `@media print`.
+- **No JavaScript** beyond a single `window.print()` binding.
