@@ -79,6 +79,21 @@
     color: var(--text-primary);
     background: var(--bg-secondary);
     text-align: left;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.terminal-window {
+    width: 100%;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.terminal-body-raw {
+    padding: 1.5rem;
 }
 
 .terminal-keyword { color: var(--accent-purple); }
