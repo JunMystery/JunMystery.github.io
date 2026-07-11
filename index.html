@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyen Hoang Thanh Tu - IT Systems Engineer & AI SDLC Orchestrator</title>
+    <title>Nguyễn Hoàng Thanh Tú - IT Systems Engineer &amp; AI SDLC Orchestrator</title>
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/vendor/fontawesome.css">
 </head>
 <body>
 
     <!-- Print-Only CV Header -->
     <div class="print-only-header">
-        <h1>Nguyen Hoang Thanh Tu</h1>
-        <p class="print-subtitle">IT Infrastructure Engineer & AI Agent SDLC Orchestrator</p>
-        <p class="print-objective">Bridging Infrastructure Engineering and AI-Augmented Development. Human judgment drives every successful project.</p>
+        <h1>Nguyễn Hoàng Thanh Tú</h1>
+        <p class="print-subtitle" data-i18n="print.subtitle">IT Infrastructure Engineer & AI Agent SDLC Orchestrator</p>
+        <p class="print-objective" data-i18n="print.objective">Bridging Infrastructure Engineering and AI-Augmented Development. Human judgment drives every successful project.</p>
         <div class="print-contacts">
-            <span><strong>DOB:</strong> Oct 12, 1997</span> <span><strong>Location:</strong> HCMC, Vietnam</span> <span><strong>Tel:</strong> (0973) 486 297</span> <span><strong>Email:</strong> darkzeuslk@gmail.com</span> <span><strong>LinkedIn:</strong> linkedin.com/in/junmystery</span> <span><strong>GitHub:</strong> github.com/JunMystery</span> <span><strong>Google Play:</strong> play/JunMystery</span>
+            <span><strong data-i18n="print.dob">DOB:</strong> Oct 12, 1997</span> <span><strong data-i18n="print.location">Location:</strong> HCMC, Vietnam</span> <span><strong data-i18n="print.tel">Tel:</strong> (0973) 486 297</span> <span><strong data-i18n="print.email">Email:</strong> darkzeuslk@gmail.com</span> <span><strong data-i18n="print.linkedin">LinkedIn:</strong> linkedin.com/in/junmystery</span> <span><strong data-i18n="print.github">GitHub:</strong> github.com/JunMystery</span> <span><strong data-i18n="print.playstore">Google Play:</strong> play/JunMystery</span>
         </div>
         <div class="print-date"></div>
     </div>
@@ -26,13 +26,23 @@
             <a href="#" class="logo">const Tu = {}</a>
             <div id="nav-menu" class="nav-menu">
                 <div class="nav-links">
-                    <a href="#about" class="nav-link">About</a> <a href="#skills" class="nav-link">Skills</a> <a href="#projects" class="nav-link">Projects</a> <a href="#certifications" class="nav-link">Certifications</a>
+                    <a href="#about" class="nav-link" data-i18n="nav.about">About</a> <a href="#skills" class="nav-link" data-i18n="nav.skills">Skills</a> <a href="#projects" class="nav-link" data-i18n="nav.projects">Projects</a> <a href="#career" class="nav-link" data-i18n="nav.career">Career</a>
                 </div>
                 <div class="nav-actions">
+                    <div class="lang-switcher">
+                        <button id="lang-toggle" class="lang-toggle" title="Switch Language">
+                            <span id="lang-label">EN</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <ul id="lang-menu" class="lang-menu">
+                            <li data-lang="en" class="lang-option active">EN</li>
+                            <li data-lang="vi" class="lang-option">VI</li>
+                        </ul>
+                    </div>
                     <button id="theme-toggle" class="theme-toggle" title="Toggle Light/Dark Mode">
                         <i class="fas fa-moon"></i>
                     </button>
-                    <a href="cv/index.html" class="btn-print-nav" title="Interactive CV Builder">
+                    <a href="cv/index.html" class="btn-print-nav" title="View CV">
                         <i class="fas fa-file-alt"></i>
                     </a>
                 </div>
@@ -48,32 +58,32 @@
         <div class="container hero-container-single">
             <div class="hero-content">
                 <div class="hero-left">
-                    <div class="hero-avatar" role="img" aria-label="Nguyen Hoang Thanh Tu"></div>
+                    <div class="hero-avatar" role="img" aria-label="Nguyễn Hoàng Thanh Tú"></div>
                     <div class="hero-info-card">
-                        <div class="hero-info-line"><span class="h-info-key">dob</span><span class="h-info-val">Oct 12, 1997</span></div>
-                        <div class="hero-info-line"><span class="h-info-key">location</span><span class="h-info-val">HCMC, Vietnam</span></div>
-                        <div class="hero-info-line"><span class="h-info-key">phone</span><span class="h-info-val">(0973) 486 297</span></div>
-                        <div class="hero-info-line"><span class="h-info-key">email</span><span class="h-info-val">darkzeuslk@gmail.com</span></div>
-                        <div class="hero-info-line"><span class="h-info-key">languages</span><span class="h-info-val">Vietnamese (native) · English (working)</span></div>
-                        <div class="hero-info-line"><span class="h-info-key">github</span><span class="h-info-val"><a href="https://github.com/JunMystery" target="_blank">github.com/JunMystery</a></span></div>
-                        <div class="hero-info-line"><span class="h-info-key">linkedin</span><span class="h-info-val"><a href="https://linkedin.com/in/junmystery" target="_blank">linkedin.com/in/junmystery</a></span></div>
-                        <div class="hero-info-line"><span class="h-info-key">playstore</span><span class="h-info-val"><a href="https://play.google.com/store/apps/dev?id=6943003088385722005" target="_blank">play/JunMystery</a></span></div>
+                        <div class="hero-info-line"><span class="h-info-key" data-i18n="hero.info.dob">dob</span><span class="h-info-val" data-i18n="hero.info.val.dob">Oct 12, 1997</span></div>
+                        <div class="hero-info-line"><span class="h-info-key" data-i18n="hero.info.location">location</span><span class="h-info-val" data-i18n="hero.info.val.location">HCMC, Vietnam</span></div>
+                        <div class="hero-info-line"><span class="h-info-key" data-i18n="hero.info.phone">phone</span><span class="h-info-val" data-i18n="hero.info.val.phone">(0973) 486 297</span></div>
+                        <div class="hero-info-line"><span class="h-info-key" data-i18n="hero.info.email">email</span><span class="h-info-val" data-i18n="hero.info.val.email">darkzeuslk@gmail.com</span></div>
+                        <div class="hero-info-line"><span class="h-info-key" data-i18n="hero.info.languages">languages</span><span class="h-info-val" data-i18n="hero.info.val.languages">Vietnamese (native) · English (working)</span></div>
+                        <div class="hero-info-line"><span class="h-info-key" data-i18n="hero.info.github">github</span><span class="h-info-val"><a href="https://github.com/JunMystery" target="_blank">github.com/JunMystery</a></span></div>
+                        <div class="hero-info-line"><span class="h-info-key" data-i18n="hero.info.linkedin">linkedin</span><span class="h-info-val"><a href="https://linkedin.com/in/junmystery" target="_blank">linkedin.com/in/junmystery</a></span></div>
+                        <div class="hero-info-line"><span class="h-info-key" data-i18n="hero.info.playstore">playstore</span><span class="h-info-val"><a href="https://play.google.com/store/apps/dev?id=6943003088385722005" target="_blank">play/JunMystery</a></span></div>
                     </div>
                 </div>
                 <div class="hero-right">
-                    <div class="hero-subtitle">
+                    <div class="hero-subtitle" data-i18n="hero.subtitle">
                         ~ systems_engineer & ai_workflow_architect
                     </div>
-                    <h1 class="hero-title">NGUYEN HOANG<br><span>THANH TU</span></h1>
-                    <p class="hero-desc">
+                    <h1 class="hero-title"><span data-i18n="hero.name_first">NGUYỄN HOÀNG</span><br><span data-i18n="hero.name_last">THANH TÚ</span></h1>
+                    <p class="hero-desc" data-i18n="hero.desc">
                         A forward-thinking IT Systems Engineer and AI-Native Developer. I bridge traditional infrastructure operations with next-generation multi-agent SDLC orchestration workflows.
                     </p>
                     <div class="hero-objective">
-                        <span class="hero-badge">open to full-time · remote-friendly</span>
-                        <p class="hero-tagline">Bridging Infrastructure Engineering and AI-Augmented Development. Human judgment drives every successful project.</p>
+                        <span class="hero-badge" data-i18n="hero.badge">open to full-time · remote-friendly</span>
+                        <p class="hero-tagline" data-i18n="hero.tagline">Bridging Infrastructure Engineering and AI-Augmented Development. Human judgment drives every successful project.</p>
                     </div>
                     <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary"><i class="fas fa-code"></i> View Work</a> <a href="cv/index.html" class="btn btn-secondary"><i class="fas fa-file-alt"></i> Interactive CV</a>
+                        <a href="#projects" class="btn btn-primary"><i class="fas fa-code"></i> <span data-i18n="hero.btn_work">View Work</span></a> <a href="cv/index.html" class="btn btn-secondary"><i class="fas fa-file-alt"></i> <span data-i18n="hero.btn_cv">View CV</span></a>
                     </div>
                     <div class="social-links">
                         <a href="https://www.linkedin.com/in/junmystery/" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a> <a href="https://github.com/JunMystery/" target="_blank" class="social-link" title="GitHub"><i class="fab fa-github"></i></a> <a href="https://play.google.com/store/apps/dev?id=6943003088385722005" target="_blank" class="social-link" title="Google Play"><i class="fab fa-google-play"></i></a> <a href="mailto:darkzeuslk@gmail.com" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
@@ -92,18 +102,18 @@
                     <span class="terminal-dot dot-yellow"></span>
                     <span class="terminal-dot dot-green"></span>
                 </div>
-                <span class="terminal-title">about.md</span>
+                <span class="terminal-title" data-i18n="about.filename">about.md</span>
             </div>
             <div class="terminal-body-raw">
-                <h2 class="section-title">Professional Paradigm</h2>
+                <h2 class="section-title" data-i18n="about.title">Professional Paradigm</h2>
                 <div class="term-session">
-                    <div class="term-line"><span class="term-prompt">$</span> <span class="term-fn">cat</span> profile.md</div>
-                    <div class="term-line"><span class="term-prompt">></span> <span class="term-kw">Seeking</span> a role spanning <span class="term-type">Infrastructure</span> and <span class="term-type">AI-Augmented Development</span>, growing strong across both domains.</div>
-                    <div class="term-line"><span class="term-prompt">></span> <span class="term-kw">Next</span>: <span class="term-str">AI-Enhanced Infrastructure Engineering</span> — leveraging structured Agentic SDLC to build production-grade tools.</div>
-                    <div class="term-line"><span class="term-prompt">></span> <span class="term-kw">Infra</span>: 2+ years hands-on — AD, DNS/DHCP, VM, Cisco/DrayTek, NAS, MySQL/MSSQL</div>
-                    <div class="term-line"><span class="term-prompt">></span> <span class="term-kw">AI Ops</span>: Structured SDLC orchestration over vibe coding. AI as tool, not dependency. Human Gate decisive.</div>
-                    <div class="term-line term-line-lang"><span class="term-prompt">></span> <span class="term-cmt"># Languages</span>  🇻🇳 Vietnamese — Native · 🇬🇧 English — IELTS 6.5 (Professional Working)</div>
-                    <div class="term-line term-line-tags"><span class="term-prompt">></span> <span class="term-cmt"># tags</span>  <span class="term-tag">2+ Years</span> <span class="term-tag">Infra & AI</span> <span class="term-tag">Production-Grade SDLC</span></div>
+                    <div class="term-line" data-i18n-html="about.line1"><span class="term-prompt">$</span> <span class="term-fn">cat</span> profile.md</div>
+                    <div class="term-line" data-i18n-html="about.line2"><span class="term-prompt">></span> <span class="term-kw">Seeking</span> a role spanning <span class="term-type">Infrastructure</span> and <span class="term-type">AI-Augmented Development</span>, growing strong across both domains.</div>
+                    <div class="term-line" data-i18n-html="about.line3"><span class="term-prompt">></span> <span class="term-kw">Next</span>: <span class="term-str">AI-Enhanced Infrastructure Engineering</span> — leveraging structured Agentic SDLC to build production-grade tools.</div>
+                    <div class="term-line" data-i18n-html="about.line4"><span class="term-prompt">></span> <span class="term-kw">Infra</span>: 2+ years hands-on — AD, DNS/DHCP, VM, Cisco/DrayTek, NAS, MySQL/MSSQL</div>
+                    <div class="term-line" data-i18n-html="about.line5"><span class="term-prompt">></span> <span class="term-kw">AI Ops</span>: Structured SDLC orchestration over vibe coding. AI as tool, not dependency. Human Gate decisive.</div>
+                    <div class="term-line term-line-lang" data-i18n-html="about.line6"><span class="term-prompt">></span> <span class="term-cmt"># Languages</span>  🇻🇳 Vietnamese — Native · 🇬🇧 English — IELTS 6.5 (Professional Working)</div>
+                    <div class="term-line term-line-tags" data-i18n-html="about.line7"><span class="term-prompt">></span> <span class="term-cmt"># tags</span>  <span class="term-tag">2+ Years</span> <span class="term-tag">Infra & AI</span> <span class="term-tag">Production-Grade SDLC</span></div>
                 </div>
             </div>
         </div>
@@ -118,36 +128,36 @@
                     <span class="terminal-dot dot-yellow"></span>
                     <span class="terminal-dot dot-green"></span>
                 </div>
-                <span class="terminal-title">skills.yaml</span>
+                <span class="terminal-title" data-i18n="skills.filename">skills.yaml</span>
             </div>
             <div class="terminal-body-raw">
-                <h2 class="section-title">Technical Expertise</h2>
+                <h2 class="section-title" data-i18n="skills.title">Technical Expertise</h2>
                 <div class="skills-tabs">
-                    <button class="skills-tab-btn active" data-filter="all">All Skills</button>
-                    <button class="skills-tab-btn" data-filter="ai-ops">AI & SDLC Ops</button>
-                    <button class="skills-tab-btn" data-filter="infra">Systems & Network</button>
-                    <button class="skills-tab-btn" data-filter="dev">Databases & Code</button>
+                    <button class="skills-tab-btn active" data-filter="all" data-i18n="skills.tab_all">All Skills</button>
+                    <button class="skills-tab-btn" data-filter="ai-ops" data-i18n="skills.tab_aiops">AI & SDLC Ops</button>
+                    <button class="skills-tab-btn" data-filter="infra" data-i18n="skills.tab_infra">Systems & Network</button>
+                    <button class="skills-tab-btn" data-filter="dev" data-i18n="skills.tab_dev">Databases & Code</button>
                 </div>
                 <div class="skill-groups reveal-stagger">
                     <div class="skill-group" data-category="ai-ops">
-                        <h3 class="skill-group-title"><span class="sgt-hash">###</span> AI-Ops</h3>
+                        <h3 class="skill-group-title" data-i18n="skills.group_aiops">AI-Ops</h3>
                         <div class="skill-group-tags">
-                            <span class="skill-tag">PromptOps</span><span class="skill-tag">Multi-Agent Workflows</span><span class="skill-tag">System Architecture</span>
-                            <span class="skill-tag">Git/GitHub</span>
+                            <span class="skill-tag" data-i18n="skills.tag_promptops">PromptOps</span><span class="skill-tag" data-i18n="skills.tag_agents">Multi-Agent Workflows</span><span class="skill-tag" data-i18n="skills.tag_arch">System Architecture</span>
+                            <span class="skill-tag" data-i18n="skills.tag_git">Git/GitHub</span>
                         </div>
                     </div>
                     <div class="skill-group" data-category="infra">
-                        <h3 class="skill-group-title"><span class="sgt-hash">###</span> Infrastructure</h3>
+                        <h3 class="skill-group-title" data-i18n="skills.group_infra">Infrastructure</h3>
                         <div class="skill-group-tags">
-                            <span class="skill-tag">Windows Server</span><span class="skill-tag">Active Directory</span><span class="skill-tag">DNS/DHCP</span><span class="skill-tag">Linux</span><span class="skill-tag">VMware</span>
-                            <span class="skill-tag">LAN/WAN</span><span class="skill-tag">VPN/P2P</span><span class="skill-tag">Firewalls</span>
+                            <span class="skill-tag" data-i18n="skills.tag_win">Windows Server</span><span class="skill-tag" data-i18n="skills.tag_ad">Active Directory</span><span class="skill-tag" data-i18n="skills.tag_dns">DNS/DHCP</span><span class="skill-tag" data-i18n="skills.tag_linux">Linux</span><span class="skill-tag" data-i18n="skills.tag_vmware">VMware</span>
+                            <span class="skill-tag" data-i18n="skills.tag_lanwan">LAN/WAN</span><span class="skill-tag" data-i18n="skills.tag_vpn">VPN/P2P</span><span class="skill-tag" data-i18n="skills.tag_firewall">Firewalls</span>
                         </div>
                     </div>
                     <div class="skill-group" data-category="dev">
-                        <h3 class="skill-group-title"><span class="sgt-hash">###</span> Dev</h3>
+                        <h3 class="skill-group-title" data-i18n="skills.group_dev">Dev</h3>
                         <div class="skill-group-tags">
-                            <span class="skill-tag">Database Administration &amp; SQL</span><span class="skill-tag">REST API Development</span>
-                            <span class="skill-tag">Scripting &amp; Automation</span><span class="skill-tag">Structured AI-Assisted Development</span>
+                            <span class="skill-tag" data-i18n="skills.tag_db">Database Administration &amp; SQL</span><span class="skill-tag" data-i18n="skills.tag_api">REST API Development</span>
+                            <span class="skill-tag" data-i18n="skills.tag_script">Scripting &amp; Automation</span><span class="skill-tag" data-i18n="skills.tag_ai_sdlc">Structured AI-Assisted Development</span>
                         </div>
                     </div>
                 </div>
@@ -164,35 +174,32 @@
                     <span class="terminal-dot dot-yellow"></span>
                     <span class="terminal-dot dot-green"></span>
                 </div>
-                <span class="terminal-title">projects.py</span>
+                <span class="terminal-title" data-i18n="projects.filename">projects.py</span>
             </div>
             <div class="terminal-body-raw">
-                <h2 class="section-title">Projects</h2>
+                <h2 class="section-title" data-i18n="projects.title">Projects</h2>
 
-                <h3 class="subsection-title"># Personal Projects</h3>
+                <h3 class="subsection-title" data-i18n="projects.personal"># Personal Projects</h3>
                 <div class="projects-grid">
                     <!-- Agent-Guidance-MCP -->
                     <div class="project-card">
                         <div class="project-info">
-                            <span class="project-type">Open Source — Python Package · MIT License</span>
-                            <h3>Agent-Guidance-MCP <a href="https://github.com/JunMystery/Agent-Guidance-MCP" target="_blank" class="project-gh-link"><i class="fab fa-github"></i></a></h3>
-                            <p class="project-desc">
+                            <span class="project-type" data-i18n="project1.type">Open Source — Python Package · MIT License</span>
+                            <h3><span data-i18n="project1.name">Agent-Guidance-MCP</span> <a href="https://github.com/JunMystery/Agent-Guidance-MCP" target="_blank" class="project-gh-link"><i class="fab fa-github"></i></a></h3>
+                            <p class="project-desc" data-i18n="project1.desc">
                                 MCP server delivering AI agent guidance via a 168-skill catalog, bundled standards corpus, workflow prompts, bounded project-code context tools, and a token optimization engine — over Stdio transport. Compatible with Claude, Cursor, VS Code, Gemini CLI, and 9+ IDEs.
                             </p>
                             <div class="project-meta">
-                                <div class="project-meta-item"><strong>Skills:</strong> <span>168-skill catalog covering backend, frontend, security, DevOps, data, and 12+ language ecosystems.</span></div>
-                                <div class="project-meta-item"><strong>Tools:</strong> <span>task_pipeline, guidance, project_context, ui_ux, session_continuity, health_check.</span></div>
-                                <div class="project-meta-item"><strong>Install:</strong> <span>Single-command bootstrap via curl/PowerShell. Auto-configures all local IDE clients.</span></div>
-                            </div>
-                            <div class="project-tech">
-                                <span class="project-tech-tag">Python 3.10+</span><span class="project-tech-tag">MCP ≥1.0.0</span><span class="project-tech-tag">SQLite</span><span class="project-tech-tag">Tree-sitter</span><span class="project-tech-tag">Pydantic</span><span class="project-tech-tag">Stdio</span>
+                                <div class="project-meta-item"><strong data-i18n="project1.meta1_key">Skills:</strong> <span data-i18n="project1.meta1_val">168-skill catalog covering backend, frontend, security, DevOps, data, and 12+ language ecosystems.</span></div>
+                                <div class="project-meta-item"><strong data-i18n="project1.meta2_key">Tools:</strong> <span data-i18n="project1.meta2_val">task_pipeline, guidance, project_context, ui_ux, session_continuity, health_check.</span></div>
+                                <div class="project-meta-item"><strong data-i18n="project1.meta3_key">Install:</strong> <span data-i18n="project1.meta3_val">Single-command bootstrap via curl/PowerShell. Auto-configures all local IDE clients.</span></div>
                             </div>
                             <div class="project-flow">
-                                <span class="flow-node">Claude / Cursor / VS Code / Gemini CLI</span>
+                                <span class="flow-node" data-i18n="project1.flow1">Claude / Cursor / VS Code / Gemini CLI</span>
                                 <span class="flow-arrow">→</span>
-                                <span class="flow-node">agent-guidance-mcp Server (Stdio)</span>
+                                <span class="flow-node" data-i18n="project1.flow2">agent-guidance-mcp Server (Stdio)</span>
                                 <span class="flow-arrow">→</span>
-                                <span class="flow-node">168-Skill Catalog + SQLite CodeGraph</span>
+                                <span class="flow-node" data-i18n="project1.flow3">168-Skill Catalog + SQLite CodeGraph</span>
                             </div>
                         </div>
                     </div>
@@ -200,108 +207,93 @@
                     <!-- AI-Powered Health Assistant -->
                     <div class="project-card">
                         <div class="project-info">
-                            <span class="project-type">Graduation Project - UIT</span>
-                            <h3>AI-Powered Health Assistant</h3>
-                            <p class="project-desc">
+                            <span class="project-type" data-i18n="project2.type">Graduation Project - UIT</span>
+                            <h3><span data-i18n="project2.name">AI-Powered Health Assistant</span></h3>
+                            <p class="project-desc" data-i18n="project2.desc">
                                 A robust, multi-tiered health ecosystem featuring an offline-first native Android app, FastAPI backend, and PySide6 dashboard.
                             </p>
                             <div class="project-meta">
-                                <div class="project-meta-item"><strong>SDLC Layer:</strong> <span>Sole architect managing AI-agent code generation.</span></div>
-                                <div class="project-meta-item"><strong>Sync:</strong> <span>Delta Sync Gen 2 with SHA-256 integrity, saving 90% bandwidth.</span></div>
-                                <div class="project-meta-item"><strong>Security:</strong> <span>Argon2id password hashing and Fernet payload encryption.</span></div>
-                            </div>
-                            <div class="project-tech">
-                                <span class="project-tech-tag">Kotlin</span><span class="project-tech-tag">FastAPI</span><span class="project-tech-tag">PySide6</span><span class="project-tech-tag">MySQL</span><span class="project-tech-tag">ChromaDB</span>
+                                <div class="project-meta-item"><strong data-i18n="project2.meta1_key">SDLC Layer:</strong> <span data-i18n="project2.meta1_val">Sole architect managing AI-agent code generation.</span></div>
+                                <div class="project-meta-item"><strong data-i18n="project2.meta2_key">Sync:</strong> <span data-i18n="project2.meta2_val">Delta Sync Gen 2 with SHA-256 integrity, saving 90% bandwidth.</span></div>
+                                <div class="project-meta-item"><strong data-i18n="project2.meta3_key">Security:</strong> <span data-i18n="project2.meta3_val">Argon2id password hashing and Fernet payload encryption.</span></div>
                             </div>
                             <div class="project-flow">
-                                <span class="flow-node">Android Native App</span>
+                                <span class="flow-node" data-i18n="project2.flow1">Android Native App</span>
                                 <span class="flow-arrow">→</span>
-                                <span class="flow-node">FastAPI Service</span>
+                                <span class="flow-node" data-i18n="project2.flow2">FastAPI Service</span>
                                 <span class="flow-arrow">→</span>
-                                <span class="flow-node">MySQL + ChromaDB</span>
+                                <span class="flow-node" data-i18n="project2.flow3">MySQL + ChromaDB</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <h3 class="subsection-title"># Work Projects</h3>
+                <h3 class="subsection-title" data-i18n="projects.work"># Work Projects</h3>
                 <div class="projects-grid">
                     <div class="project-card">
                         <div class="project-info">
-                            <span class="project-type">Enterprise Infrastructure</span>
-                            <h3>NAS Storage &amp; Domain Infrastructure</h3>
-                            <p class="project-desc">
+                            <span class="project-type" data-i18n="project3.type">Enterprise Infrastructure</span>
+                            <h3><span data-i18n="project3.name">NAS Storage &amp; Domain Infrastructure</span></h3>
+                            <p class="project-desc" data-i18n="project3.desc">
                                 Architected and deployed an enterprise-grade NAS storage solution for centralized data management across the manufacturing plant. Configured Windows Server Domain Controller with Active Directory, DNS, and DHCP services. Designed and implemented relational databases to support localized factory operations based on technical specifications from parent headquarters.
                             </p>
-                            <div class="project-tech">
-                                <span class="project-tech-tag">Windows Server</span><span class="project-tech-tag">Active Directory</span><span class="project-tech-tag">NAS</span><span class="project-tech-tag">DNS/DHCP</span><span class="project-tech-tag">Microsoft SQL Server</span>
-                            </div>
                             <div class="project-flow">
-                                <span class="flow-node">HQ Specifications</span>
+                                <span class="flow-node" data-i18n="project3.flow1">HQ Specifications</span>
                                 <span class="flow-arrow">→</span>
-                                <span class="flow-node">Localized DB + AD Domain</span>
+                                <span class="flow-node" data-i18n="project3.flow2">Localized DB + AD Domain</span>
                                 <span class="flow-arrow">→</span>
-                                <span class="flow-node">NAS Central Storage</span>
+                                <span class="flow-node" data-i18n="project3.flow3">NAS Central Storage</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="project-card">
                         <div class="project-info">
-                            <span class="project-type">Network Infrastructure</span>
-                            <h3>Site-to-Site Private Network Connectivity</h3>
-                            <p class="project-desc">
+                            <span class="project-type" data-i18n="project4.type">Network Infrastructure</span>
+                            <h3><span data-i18n="project4.name">Site-to-Site Private Network Connectivity</span></h3>
+                            <p class="project-desc" data-i18n="project4.desc">
                                 Designed and implemented secure Site-to-Site VPN connections between multiple factory sites, enabling private, encrypted data synchronization across the corporate network. Configured routing policies, tunnel negotiation, and failover to ensure 99.9% uptime for inter-factory communication.
                             </p>
-                            <div class="project-tech">
-                                <span class="project-tech-tag">VPN/P2P</span><span class="project-tech-tag">LAN/WAN</span><span class="project-tech-tag">Cisco/DrayTek</span><span class="project-tech-tag">Routing</span><span class="project-tech-tag">Firewalls</span>
-                            </div>
                             <div class="project-flow">
-                                <span class="flow-node">Factory Site A</span>
+                                <span class="flow-node" data-i18n="project4.flow1">Factory Site A</span>
                                 <span class="flow-arrow">→</span>
-                                <span class="flow-node">Encrypted VPN Tunnel</span>
+                                <span class="flow-node" data-i18n="project4.flow2">Encrypted VPN Tunnel</span>
                                 <span class="flow-arrow">→</span>
-                                <span class="flow-node">Factory Site B</span>
+                                <span class="flow-node" data-i18n="project4.flow3">Factory Site B</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="project-card">
                         <div class="project-info">
-                            <span class="project-type">Security Infrastructure</span>
-                            <h3>CCTV Surveillance System Deployment</h3>
-                            <p class="project-desc">
+                            <span class="project-type" data-i18n="project5.type">Security Infrastructure</span>
+                            <h3><span data-i18n="project5.name">CCTV Surveillance System Deployment</span></h3>
+                            <p class="project-desc" data-i18n="project5.desc">
                                 Planned and executed a comprehensive CCTV deployment across the factory: surveyed site layouts, determined optimal camera positions, routed structural cabling (network and power), configured NVR recording schedules and retention policies, and integrated the system into the existing network infrastructure for centralized remote monitoring.
                             </p>
-                            <div class="project-tech">
-                                <span class="project-tech-tag">CCTV</span><span class="project-tech-tag">NVR</span><span class="project-tech-tag">Structured Cabling</span><span class="project-tech-tag">LAN</span><span class="project-tech-tag">Network Configuration</span>
-                            </div>
                             <div class="project-flow">
-                                <span class="flow-node">Site Survey &amp; Planning</span>
+                                <span class="flow-node" data-i18n="project5.flow1">Site Survey &amp; Planning</span>
                                 <span class="flow-arrow">→</span>
-                                <span class="flow-node">Cabling &amp; Installation</span>
+                                <span class="flow-node" data-i18n="project5.flow2">Cabling &amp; Installation</span>
                                 <span class="flow-arrow">→</span>
-                                <span class="flow-node">NVR Configuration &amp; Monitoring</span>
+                                <span class="flow-node" data-i18n="project5.flow3">NVR Configuration &amp; Monitoring</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="project-card">
                         <div class="project-info">
-                            <span class="project-type">Software Development</span>
-                            <h3>Internal Business Software Solutions</h3>
-                            <p class="project-desc">
+                            <span class="project-type" data-i18n="project6.type">Software Development</span>
+                            <h3><span data-i18n="project6.name">Internal Business Software Solutions</span></h3>
+                            <p class="project-desc" data-i18n="project6.desc">
                                 Designed and developed custom software applications to streamline workflows across multiple company departments. Analyzed departmental requirements, architected database schemas, and directed AI-assisted development to produce production-grade utilities for inventory tracking, report generation, and operational data management.
                             </p>
-                            <div class="project-tech">
-                                <span class="project-tech-tag">Python</span><span class="project-tech-tag">SQL</span><span class="project-tech-tag">AI SDLC Orchestration</span><span class="project-tech-tag">Web Apps</span><span class="project-tech-tag">Database Design</span>
-                            </div>
                             <div class="project-flow">
-                                <span class="flow-node">Department Requirements</span>
+                                <span class="flow-node" data-i18n="project6.flow1">Department Requirements</span>
                                 <span class="flow-arrow">→</span>
-                                <span class="flow-node">AI-Assisted Development</span>
+                                <span class="flow-node" data-i18n="project6.flow2">AI-Assisted Development</span>
                                 <span class="flow-arrow">→</span>
-                                <span class="flow-node">Production Utilities</span>
+                                <span class="flow-node" data-i18n="project6.flow3">Production Utilities</span>
                             </div>
                         </div>
                     </div>
@@ -310,8 +302,8 @@
         </div>
     </section>
 
-    <!-- Certifications Section -->
-    <section class="section container reveal" id="certifications">
+    <!-- Career Section (Experience + Education + Certifications) -->
+    <section class="section container reveal" id="career">
         <div class="terminal-window">
             <div class="terminal-header">
                 <div class="terminal-dots">
@@ -319,100 +311,143 @@
                     <span class="terminal-dot dot-yellow"></span>
                     <span class="terminal-dot dot-green"></span>
                 </div>
-                <span class="terminal-title">certifications.json</span>
+                <span class="terminal-title" data-i18n="career.filename">career.sh</span>
             </div>
             <div class="terminal-body-raw">
-                <h2 class="section-title">Certifications</h2>
-                <div class="cert-list reveal-stagger">
-                    <div class="cert-line">
-                        <span class="cert-prompt">&gt;</span>
-                        <span class="cert-name">IT Automation with Python</span>
-                        <span class="cert-sep">·</span>
-                        <span class="cert-issuer">Google Career Certification (2025)</span>
-                        <span class="cert-sep">·</span>
-                        <a href="https://coursera.org/share/470d54b69ed19f56f5245351064fe32d" target="_blank" class="cert-link">Verify <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="cert-line">
-                        <span class="cert-prompt">&gt;</span>
-                        <span class="cert-name">Google Cybersecurity</span>
-                        <span class="cert-sep">·</span>
-                        <span class="cert-issuer">Google Career Certification (2025)</span>
-                        <span class="cert-sep">·</span>
-                        <a href="https://coursera.org/share/93ab286e9f7e890cd756b28312d00005" target="_blank" class="cert-link">Verify <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="cert-line">
-                        <span class="cert-prompt">&gt;</span>
-                        <span class="cert-name">Google IT Support</span>
-                        <span class="cert-sep">·</span>
-                        <span class="cert-issuer">Google Career Certification (2025)</span>
-                        <span class="cert-sep">·</span>
-                        <a href="https://coursera.org/share/2d1da52b4a782102f9c31245b6e263d9" target="_blank" class="cert-link">Verify <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="cert-line">
-                        <span class="cert-prompt">&gt;</span>
-                        <span class="cert-name">Google UX Design</span>
-                        <span class="cert-sep">·</span>
-                        <span class="cert-issuer">Google Career Certification (2025)</span>
-                        <span class="cert-sep">·</span>
-                        <a href="https://coursera.org/share/c7474f23e065dfd225b50aeee75eb834" target="_blank" class="cert-link">Verify <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="cert-line">
-                        <span class="cert-prompt">&gt;</span>
-                        <span class="cert-name">Google Project Management</span>
-                        <span class="cert-sep">·</span>
-                        <span class="cert-issuer">Google Career Certification (2025)</span>
-                        <span class="cert-sep">·</span>
-                        <a href="https://coursera.org/share/d4c431b324f8b0b7a91fe0068535ea43" target="_blank" class="cert-link">Verify <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="cert-line">
-                        <span class="cert-prompt">&gt;</span>
-                        <span class="cert-name">Google Advanced Data Analytics</span>
-                        <span class="cert-sep">·</span>
-                        <span class="cert-issuer">Google Career Certification (2025)</span>
-                        <span class="cert-sep">·</span>
-                        <a href="https://coursera.org/share/1d1a87f0878dd9bd27c94fecff4f45fa" target="_blank" class="cert-link">Verify <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="cert-line">
-                        <span class="cert-prompt">&gt;</span>
-                        <span class="cert-name">Google Data Analytics</span>
-                        <span class="cert-sep">·</span>
-                        <span class="cert-issuer">Google Career Certification (2025)</span>
-                        <span class="cert-sep">·</span>
-                        <a href="https://coursera.org/share/9aafced16e4a7056a1a36b77dd45bd3d" target="_blank" class="cert-link">Verify <i class="fas fa-external-link-alt"></i></a>
-                    </div>
+                <h2 class="section-title" data-i18n="career.title">Career</h2>
+                <div class="career-tabs">
+                    <button class="career-tab-btn active" data-career-tab="experience" data-i18n="career.tab_experience">Experience</button>
+                    <button class="career-tab-btn" data-career-tab="education" data-i18n="career.tab_education">Education</button>
+                    <button class="career-tab-btn" data-career-tab="certifications" data-i18n="career.tab_certifications">Certifications</button>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education Section -->
-    <section class="section container reveal" id="education">
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="terminal-dots">
-                    <span class="terminal-dot dot-red"></span>
-                    <span class="terminal-dot dot-yellow"></span>
-                    <span class="terminal-dot dot-green"></span>
-                </div>
-                <span class="terminal-title">education.sh</span>
-            </div>
-            <div class="terminal-body-raw">
-                <h2 class="section-title">Education</h2>
-                <div class="edu-grid reveal-stagger">
-                    <div class="edu-card">
-                        <div class="edu-header"><span class="edu-institution">Univ. of Information Technology</span><span class="edu-period">2024 – 2026</span></div>
-                        <div class="edu-degree">Major: Information Technology</div>
-                        <ul class="edu-bullets">
-                            <li>Accelerated Bachelor's Program.</li>
-                            <li>Focus: Data Structures, Database Systems, Computer Networks.</li>
-                        </ul>
+                <div class="career-panels">
+                    <!-- Experience Tab -->
+                    <div class="career-panel active" data-career-panel="experience">
+                        <div class="exp-card">
+                            <div class="exp-header">
+                                <span class="exp-title" data-i18n="exp.role1_title">IT Engineer Assistant Supervisor</span>
+                                <span class="exp-period" data-i18n="exp.role1_period">May 2026 – Present</span>
+                            </div>
+                            <div class="exp-company" data-i18n="exp.role1_company">Sharp Manufacturing Vietnam Co., Ltd</div>
+                            <ul class="exp-bullets">
+                                <li data-i18n="exp.role1_b1">Database Administration: Managed enterprise SQL databases, analyzed HQ system architectures, and deployed localized relational databases for manufacturing operations.</li>
+                                <li data-i18n="exp.role1_b2">AI-Native SDLC Orchestration: Architected structural specifications and directed AI agents to build internal utilities and automation tools, reducing development cycles by 80%.</li>
+                                <li data-i18n="exp.role1_b3">Infrastructure Management: Administered Windows Server environments, centralized NAS storage, and multi-channel CCTV systems, guaranteeing 99.9% operations uptime.</li>
+                                <li data-i18n="exp.role1_b4">Network Engineering: Designed and optimized LAN/WAN topologies for secure, high-bandwidth communication across corporate and factory areas.</li>
+                                <li data-i18n="exp.role1_b5">Technical Support &amp; Provisioning: Handled L1/L2 troubleshooting, PC assembly, hardware staging, OS deployment, and end-user peripheral setup.</li>
+                            </ul>
+                        </div>
+                        <div class="exp-card">
+                            <div class="exp-header">
+                                <span class="exp-title" data-i18n="exp.role2_title">IT Support &amp; Infrastructure Admin</span>
+                                <span class="exp-period" data-i18n="exp.role2_period">Mar 2024 – Mar 2026</span>
+                            </div>
+                            <div class="exp-company" data-i18n="exp.role2_company">Danu Vina Co., Ltd</div>
+                            <ul class="exp-bullets">
+                                <li data-i18n="exp.role2_b1">Automated Task Orchestration: Designed scripting logic and directed AI agents to build production-grade Python scripts for automated network health checks and log parsing.</li>
+                                <li data-i18n="exp.role2_b2">Infrastructure Management: Administered internal IT systems and network devices, ensuring stable daily operations and accurate technical logging.</li>
+                                <li data-i18n="exp.role2_b3">Factory Server Administration: Managed local Windows Server and NAS environments to centralize corporate data and support production workflows.</li>
+                                <li data-i18n="exp.role2_b4">Network Administration: Deployed LAN/Wi-Fi networks and CCTV systems including IP allocation, routing, and physical cabling.</li>
+                                <li data-i18n="exp.role2_b5">Secure Connectivity: Set up VPN and P2P connections for encrypted data synchronization across multiple factory branches.</li>
+                            </ul>
+                        </div>
+                        <div class="exp-card">
+                            <div class="exp-header">
+                                <span class="exp-title" data-i18n="exp.role3_title">Data Specialist and Warehouse OPS</span>
+                                <span class="exp-period" data-i18n="exp.role3_period">Mar 2023 – Feb 2024</span>
+                            </div>
+                            <div class="exp-company" data-i18n="exp.role3_company">YCH — Protrade Company Limited</div>
+                            <ul class="exp-bullets">
+                                <li data-i18n="exp.role3_b1">System Operations: Monitored data flow and system integrity within enterprise Warehouse Management Systems.</li>
+                                <li data-i18n="exp.role3_b2">Data Reconciliation: Queried database transaction logs using SQL to resolve discrepancies between physical stock and digital records.</li>
+                                <li data-i18n="exp.role3_b3">Workflow Optimization: Designed layout architectures and guided AI agents to implement lightweight web utilities streamlining monthly report formatting.</li>
+                            </ul>
+                        </div>
+                        <div class="exp-card">
+                            <div class="exp-header">
+                                <span class="exp-title" data-i18n="exp.role4_title">Store Manager / Tech Support</span>
+                                <span class="exp-period" data-i18n="exp.role4_period">Dec 2018 – Feb 2023</span>
+                            </div>
+                            <div class="exp-company" data-i18n="exp.role4_company">The Gioi Di Dong JSC</div>
+                            <ul class="exp-bullets">
+                                <li data-i18n="exp.role4_b1">Tech Support: Provided complex diagnostics and repairs for PCs, mobile devices, and operating systems.</li>
+                                <li data-i18n="exp.role4_b2">Operations Reporting: Extracted ERP metrics and built weekly performance reports presented to Area Management.</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="edu-card">
-                        <div class="edu-header"><span class="edu-institution">Industrial Univ. of HCMC</span><span class="edu-period">2016 – 2018</span></div>
-                        <div class="edu-degree">Major: Software Engineering</div>
-                        <ul class="edu-bullets">
-                            <li>Core Studies: Systems Analysis, Database Management, Software Architectures.</li>
-                        </ul>
+                    <!-- Education Tab -->
+                    <div class="career-panel" data-career-panel="education">
+                        <div class="edu-grid reveal-stagger">
+                            <div class="edu-card">
+                                <div class="edu-header"><span class="edu-institution" data-i18n="edu.uit_name">Univ. of Information Technology</span><span class="edu-period" data-i18n="edu.uit_period">2024 – 2026</span></div>
+                                <div class="edu-degree" data-i18n="edu.uit_degree">Bachelor\u2019s Degree in Information Technology</div>
+                                <ul class="edu-bullets">
+                                    <li data-i18n="edu.uit_b1">Comprehensive IT curriculum covering Development, Data, ERP, Infrastructure, Networking, and Hardware.</li>
+                                    <li data-i18n="edu.uit_b2">Hands-on training in database administration, enterprise systems, network engineering, and IT infrastructure management.</li>
+                                </ul>
+                            </div>
+                            <div class="edu-card">
+                                <div class="edu-header"><span class="edu-institution" data-i18n="edu.iuh_name">Industrial Univ. of HCMC</span><span class="edu-period" data-i18n="edu.iuh_period">2016 – 2018</span></div>
+                                <div class="edu-degree" data-i18n="edu.iuh_degree">Bachelor\u2019s Degree in Software Engineering</div>
+                                <ul class="edu-bullets">
+                                    <li data-i18n="edu.iuh_b1">Core studies in Systems Analysis, Database Management, Software Architecture, and Object-Oriented Programming methodologies.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Certifications Tab -->
+                    <div class="career-panel" data-career-panel="certifications">
+                        <div class="cert-list reveal-stagger">
+                            <a href="https://coursera.org/share/470d54b69ed19f56f5245351064fe32d" target="_blank" class="cert-line">
+                                <span class="cert-name" data-i18n="cert.name1">IT Automation with Python</span>
+                                <span class="cert-sep" data-i18n="cert.separator">·</span>
+                                <span class="cert-issuer" data-i18n="cert.issuer">Google Career Certification (2025)</span>
+                                <span class="cert-sep" data-i18n="cert.separator">·</span>
+                                <i class="fas fa-external-link-alt cert-ext-icon"></i>
+                            </a>
+                            <a href="https://coursera.org/share/93ab286e9f7e890cd756b28312d00005" target="_blank" class="cert-line">
+                                <span class="cert-name" data-i18n="cert.name2">Google Cybersecurity</span>
+                                <span class="cert-sep" data-i18n="cert.separator">·</span>
+                                <span class="cert-issuer" data-i18n="cert.issuer">Google Career Certification (2025)</span>
+                                <span class="cert-sep" data-i18n="cert.separator">·</span>
+                                <i class="fas fa-external-link-alt cert-ext-icon"></i>
+                            </a>
+                            <a href="https://coursera.org/share/2d1da52b4a782102f9c31245b6e263d9" target="_blank" class="cert-line">
+                                <span class="cert-name" data-i18n="cert.name3">Google IT Support</span>
+                                <span class="cert-sep" data-i18n="cert.separator">·</span>
+                                <span class="cert-issuer" data-i18n="cert.issuer">Google Career Certification (2025)</span>
+                                <span class="cert-sep" data-i18n="cert.separator">·</span>
+                                <i class="fas fa-external-link-alt cert-ext-icon"></i>
+                            </a>
+                            <a href="https://coursera.org/share/c7474f23e065dfd225b50aeee75eb834" target="_blank" class="cert-line">
+                                <span class="cert-name" data-i18n="cert.name4">Google UX Design</span>
+                                <span class="cert-sep" data-i18n="cert.separator">·</span>
+                                <span class="cert-issuer" data-i18n="cert.issuer">Google Career Certification (2025)</span>
+                                <span class="cert-sep" data-i18n="cert.separator">·</span>
+                                <i class="fas fa-external-link-alt cert-ext-icon"></i>
+                            </a>
+                            <a href="https://coursera.org/share/d4c431b324f8b0b7a91fe0068535ea43" target="_blank" class="cert-line">
+                                <span class="cert-name" data-i18n="cert.name5">Google Project Management</span>
+                                <span class="cert-sep" data-i18n="cert.separator">·</span>
+                                <span class="cert-issuer" data-i18n="cert.issuer">Google Career Certification (2025)</span>
+                                <span class="cert-sep" data-i18n="cert.separator">·</span>
+                                <i class="fas fa-external-link-alt cert-ext-icon"></i>
+                            </a>
+                            <a href="https://coursera.org/share/1d1a87f0878dd9bd27c94fecff4f45fa" target="_blank" class="cert-line">
+                                <span class="cert-name" data-i18n="cert.name6">Google Advanced Data Analytics</span>
+                                <span class="cert-sep" data-i18n="cert.separator">·</span>
+                                <span class="cert-issuer" data-i18n="cert.issuer">Google Career Certification (2025)</span>
+                                <span class="cert-sep" data-i18n="cert.separator">·</span>
+                                <i class="fas fa-external-link-alt cert-ext-icon"></i>
+                            </a>
+                            <a href="https://coursera.org/share/9aafced16e4a7056a1a36b77dd45bd3d" target="_blank" class="cert-line">
+                                <span class="cert-name" data-i18n="cert.name7">Google Data Analytics</span>
+                                <span class="cert-sep" data-i18n="cert.separator">·</span>
+                                <span class="cert-issuer" data-i18n="cert.issuer">Google Career Certification (2025)</span>
+                                <span class="cert-sep" data-i18n="cert.separator">·</span>
+                                <i class="fas fa-external-link-alt cert-ext-icon"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ import { initNav } from './controllers/nav.controller.js';
 import { initSkillsTabs } from './controllers/skills.controller.js';
 import { initFooter } from './controllers/footer.controller.js';
 import { initReveal } from './controllers/scroll.controller.js';
+import { initLanguage } from './controllers/language.controller.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
@@ -15,4 +16,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initSkillsTabs();
     initFooter();
     initReveal();
+    initLanguage();
 });

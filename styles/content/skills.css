@@ -10,7 +10,8 @@
     gap: 0.4rem;
 }
 
-.sgt-hash {
+.skill-group-title::before {
+    content: "### ";
     color: var(--text-muted);
     font-weight: 400;
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyen Hoang Thanh Tu — CV</title>
+    <title>Nguyễn Hoàng Thanh Tú — CV</title>
     <link rel="stylesheet" href="styles/main.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
             </svg>
-            Print / Save PDF
+            <span data-i18n="cv.btn_print">Print / Save PDF</span>
         </button>
     </div>
 
@@ -36,28 +36,28 @@
             <!-- HEADER: Photo + Personal Info -->
             <div class="cv-header-grid">
 
-                <div class="cv-photo" role="img" aria-label="Nguyen Hoang Thanh Tu"></div>
+                <div class="cv-photo" role="img" aria-label="Nguyễn Hoàng Thanh Tú"></div>
 
                 <!-- Right: Name + Contact -->
                 <div class="cv-name-title">
-                    <h1 class="cv-name">NGUYEN HOANG THANH TU</h1>
-                    <p class="cv-role">IT Infrastructure Engineer &amp; AI Workflows Architect</p>
+                    <h1 class="cv-name" data-i18n="cv.name">NGUYỄN HOÀNG THANH TÚ</h1>
+                    <p class="cv-role" data-i18n="cv.role">IT Infrastructure Engineer &amp; AI Workflows Architect</p>
 
                     <div class="cv-meta-grid">
                         <div class="cv-meta-row">
-                            <span class="cv-meta-label">DOB:</span>
+                            <span class="cv-meta-label" data-i18n="print.dob">DOB:</span>
                             <span class="cv-meta-value">Oct 12th 1997</span>
                         </div>
                         <div class="cv-meta-row">
-                            <span class="cv-meta-label">Location:</span>
+                            <span class="cv-meta-label" data-i18n="print.location">Location:</span>
                             <span class="cv-meta-value">Ho Chi Minh City, Vietnam</span>
                         </div>
                         <div class="cv-meta-row">
-                            <span class="cv-meta-label">Tel:</span>
+                            <span class="cv-meta-label" data-i18n="print.tel">Tel:</span>
                             <span class="cv-meta-value">(0973) 486 297</span>
                         </div>
                         <div class="cv-meta-row">
-                            <span class="cv-meta-label">Email:</span>
+                            <span class="cv-meta-label" data-i18n="print.email">Email:</span>
                             <a href="mailto:darkzeuslk@gmail.com" class="cv-meta-value">darkzeuslk@gmail.com</a>
                         </div>
 
@@ -89,41 +89,6 @@
                 <p class="cv-summary-text">
                     Forward-thinking IT Systems Engineer and AI-Native Developer specializing in system administration and structured <strong>SDLC Orchestration</strong>. I offer robust hands-on hardware strength, including enterprise physical server configurations, hardware provisioning, and secure network routing alongside active directory infrastructure. Rejecting unguided code generation (&ldquo;vibe coding&rdquo;), I operate a rigorous, systematic software development lifecycle methodology where I act as the System Architect, Technical Designer, and QA Orchestrator while directing specialized AI Agents to write, refactor, and deploy code. This operational framework offloads manual development to AI while ensuring robust, high-performance, and secure software. Highly skilled in bridging traditional infrastructure (Windows Server, SQL, Networks) with cutting-edge agentic workflows to build reliable enterprise-grade systems.
                 </p>
-            </div>
-
-            <!-- Technical Skills -->
-            <div class="cv-section">
-                <h2 class="cv-section-title">Technical Skills</h2>
-                <div class="cv-skills-list">
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">AI &amp; SDLC Ops:</span>
-                        <span class="cv-skills-items">SDLC Orchestration, PromptOps, Multi-Agent Workflows, System Architecture, Automated QA &amp; Verification.</span>
-                    </div>
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">Systems &amp; Infra:</span>
-                        <span class="cv-skills-items">Windows Server, Active Directory, DNS/DHCP, Linux (Ubuntu), VMware, NAS Storage.</span>
-                    </div>
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">IT Support &amp; Ops:</span>
-                        <span class="cv-skills-items">L1/L2 Troubleshooting, Diagnostics, Asset Lifecycle, OS Deployment, ERP/WMS systems.</span>
-                    </div>
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">Network Admin:</span>
-                        <span class="cv-skills-items">LAN/WAN, VPN/P2P, Firewalls, CCTV infrastructure.</span>
-                    </div>
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">Databases &amp; Scripting:</span>
-                        <span class="cv-skills-items">Database Administration &amp; SQL, REST API Development, Scripting &amp; Automation, Structured AI-Assisted Development.</span>
-                    </div>
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">Orchestration Tools:</span>
-                        <span class="cv-skills-items">Git/GitHub.</span>
-                    </div>
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">Languages:</span>
-                        <span class="cv-skills-items">English (IELTS 6.5 — Professional Working Proficiency).</span>
-                    </div>
-                </div>
             </div>
 
             <!-- Work Experience -->
@@ -214,6 +179,21 @@
                 </div>
             </div>
 
+            <!-- Certifications -->
+            <div class="cv-section">
+                <h2 class="cv-section-title">Certifications</h2>
+                <ul class="cv-cert-list">
+                    <li>IELTS 6.5 (British Council — 2017)</li>
+                    <li><a href="https://coursera.org/share/470d54b69ed19f56f5245351064fe32d" target="_blank">Google IT Automation with Python</a> (2025)</li>
+                    <li><a href="https://coursera.org/share/93ab286e9f7e890cd756b28312d00005" target="_blank">Google Cybersecurity</a> (2025)</li>
+                    <li><a href="https://coursera.org/share/2d1da52b4a782102f9c31245b6e263d9" target="_blank">Google IT Support</a> (2025)</li>
+                    <li><a href="https://coursera.org/share/c7474f23e065dfd225b50aeee75eb834" target="_blank">Google UX Design</a> (2025)</li>
+                    <li><a href="https://coursera.org/share/d4c431b324f8b0b7a91fe0068535ea43" target="_blank">Google Data Analytics</a> (2025)</li>
+                    <li><a href="https://coursera.org/share/1d1a87f0878dd9bd27c94fecff4f45fa" target="_blank">Google Advanced Data Analytics</a> (2025)</li>
+                    <li><a href="https://coursera.org/share/9aafced16e4a7056a1a36b77dd45bd3d" target="_blank">Google Project Management</a> (2025)</li>
+                </ul>
+            </div>
+
             <div class="cv-section">
                 <h2 class="cv-section-title">Personal Projects</h2>
                 <p class="cv-projects-note">* All personal projects (including various automation scripts, system utilities, and production apps) are hosted on GitHub and published on Google Play via the links in the contact header.</p>
@@ -275,25 +255,46 @@
                 </div>
             </div>
 
-            <!-- Certifications -->
+            <!-- Technical Skills -->
             <div class="cv-section">
-                <h2 class="cv-section-title">Certifications</h2>
-                <ul class="cv-cert-list">
-                    <li>IELTS 6.5 (British Council — 2017)</li>
-                    <li><a href="https://coursera.org/share/470d54b69ed19f56f5245351064fe32d" target="_blank">Google IT Automation with Python</a> (2025)</li>
-                    <li><a href="https://coursera.org/share/93ab286e9f7e890cd756b28312d00005" target="_blank">Google Cybersecurity</a> (2025)</li>
-                    <li><a href="https://coursera.org/share/2d1da52b4a782102f9c31245b6e263d9" target="_blank">Google IT Support</a> (2025)</li>
-                    <li><a href="https://coursera.org/share/c7474f23e065dfd225b50aeee75eb834" target="_blank">Google UX Design</a> (2025)</li>
-                    <li><a href="https://coursera.org/share/d4c431b324f8b0b7a91fe0068535ea43" target="_blank">Google Data Analytics</a> (2025)</li>
-                    <li><a href="https://coursera.org/share/1d1a87f0878dd9bd27c94fecff4f45fa" target="_blank">Google Advanced Data Analytics</a> (2025)</li>
-                    <li><a href="https://coursera.org/share/9aafced16e4a7056a1a36b77dd45bd3d" target="_blank">Google Project Management</a> (2025)</li>
-                </ul>
+                <h2 class="cv-section-title">Technical Skills</h2>
+                <div class="cv-skills-list">
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">AI &amp; SDLC Ops:</span>
+                        <span class="cv-skills-items">SDLC Orchestration, PromptOps, Multi-Agent Workflows, System Architecture, Automated QA &amp; Verification.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Systems &amp; Infra:</span>
+                        <span class="cv-skills-items">Windows Server, Active Directory, DNS/DHCP, Linux (Ubuntu), VMware, NAS Storage.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">IT Support &amp; Ops:</span>
+                        <span class="cv-skills-items">L1/L2 Troubleshooting, Diagnostics, Asset Lifecycle, OS Deployment, ERP/WMS systems.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Network Admin:</span>
+                        <span class="cv-skills-items">LAN/WAN, VPN/P2P, Firewalls, CCTV infrastructure.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Databases &amp; Scripting:</span>
+                        <span class="cv-skills-items">Database Administration &amp; SQL, REST API Development, Scripting &amp; Automation, Structured AI-Assisted Development.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Orchestration Tools:</span>
+                        <span class="cv-skills-items">Git/GitHub.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Languages:</span>
+                        <span class="cv-skills-items">English (IELTS 6.5 — Professional Working Proficiency).</span>
+                    </div>
+                </div>
             </div>
 
         </div>
     </div>
 
     <script src="src/print.js"></script>
+    <script src="../src/bundle.js"></script>
 </body>
 
 </html>
