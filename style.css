@@ -1,8 +1,9 @@
 /* 
    style.css
-   Main entry stylesheet importing theme, components, and print rules
+   Main entry stylesheet importing theme, layout, components, and print rules
 */
 
 @import url('theme.css');
+@import url('layout.css');
 @import url('components.css');
 @import url('print.css');

@@ -31,7 +31,6 @@
             <div class="nav-links">
                 <a href="#about" class="nav-link">About</a>
                 <a href="#skills" class="nav-link">Skills</a>
-                <a href="#experience" class="nav-link">Experience</a>
                 <a href="#projects" class="nav-link">Projects</a>
                 <a href="#certifications" class="nav-link">Certifications</a>
                 <button id="theme-toggle" class="theme-toggle" title="Toggle Light/Dark Mode">
@@ -135,56 +134,39 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section class="section container" id="experience">
-        <h2 class="section-title">Professional Timeline</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <span class="timeline-time">May 2026 – Present</span>
-                <div class="timeline-card">
-                    <h3 class="timeline-title">IT Engineer Assistant Supervisor</h3>
-                    <span class="timeline-company">Sharp Manufacturing Vietnam Co., Ltd</span>
-                    <ul class="timeline-bullets">
-                        <li><strong>Database Administration:</strong> Administered relational SQL databases, analyzed HQ architectures, and localized systems to fit manufacturing operations.</li>
-                        <li><strong>AI-Native SDLC Orchestration:</strong> Supervised AI Agents in building localized tools, shortening cycles by 80%.</li>
-                        <li><strong>Infrastructure Management:</strong> Administered Windows Server environments, NAS nodes, and CCTV surveillance to maintain 99.9% uptime.</li>
-                        <li><strong>Network Engineering:</strong> Optimized LAN/WAN topologies across corporate offices and factory floors.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <span class="timeline-time">Mar 2024 – Mar 2026</span>
-                <div class="timeline-card">
-                    <h3 class="timeline-title">IT Support & Infrastructure Admin</h3>
-                    <span class="timeline-company">Danu Vina Co., Ltd</span>
-                    <ul class="timeline-bullets">
-                        <li><strong>Automated Task Orchestration:</strong> Scripted network health checks and log parsers in Python utilizing AI agent guidance.</li>
-                        <li><strong>Factory Server Administration:</strong> Managed localized servers and NAS storage networks to maintain zero-loss production streams.</li>
-                        <li><strong>Secure Connectivity:</strong> Deployed secure VPN/P2P connections for encrypted data synchronization across branches.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <span class="timeline-time">Mar 2023 – Feb 2024</span>
-                <div class="timeline-card">
-                    <h3 class="timeline-title">Data Specialist and Warehouse OPS</h3>
-                    <span class="timeline-company">YCH - Protrade Company Limited</span>
-                    <ul class="timeline-bullets">
-                        <li><strong>System Operations:</strong> Maintained transaction log flow integrity within Enterprise Warehouse Management Systems.</li>
-                        <li><strong>Data Reconciliation:</strong> Ran complex SQL diagnostic queries to bridge inventory sync gaps.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Projects Section -->
     <section class="section container" id="projects">
         <h2 class="section-title">Key Projects</h2>
         <div class="projects-grid">
+            <!-- Agent-Guidance-MCP -->
+            <div class="project-card">
+                <div class="project-info">
+                    <span class="project-type">Open Source - Python Package</span>
+                    <h3>Agent-Guidance-MCP</h3>
+                    <p class="project-desc">
+                        A Python-based Model Context Protocol (MCP) server that empowers AI agents with structured coding standards, project contexts, and automated guidance systems.
+                    </p>
+                    <div class="project-meta">
+                        <div class="project-meta-item"><strong>Core Service:</strong> <span>Provides standards, symbols, and dependencies extraction.</span></div>
+                        <div class="project-meta-item"><strong>AST Engine:</strong> <span>Builds an on-demand SQL-backed code graph using Tree-sitter.</span></div>
+                        <div class="project-meta-item"><strong>Integration:</strong> <span>Direct integration with any MCP host (stdio transport).</span></div>
+                    </div>
+                    <div class="project-tech">
+                        <span class="project-tech-tag">Python</span><span class="project-tech-tag">SQLite</span><span class="project-tech-tag">Tree-sitter</span><span class="project-tech-tag">Pydantic</span><span class="project-tech-tag">MCP</span>
+                    </div>
+                </div>
+                <div class="project-visual">
+                    <div class="project-architecture">
+                        <div class="arch-node"><i class="fas fa-terminal"></i> Cursor / Claude / IDE</div>
+                        <div class="arch-arrow"><i class="fas fa-arrows-alt-v"></i></div>
+                        <div class="arch-node"><i class="fas fa-cogs"></i> agent-guidance-mcp Server</div>
+                        <div class="arch-arrow"><i class="fas fa-arrows-alt-v"></i></div>
+                        <div class="arch-node"><i class="fas fa-database"></i> SQLite CodeGraph DB</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI-Powered Health Assistant -->
             <div class="project-card">
                 <div class="project-info">
                     <span class="project-type">Graduation Project - UIT</span>
