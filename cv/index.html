@@ -91,6 +91,108 @@
                 </p>
             </div>
 
+            <!-- Technical Skills -->
+            <div class="cv-section">
+                <h2 class="cv-section-title">Technical Skills</h2>
+                <div class="cv-skills-list">
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">AI &amp; SDLC Ops:</span>
+                        <span class="cv-skills-items">SDLC Orchestration, PromptOps, Multi-Agent Workflows, System Architecture, Automated QA &amp; Verification.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Systems &amp; Infra:</span>
+                        <span class="cv-skills-items">Windows Server, Active Directory, DNS/DHCP, Linux (Ubuntu), VMware, NAS Storage.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">IT Support &amp; Ops:</span>
+                        <span class="cv-skills-items">L1/L2 Troubleshooting, Diagnostics, Asset Lifecycle, OS Deployment, ERP/WMS systems.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Network Admin:</span>
+                        <span class="cv-skills-items">LAN/WAN, VPN/P2P, Firewalls, CCTV infrastructure.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Databases &amp; Scripting:</span>
+                        <span class="cv-skills-items">Database Administration &amp; SQL, REST API Development, Scripting &amp; Automation, Structured AI-Assisted Development.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Orchestration Tools:</span>
+                        <span class="cv-skills-items">Git/GitHub.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Languages:</span>
+                        <span class="cv-skills-items">English (IELTS 6.5 — Professional Working Proficiency).</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Projects -->
+            <div class="cv-section">
+                <h2 class="cv-section-title">Personal Projects</h2>
+                <p class="cv-projects-note">* All personal projects (including various automation scripts, system utilities, and production apps) are hosted on GitHub and published on Google Play via the links in the contact header.</p>
+
+                <div class="cv-project">
+                    <div class="cv-project-header">
+                        <span class="cv-project-name">AI-Powered Health Assistant <span class="cv-project-tag">— Graduation Project (UIT)</span></span>
+                        <span class="cv-project-stack">Kotlin · Jetpack Compose · FastAPI · SQLAlchemy · PySide6 · MySQL · ChromaDB · LiteRT</span>
+                    </div>
+                    <p class="cv-project-desc">An offline-first Android health ecosystem that aggregates Google Health Connect biometrics, manages tasks and habits, and delivers AI health guidance via RAG pipeline + on-device LLM — built as a 4-tier system and successfully defended as a UIT graduation thesis.</p>
+                    <ul class="cv-project-bullets">
+                        <li><strong>4-Tier Architecture:</strong> Decoupled system across Frontend Android (Jetpack Compose, 35 Compose destinations, 8 locales, edge-to-edge UI), Backend Android (Room DB source-of-truth, WorkManager sync, Health Connect 20+ metrics, on-device LiteRT-LM AI), Backend Server (FastAPI, 10 routers / 50+ endpoints, MySQL, Delta Sync Gen 2, rate-limited), and Master GUI (PySide6 admin panel, 33 script tasks, AI Guard hot-reload, disease pipeline, automation center).</li>
+                        <li><strong>Delta Sync Gen 2:</strong> Cursor-based bidirectional sync with mutation idempotency (mutation_id + device_id), tombstone conflict resolution, and dirty-row protection — enabling full offline capability across tasks, habits, health snapshots, biometrics, and chat history.</li>
+                        <li><strong>AI Multi-Mode with Medical RAG:</strong> Backend RAG pipeline over ChromaDB (1,400+ disease embeddings via multilingual-e5-small), on-device AI via user-provided .litertlm models (Gemma/Phi/TinyLlama), and external API gateway with 8 provider presets (OpenAI, Gemini, Anthropic, DeepSeek, Ollama...). Dynamic conversational language detection and AI Guard off-topic policy.</li>
+                        <li><strong>Google Health Connect Integration:</strong> 20 read + 5 write permissions across cardio, body composition, sleep, and biometrics. Smart sleep processing with wake-up day aggregation and overlap resolution. Selected-date data protection — current-day local-only, past dates use backend snapshots as fallback.</li>
+                        <li><strong>Defense-in-Depth Security:</strong> Argon2id password hashing, JWT HS256 with refresh token rotation (device-bound), Fernet encrypted chat storage, AES-256-GCM V3 backup encryption, SQLAlchemy parameterized queries, encrypted SharedPreferences for API keys, and OWASP-oriented mitigation across all tiers.</li>
+                        <li><strong>Smart Notification System:</strong> 13 contextual rules (AQI, HR, SpO2, sleep, steps goal, weather...) with swipe-to-dismiss (250ms animation delay + undo dialog), AI-generated smart notifications via WorkManager, and privacy-local design (no notification state on backend).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Work Projects -->
+            <div class="cv-section">
+                <h2 class="cv-section-title">Work Projects</h2>
+
+                <div class="cv-project">
+                    <div class="cv-project-header">
+                        <span class="cv-project-name">NAS Storage &amp; Domain Infrastructure</span>
+                        <span class="cv-project-stack">Windows Server · AD · NAS · SQL</span>
+                    </div>
+                    <ul class="cv-project-bullets">
+                        <li>Deployed enterprise NAS storage for centralized data management. Configured Windows Server Domain Controller with Active Directory, DNS, and DHCP. Designed relational databases for localized factory operations based on HQ specifications.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-project">
+                    <div class="cv-project-header">
+                        <span class="cv-project-name">Site-to-Site Private Network Connectivity</span>
+                        <span class="cv-project-stack">VPN/P2P · Cisco/DrayTek · Routing</span>
+                    </div>
+                    <ul class="cv-project-bullets">
+                        <li>Designed and implemented secure Site-to-Site VPN connections between factory sites for private encrypted data synchronization with routing policies and failover for 99.9% uptime.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-project">
+                    <div class="cv-project-header">
+                        <span class="cv-project-name">CCTV Surveillance System Deployment</span>
+                        <span class="cv-project-stack">CCTV · NVR · Structured Cabling · LAN</span>
+                    </div>
+                    <ul class="cv-project-bullets">
+                        <li>Planned and executed factory-wide CCTV deployment: site layout survey, camera positioning, structural cabling (network and power), NVR configuration, and network integration for centralized remote monitoring.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-project">
+                    <div class="cv-project-header">
+                        <span class="cv-project-name">Internal Business Software Solutions</span>
+                        <span class="cv-project-stack">Python · SQL · AI SDLC · Web Apps</span>
+                    </div>
+                    <ul class="cv-project-bullets">
+                        <li>Designed custom software for departmental workflows: analyzed requirements, architected database schemas, directed AI-assisted development of production-grade utilities for inventory, reporting, and data management.</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- Work Experience -->
             <div class="cv-section">
                 <h2 class="cv-section-title">Work Experience</h2>
@@ -192,102 +294,6 @@
                     <li><a href="https://coursera.org/share/1d1a87f0878dd9bd27c94fecff4f45fa" target="_blank">Google Advanced Data Analytics</a> (2025)</li>
                     <li><a href="https://coursera.org/share/9aafced16e4a7056a1a36b77dd45bd3d" target="_blank">Google Project Management</a> (2025)</li>
                 </ul>
-            </div>
-
-            <div class="cv-section">
-                <h2 class="cv-section-title">Personal Projects</h2>
-                <p class="cv-projects-note">* All personal projects (including various automation scripts, system utilities, and production apps) are hosted on GitHub and published on Google Play via the links in the contact header.</p>
-
-                <div class="cv-project">
-                    <div class="cv-project-header">
-                        <span class="cv-project-name">AI-Powered Health Assistant <span class="cv-project-tag">— Personal Graduation Project (UIT)</span></span>
-                        <span class="cv-project-stack">Kotlin, FastAPI, PySide6, MySQL, ChromaDB</span>
-                    </div>
-                    <ul class="cv-project-bullets">
-                        <li><strong>SDLC Orchestration Layer:</strong> Served as the sole Architect, System Engineer, and QA Lead, orchestrating a team of specialized AI agents to generate, refactor, and test a complex, multi-tiered health application ecosystem.</li>
-                        <li><strong>System Architecture:</strong> Designed core schemas and directed AI code execution to construct an Offline-First native Android app (Jetpack Compose, Room, WorkManager) with FastAPI backend, and PySide6 Master Admin Panel.</li>
-                        <li><strong>Data &amp; Operations:</strong> Guided the implementation of <strong>Delta Sync Gen 2</strong> with SHA-256 session integrity checks, saving 90% bandwidth. Managed AI to script secure OWASP-compliant Argon2id hashing and Fernet chat encryption.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="cv-section">
-                <h2 class="cv-section-title">Work Projects</h2>
-
-                <div class="cv-project">
-                    <div class="cv-project-header">
-                        <span class="cv-project-name">NAS Storage &amp; Domain Infrastructure</span>
-                        <span class="cv-project-stack">Windows Server · AD · NAS · SQL</span>
-                    </div>
-                    <ul class="cv-project-bullets">
-                        <li>Deployed enterprise NAS storage for centralized data management. Configured Windows Server Domain Controller with Active Directory, DNS, and DHCP. Designed relational databases for localized factory operations based on HQ specifications.</li>
-                    </ul>
-                </div>
-
-                <div class="cv-project">
-                    <div class="cv-project-header">
-                        <span class="cv-project-name">Site-to-Site Private Network Connectivity</span>
-                        <span class="cv-project-stack">VPN/P2P · Cisco/DrayTek · Routing</span>
-                    </div>
-                    <ul class="cv-project-bullets">
-                        <li>Designed and implemented secure Site-to-Site VPN connections between factory sites for private encrypted data synchronization with routing policies and failover for 99.9% uptime.</li>
-                    </ul>
-                </div>
-
-                <div class="cv-project">
-                    <div class="cv-project-header">
-                        <span class="cv-project-name">CCTV Surveillance System Deployment</span>
-                        <span class="cv-project-stack">CCTV · NVR · Structured Cabling · LAN</span>
-                    </div>
-                    <ul class="cv-project-bullets">
-                        <li>Planned and executed factory-wide CCTV deployment: site layout survey, camera positioning, structural cabling (network and power), NVR configuration, and network integration for centralized remote monitoring.</li>
-                    </ul>
-                </div>
-
-                <div class="cv-project">
-                    <div class="cv-project-header">
-                        <span class="cv-project-name">Internal Business Software Solutions</span>
-                        <span class="cv-project-stack">Python · SQL · AI SDLC · Web Apps</span>
-                    </div>
-                    <ul class="cv-project-bullets">
-                        <li>Designed custom software for departmental workflows: analyzed requirements, architected database schemas, directed AI-assisted development of production-grade utilities for inventory, reporting, and data management.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Technical Skills -->
-            <div class="cv-section">
-                <h2 class="cv-section-title">Technical Skills</h2>
-                <div class="cv-skills-list">
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">AI &amp; SDLC Ops:</span>
-                        <span class="cv-skills-items">SDLC Orchestration, PromptOps, Multi-Agent Workflows, System Architecture, Automated QA &amp; Verification.</span>
-                    </div>
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">Systems &amp; Infra:</span>
-                        <span class="cv-skills-items">Windows Server, Active Directory, DNS/DHCP, Linux (Ubuntu), VMware, NAS Storage.</span>
-                    </div>
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">IT Support &amp; Ops:</span>
-                        <span class="cv-skills-items">L1/L2 Troubleshooting, Diagnostics, Asset Lifecycle, OS Deployment, ERP/WMS systems.</span>
-                    </div>
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">Network Admin:</span>
-                        <span class="cv-skills-items">LAN/WAN, VPN/P2P, Firewalls, CCTV infrastructure.</span>
-                    </div>
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">Databases &amp; Scripting:</span>
-                        <span class="cv-skills-items">Database Administration &amp; SQL, REST API Development, Scripting &amp; Automation, Structured AI-Assisted Development.</span>
-                    </div>
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">Orchestration Tools:</span>
-                        <span class="cv-skills-items">Git/GitHub.</span>
-                    </div>
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">Languages:</span>
-                        <span class="cv-skills-items">English (IELTS 6.5 — Professional Working Proficiency).</span>
-                    </div>
-                </div>
             </div>
 
         </div>
