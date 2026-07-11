@@ -12,16 +12,17 @@ Design philosophy: an interface that feels like a high-end code editor or GitHub
 
 Core principles:
 1. **OLED-first dark mode** — near-black backgrounds for modern screens.
-2. **Bento Box layout** — content grouped in distinct bordered panels.
-3. **Terminal framing** — sections wrapped in macOS-style mock terminal containers.
-4. **Syntax coloring** — section titles, tags, and labels use code-editor accent colors.
+2. **Terminal framing** — sections wrapped in macOS-style mock terminal containers.
+3. **Syntax coloring** — section titles, tags, and labels use code-editor accent colors.
+4. **Compact content** — tag clouds, single-line lists, terminal session output replace heavy cards.
 5. **No decorative noise** — no gradients on content, no rounded pills on layout elements.
+6. **Apple-style scroll animations** — fade + translateY reveal with stagger delays.
 
 ---
 
 ## Color System
 
-All colors are defined as CSS custom properties in [`theme.css`](../theme.css).
+All colors are defined as CSS custom properties in [`styles/base/tokens.css`](../styles/base/tokens.css).
 
 ### Dark Mode (Default — OLED Black)
 
@@ -40,8 +41,8 @@ All colors are defined as CSS custom properties in [`theme.css`](../theme.css).
 | Token | Value | Role |
 |---|---|---|
 | `--accent-primary` | `#58a6ff` | Links, skill tags, hero title accent span, active borders |
-| `--accent-secondary` | `#3fb950` | String syntax tokens |
-| `--accent-orange` | `#f0883e` | Hero subtitle, skill category badge |
+| `--accent-secondary` | `#3fb950` | String syntax tokens, availability badge |
+| `--accent-orange` | `#f0883e` | Hero subtitle, project type label, education period |
 | `--accent-purple` | `#bc8cff` | Section titles (`##` headings), keyword tokens |
 | `--accent-gradient` | `135deg #58a6ff → #bc8cff` | Reserved for hero/badge gradients |
 
@@ -77,13 +78,13 @@ Two typefaces are imported from Google Fonts:
 | Hero Name | `3rem` | 800 | Inter |
 | Hero Name (mobile) | `2.25rem` | 800 | Inter |
 | Section Title | `1.5rem` | 700 | Fira Code |
-| Project Title | `1.25rem` | 700 | Fira Code |
-| Skill Title | `0.9rem` | 700 | Fira Code |
+| Project Title | `1.1rem` | 700 | Fira Code |
+| Skill Group Title | `0.85rem` | 700 | Fira Code |
 | Body / Description | `0.9rem` | 400 | Inter |
 | Nav Links | `0.85rem` | 400 | Fira Code |
 | Tags / Metadata | `0.7–0.75rem` | 400 | Fira Code |
 | Terminal label | `0.75rem` | 400 | Fira Code |
-| Footer | `0.8rem` | 400 | Fira Code |
+| Footer | `0.75rem` | 400 | Fira Code |
 
 ---
 
@@ -117,7 +118,7 @@ The primary visual container for all major sections.
 │                                    │
 │  ## Section Title                  │  ← section-title (accent-purple)
 │                                    │
-│  [content grid / cards inside]     │  ← terminal-body-raw (padding only)
+│  [content inside]                  │  ← terminal-body-raw (padding only)
 │                                    │
 └────────────────────────────────────┘
 ```
@@ -141,23 +142,69 @@ The primary visual container for all major sections.
 
 Renders as: `## Technical Expertise` — mimicking a Markdown H2 inside a code file.
 
-### Skill Cards (Bento Grid)
+### About — Terminal Session
 
-Auto-fill responsive grid (`minmax(280px, 1fr)`). Each card contains:
-- **Header row**: skill name (Fira Code, bold) + category badge (`accent-orange`).
-- **Tag row**: monospace pills with `accent-primary` text on `bg-tertiary` background.
+The About section uses a **terminal session** format instead of cards:
 
-Filter tabs above the grid use the same monospace style as nav links.
+```
+> cat about.tu
+function NguyenHoangThanhTu() {
+    let title = "IT Systems Engineer";
+    let status = "Available";
+    let focus = ["Infrastructure", "AI-Augmented Dev"];
+    let langs = "Vietnamese (native) | English (working)";
+}
+```
 
-### Project Cards
+- Each line starts with a `>` prompt (`accent-secondary` green).
+- Syntax-colored tokens: keywords (`accent-purple`), functions (`accent-blue`), strings (`accent-green`).
+- Inline tag pills for languages/domains with colored borders.
 
-Two-column grid inside each card (`1.1fr 0.9fr`):
-- **Left**: Project type label, title, description paragraph, metadata key-values, tech stack tags.
-- **Right**: Architecture diagram — vertical node → arrow → node stack.
+### Skills — Tag Cloud by Category
 
-### Certification / Education Cards
+No card boxes. Skills are grouped by category with a **tag cloud** layout:
 
-Simple flat bordered cards with `bg-secondary` fill. No visual hierarchy beyond `h4` titles.
+```
+### AI-Ops             ### Infrastructure      ### Dev
+[OpenAI API]           [Docker]               [TypeScript]
+[LangChain]            [K8s]                  [Python]
+[Vector DB]            [CI/CD]                [Kotlin]
+```
+
+- Group titles: Fira Code `0.85rem` bold, `accent-primary` with `###` prefix.
+- Tags: monospace pills, `accent-primary` text on `bg-tertiary`.
+- Filter tabs above the grid toggle visibility by `data-category`.
+
+### Projects — Single Column with Flow Diagram
+
+Each `.project-card` is a single column layout containing:
+- **Title row**: project name (Fira Code, bold) + optional GitHub link icon.
+- **Type label**: uppercase monospace label in `accent-orange`.
+- **Description**: paragraph in `text-secondary`.
+- **Metadata**: bordered left-accent panel with key-value rows.
+- **Tech stack**: monospace tags in `accent-secondary`.
+- **Flow diagram**: horizontal `[node] → [node] → [node]` chain representing architecture.
+
+### Certifications — Compact Terminal List
+
+No card boxes. Each cert is a single monospace line:
+
+```
+> IT Automation with Python · Google Career Certification (2025) · Verify →
+```
+
+- `>` prompt (`accent-primary`).
+- `·` separator dots (`text-muted`).
+- Inline Verify link.
+- Flex-wrap: collapses to multiple lines on narrow viewports.
+
+### Education — Flat Cards
+
+Two-column grid (`1fr 1fr`), stacks on mobile:
+
+- **Header**: institution name + period badge (`accent-orange`).
+- **Degree**: monospace label in `text-secondary`.
+- **Bullets**: `-` prefixed list items with `accent-purple` dash.
 
 ---
 
@@ -168,9 +215,9 @@ Simple flat bordered cards with `bg-secondary` fill. No visual hierarchy beyond 
 | Nav links | `text-primary` (brighter) |
 | Social icons | `accent-primary` (blue) |
 | Theme / Print buttons | `text-primary` + `accent-primary` border |
-| Skill filter buttons | `accent-primary` border + `bg-tertiary` fill |
+| Skill filter buttons | Active: `accent-primary` border + `bg-tertiary` fill; Hover: slight brighten |
 | Skill tags | Static (no hover needed) |
-| Cert links | `accent-primary` underline on hover |
+| Cert links | `accent-primary` hover |
 | Buttons (primary) | `opacity: 0.95` |
 | Buttons (secondary) | `bg-tertiary` fill + `text-secondary` border |
 
@@ -184,8 +231,23 @@ Light/dark mode is toggled via a button in the navbar. State is:
 - Stored in `localStorage` under key `theme`.
 - Falls back to OS `prefers-color-scheme` on first visit.
 - Applied as `data-theme="light"` or `data-theme="dark"` on `<html>`.
+- Controlled by `src/controllers/theme.controller.js`.
 
 The sun/moon icon swaps on toggle.
+
+---
+
+## Scroll Reveal Animations
+
+Defined in [`styles/components/reveal.css`](../styles/components/reveal.css):
+
+- **`.reveal`**: fade + translateY(24px) → visible on intersect.
+- **`.reveal-hero`**: hero section delayed fade-in (0.5s delay).
+- **`.reveal-stagger`**: child elements fade in sequentially with 0.05s stagger delays (up to 6 children).
+
+Controlled by `src/controllers/scroll.controller.js` via `IntersectionObserver` (threshold 0.12, rootMargin -40px).
+
+- `prefers-reduced-motion` disables all reveal animations.
 
 ---
 
@@ -194,7 +256,7 @@ The sun/moon icon swaps on toggle.
 | Viewport | Behavior |
 |---|---|
 | Desktop (`> 768px`) | Full horizontal navbar, all grids side-by-side |
-| Mobile (`<= 768px`) | Hamburger nav drawer (slides from right), summary grid stacks |
+| Mobile (`<= 768px`) | Hamburger nav drawer (slides from right), stacks grids |
 
 The navbar drawer is `260px` wide, positioned fixed from the right, hidden at `right: -100%` and shown at `right: 0` via `.active` class.
 
