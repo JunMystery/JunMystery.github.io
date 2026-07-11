@@ -50,77 +50,79 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="hero" id="home">
-        <div class="container hero-grid">
-            <div class="hero-content">
-                <div class="hero-subtitle">
-                    ~ systems_engineer & ai_orchestrator
-                </div>
-                <h1 class="hero-title">NGUYEN HOANG<br><span>THANH TU</span></h1>
-                <p class="hero-desc">
-                    A forward-thinking IT Systems Engineer and AI-Native Developer. I bridge traditional infrastructure operations with next-generation multi-agent SDLC orchestration workflows.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">
-                        <i class="fas fa-code"></i> View Work
-                    </a>
-                    <button id="btn-print" class="btn btn-secondary">
-                        <i class="fas fa-file-pdf"></i> Get A4 CV / Print
-                    </button>
-                </div>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/junmystery/" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/JunMystery/" target="_blank" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://play.google.com/store/apps/dev?id=6943003088385722005" target="_blank" class="social-link" title="Google Play"><i class="fab fa-google-play"></i></a>
-                    <a href="mailto:darkzeuslk@gmail.com" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
+    <!-- Hero & About Combined Section -->
+    <header class="hero-about section" id="home">
+        <div class="container hero-about-grid">
+            <!-- Left Side: About Section (Professional Paradigm) -->
+            <div class="about-column" id="about">
+                <h2 class="section-title">Professional Paradigm</h2>
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <p>
+                            <strong>Infrastructure Strength:</strong> Proven hands-on experience configuring physical server infrastructure, setting up Active Directory, DNS/DHCP networks, VM virtualization, secure local DrayTek/Cisco routing protocols, NAS servers, and managing localized MySQL/MSSQL corporate database deployments.
+                        </p>
+                    </div>
+                    <div class="summary-card">
+                        <p>
+                            <strong>AI-Native Orchestration:</strong> Pioneering structured SDLC Orchestration over unguided "vibe coding". I act as the System Architect and QA Supervisor directing specialized AI Agents to write clean, fully tested, and secure software applications, speeding up SDLC iteration loops by 80%.
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="avatar-wrapper">
-                    <div class="terminal-header">
-                        <div class="terminal-dots">
-                            <span class="terminal-dot dot-red"></span>
-                            <span class="terminal-dot dot-yellow"></span>
-                            <span class="terminal-dot dot-green"></span>
-                        </div>
-                        <span class="terminal-title">profile.json</span>
+
+            <!-- Right Side: Hero Section -->
+            <div class="hero-column">
+                <div class="hero-content">
+                    <div class="hero-subtitle">
+                        ~ systems_engineer & ai_orchestrator
                     </div>
-                    <div class="terminal-body">
-                        <span class="terminal-comment">// Systems & AI-Ops profile</span><br>
-                        <span class="terminal-keyword">const</span> <span class="terminal-variable">developer</span> = {<br>
-                        &nbsp;&nbsp;name: <span class="terminal-string">"Nguyen Hoang Thanh Tu"</span>,<br>
-                        &nbsp;&nbsp;role: <span class="terminal-string">"Systems & AI Orchestrator"</span>,<br>
-                        &nbsp;&nbsp;dob: <span class="terminal-string">"Oct 12, 1997"</span>,<br>
-                        &nbsp;&nbsp;location: <span class="terminal-string">"HCMC, Vietnam"</span>,<br>
-                        &nbsp;&nbsp;stack: [<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-string">"Windows Server"</span>, <span class="terminal-string">"Networks"</span>,<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-string">"AI-Native SDLC"</span>, <span class="terminal-string">"SQL DBs"</span><br>
-                        &nbsp;&nbsp;],<br>
-                        &nbsp;&nbsp;status: <span class="terminal-string">"active_orchestration"</span><br>
-                        };
+                    <h1 class="hero-title">NGUYEN HOANG<br><span>THANH TU</span></h1>
+                    <p class="hero-desc">
+                        A forward-thinking IT Systems Engineer and AI-Native Developer. I bridge traditional infrastructure operations with next-generation multi-agent SDLC orchestration workflows.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            <i class="fas fa-code"></i> View Work
+                        </a>
+                        <button id="btn-print" class="btn btn-secondary">
+                            <i class="fas fa-file-pdf"></i> Get A4 CV / Print
+                        </button>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/junmystery/" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/JunMystery/" target="_blank" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://play.google.com/store/apps/dev?id=6943003088385722005" target="_blank" class="social-link" title="Google Play"><i class="fab fa-google-play"></i></a>
+                        <a href="mailto:darkzeuslk@gmail.com" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="avatar-wrapper">
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <span class="terminal-dot dot-red"></span>
+                                <span class="terminal-dot dot-yellow"></span>
+                                <span class="terminal-dot dot-green"></span>
+                            </div>
+                            <span class="terminal-title">profile.json</span>
+                        </div>
+                        <div class="terminal-body">
+                            {<br>
+                            &nbsp;&nbsp;<span class="terminal-keyword">"name"</span>: <span class="terminal-string">"Nguyen Hoang Thanh Tu"</span>,<br>
+                            &nbsp;&nbsp;<span class="terminal-keyword">"role"</span>: <span class="terminal-string">"Systems & AI Orchestrator"</span>,<br>
+                            &nbsp;&nbsp;<span class="terminal-keyword">"dob"</span>: <span class="terminal-string">"Oct 12, 1997"</span>,<br>
+                            &nbsp;&nbsp;<span class="terminal-keyword">"location"</span>: <span class="terminal-string">"HCMC, Vietnam"</span>,<br>
+                            &nbsp;&nbsp;<span class="terminal-keyword">"stack"</span>: [<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-string">"Windows Server"</span>, <span class="terminal-string">"Networks"</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-string">"AI-Native SDLC"</span>, <span class="terminal-string">"SQL DBs"</span><br>
+                            &nbsp;&nbsp;],<br>
+                            &nbsp;&nbsp;<span class="terminal-keyword">"status"</span>: <span class="terminal-string">"active_orchestration"</span><br>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
-    <!-- About Section -->
-    <section class="section container" id="about">
-        <h2 class="section-title">Professional Paradigm</h2>
-        <div class="summary-grid">
-            <div class="summary-card">
-                <p>
-                    <strong>Infrastructure Strength:</strong> Proven hands-on experience configuring physical server infrastructure, setting up Active Directory, DNS/DHCP networks, VM virtualization, secure local DrayTek/Cisco routing protocols, NAS servers, and managing localized MySQL/MSSQL corporate database deployments.
-                </p>
-            </div>
-            <div class="summary-card">
-                <p>
-                    <strong>AI-Native Orchestration:</strong> Pioneering structured SDLC Orchestration over unguided "vibe coding". I act as the System Architect and QA Supervisor directing specialized AI Agents to write clean, fully tested, and secure software applications, speeding up SDLC iteration loops by 80%.
-                </p>
-            </div>
-        </div>
-    </section>
 
     <!-- Skills Section -->
     <section class="section container" id="skills">

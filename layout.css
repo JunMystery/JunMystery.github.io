@@ -84,8 +84,8 @@
     color: var(--text-secondary);
 }
 
-/* Hero Split Layout */
-.hero {
+/* Hero & About Combined Section Layout */
+.hero-about {
     min-height: 90vh;
     display: flex;
     align-items: center;
@@ -94,10 +94,23 @@
     border-bottom: 1px solid var(--border-color);
 }
 
-.hero-grid {
+.hero-about-grid {
     display: grid;
-    grid-template-cols: 1.1fr 0.9fr;
-    gap: 3rem;
+    grid-template-cols: 0.95fr 1.05fr; /* About left, Hero right */
+    gap: 3.5rem;
+    align-items: center;
+    width: 100%;
+}
+
+.about-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-column {
+    display: grid;
+    grid-template-cols: 1fr 1fr;
+    gap: 2rem;
     align-items: center;
 }
 
@@ -109,7 +122,7 @@
 }
 
 .hero-title {
-    font-size: 3rem;
+    font-size: 2.25rem; /* Reduced to fit nicely side-by-side */
     font-weight: 800;
     line-height: 1.15;
     margin-bottom: 1rem;
@@ -121,10 +134,10 @@
 }
 
 .hero-desc {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--text-secondary);
     margin-bottom: 2rem;
-    max-width: 520px;
+    max-width: 480px;
 }
 
 .hero-buttons {
@@ -195,7 +208,15 @@
 
 /* Breakpoints */
 @media (max-width: 960px) {
-    .hero-grid {
+    .hero-about-grid {
+        grid-template-cols: 1fr;
+        gap: 3.5rem;
+    }
+    .about-column {
+        order: 2;
+    }
+    .hero-column {
+        order: 1;
         grid-template-cols: 1fr;
         text-align: center;
         gap: 2.5rem;
@@ -250,6 +271,6 @@
         padding-top: 1.5rem;
     }
     .hero-title {
-        font-size: 2.25rem;
+        font-size: 2rem;
     }
 }
