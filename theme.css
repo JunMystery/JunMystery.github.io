@@ -1,46 +1,58 @@
 /* 
    theme.css
-   Color variables, resets, core layout, and theme configs
+   Clean Developer Style (OLED Dark / Syntax Light Theme)
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    --bg-primary: #0b0f19;
-    --bg-secondary: #131c2e;
-    --bg-tertiary: #1e293b;
-    --border-color: rgba(255, 255, 255, 0.08);
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --accent-primary: #38bdf8;
-    --accent-secondary: #34d399;
-    --accent-gradient: linear-gradient(135deg, #38bdf8, #34d399);
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.3);
-    --font-sans: 'Plus Jakarta Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Developer Syntax theme (OLED Dark) */
+    --bg-primary: #05070a;
+    --bg-secondary: #0c1017;
+    --bg-tertiary: #161b22;
+    --border-color: #21262d;
+    --text-primary: #c9d1d9;
+    --text-secondary: #8b949e;
+    --text-muted: #484f58;
     
-    --container-max: 1200px;
-    --border-radius-sm: 8px;
-    --border-radius-md: 16px;
-    --border-radius-lg: 24px;
+    /* Syntax highlighting accents */
+    --accent-primary: #58a6ff;   /* Syntax Blue */
+    --accent-secondary: #3fb950; /* Syntax Green */
+    --accent-orange: #f0883e;    /* Syntax Orange */
+    --accent-purple: #bc8cff;    /* Syntax Purple */
+    --accent-gradient: linear-gradient(135deg, #58a6ff, #bc8cff);
+    
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'Fira Code', monospace;
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    --container-max: 1100px;
+    --border-radius-sm: 4px;
+    --border-radius-md: 6px;
+    --border-radius-lg: 8px;
+    
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 [data-theme="light"] {
-    --bg-primary: #f8fafc;
-    --bg-secondary: #ffffff;
-    --bg-tertiary: #f1f5f9;
-    --border-color: rgba(0, 0, 0, 0.06);
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-muted: #64748b;
-    --accent-primary: #0284c7;
-    --accent-secondary: #059669;
-    --accent-gradient: linear-gradient(135deg, #0284c7, #059669);
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.08);
+    /* Developer Light Syntax theme (GitHub light style) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --bg-tertiary: #afb8c133;
+    --border-color: #d0d7de;
+    --text-primary: #24292f;
+    --text-secondary: #57606a;
+    --text-muted: #8c959f;
+    
+    --accent-primary: #0969da;
+    --accent-secondary: #1a7f37;
+    --accent-orange: #bc4c00;
+    --accent-purple: #8250df;
+    --accent-gradient: linear-gradient(135deg, #0969da, #8250df);
+    
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 * {
@@ -57,9 +69,9 @@ body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     font-family: var(--font-sans);
-    line-height: 1.6;
+    line-height: 1.5;
     overflow-x: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 a {
@@ -75,31 +87,28 @@ ul {
 .container {
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
     width: 100%;
 }
 
 .section {
-    padding: 6rem 0;
+    padding: 5rem 0;
     border-bottom: 1px solid var(--border-color);
 }
 
 .section-title {
-    font-size: 2.25rem;
-    font-weight: 800;
-    margin-bottom: 3rem;
-    letter-spacing: -0.025em;
-    position: relative;
-    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+    color: var(--accent-purple);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 60px;
-    height: 4px;
-    background: var(--accent-gradient);
-    border-radius: 2px;
+.section-title::before {
+    content: '##';
+    color: var(--text-muted);
 }

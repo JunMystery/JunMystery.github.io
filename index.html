@@ -27,19 +27,26 @@
     <!-- Header Navigation -->
     <nav class="navbar">
         <div class="container navbar-container">
-            <a href="#" class="logo">TU.DEV</a>
-            <div class="nav-links">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#certifications" class="nav-link">Certifications</a>
-                <button id="theme-toggle" class="theme-toggle" title="Toggle Light/Dark Mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button id="btn-print-nav" class="btn-print-nav" title="Print/Export CV">
-                    <i class="fas fa-print"></i>
-                </button>
+            <a href="#" class="logo">const Tu = {}</a>
+            <div id="nav-menu" class="nav-menu">
+                <div class="nav-links">
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#certifications" class="nav-link">Certifications</a>
+                </div>
+                <div class="nav-actions">
+                    <button id="theme-toggle" class="theme-toggle" title="Toggle Light/Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button id="btn-print-nav" class="btn-print-nav" title="Print/Export CV">
+                        <i class="fas fa-print"></i>
+                    </button>
+                </div>
             </div>
+            <button id="nav-toggle" class="nav-toggle" aria-label="Toggle Navigation Menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
@@ -48,7 +55,7 @@
         <div class="container hero-grid">
             <div class="hero-content">
                 <div class="hero-subtitle">
-                    <i class="fas fa-terminal"></i> systems_engineer & ai_orchestrator
+                    ~ systems_engineer & ai_orchestrator
                 </div>
                 <h1 class="hero-title">NGUYEN HOANG<br><span>THANH TU</span></h1>
                 <p class="hero-desc">
@@ -71,9 +78,27 @@
             </div>
             <div class="hero-visual">
                 <div class="avatar-wrapper">
-                    <div class="avatar-placeholder">
-                        <i class="fas fa-user-astronaut"></i>
-                        <span>SYSTEMS ENGINEER</span>
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                        </div>
+                        <span class="terminal-title">profile.json</span>
+                    </div>
+                    <div class="terminal-body">
+                        <span class="terminal-comment">// Systems & AI-Ops profile</span><br>
+                        <span class="terminal-keyword">const</span> <span class="terminal-variable">developer</span> = {<br>
+                        &nbsp;&nbsp;name: <span class="terminal-string">"Nguyen Hoang Thanh Tu"</span>,<br>
+                        &nbsp;&nbsp;role: <span class="terminal-string">"Systems & AI Orchestrator"</span>,<br>
+                        &nbsp;&nbsp;dob: <span class="terminal-string">"Oct 12, 1997"</span>,<br>
+                        &nbsp;&nbsp;location: <span class="terminal-string">"HCMC, Vietnam"</span>,<br>
+                        &nbsp;&nbsp;stack: [<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-string">"Windows Server"</span>, <span class="terminal-string">"Networks"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="terminal-string">"AI-Native SDLC"</span>, <span class="terminal-string">"SQL DBs"</span><br>
+                        &nbsp;&nbsp;],<br>
+                        &nbsp;&nbsp;status: <span class="terminal-string">"active_orchestration"</span><br>
+                        };
                     </div>
                 </div>
             </div>
@@ -86,7 +111,7 @@
         <div class="summary-grid">
             <div class="summary-card">
                 <p>
-                    <strong>Infrastructure Strength:</strong> Proven hands-on experience configuration physical server infrastructure, setting up Active Directory, DNS/DHCP networks, VM virtualization, secure local DrayTek/Cisco routing protocols, NAS servers, and managing localized MySQL/MSSQL corporate database deployments.
+                    <strong>Infrastructure Strength:</strong> Proven hands-on experience configuring physical server infrastructure, setting up Active Directory, DNS/DHCP networks, VM virtualization, secure local DrayTek/Cisco routing protocols, NAS servers, and managing localized MySQL/MSSQL corporate database deployments.
                 </p>
             </div>
             <div class="summary-card">
@@ -157,11 +182,11 @@
                 </div>
                 <div class="project-visual">
                     <div class="project-architecture">
-                        <div class="arch-node"><i class="fas fa-terminal"></i> Cursor / Claude / IDE</div>
-                        <div class="arch-arrow"><i class="fas fa-arrows-alt-v"></i></div>
-                        <div class="arch-node"><i class="fas fa-cogs"></i> agent-guidance-mcp Server</div>
-                        <div class="arch-arrow"><i class="fas fa-arrows-alt-v"></i></div>
-                        <div class="arch-node"><i class="fas fa-database"></i> SQLite CodeGraph DB</div>
+                        <div class="arch-node">Cursor / Claude / IDE</div>
+                        <div class="arch-arrow">v</div>
+                        <div class="arch-node">agent-guidance-mcp Server</div>
+                        <div class="arch-arrow">v</div>
+                        <div class="arch-node">SQLite CodeGraph DB</div>
                     </div>
                 </div>
             </div>
@@ -185,11 +210,11 @@
                 </div>
                 <div class="project-visual">
                     <div class="project-architecture">
-                        <div class="arch-node"><i class="fab fa-android"></i> Android Native App</div>
-                        <div class="arch-arrow"><i class="fas fa-arrows-alt-v"></i></div>
-                        <div class="arch-node"><i class="fas fa-server"></i> FastAPI Service</div>
-                        <div class="arch-arrow"><i class="fas fa-arrows-alt-v"></i></div>
-                        <div class="arch-node"><i class="fas fa-database"></i> MySQL + ChromaDB</div>
+                        <div class="arch-node">Android Native App</div>
+                        <div class="arch-arrow">v</div>
+                        <div class="arch-node">FastAPI Service</div>
+                        <div class="arch-arrow">v</div>
+                        <div class="arch-node">MySQL + ChromaDB</div>
                     </div>
                 </div>
             </div>
@@ -204,28 +229,28 @@
                 <div class="cert-info">
                     <h4>IT Automation with Python</h4>
                     <p>Google Career Certification (2025)</p>
-                    <a href="https://coursera.org/share/470d54b69ed19f56f5245351064fe32d" target="_blank" class="cert-link">Verify Credentials <i class="fas fa-external-link-alt"></i></a>
+                    <a href="https://coursera.org/share/470d54b69ed19f56f5245351064fe32d" target="_blank" class="cert-link">Verify <i class="fas fa-external-link-alt"></i></a>
                 </div>
             </div>
             <div class="cert-card">
                 <div class="cert-info">
                     <h4>Google Cybersecurity</h4>
                     <p>Google Career Certification (2025)</p>
-                    <a href="https://coursera.org/share/93ab286e9f7e890cd756b28312d00005" target="_blank" class="cert-link">Verify Credentials <i class="fas fa-external-link-alt"></i></a>
+                    <a href="https://coursera.org/share/93ab286e9f7e890cd756b28312d00005" target="_blank" class="cert-link">Verify <i class="fas fa-external-link-alt"></i></a>
                 </div>
             </div>
             <div class="cert-card">
                 <div class="cert-info">
                     <h4>Google IT Support</h4>
                     <p>Google Career Certification (2025)</p>
-                    <a href="https://coursera.org/share/2d1da52b4a782102f9c31245b6e263d9" target="_blank" class="cert-link">Verify Credentials <i class="fas fa-external-link-alt"></i></a>
+                    <a href="https://coursera.org/share/2d1da52b4a782102f9c31245b6e263d9" target="_blank" class="cert-link">Verify <i class="fas fa-external-link-alt"></i></a>
                 </div>
             </div>
             <div class="cert-card">
                 <div class="cert-info">
                     <h4>Google UX Design</h4>
                     <p>Google Career Certification (2025)</p>
-                    <a href="https://coursera.org/share/c7474f23e065dfd225b50aeee75eb834" target="_blank" class="cert-link">Verify Credentials <i class="fas fa-external-link-alt"></i></a>
+                    <a href="https://coursera.org/share/c7474f23e065dfd225b50aeee75eb834" target="_blank" class="cert-link">Verify <i class="fas fa-external-link-alt"></i></a>
                 </div>
             </div>
         </div>
@@ -256,7 +281,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 Nguyen Hoang Thanh Tu. Built using premium HTML/CSS/JS. Fully responsive & print-ready.</p>
+            <p>&copy; 2026 Nguyen Hoang Thanh Tu. Designed in Clean Dev Style. Under 300 LOC guidelines.</p>
         </div>
     </footer>
 
