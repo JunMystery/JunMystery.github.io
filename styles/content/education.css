@@ -1,0 +1,64 @@
+/* Education */
+.edu-grid {
+    display: grid;
+    grid-template-cols: 1fr 1fr;
+    gap: 1rem;
+}
+
+.edu-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 1.5rem;
+}
+
+.edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.edu-institution {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.edu-period {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-orange);
+}
+
+.edu-degree {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.edu-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.edu-bullets li {
+    position: relative;
+    padding-left: 1rem;
+}
+
+.edu-bullets li::before {
+    content: '-';
+    position: absolute;
+    left: 0;
+    color: var(--accent-purple);
+}
+
+@media (max-width: 768px) {
+    .edu-grid {
+        grid-template-cols: 1fr;
+    }
+}

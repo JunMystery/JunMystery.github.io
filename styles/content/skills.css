@@ -1,0 +1,40 @@
+/* Skills — Category Groups */
+.skill-group-title {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.sgt-hash {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.skill-group-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+/* Skills — Tag Pills */
+.skill-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent-primary);
+    background: var(--bg-tertiary);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+}
+
+/* Groups container */
+.skill-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}

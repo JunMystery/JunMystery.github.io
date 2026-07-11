@@ -1,0 +1,102 @@
+/* Projects Bento Grid Layout */
+.projects-grid {
+    display: grid;
+    grid-template-cols: 1fr;
+    gap: 0.85rem;
+}
+
+.project-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 1rem 1.25rem;
+}
+
+.project-info h3 {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.project-gh-link {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.project-gh-link:hover {
+    color: var(--accent-primary);
+}
+
+.project-type {
+    font-family: var(--font-mono);
+    color: var(--accent-orange);
+    font-size: 0.7rem;
+    margin-bottom: 0.3rem;
+    display: block;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.project-desc {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 0.65rem;
+    line-height: 1.55;
+}
+
+.project-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 0.65rem;
+    padding: 0.6rem 0.75rem;
+    border-left: 2px solid var(--border-color);
+    background: var(--bg-tertiary);
+    border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+
+.project-meta-item {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    line-height: 1.4;
+}
+
+.project-meta-item strong {
+    font-family: var(--font-mono);
+    color: var(--accent-primary);
+    min-width: 80px;
+    flex-shrink: 0;
+}
+
+.project-meta-item span {
+    color: var(--text-secondary);
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.project-tech-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent-secondary);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--border-radius-sm);
+}
+
+@media (max-width: 768px) {
+    .project-card {
+        grid-template-cols: 1fr;
+        padding: 1.5rem;
+    }
+}

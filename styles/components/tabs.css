@@ -1,0 +1,30 @@
+/* Skills — Filter Tabs */
+.skills-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.skills-tab-btn {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--bg-tertiary);
+    color: var(--text-muted);
+    background: transparent;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.skills-tab-btn:hover {
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+.skills-tab-btn.active {
+    border-color: var(--accent-primary);
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+}

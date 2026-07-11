@@ -1,0 +1,31 @@
+/* Footer Section */
+.footer {
+    padding: 0.85rem 0;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.footer-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-line {
+    min-height: 1.2em;
+}
+
+.footer-line.typing::after {
+    content: '|';
+    color: var(--accent-primary);
+    animation: cursor-blink 0.65s step-end infinite;
+}
+
+@keyframes cursor-blink {
+    50% { opacity: 0; }
+}

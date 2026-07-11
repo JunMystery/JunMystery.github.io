@@ -1,10 +1,3 @@
-/* 
-   theme.css
-   Clean Developer Style (OLED Dark / Syntax Light Theme)
-*/
-
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 :root {
     /* Developer Syntax theme (OLED Dark) */
     --bg-primary: #05070a;
@@ -14,23 +7,23 @@
     --text-primary: #c9d1d9;
     --text-secondary: #8b949e;
     --text-muted: #484f58;
-    
+
     /* Syntax highlighting accents */
     --accent-primary: #58a6ff;   /* Syntax Blue */
     --accent-secondary: #3fb950; /* Syntax Green */
     --accent-orange: #f0883e;    /* Syntax Orange */
     --accent-purple: #bc8cff;    /* Syntax Purple */
     --accent-gradient: linear-gradient(135deg, #58a6ff, #bc8cff);
-    
+
     --font-sans: 'Inter', sans-serif;
     --font-mono: 'Fira Code', monospace;
     --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    
+
     --container-max: 1100px;
     --border-radius-sm: 4px;
     --border-radius-md: 6px;
     --border-radius-lg: 8px;
-    
+
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
     --shadow-md: 0 4px 12px rgba(0,0,0,0.2);
 }
@@ -44,71 +37,13 @@
     --text-primary: #24292f;
     --text-secondary: #57606a;
     --text-muted: #8c959f;
-    
+
     --accent-primary: #0969da;
     --accent-secondary: #1a7f37;
     --accent-orange: #bc4c00;
     --accent-purple: #8250df;
     --accent-gradient: linear-gradient(135deg, #0969da, #8250df);
-    
+
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
     --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    font-family: var(--font-sans);
-    line-height: 1.5;
-    overflow-x: hidden;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-ul {
-    list-style: none;
-}
-
-.container {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    width: 100%;
-}
-
-.section {
-    padding: 2.5rem 0;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.section-title {
-    font-family: var(--font-mono);
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1.25rem;
-    letter-spacing: -0.01em;
-    color: var(--accent-purple);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.section-title::before {
-    content: '##';
-    color: var(--text-muted);
 }

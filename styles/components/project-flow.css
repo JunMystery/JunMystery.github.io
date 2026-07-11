@@ -1,0 +1,27 @@
+/* Project Flow (horizontal arrows + nodes) */
+.project-flow {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.2rem 0.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1.5;
+}
+
+.flow-node {
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 0.1rem 0.4rem;
+    white-space: nowrap;
+}
+
+.flow-arrow {
+    color: var(--accent-primary);
+    font-weight: 700;
+    opacity: 0.7;
+    margin: 0 0.1rem;
+}
