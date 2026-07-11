@@ -1,5 +1,5 @@
 /**
- * bundle.js — Auto-generated from src/ modules
+ * bundle.js ï¿½ Auto-generated from src/ modules
  * Offline-friendly single-file build (no import/export)
  */
 
@@ -12,7 +12,6 @@ const SELECTORS = {
     NAV_LINKS: '.nav-link',
     TAB_BTNS: '.skills-tab-btn',
     SKILL_GROUPS: '.skill-group',
-    PRINT_BTNS: ['#btn-print', '#btn-print-nav'],
     FOOTER: '.footer',
 };
 
@@ -77,17 +76,6 @@ function applyTheme(theme) {
 function getToggleIconClass(theme) {
     return theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
 }
-
-
-// --- services/print.service.js ---
-/**
- * Print service â€” trigger browser print dialog
- */
-
-function triggerPrint() {
-    window.print();
-}
-
 
 // --- services/scroll.service.js ---
 /**
@@ -362,11 +350,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initSkillsTabs();
     initFooter();
     initReveal();
-
-    const printBtns = ['#btn-print', '#btn-print-nav'];
-    printBtns.forEach(sel => {
-        const btn = $(sel);
-        if (btn) btn.addEventListener('click', triggerPrint);
-    });
 });
 

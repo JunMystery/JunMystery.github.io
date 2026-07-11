@@ -1,0 +1,52 @@
+/* Key Projects */
+.cv-projects-note {
+    font-size: 0.6875rem;
+    color: var(--color-gray-500);
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.cv-project {
+    margin-bottom: 0;
+}
+
+.cv-project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.75rem;
+    color: var(--color-gray-900);
+    margin-bottom: 0.25rem;
+}
+
+.cv-project-name {
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.cv-project-tag {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-gray-500);
+}
+
+.cv-project-stack {
+    color: var(--color-gray-500);
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+}
+
+.cv-project-bullets {
+    list-style: disc;
+    padding-left: 1rem;
+    font-size: 0.75rem;
+    color: var(--color-gray-700);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: justify;
+}
+
+.cv-project-bullets li strong {
+    font-weight: 700;
+}

@@ -1,0 +1,34 @@
+/* Print styles for CV builder */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .a4-page {
+        box-shadow: none !important;
+        margin: 0 !important;
+        width: 100% !important;
+        min-height: auto !important;
+        padding: 15mm !important;
+        page-break-after: always;
+    }
+
+    .page-break {
+        page-break-before: always;
+    }
+
+    .cv-avatar-area.interactive {
+        display: none !important;
+    }
+
+    .cv-avatar-area.print-placeholder {
+        display: flex !important;
+    }
+}

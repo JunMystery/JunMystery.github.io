@@ -1,8 +1,9 @@
 /* 
    print.css
-   Print-specific styles for A4 layout rendering (Cleaned)
+   Print-specific styles — hides web UI, shows compact print-only header
 */
 
+/* Hide print-only header on screen */
 .print-only-header {
     display: none;
 }
@@ -16,15 +17,18 @@
     }
 
     /* Hide all interactive and screen-only elements */
-    .navbar, 
-    .hero, 
+    .navbar,
+    .hero-avatar,
+    .hero-info-card,
     .hero-objective,
-    .skills-tabs, 
-    .footer, 
-    button, 
+    .skills-tabs,
+    .footer,
+    button,
     .btn,
     .social-links,
-    .project-visual {
+    .project-flow,
+    .cert-prompt,
+    .cert-link {
         display: none !important;
     }
 
@@ -83,15 +87,29 @@
         font-weight: 700;
         color: #0284c7;
         text-transform: uppercase;
+        margin-bottom: 4px;
+    }
+
+    .print-objective {
+        font-size: 9.5px;
+        color: #475569;
+        font-style: italic;
         margin-bottom: 6px;
     }
 
     .print-contacts {
         display: grid;
-        grid-template-cols: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 3px;
         font-size: 9px;
         color: #475569;
+    }
+
+    .print-date {
+        text-align: right;
+        font-size: 8px;
+        color: #94a3b8;
+        margin-top: 4px;
     }
 
     /* About/Summary Section */
@@ -128,22 +146,14 @@
         content: "";
     }
 
-    /* Skills Grid */
-    .skills-grid {
+    /* Skills — tag cloud */
+    .skill-groups {
         display: grid !important;
-        grid-template-cols: 1fr 1fr 1fr !important;
+        grid-template-columns: 1fr 1fr 1fr !important;
         gap: 8px !important;
     }
 
-    .skill-card {
-        background: transparent !important;
-        border: none !important;
-        padding: 0 !important;
-        box-shadow: none !important;
-        gap: 2px !important;
-    }
-
-    .skill-header {
+    .skill-group-title {
         font-weight: bold;
         font-size: 10px;
         color: #0f172a !important;
@@ -152,11 +162,7 @@
         margin-bottom: 3px;
     }
 
-    .skill-category {
-        display: none !important;
-    }
-
-    .skill-tags {
+    .skill-group-tags {
         display: flex;
         flex-wrap: wrap;
         gap: 4px;
@@ -188,7 +194,7 @@
         border: none !important;
         padding: 0 !important;
         box-shadow: none !important;
-        grid-template-cols: 1fr !important;
+        grid-template-columns: 1fr !important;
         margin-bottom: 10px;
         page-break-inside: avoid;
     }
@@ -244,10 +250,6 @@
         color: #334155 !important;
     }
 
-    .cert-prompt {
-        display: none !important;
-    }
-
     .cert-name {
         color: #0f172a !important;
         font-weight: 700 !important;
@@ -262,13 +264,9 @@
         color: #475569 !important;
     }
 
-    .cert-link {
-        display: none !important;
-    }
-
     /* Education */
     .edu-grid {
-        grid-template-cols: 1fr 1fr !important;
+        grid-template-columns: 1fr 1fr !important;
         gap: 12px !important;
     }
 
@@ -307,5 +305,9 @@
 
     .edu-bullets {
         font-size: 9px !important;
+    }
+
+    @page {
+        margin: 1.5cm;
     }
 }

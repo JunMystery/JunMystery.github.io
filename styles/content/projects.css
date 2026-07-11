@@ -1,4 +1,18 @@
 /* Projects Bento Grid Layout */
+.subsection-title {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    margin: 1.25rem 0 0.65rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid var(--accent-primary);
+}
+
+.subsection-title:first-of-type {
+    margin-top: 0.75rem;
+}
+
 .projects-grid {
     display: grid;
     grid-template-cols: 1fr;

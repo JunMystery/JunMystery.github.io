@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyen Hoang Thanh Tu — CV</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;500;700&family=Noto+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="font-sans-pro">
+
+    <!-- Print button (hidden in print) -->
+    <div class="cv-print-bar no-print">
+        <button data-action="print" class="btn-print">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            Print / Save PDF
+        </button>
+    </div>
+
+    <!-- A4 CV Content -->
+    <div class="cv-scroll-wrap">
+        <div id="cv-content" class="a4-page font-sans-pro" style="line-height:1.35;">
+
+            <!-- HEADER: Photo + Personal Info -->
+            <div class="cv-header-grid">
+
+                <!-- TODO: CV photo placeholder — thay thế bằng ảnh profile (dùng chung với portfolio) -->
+                <div class="cv-photo-placeholder">
+                    <span class="cv-photo-label">Photo</span>
+                </div>
+
+                <!-- Right: Name + Contact -->
+                <div class="cv-name-title">
+                    <h1 class="cv-name">NGUYEN HOANG THANH TU</h1>
+                    <p class="cv-role">IT Infrastructure Engineer &amp; AI Workflows Architect</p>
+
+                    <div class="cv-meta-grid">
+                        <div class="cv-meta-row">
+                            <span class="cv-meta-label">DOB:</span>
+                            <span class="cv-meta-value">Oct 12th 1997</span>
+                        </div>
+                        <div class="cv-meta-row">
+                            <span class="cv-meta-label">Location:</span>
+                            <span class="cv-meta-value">Ho Chi Minh City, Vietnam</span>
+                        </div>
+                        <div class="cv-meta-row">
+                            <span class="cv-meta-label">Tel:</span>
+                            <span class="cv-meta-value">(0973) 486 297</span>
+                        </div>
+                        <div class="cv-meta-row">
+                            <span class="cv-meta-label">Email:</span>
+                            <a href="mailto:darkzeuslk@gmail.com" class="cv-meta-value">darkzeuslk@gmail.com</a>
+                        </div>
+
+                        <div class="cv-social-row">
+                            <div class="cv-social-item">
+                                <i class="fab fa-linkedin"></i>
+                                <a href="https://www.linkedin.com/in/junmystery/" target="_blank">in/JunMystery</a>
+                            </div>
+                            <div class="cv-social-item">
+                                <i class="fab fa-github"></i>
+                                <a href="https://github.com/JunMystery/" target="_blank">github/JunMystery</a>
+                            </div>
+                            <div class="cv-social-item">
+                                <i class="fab fa-google-play"></i>
+                                <a href="https://play.google.com/store/apps/dev?id=6943003088385722005" target="_blank">play/JunMystery</a>
+                            </div>
+                            <div class="cv-social-item">
+                                <i class="fas fa-globe"></i>
+                                <a href="https://junmystery.github.io/" target="_blank">portfolio/JunMystery</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Summary -->
+            <div class="cv-section">
+                <h2 class="cv-section-title">Professional Summary</h2>
+                <p class="cv-summary-text">
+                    Forward-thinking IT Systems Engineer and AI-Native Developer specializing in system administration and structured <strong>SDLC Orchestration</strong>. I offer robust hands-on hardware strength, including enterprise physical server configurations, hardware provisioning, and secure network routing alongside active directory infrastructure. Rejecting unguided code generation (&ldquo;vibe coding&rdquo;), I operate a rigorous, systematic software development lifecycle methodology where I act as the System Architect, Technical Designer, and QA Orchestrator while directing specialized AI Agents to write, refactor, and deploy code. This operational framework offloads manual development to AI while ensuring robust, high-performance, and secure software. Highly skilled in bridging traditional infrastructure (Windows Server, SQL, Networks) with cutting-edge agentic workflows to build reliable enterprise-grade systems.
+                </p>
+            </div>
+
+            <!-- Technical Skills -->
+            <div class="cv-section">
+                <h2 class="cv-section-title">Technical Skills</h2>
+                <div class="cv-skills-list">
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">AI &amp; SDLC Ops:</span>
+                        <span class="cv-skills-items">SDLC Orchestration, PromptOps, Multi-Agent Workflows, System Architecture, Automated QA &amp; Verification.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Systems &amp; Infra:</span>
+                        <span class="cv-skills-items">Windows Server, Active Directory, DNS/DHCP, Linux (Ubuntu), VMware, NAS Storage.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">IT Support &amp; Ops:</span>
+                        <span class="cv-skills-items">L1/L2 Troubleshooting, Diagnostics, Asset Lifecycle, OS Deployment, ERP/WMS systems.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Network Admin:</span>
+                        <span class="cv-skills-items">LAN/WAN, VPN/P2P, Cisco/DrayTek Routing, Firewalls, CCTV infrastructure.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Databases &amp; Scripting:</span>
+                        <span class="cv-skills-items">SQL (MySQL/MSSQL DB Administration), Python (System &amp; Log Automation), PowerShell &amp; Bash (Infrastructure Scripting).</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Orchestration Tools:</span>
+                        <span class="cv-skills-items">Git/GitHub, Cursor, VS Code.</span>
+                    </div>
+                    <div class="cv-skills-row">
+                        <span class="cv-skills-cat">Languages:</span>
+                        <span class="cv-skills-items">English (IELTS 6.5 — Professional Working Proficiency).</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Work Experience -->
+            <div class="cv-section">
+                <h2 class="cv-section-title">Work Experience</h2>
+
+                <div class="cv-experience">
+                    <div class="cv-exp-header">
+                        <span class="cv-exp-title">IT Engineer Assistant Supervisor</span>
+                        <span class="cv-exp-period">May 2026 – Present</span>
+                    </div>
+                    <div class="cv-exp-company">Sharp Manufacturing Vietnam Co., Ltd</div>
+                    <ul class="cv-exp-duties">
+                        <li><strong>Database Administration:</strong> Managed enterprise SQL databases, analyzed system architectures provided by parent headquarters, and successfully deployed localized relational databases to support manufacturing plant operations.</li>
+                        <li><strong>AI-Native SDLC Orchestration:</strong> Developed internal software utilities and corporate automation tools by architecting structural specifications, outlining operational models, and supervising specialized AI Agents to write complete codebase packages, reducing development cycles by 80%.</li>
+                        <li><strong>Infrastructure Management:</strong> Administered enterprise-grade Windows Server environments, centralized network-attached storage (NAS) devices, and multi-channel CCTV surveillance systems to guarantee 99.9% operations uptime.</li>
+                        <li><strong>Network Engineering:</strong> Designed and optimized local network topologies (LAN/WAN) to ensure secure, high-bandwidth communication across corporate and factory areas.</li>
+                        <li><strong>Technical Support &amp; Provisioning:</strong> Handled comprehensive L1/L2 technical troubleshooting, PC/laptop assembly, hardware staging, OS deployment, and peripheral setup for end-users.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-experience">
+                    <div class="cv-exp-header">
+                        <span class="cv-exp-title">IT Support &amp; Infrastructure Admin</span>
+                        <span class="cv-exp-period">Mar 2024 – Mar 2026</span>
+                    </div>
+                    <div class="cv-exp-company">Danu Vina Co., Ltd</div>
+                    <ul class="cv-exp-duties">
+                        <li><strong>Automated Task Orchestration:</strong> Set up automated network health checks and parsed complex system logs by designing scripting logic and driving AI agents to write production-grade Python scripts.</li>
+                        <li><strong>Infrastructure Management:</strong> Administered internal IT systems (PCs, Printers, Network devices), ensuring stable daily operations and accurate technical logging.</li>
+                        <li><strong>Factory Server Administration:</strong> Directly managed and maintained local servers (Windows Server, NAS) to centralize corporate data and ensure continuous production workflows.</li>
+                        <li><strong>Network Administration:</strong> Deployed and managed LAN/Wi-Fi networks and CCTV systems, including IP allocation, routing, and physical cabling.</li>
+                        <li><strong>Secure Connectivity:</strong> Set up secure VPN and P2P connections to facilitate secure data synchronization across multiple factory branches.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-experience">
+                    <div class="cv-exp-header">
+                        <span class="cv-exp-title">Data Specialist and Warehouse OPS</span>
+                        <span class="cv-exp-period">Mar 2023 – Feb 2024</span>
+                    </div>
+                    <div class="cv-exp-company">YCH — Protrade Company Limited</div>
+                    <ul class="cv-exp-duties">
+                        <li><strong>System Operations:</strong> Monitored data flow and system integrity within enterprise Warehouse Management Systems (Wx3, Tx3).</li>
+                        <li><strong>Data Reconciliation:</strong> Queried and analyzed database transaction logs using SQL to resolve discrepancies between physical stock and digital records.</li>
+                        <li><strong>Workflow Optimization:</strong> Designed layout architectures and guided AI agents to implement lightweight local web utilities (HTML/JS) to streamline monthly report formatting.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-experience">
+                    <div class="cv-exp-header">
+                        <span class="cv-exp-title">Store Manager / Tech Support</span>
+                        <span class="cv-exp-period">Dec 2018 – Feb 2023</span>
+                    </div>
+                    <div class="cv-exp-company">The Gioi Di Dong JSC</div>
+                    <ul class="cv-exp-duties">
+                        <li><strong>Tech Support:</strong> Provided complex technical diagnostics and repairs for user electronics (PCs, mobile devices, operating systems).</li>
+                        <li><strong>Operations Reporting:</strong> Extracted ERP metrics to build weekly operation performance reports directly presented to the Area Manager.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="cv-section">
+                <h2 class="cv-section-title">Education</h2>
+
+                <div class="cv-edu-item">
+                    <div class="cv-edu-header">
+                        <span class="cv-edu-school">Univ. of Information Technology (UIT)</span>
+                        <span class="cv-edu-period">Feb 2024 – Sep 2026 (Expected)</span>
+                    </div>
+                    <div class="cv-edu-major">Major: Information Technology | Accelerated Bachelor's Program</div>
+                    <ul class="cv-edu-details">
+                        <li><strong>Core Studies:</strong> Data Structures &amp; Algorithms, OOP, Database Systems, Computer Networks, Web Tech, Information Security.</li>
+                        <li><strong>Academic Focus:</strong> Algorithmic problem-solving, secure coding, and modern database/system architecture.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-edu-item">
+                    <div class="cv-edu-header">
+                        <span class="cv-edu-school">Industrial Univ. of HCMC (IUH)</span>
+                        <span class="cv-edu-period">Aug 2016 – Dec 2018</span>
+                    </div>
+                    <div class="cv-edu-major">Major: Software Engineering</div>
+                    <ul class="cv-edu-details">
+                        <li><strong>Core Studies:</strong> Systems Analysis &amp; Design, Database Management (SQL), Software Architecture, Web &amp; Mobile Development.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cv-section">
+                <h2 class="cv-section-title">Personal Projects</h2>
+                <p class="cv-projects-note">* All personal projects (including various automation scripts, system utilities, and production apps) are hosted on GitHub and published on Google Play via the links in the contact header.</p>
+
+                <div class="cv-project">
+                    <div class="cv-project-header">
+                        <span class="cv-project-name">AI-Powered Health Assistant <span class="cv-project-tag">— Personal Graduation Project (UIT)</span></span>
+                        <span class="cv-project-stack">Kotlin, FastAPI, PySide6, MySQL, ChromaDB</span>
+                    </div>
+                    <ul class="cv-project-bullets">
+                        <li><strong>SDLC Orchestration Layer:</strong> Served as the sole Architect, System Engineer, and QA Lead, orchestrating a team of specialized AI agents to generate, refactor, and test a complex, multi-tiered health application ecosystem.</li>
+                        <li><strong>System Architecture:</strong> Designed core schemas and directed AI code execution to construct an Offline-First native Android app (Jetpack Compose, Room, WorkManager) with FastAPI backend, and PySide6 Master Admin Panel.</li>
+                        <li><strong>Data &amp; Operations:</strong> Guided the implementation of <strong>Delta Sync Gen 2</strong> with SHA-256 session integrity checks, saving 90% bandwidth. Managed AI to script secure OWASP-compliant Argon2id hashing and Fernet chat encryption.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cv-section">
+                <h2 class="cv-section-title">Work Projects</h2>
+
+                <div class="cv-project">
+                    <div class="cv-project-header">
+                        <span class="cv-project-name">NAS Storage &amp; Domain Infrastructure</span>
+                        <span class="cv-project-stack">Windows Server · AD · NAS · SQL</span>
+                    </div>
+                    <ul class="cv-project-bullets">
+                        <li>Deployed enterprise NAS storage for centralized data management. Configured Windows Server Domain Controller with Active Directory, DNS, and DHCP. Designed relational databases for localized factory operations based on HQ specifications.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-project">
+                    <div class="cv-project-header">
+                        <span class="cv-project-name">Site-to-Site Private Network Connectivity</span>
+                        <span class="cv-project-stack">VPN/P2P · Cisco/DrayTek · Routing</span>
+                    </div>
+                    <ul class="cv-project-bullets">
+                        <li>Designed and implemented secure Site-to-Site VPN connections between factory sites for private encrypted data synchronization with routing policies and failover for 99.9% uptime.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-project">
+                    <div class="cv-project-header">
+                        <span class="cv-project-name">CCTV Surveillance System Deployment</span>
+                        <span class="cv-project-stack">CCTV · NVR · Structured Cabling · LAN</span>
+                    </div>
+                    <ul class="cv-project-bullets">
+                        <li>Planned and executed factory-wide CCTV deployment: site layout survey, camera positioning, structural cabling (network and power), NVR configuration, and network integration for centralized remote monitoring.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-project">
+                    <div class="cv-project-header">
+                        <span class="cv-project-name">Internal Business Software Solutions</span>
+                        <span class="cv-project-stack">Python · SQL · AI SDLC · Web Apps</span>
+                    </div>
+                    <ul class="cv-project-bullets">
+                        <li>Designed custom software for departmental workflows: analyzed requirements, architected database schemas, directed AI-assisted development of production-grade utilities for inventory, reporting, and data management.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="cv-section">
+                <h2 class="cv-section-title">Certifications</h2>
+                <ul class="cv-cert-list">
+                    <li>IELTS 6.5 (British Council — 2017)</li>
+                    <li><a href="https://coursera.org/share/470d54b69ed19f56f5245351064fe32d" target="_blank">Google IT Automation with Python</a> (2025)</li>
+                    <li><a href="https://coursera.org/share/93ab286e9f7e890cd756b28312d00005" target="_blank">Google Cybersecurity</a> (2025)</li>
+                    <li><a href="https://coursera.org/share/2d1da52b4a782102f9c31245b6e263d9" target="_blank">Google IT Support</a> (2025)</li>
+                    <li><a href="https://coursera.org/share/c7474f23e065dfd225b50aeee75eb834" target="_blank">Google UX Design</a> (2025)</li>
+                    <li><a href="https://coursera.org/share/d4c431b324f8b0b7a91fe0068535ea43" target="_blank">Google Data Analytics</a> (2025)</li>
+                    <li><a href="https://coursera.org/share/1d1a87f0878dd9bd27c94fecff4f45fa" target="_blank">Google Advanced Data Analytics</a> (2025)</li>
+                    <li><a href="https://coursera.org/share/9aafced16e4a7056a1a36b77dd45bd3d" target="_blank">Google Project Management</a> (2025)</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="src/print.js"></script>
+</body>
+
+</html>

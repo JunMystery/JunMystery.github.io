@@ -13,9 +13,11 @@
     <div class="print-only-header">
         <h1>Nguyen Hoang Thanh Tu</h1>
         <p class="print-subtitle">IT Infrastructure Engineer & AI Agent SDLC Orchestrator</p>
+        <p class="print-objective">Bridging Infrastructure Engineering and AI-Augmented Development. Human judgment drives every successful project.</p>
         <div class="print-contacts">
             <span><strong>DOB:</strong> Oct 12, 1997</span> <span><strong>Location:</strong> HCMC, Vietnam</span> <span><strong>Tel:</strong> (0973) 486 297</span> <span><strong>Email:</strong> darkzeuslk@gmail.com</span> <span><strong>LinkedIn:</strong> linkedin.com/in/junmystery</span> <span><strong>GitHub:</strong> github.com/JunMystery</span> <span><strong>Google Play:</strong> play/JunMystery</span>
         </div>
+        <div class="print-date"></div>
     </div>
 
     <!-- Header Navigation -->
@@ -30,9 +32,9 @@
                     <button id="theme-toggle" class="theme-toggle" title="Toggle Light/Dark Mode">
                         <i class="fas fa-moon"></i>
                     </button>
-                    <button id="btn-print-nav" class="btn-print-nav" title="Print/Export CV">
-                        <i class="fas fa-print"></i>
-                    </button>
+                    <a href="cv/index.html" class="btn-print-nav" title="Interactive CV Builder">
+                        <i class="fas fa-file-alt"></i>
+                    </a>
                 </div>
             </div>
             <button id="nav-toggle" class="nav-toggle" aria-label="Toggle Navigation Menu">
@@ -73,7 +75,7 @@
                         <p class="hero-tagline">Bridging Infrastructure Engineering and AI-Augmented Development. Human judgment drives every successful project.</p>
                     </div>
                     <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary"><i class="fas fa-code"></i> View Work</a> <button id="btn-print" class="btn btn-secondary"><i class="fas fa-file-pdf"></i> Get A4 CV / Print</button>
+                        <a href="#projects" class="btn btn-primary"><i class="fas fa-code"></i> View Work</a> <a href="cv/index.html" class="btn btn-secondary"><i class="fas fa-file-alt"></i> Interactive CV</a>
                     </div>
                     <div class="social-links">
                         <a href="https://www.linkedin.com/in/junmystery/" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a> <a href="https://github.com/JunMystery/" target="_blank" class="social-link" title="GitHub"><i class="fab fa-github"></i></a> <a href="https://play.google.com/store/apps/dev?id=6943003088385722005" target="_blank" class="social-link" title="Google Play"><i class="fab fa-google-play"></i></a> <a href="mailto:darkzeuslk@gmail.com" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
@@ -167,7 +169,9 @@
                 <span class="terminal-title">projects.py</span>
             </div>
             <div class="terminal-body-raw">
-                <h2 class="section-title">Key Projects</h2>
+                <h2 class="section-title">Projects</h2>
+
+                <h3 class="subsection-title"># Personal Projects</h3>
                 <div class="projects-grid">
                     <!-- Agent-Guidance-MCP -->
                     <div class="project-card">
@@ -217,6 +221,89 @@
                                 <span class="flow-node">FastAPI Service</span>
                                 <span class="flow-arrow">→</span>
                                 <span class="flow-node">MySQL + ChromaDB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title"># Work Projects</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-info">
+                            <span class="project-type">Enterprise Infrastructure — Sharp Manufacturing</span>
+                            <h3>NAS Storage &amp; Domain Infrastructure</h3>
+                            <p class="project-desc">
+                                Architected and deployed an enterprise-grade NAS storage solution for centralized data management across the manufacturing plant. Configured Windows Server Domain Controller with Active Directory, DNS, and DHCP services. Designed and implemented relational databases to support localized factory operations based on technical specifications from parent headquarters.
+                            </p>
+                            <div class="project-tech">
+                                <span class="project-tech-tag">Windows Server</span><span class="project-tech-tag">Active Directory</span><span class="project-tech-tag">NAS</span><span class="project-tech-tag">DNS/DHCP</span><span class="project-tech-tag">Microsoft SQL Server</span>
+                            </div>
+                            <div class="project-flow">
+                                <span class="flow-node">HQ Specifications</span>
+                                <span class="flow-arrow">→</span>
+                                <span class="flow-node">Localized DB + AD Domain</span>
+                                <span class="flow-arrow">→</span>
+                                <span class="flow-node">NAS Central Storage</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-info">
+                            <span class="project-type">Network Infrastructure — Sharp Manufacturing</span>
+                            <h3>Site-to-Site Private Network Connectivity</h3>
+                            <p class="project-desc">
+                                Designed and implemented secure Site-to-Site VPN connections between multiple factory sites, enabling private, encrypted data synchronization across the corporate network. Configured routing policies, tunnel negotiation, and failover to ensure 99.9% uptime for inter-factory communication.
+                            </p>
+                            <div class="project-tech">
+                                <span class="project-tech-tag">VPN/P2P</span><span class="project-tech-tag">LAN/WAN</span><span class="project-tech-tag">Cisco/DrayTek</span><span class="project-tech-tag">Routing</span><span class="project-tech-tag">Firewalls</span>
+                            </div>
+                            <div class="project-flow">
+                                <span class="flow-node">Factory Site A</span>
+                                <span class="flow-arrow">→</span>
+                                <span class="flow-node">Encrypted VPN Tunnel</span>
+                                <span class="flow-arrow">→</span>
+                                <span class="flow-node">Factory Site B</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-info">
+                            <span class="project-type">Security Infrastructure — Sharp Manufacturing</span>
+                            <h3>CCTV Surveillance System Deployment</h3>
+                            <p class="project-desc">
+                                Planned and executed a comprehensive CCTV deployment across the factory: surveyed site layouts, determined optimal camera positions, routed structural cabling (network and power), configured NVR recording schedules and retention policies, and integrated the system into the existing network infrastructure for centralized remote monitoring.
+                            </p>
+                            <div class="project-tech">
+                                <span class="project-tech-tag">CCTV</span><span class="project-tech-tag">NVR</span><span class="project-tech-tag">Structured Cabling</span><span class="project-tech-tag">LAN</span><span class="project-tech-tag">Network Configuration</span>
+                            </div>
+                            <div class="project-flow">
+                                <span class="flow-node">Site Survey &amp; Planning</span>
+                                <span class="flow-arrow">→</span>
+                                <span class="flow-node">Cabling &amp; Installation</span>
+                                <span class="flow-arrow">→</span>
+                                <span class="flow-node">NVR Configuration &amp; Monitoring</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-info">
+                            <span class="project-type">Software Development — Sharp Manufacturing</span>
+                            <h3>Internal Business Software Solutions</h3>
+                            <p class="project-desc">
+                                Designed and developed custom software applications to streamline workflows across multiple company departments. Analyzed departmental requirements, architected database schemas, and directed AI-assisted development to produce production-grade utilities for inventory tracking, report generation, and operational data management.
+                            </p>
+                            <div class="project-tech">
+                                <span class="project-tech-tag">Python</span><span class="project-tech-tag">SQL</span><span class="project-tech-tag">AI SDLC Orchestration</span><span class="project-tech-tag">Web Apps</span><span class="project-tech-tag">Database Design</span>
+                            </div>
+                            <div class="project-flow">
+                                <span class="flow-node">Department Requirements</span>
+                                <span class="flow-arrow">→</span>
+                                <span class="flow-node">AI-Assisted Development</span>
+                                <span class="flow-arrow">→</span>
+                                <span class="flow-node">Production Utilities</span>
                             </div>
                         </div>
                     </div>

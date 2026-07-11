@@ -1,0 +1,31 @@
+/* Technical Skills */
+.cv-skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--color-gray-700);
+    width: 100%;
+}
+
+.cv-skills-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 1rem;
+    padding: 0.125rem 0;
+    border-bottom: 1px solid var(--color-gray-100);
+    align-items: baseline;
+}
+
+.cv-skills-row:last-child {
+    border-bottom: none;
+}
+
+.cv-skills-cat {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.cv-skills-items {
+    text-align: justify;
+}

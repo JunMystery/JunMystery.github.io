@@ -1,0 +1,51 @@
+/* A4 preview container */
+.a4-page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 15mm;
+    margin: 0 auto;
+    background: var(--color-surface);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Hint bar above A4 */
+.cv-hint-bar {
+    max-width: 210mm;
+    margin: 0 auto 1rem;
+    padding: 0.75rem;
+    background: var(--color-indigo-50, #eef2ff);
+    border: 1px solid var(--color-indigo-100, #e0e7ff);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cv-hint-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--color-indigo-900, #312e81);
+}
+
+.cv-hint-close {
+    color: var(--color-indigo-400, #818cf8);
+    background: none;
+    border: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cv-hint-close:hover {
+    color: var(--color-indigo-600, #4f46e5);
+}
+
+/* Scroll wrapper for A4 */
+.cv-scroll-wrap {
+    overflow-x: auto;
+    padding-bottom: 3rem;
+}

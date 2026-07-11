@@ -1,0 +1,44 @@
+/* Education */
+.cv-edu-item {
+    margin-bottom: 0.75rem;
+}
+
+.cv-edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.75rem;
+    color: var(--color-gray-900);
+}
+
+.cv-edu-school {
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.cv-edu-period {
+    color: var(--color-gray-600);
+    font-weight: 400;
+}
+
+.cv-edu-major {
+    font-size: 0.75rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.cv-edu-details {
+    list-style: disc;
+    padding-left: 1rem;
+    font-size: 0.6875rem;
+    color: var(--color-gray-600);
+}
+
+.cv-edu-details li {
+    margin-bottom: 0.0625rem;
+}
+
+.cv-edu-details li strong {
+    font-weight: 700;
+}

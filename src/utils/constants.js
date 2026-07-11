@@ -6,7 +6,6 @@ export const SELECTORS = {
     NAV_LINKS: '.nav-link',
     TAB_BTNS: '.skills-tab-btn',
     SKILL_GROUPS: '.skill-group',
-    PRINT_BTNS: ['#btn-print', '#btn-print-nav'],
     FOOTER: '.footer',
 };
 
