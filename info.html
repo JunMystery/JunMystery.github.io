@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyen Hoang Thanh Tu - Interactive CV Builder</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for premium typography styling -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;500;700&family=Noto+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Professional Brand Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        /* CV Font Themes */
+        .font-mono-tech {
+            font-family: 'Noto Sans Mono', monospace;
+        }
+        .font-sans-pro {
+            font-family: 'Noto Sans', sans-serif;
+        }
+        .font-serif-classic {
+            font-family: 'Noto Serif', serif;
+        }
+
+        /* Printable A4 representation rules */
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        /* Print Media Queries to hide UI elements and format strictly to A4 */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .a4-page {
+                box-shadow: none !important;
+                margin: 0 !important;
+                width: 100% !important;
+                min-height: auto !important;
+                padding: 15mm 15mm 15mm 15mm !important;
+                page-break-after: always;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="font-sans-pro text-gray-800 transition-colors duration-300">
+
+    <!-- Top Dashboard Header (no-print) -->
+    <header class="bg-slate-900 text-white shadow-md p-4 sticky top-0 z-50 no-print">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-600 p-2 rounded-lg text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight">Thanh Tu - Interactive CV Builder</h1>
+                    <p class="text-xs text-slate-400">Systems Engineer & AI Agent SDLC Orchestrator</p>
+                </div>
+            </div>
+            
+            <!-- Quick Actions Panel -->
+            <div class="flex flex-wrap items-center gap-3">
+                <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-semibold flex items-center gap-2 transition duration-150">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                    Print / Save PDF
+                </button>
+                <button onclick="openTexModal()" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-md text-sm font-semibold flex items-center gap-2 transition duration-150">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    Get TeX Code
+                </button>
+                <button onclick="toggleControls()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-md text-sm flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                    <span>Config</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Side Configurations Dashboard (Toggled dynamically) -->
+    <div id="config-panel" class="bg-white border-b border-gray-200 p-4 no-print shadow-sm hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <!-- Typography styling controls -->
+            <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Typography & Style</label>
+                <select id="fontSelect" onchange="changeFont(this.value)" class="w-full bg-gray-50 border border-gray-300 rounded px-2.5 py-1.5 text-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option value="font-mono-tech">Noto Sans Mono (Technical)</option>
+                    <option value="font-sans-pro" selected>Noto Sans (Modern Clean)</option>
+                    <option value="font-serif-classic">Noto Serif (Academic/Classic)</option>
+                </select>
+            </div>
+
+            <!-- Page Sizing & Spacing Adjusters -->
+            <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Base Spacing Ratio</label>
+                <div class="flex items-center gap-2">
+                    <input type="range" id="spacingRange" min="0.8" max="1.3" step="0.02" value="1.0" oninput="changeSpacing(this.value)" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                    <span id="spacingVal" class="text-xs font-mono text-gray-600">1.00x</span>
+                </div>
+            </div>
+
+            <!-- Custom Accent Theme Color -->
+            <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Accent Navy Theme</label>
+                <div class="flex items-center gap-2">
+                    <input type="color" id="primaryColor" value="#003366" onchange="changePrimaryColor(this.value)" class="w-8 h-8 rounded cursor-pointer border border-gray-300">
+                    <span class="text-xs font-mono text-gray-600">Primary Color</span>
+                </div>
+            </div>
+
+            <!-- Interactive editing notification -->
+            <div class="flex items-center">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-800">
+                    <span class="font-bold">SDLC Orchestration:</span> Fully custom, rigorous framework for guiding AI agents to high-quality code.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Workspace Container -->
+    <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        
+        <!-- Hint Bar on Web -->
+        <div class="max-w-[210mm] mx-auto mb-4 p-3 bg-indigo-50 border border-indigo-100 rounded-lg flex items-center justify-between no-print">
+            <div class="flex items-center gap-2 text-xs text-indigo-900">
+                <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span><strong>Layout Upgrade:</strong> Grouped LinkedIn, GitHub, and Google Play Store into a single row using crisp vector icons.</span>
+            </div>
+            <button onclick="this.parentElement.remove()" class="text-indigo-400 hover:text-indigo-600 text-xs font-bold">&times;</button>
+        </div>
+
+        <!-- Printable Document View Wrapper -->
+        <div class="overflow-x-auto pb-12">
+            <div id="cv-content" class="a4-page font-sans-pro" style="line-height: 1.35;">
+                
+                <!-- HEADER INFORMATION SECTION (1 Row, 2 Columns with no large gaps) -->
+                <div class="grid grid-cols-[auto_1fr] gap-6 border-b pb-6 mb-6 items-start">
+                    
+                    <!-- Left Side Column: Avatar Picture Box -->
+                    <div class="w-28 h-36 sm:w-32 sm:h-40 bg-gray-100 border-2 border-dashed border-gray-300 rounded flex flex-col items-center justify-center relative overflow-hidden group no-print shrink-0">
+                        <input type="file" id="avatarUpload" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer z-10" onchange="previewAvatar(event)">
+                        <img id="avatarImg" class="w-full h-full object-cover hidden" alt="Avatar Preview">
+                        <div id="avatarPlaceholder" class="text-center p-2 text-gray-400 group-hover:text-gray-600 transition">
+                            <svg class="w-8 h-8 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span class="text-[10px] font-bold">Add Photo</span>
+                        </div>
+                    </div>
+                    <!-- Printable placeholder for physical photo when exported to PDF -->
+                    <div class="w-28 h-36 sm:w-32 sm:h-40 bg-gray-50 border border-gray-300 rounded flex items-center justify-center hidden print:flex shrink-0">
+                        <span class="text-[10px] text-gray-400 text-center px-2">3x4 Photo</span>
+                    </div>
+
+                    <!-- Right Side Column: Dynamic Personal Contact Info -->
+                    <div class="min-w-0 flex-1">
+                        <h1 class="text-3xl font-bold tracking-tight text-primary-color leading-none" style="color: #003366;" contenteditable="true">NGUYEN HOANG THANH TU</h1>
+                        <p class="text-sm font-semibold tracking-wide text-gray-600 uppercase mt-2.5" contenteditable="true">IT Infrastructure Engineer & AI Agent SDLC Orchestrator</p>
+                        
+                        <!-- Metadata elements stretching cleanly across the space -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 mt-4 text-xs text-gray-700 w-full">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-gray-900">DOB:</span> <span contenteditable="true">Oct 12th 1997</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-gray-900">Location:</span> <span contenteditable="true">Ho Chi Minh City, Vietnam</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-gray-900">Tel:</span> <span contenteditable="true">(0973) 486 297</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-gray-900">Email:</span> <a href="mailto:darkzeuslk@gmail.com" class="text-primary-color hover:underline font-semibold" style="color: #003366;" contenteditable="true">darkzeuslk@gmail.com</a>
+                            </div>
+                            
+                            <!-- Same Row Pinned Public Links with Icons -->
+                            <div class="flex flex-wrap items-center gap-x-6 gap-y-1.5 mt-2.5 pt-2 border-t border-gray-100 sm:col-span-2">
+                                <div class="flex items-center gap-1.5">
+                                    <i class="fab fa-linkedin text-slate-500 text-[13px]"></i>
+                                    <a href="https://www.linkedin.com/in/junmystery/" target="_blank" class="text-primary-color hover:underline font-semibold" style="color: #003366;" contenteditable="true">in/junmystery</a>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <i class="fab fa-github text-slate-500 text-[13px]"></i>
+                                    <a href="https://github.com/JunMystery/" target="_blank" class="text-primary-color hover:underline font-semibold" style="color: #003366;" contenteditable="true">github/JunMystery</a>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <i class="fab fa-google-play text-slate-500 text-[13px]"></i>
+                                    <a href="https://play.google.com/store/apps/dev?id=6943003088385722005" target="_blank" class="text-primary-color hover:underline font-semibold" style="color: #003366;" contenteditable="true">play/JunMystery</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROFESSIONAL SUMMARY SECTION (1 Column, Full Width) -->
+                <div class="mb-5 section-container">
+                    <h2 class="text-base font-bold tracking-wider text-primary-color border-b-2 pb-1 mb-2 uppercase" style="color: #003366; border-color: #003366;">Professional Summary</h2>
+                    <p class="text-xs text-gray-700 text-justify leading-relaxed" contenteditable="true">
+                        Forward-thinking IT Systems Engineer and AI-Native Developer specializing in system administration and structured <strong>SDLC Orchestration</strong>. I offer robust hands-on hardware strength, including enterprise physical server configurations, hardware provisioning, and secure network routing alongside active directory infrastructure. Rejecting unguided code generation (<em>"vibe coding"</em>), I operate a rigorous, systematic software development lifecycle methodology where I act as the System Architect, Technical Designer, and QA Orchestrator while directing specialized AI Agents to write, refactor, and deploy code. This operational framework offloads manual development to AI while ensuring robust, high-performance, and secure software. Highly skilled in bridging traditional infrastructure (Windows Server, SQL, Networks) with cutting-edge agentic workflows to build reliable enterprise-grade systems.
+                    </p>
+                </div>
+
+                <!-- TECHNICAL SKILLS SECTION (1 Column, Full Width spacing layout) -->
+                <div class="mb-5 section-container">
+                    <h2 class="text-base font-bold tracking-wider text-primary-color border-b-2 pb-1 mb-2 uppercase" style="color: #003366; border-color: #003366;">Technical Skills</h2>
+                    <div class="space-y-2 text-xs text-gray-700 w-full">
+                        <div class="grid grid-cols-[150px_1fr] gap-4 py-0.5 border-b border-gray-100">
+                            <span class="text-primary-color font-bold" style="color: #003366;">AI & SDLC Ops:</span>
+                            <span contenteditable="true" class="text-justify">SDLC Orchestration, PromptOps, Multi-Agent Workflows, System Architecture, Automated QA & Verification.</span>
+                        </div>
+                        <div class="grid grid-cols-[150px_1fr] gap-4 py-0.5 border-b border-gray-100">
+                            <span class="text-primary-color font-bold" style="color: #003366;">Systems & Infra:</span>
+                            <span contenteditable="true" class="text-justify">Windows Server, Active Directory, DNS/DHCP, Linux (Ubuntu), VMware, NAS Storage.</span>
+                        </div>
+                        <div class="grid grid-cols-[150px_1fr] gap-4 py-0.5 border-b border-gray-100">
+                            <span class="text-primary-color font-bold" style="color: #003366;">IT Support & Ops:</span>
+                            <span contenteditable="true" class="text-justify">L1/L2 Troubleshooting, Diagnostics, Asset Lifecycle, OS Deployment, ERP/WMS systems.</span>
+                        </div>
+                        <div class="grid grid-cols-[150px_1fr] gap-4 py-0.5 border-b border-gray-100">
+                            <span class="text-primary-color font-bold" style="color: #003366;">Network Admin:</span>
+                            <span contenteditable="true" class="text-justify">LAN/WAN, VPN/P2P, Cisco/DrayTek Routing, Firewalls, CCTV infrastructure.</span>
+                        </div>
+                        <div class="grid grid-cols-[150px_1fr] gap-4 py-0.5 border-b border-gray-100">
+                            <span class="text-primary-color font-bold" style="color: #003366;">Databases & Scripting:</span>
+                            <span contenteditable="true" class="text-justify">SQL (MySQL/MSSQL DB Administration), Python (System & Log Automation), PowerShell & Bash (Infrastructure Scripting).</span>
+                        </div>
+                        <div class="grid grid-cols-[150px_1fr] gap-4 py-0.5 border-b border-gray-100">
+                            <span class="text-primary-color font-bold" style="color: #003366;">Orchestration Tools:</span>
+                            <span contenteditable="true" class="text-justify">Git/GitHub, Cursor, VS Code.</span>
+                        </div>
+                        <div class="grid grid-cols-[150px_1fr] gap-4 py-0.5">
+                            <span class="text-primary-color font-bold" style="color: #003366;">Languages:</span>
+                            <span contenteditable="true" class="text-justify">English (IELTS 6.5 - Professional Working Proficiency).</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WORK EXPERIENCE SECTION (1 Column, Full Width) -->
+                <div class="mb-5 section-container">
+                    <h2 class="text-base font-bold tracking-wider text-primary-color border-b-2 pb-1 mb-3 uppercase" style="color: #003366; border-color: #003366;">Work Experience</h2>
+                    
+                    <!-- Sharp Role -->
+                    <div class="mb-4">
+                        <div class="flex justify-between items-baseline font-bold text-xs text-gray-900">
+                            <span class="text-sm font-bold" contenteditable="true">IT Engineer Assistant Supervisor</span>
+                            <span class="text-gray-600 font-normal" contenteditable="true">May 2026 – Present</span>
+                        </div>
+                        <div class="text-xs text-primary-color font-bold mb-1.5" style="color: #003366;" contenteditable="true">Sharp Manufacturing Vietnam Co., Ltd</div>
+                        <ul class="list-disc pl-4 text-xs text-gray-700 space-y-1 text-justify">
+                            <li contenteditable="true">
+                                <strong>Database Administration:</strong> Managed enterprise SQL databases, analyzed system architectures provided by parent headquarters, and successfully deployed localized relational databases to support manufacturing plant operations.
+                            </li>
+                            <li contenteditable="true">
+                                <strong>AI-Native SDLC Orchestration:</strong> Developed internal software utilities and corporate automation tools by architecting structural specifications, outlining operational models, and supervising specialized AI Agents to write complete codebase packages, reducing development cycles by 80%.
+                            </li>
+                            <li contenteditable="true">
+                                <strong>Infrastructure Management:</strong> Administered enterprise-grade Windows Server environments, centralized network-attached storage (NAS) devices, and multi-channel CCTV surveillance systems to guarantee 99.9% operations uptime.
+                            </li>
+                            <li contenteditable="true">
+                                <strong>Network Engineering:</strong> Designed and optimized local network topologies (LAN/WAN) to ensure secure, high-bandwidth communication across corporate and factory areas.
+                            </li>
+                            <li contenteditable="true">
+                                <strong>Technical Support & Provisioning:</strong> Handled comprehensive L1/L2 technical troubleshooting, PC/laptop assembly, hardware staging, OS deployment, and peripheral setup for end-users.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Danu Vina Role -->
+                    <div class="mb-4">
+                        <div class="flex justify-between items-baseline font-bold text-xs text-gray-900">
+                            <span class="text-sm font-bold" contenteditable="true">IT Support & Infrastructure Admin</span>
+                            <span class="text-gray-600 font-normal" contenteditable="true">Mar 2024 – Mar 2026</span>
+                        </div>
+                        <div class="text-xs text-primary-color font-bold mb-1.5" style="color: #003366;" contenteditable="true">Danu Vina Co., Ltd</div>
+                        <ul class="list-disc pl-4 text-xs text-gray-700 space-y-1 text-justify">
+                            <li contenteditable="true"><strong>Automated Task Orchestration:</strong> Set up automated network health checks and parsed complex system logs by designing scripting logic and driving AI agents to write production-grade Python scripts.</li>
+                            <li contenteditable="true"><strong>Infrastructure Management:</strong> Administered internal IT systems (PCs, Printers, Network devices), ensuring stable daily operations and accurate technical logging.</li>
+                            <li contenteditable="true"><strong>Factory Server Administration:</strong> Directly managed and maintained local servers (Windows Server, NAS) to centralize corporate data and ensure continuous production workflows.</li>
+                            <li contenteditable="true"><strong>Network Administration:</strong> Deployed and managed LAN/Wi-Fi networks and CCTV systems, including IP allocation, routing, and physical cabling.</li>
+                            <li contenteditable="true"><strong>Secure Connectivity:</strong> Set up secure VPN and P2P connections to facilitate secure data synchronization across multiple factory branches.</li>
+                        </ul>
+                    </div>
+
+                    <!-- YCH Role -->
+                    <div class="mb-4">
+                        <div class="flex justify-between items-baseline font-bold text-xs text-gray-900">
+                            <span class="text-sm font-bold" contenteditable="true">Data Specialist and Warehouse OPS</span>
+                            <span class="text-gray-600 font-normal" contenteditable="true">Mar 2023 – Feb 2024</span>
+                        </div>
+                        <div class="text-xs text-primary-color font-bold mb-1.5" style="color: #003366;" contenteditable="true">YCH - Protrade Company Limited</div>
+                        <ul class="list-disc pl-4 text-xs text-gray-700 space-y-1 text-justify">
+                            <li contenteditable="true"><strong>System Operations:</strong> Monitored data flow and system integrity within enterprise Warehouse Management Systems (Wx3, Tx3).</li>
+                            <li contenteditable="true"><strong>Data Reconciliation:</strong> Queried and analyzed database transaction logs using SQL to resolve discrepancies between physical stock and digital records.</li>
+                            <li contenteditable="true"><strong>Workflow Optimization:</strong> Designed layout architectures and guided AI agents to implement lightweight local web utilities (HTML/JS) to streamline monthly report formatting.</li>
+                        </ul>
+                    </div>
+
+                    <!-- The Gioi Di Dong Role -->
+                    <div class="mb-4">
+                        <div class="flex justify-between items-baseline font-bold text-xs text-gray-900">
+                            <span class="text-sm font-bold" contenteditable="true">Store Manager / Tech Support</span>
+                            <span class="text-gray-600 font-normal" contenteditable="true">Dec 2018 – Feb 2023</span>
+                        </div>
+                        <div class="text-xs text-primary-color font-bold mb-1.5" style="color: #003366;" contenteditable="true">The Gioi Di Dong JSC</div>
+                        <ul class="list-disc pl-4 text-xs text-gray-700 space-y-1 text-justify">
+                            <li contenteditable="true"><strong>Tech Support:</strong> Provided complex technical diagnostics and repairs for user electronics (PCs, mobile devices, operating systems).</li>
+                            <li contenteditable="true"><strong>Operations Reporting:</strong> Extracted ERP metrics to build weekly operation performance reports directly presented to the Area Manager.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- EDUCATION SECTION (1 Column, Full Width) -->
+                <div class="mb-5 section-container">
+                    <h2 class="text-base font-bold tracking-wider text-primary-color border-b-2 pb-1 mb-3 uppercase" style="color: #003366; border-color: #003366;">Education</h2>
+                    
+                    <div class="mb-3">
+                        <div class="flex justify-between items-baseline font-bold text-xs text-gray-900">
+                            <span class="text-sm font-bold" contenteditable="true">Univ. of Information Technology (UIT)</span>
+                            <span class="text-gray-600 font-normal" contenteditable="true">Feb 2024 – Sep 2026 (Expected)</span>
+                        </div>
+                        <div class="text-xs text-primary-color font-semibold mb-1" style="color: #003366;" contenteditable="true">Major: Information Technology | Accelerated Bachelor's Program</div>
+                        <ul class="list-disc pl-4 text-[11px] text-gray-600 space-y-0.5">
+                            <li contenteditable="true"><strong>Core Studies:</strong> Data Structures & Algorithms, OOP, Database Systems, Computer Networks, Web Tech, Information Security.</li>
+                            <li contenteditable="true"><strong>Academic Focus:</strong> Algorithmic problem-solving, secure coding, and modern database/system architecture.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-baseline font-bold text-xs text-gray-900">
+                            <span class="text-sm font-bold" contenteditable="true">Industrial Univ. of HCMC (IUH)</span>
+                            <span class="text-gray-600 font-normal" contenteditable="true">Aug 2016 – Dec 2018</span>
+                        </div>
+                        <div class="text-xs text-primary-color font-semibold mb-1" style="color: #003366;" contenteditable="true">Major: Software Engineering</div>
+                        <ul class="list-disc pl-4 text-[11px] text-gray-600 space-y-0.5">
+                            <li contenteditable="true"><strong>Core Studies:</strong> Systems Analysis & Design, Database Management (SQL), Software Architecture, Web & Mobile Development.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- OUTSTANDING PROJECTS SECTION -->
+                <div class="mb-5 section-container">
+                    <h2 class="text-base font-bold tracking-wider text-primary-color border-b-2 pb-1 mb-3 uppercase" style="color: #003366; border-color: #003366;">Key Projects</h2>
+                    <p class="text-[11px] text-gray-500 italic mb-2.5" contenteditable="true">* All personal development projects (including various automation scripts, system utilities, and production apps, not limited to the AI-Powered Health Assistant featured below) are fully hosted on GitHub and published on Google Play via the links in the contact header.</p>
+                    <div>
+                        <div class="flex justify-between items-baseline font-bold text-xs text-gray-900 mb-1">
+                            <span class="text-sm font-bold" contenteditable="true">AI-Powered Health Assistant <span class="text-xs font-normal text-gray-500">-- Personal Graduation Project (UIT)</span></span>
+                            <span class="text-gray-500 font-mono text-[10px]" contenteditable="true">Kotlin, FastAPI, PySide6, MySQL, ChromaDB</span>
+                        </div>
+                        <ul class="list-disc pl-4 text-xs text-gray-700 space-y-1 text-justify">
+                            <li contenteditable="true"><strong>SDLC Orchestration Layer:</strong> Served as the sole Architect, System Engineer, and QA Lead, orchestrating a team of specialized AI agents to generate, refactor, and test a complex, multi-tiered health application ecosystem.</li>
+                            <li contenteditable="true"><strong>System Architecture:</strong> Designed core schemas and directed AI code execution to construct an Offline-First native Android app (Jetpack Compose, Room, WorkManager) with FastAPI backend, and PySide6 Master Admin Panel.</li>
+                            <li contenteditable="true"><strong>Data & Operations:</strong> Guided the implementation of <strong>Delta Sync Gen 2</strong> with SHA-256 session integrity checks, saving 90% bandwidth. Managed AI to script secure OWASP-compliant Argon2id hashing and Fernet chat encryption.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- CERTIFICATIONS SECTION (1 Column, Full Width) -->
+                <div class="mb-2 section-container">
+                    <h2 class="text-base font-bold tracking-wider text-primary-color border-b-2 pb-1 mb-2 uppercase" style="color: #003366; border-color: #003366;">Certifications</h2>
+                    <ul class="list-disc pl-4 text-xs text-gray-700 space-y-1.5">
+                        <li contenteditable="true">IELTS 6.5 (British Council - 2017)</li>
+                        <li contenteditable="true"><a href="https://coursera.org/share/470d54b69ed19f56f5245351064fe32d" target="_blank" class="text-primary-color hover:underline font-semibold" style="color: #003366;">Google IT Automation with Python</a> (2025)</li>
+                        <li contenteditable="true"><a href="https://coursera.org/share/93ab286e9f7e890cd756b28312d00005" target="_blank" class="text-primary-color hover:underline font-semibold" style="color: #003366;">Google Cybersecurity</a> (2025)</li>
+                        <li contenteditable="true"><a href="https://coursera.org/share/2d1da52b4a782102f9c31245b6e263d9" target="_blank" class="text-primary-color hover:underline font-semibold" style="color: #003366;">Google IT Support</a> (2025)</li>
+                        <li contenteditable="true"><a href="https://coursera.org/share/c7474f23e065dfd225b50aeee75eb834" target="_blank" class="text-primary-color hover:underline font-semibold" style="color: #003366;">Google UX Design</a> (2025)</li>
+                        <li contenteditable="true"><a href="https://coursera.org/share/25ab5f28fcbb6aad62a57827e7972dd0" target="_blank" class="text-primary-color hover:underline font-semibold" style="color: #003366;">Google Project Management</a> (2025)</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- LaTeX Code Retrieval Modal -->
+    <div id="texModal" class="fixed inset-0 bg-slate-900/60 z-[100] backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[85vh] flex flex-col overflow-hidden">
+            <div class="bg-slate-900 px-6 py-4 flex items-center justify-between text-white border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                    <span class="bg-blue-600 text-xs font-bold uppercase tracking-wider px-2 py-1 rounded">LaTeX Output</span>
+                    <h3 class="font-bold text-lg">Synchronized TeX Document Code</h3>
+                </div>
+                <button onclick="closeTexModal()" class="text-slate-400 hover:text-white transition text-2xl font-bold">&times;</button>
+            </div>
+            
+            <div class="p-6 flex-1 overflow-y-auto bg-slate-950 font-mono text-sm text-slate-300">
+                <p class="text-xs text-slate-400 mb-4 font-sans italic">This TeX output is perfectly synchronized with your updated AI-Native SDLC Orchestrator profile. Copy this to paste into Overleaf:</p>
+                <pre id="texCodeArea" class="whitespace-pre-wrap select-all bg-slate-900 p-4 rounded border border-slate-800 text-xs text-emerald-400"></pre>
+            </div>
+            
+            <div class="bg-slate-900 p-4 flex justify-end gap-3 border-t border-slate-800">
+                <button onclick="copyTexCode()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm font-semibold transition">
+                    Copy Code
+                </button>
+                <button onclick="closeTexModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded text-sm transition">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Operations Logic -->
+    <script>
+        // Toggle the styling controller bar
+        function toggleControls() {
+            const panel = document.getElementById('config-panel');
+            panel.classList.toggle('hidden');
+        }
+
+        // Change base fonts dynamically
+        function changeFont(fontClass) {
+            const cv = document.getElementById('cv-content');
+            cv.className = `a4-page ${fontClass}`;
+        }
+
+        // Handle avatar picture uploads
+        function previewAvatar(event) {
+            const reader = new FileReader();
+            reader.onload = function(){
+                const output = document.getElementById('avatarImg');
+                const placeholder = document.getElementById('avatarPlaceholder');
+                output.src = reader.result;
+                output.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        // Handle color modifications across CV structures
+        function changePrimaryColor(colorCode) {
+            document.querySelectorAll('.text-primary-color').forEach(el => {
+                el.style.color = colorCode;
+                if(el.tagName === 'H2') {
+                    el.style.borderColor = colorCode;
+                }
+            });
+        }
+
+        // Dynamically adjust system spacing configurations
+        function changeSpacing(factor) {
+            const cv = document.getElementById('cv-content');
+            cv.style.lineHeight = (1.35 * parseFloat(factor)).toFixed(2);
+            document.getElementById('spacingVal').textContent = `${parseFloat(factor).toFixed(2)}x`;
+            
+            // Adjust margin elements in standard list bullets
+            document.querySelectorAll('ul.list-disc li').forEach(el => {
+                el.style.marginBottom = `${(0.25 * parseFloat(factor)).toFixed(2)}rem`;
+            });
+        }
+
+        // Dynamically structured LaTeX source code based on user inputs
+        function getUpdatedTex() {
+            return `\\documentclass[11pt, a4paper]{article}
+
+% --- UNIVERSAL PREAMBLE BLOCK ---
+\\usepackage[top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm]{geometry}
+\\usepackage{fontspec}
+\\usepackage[english, bidi=basic, provide=*]{babel}
+
+\\babelprovide[import, onchar=ids fonts]{english}
+
+% Thiết lập font Noto Sans Mono cho phong cách Kỹ thuật/Developer
+\\babelfont{rm}{Noto Sans Mono}
+
+\\usepackage{enumitem}
+\\setlist[itemize]{label=-}
+% --- END UNIVERSAL PREAMBLE BLOCK ---
+
+\\usepackage{xcolor}
+\\usepackage{titlesec}
+\\usepackage{hyperref}
+\\usepackage{fontawesome5}
+
+%---BẢNG MÀU CHỦ ĐẠO---
+\\definecolor{primary}{HTML}{003366} % Xanh Navy đậm sang trọng
+\\definecolor{accent}{HTML}{2E86C1}  % Xanh sáng nhấn mạnh
+\\definecolor{darkgrey}{HTML}{333333}
+\\definecolor{lightgrey}{HTML}{666666}
+
+% Điều chỉnh giãn dòng tối ưu để khống chế vừa vặn 3 trang A4
+\\renewcommand{\\baselinestretch}{1.04}
+
+%---CẤU HÌNH LIÊN KẾT---
+\\hypersetup{
+    colorlinks=true,
+    linkcolor=primary,
+    filecolor=magenta,
+    urlcolor=primary,
+}
+
+% Định dạng tiêu đề các mục lớn
+\\titleformat{\\section}
+{\\Large\\bfseries\\color{primary}\\uppercase}
+{}{0em}
+{}[\\titlerule]
+\\titlespacing{\\section}{0pt}{10pt}{4pt}
+
+% Macro dựng khối kinh nghiệm làm việc chuyên nghiệp
+\\newcommand{\\workentry}[4]{
+    {\\large\\bfseries #1} \\hfill {\\normalsize\\bfseries #2} \\par
+    \\textcolor{primary}{\\bfseries #3} \\par
+    \\vspace{0.2em}
+    #4
+    \\vspace{0.5em}
+}
+
+% Định dạng lề và khoảng cách cho gạch đầu dòng
+\\setlist[itemize]{
+    leftmargin=1.5em,
+    labelsep=0.5em,
+    itemsep=0.15em,
+    topsep=0.15em,
+    parsep=0pt,
+    label=-
+}
+
+\\begin{document}
+
+\\raggedright
+\\sloppy
+
+%---PHẦN TIÊU ĐỀ CV \\& THÔNG TIN CÁ NHÂN (1 Row, 2 Columns)---
+\\noindent
+\\begin{minipage}[t]{0.22\\textwidth}
+    \\vspace{0pt}
+    \\begin{minipage}[c][4.2cm][c]{3.5cm}
+        % Chừa khoảng trống chuẩn để bạn dán ảnh chân dung thực tế
+    \\end{minipage}
+\\end{minipage}%
+\\hfill
+\\begin{minipage}[t]{0.74\\textwidth}
+    \\raggedright
+    \\vspace{0pt}
+    {\\LARGE\\bfseries\\color{primary} NGUYEN HOANG THANH TU} \\\\[0.2cm]
+    {\\small\\bfseries\\textcolor{darkgrey}{IT Infrastructure Engineer \\& AI Agent SDLC Orchestrator}} \\\\[0.4cm]
+    \\normalsize
+    \\textbf{DOB:} Oct 12th 1997 \\quad \\textbf{Location:} Ho Chi Minh City, Vietnam \\\\[0.2cm]
+    \\textbf{Tel:} (0973) 486 297 \\quad \\textbf{Email:} \\href{mailto:darkzeuslk@gmail.com}{darkzeuslk@gmail.com} \\\\[0.3cm]
+    \\faLinkedin\\ \\href{https://www.linkedin.com/in/junmystery/}{in/junmystery} \\quad
+    \\faGithub\\ \\href{https://github.com/JunMystery/}{github/JunMystery} \\quad
+    \\faGooglePlay\\ \\href{https://play.google.com/store/apps/dev?id=6943003088385722005}{play/JunMystery}
+\\end{minipage}
+
+\\vspace{0.2cm}
+
+%---TÓM TẮT MỤC TIÊU NGHỀ NGHIỆP---
+\\section{Professional Summary}
+Forward-thinking IT Systems Engineer and AI-Native Developer specializing in system administration and structured \\textbf{SDLC Orchestration}. I offer robust hands-on hardware strength, including enterprise physical server configurations, hardware provisioning, and secure network routing alongside active directory infrastructure. Rejecting unguided code generation (\\textit{"vibe coding"}), I operate a rigorous, systematic software development lifecycle methodology where I act as the System Architect, Technical Designer, and QA Orchestrator while directing specialized AI Agents to write, refactor, and deploy code. This operational framework offloads manual development to AI while ensuring robust, high-performance, and secure software. Highly skilled in bridging traditional infrastructure (Windows Server, SQL, Networks) with cutting-edge agentic workflows to build reliable enterprise-grade systems.
+
+%---KỸ NĂNG CHUYÊN MÔN (1 Column Full-width list)---
+\\section{Technical Skills}
+\\begin{itemize}[leftmargin=1.5em]
+    \\item \\textcolor{primary}{\\textbf{AI \\& SDLC Ops:}} SDLC Orchestration, PromptOps, Multi-Agent Workflows, System Architecture, Automated QA \\& Verification.
+    \\item \\textcolor{primary}{\\textbf{Systems \\& Infrastructure:}} Windows Server, Active Directory, DNS/DHCP, Linux (Ubuntu), VMware, NAS Storage.
+    \\item \\textcolor{primary}{\\textbf{IT Support \\& Operations:}} L1/L2 Troubleshooting, Hardware Diagnostics \\& Upgrades, IT Asset/Lifecycle Management, OS Deployment, ERP/WMS Systems.
+    \\item \\textcolor{primary}{\\textbf{Network Administration:}} LAN/WAN Design, VPN/P2P Connectivity, Routing \\& Switching (Cisco/DrayTek), Firewall Configuration, CCTV.
+    \\item \\textcolor{primary}{\\textbf{Databases \\& Scripting:}} SQL (MySQL/MSSQL DB Administration), Python (System \\& Log Automation), PowerShell \\& Bash (Infrastructure Scripting).
+    \\item \\textcolor{primary}{\\textbf{Orchestration Tools:}} Git/GitHub, Cursor, VS Code.
+    \\item \\textcolor{primary}{\\textbf{Languages:}} English (IELTS 6.5 - Professional Working Proficiency).
+\\end{itemize}
+
+%---LỊCH SỬ KINH NGHIỆM LÀM VIỆC---
+\\section{Work Experience}
+
+\\workentry{IT Engineer Assistant Supervisor}{May 2026 -- Present}
+{Sharp Manufacturing Vietnam Co., Ltd}
+{\\begin{itemize}
+    \\item \\textbf{Database Administration:} Managed enterprise SQL databases, analyzed database system architectures provided by the parent headquarters, and successfully deployed localized databases to support factory operations.
+    \\item \\textbf{AI-Native SDLC Orchestration:} Developed internal software utilities and corporate automation tools by architecting structural specifications, outlining operational models, and supervising specialized AI Agents to write complete codebase packages, reducing development cycles by 80\\%.
+    \\item \\textbf{Infrastructure Management:} Administered enterprise-grade Windows Server environments, centralized network-attached storage (NAS) devices, and multi-channel CCTV surveillance systems to guarantee 99.9\\% operations uptime.
+    \\item \\textbf{Network Engineering:} Designed and optimized local network topologies (LAN/WAN) to ensure secure, high-bandwidth communication across corporate and factory areas.
+    \\item \\textbf{Technical Support \\& Provisioning:} Handled comprehensive L1/L2 technical troubleshooting, PC/laptop assembly, hardware staging, OS deployment, and peripheral setup for end-users.
+\\end{itemize}}
+
+\\workentry{IT Support \\& Infrastructure Admin}{Mar 2024 -- Mar 2026}
+{Danu Vina Co., Ltd}
+{\\begin{itemize}
+    \\item \\textbf{Automated Task Orchestration:} Set up automated network health checks and parsed complex system logs by designing scripting logic and driving AI agents to write production-grade Python scripts.
+    \\item \\textbf{Infrastructure Management:} Administered internal IT systems (PCs, Printers, Network devices), ensuring stable daily operations and accurate technical logging.
+    \\item \\textbf{Factory Server Administration:} Directly managed, operated, and maintained local servers (Windows Server, NAS) to centralize corporate data and ensure continuous production workflows.
+    \\item \\textbf{Network Administration:} Deployed and managed LAN/Wi-Fi networks and CCTV systems, including IP allocation, basic routing, and physical cabling.
+    \\item \\textbf{Secure Connectivity:} Set up VPN and P2P connections to facilitate secure data synchronization across multiple factory branches.
+\\end{itemize}}
+
+\\workentry{Data Specialist and Warehouse OPS}{Mar 2023 -- Feb 2024}
+{YCH - Protrade Company Limited}
+{\\begin{itemize}
+    \\item \\textbf{System Operations:} Monitored data flow and integrity within enterprise Warehouse Management Systems (Wx3, Tx3).
+    \\item \\textbf{Data Reconciliation:} Queried and analyzed system logs using SQL to resolve discrepancies between physical stock and digital records.
+    \\item \\textbf{Workflow Optimization:} Designed layout architectures and guided AI agents to implement lightweight local web utilities (HTML/JS) to streamline monthly report formatting.
+\\end{itemize}}
+
+\\workentry{Store Manager / Tech Support}{Dec 2018 -- Feb 2023}
+{The Gioi Di Dong JSC}
+{\\begin{itemize}
+    \\item \\textbf{Tech Support:} Provided technical assistance and troubleshooting for customers on various personal and home electronics (PCs, mobile devices, smart appliances).
+    \\item \\textbf{Operations \\& Reporting:} Extracted ERP data to generate daily, weekly, and monthly operational reports, presenting key metrics directly to Area Manager.
+\\end{itemize}}
+
+%---TRÌNH ĐỘ HỌC VẤN---
+\\section{Education}
+
+{\\large\\bfseries Univ. of Information Technology (UIT)} \\hfill {\\normalsize\\bfseries Feb 2024 -- Sep 2026 (Expected)} \\par
+\\textcolor{primary}{\\textbf{Major: Information Technology}} \\par
+\\textit{Accelerated Bachelor's Program}
+\\vspace{0.2em}
+\\begin{itemize}
+    \\item \\textbf{Core Coursework:} Data Structures \\& Algorithms, OOP, Database Systems, Computer Networks, OS, Web Tech, and Information Security.
+    \\item \\textbf{Academic Focus:} Algorithmic problem-solving, secure coding practices, and modern system architecture.
+\\end{itemize}
+
+\\vspace{0.4em}
+
+{\\large\\bfseries Industrial Univ. of HCMC (IUH)} \\hfill {\\normalsize\\bfseries Aug 2016 -- Dec 2018} \\par
+\\textcolor{primary}{\\textbf{Major: Software Engineering}}
+\\vspace{0.2em}
+\\begin{itemize}
+    \\item \\textbf{Core Coursework:} Software Engineering, System Analysis \\& Design, OOP, Database Systems (SQL), Web/Mobile Dev, and Software Architecture.
+\\end{itemize}
+
+%---DỰ ÁN PHÁT TRIỂN NỔI BẬT---
+\\section{Projects}
+\\textit{* All personal development projects (including various automation scripts, system utilities, and production apps, not limited to the AI-Powered Health Assistant featured below) are fully hosted on GitHub and published on Google Play via the links in the contact header.} \\\\[0.25cm]
+
+\\subsection*{AI-Powered Health Assistant \\textmd{-- \\textit{Personal Graduation Project (UIT)}} \\hfill \\textmd{\\textit{Kotlin, FastAPI, PySide6, MySQL, ChromaDB}}}
+\\begin{itemize}[itemsep=0.15em]
+    \\item \\textbf{SDLC Orchestration Layer:} Served as the sole Architect, System Engineer, and QA Lead, orchestrating a team of specialized AI agents to generate, refactor, and test a complex, multi-tiered health application ecosystem.
+    \\item \\textbf{System Architecture:} Designed core schemas and directed AI code execution to construct an Offline-First native Android app (Jetpack Compose, Room, WorkManager) with FastAPI backend, and PySide6 Master Admin Panel.
+    \\item \\textbf{Data \\& Operations:} Guided the implementation of \\textbf{Delta Sync Gen 2} with SHA-256 session integrity checks, saving 90\\% bandwidth. Managed AI to script secure OWASP-compliant Argon2id hashing and Fernet chat encryption.
+\\end{itemize}
+
+%---DANH SÁCH CHỨNG CHỈ CHỌN LỌC---
+\\section{Certifications}
+\\begin{itemize}[itemsep=0.15em]
+    \\item IELTS 6.5 (British Council - 2017)
+    \\item \\href{https://coursera.org/share/470d54b69ed19f56f5245351064fe32d}{Google IT Automation with Python} (2025)
+    \\item \\href{https://coursera.org/share/93ab286e9f7e890cd756b28312d00005}{Google Cybersecurity} (2025)
+    \\item \\href{https://coursera.org/share/2d1da52b4a782102f9c31245b6e263d9}{Google IT Support} (2025)
+    \\item \\href{https://coursera.org/share/c7474f23e065dfd225b50aeee75eb834}{Google UX Design} (2025)
+    \\item \\href{https://coursera.org/share/25ab5f28fcbb6aad62a57827e7972dd0}{Google Project Management} (2025)
+\\end{itemize}
+
+\\end{document}`;
+        }
+
+        // Open Modal showing ready TeX Code
+        function openTexModal() {
+            const codeArea = document.getElementById('texCodeArea');
+            codeArea.textContent = getUpdatedTex();
+            document.getElementById('texModal').classList.remove('hidden');
+        }
+
+        function closeTexModal() {
+            document.getElementById('texModal').classList.add('hidden');
+        }
+
+        // Clipboard Copy Action
+        function copyTexCode() {
+            const text = getUpdatedTex();
+            const tempInput = document.createElement("textarea");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            
+            // Temporary feedback styling
+            const copyBtn = document.querySelector('#texModal button[onclick="copyTexCode()"]');
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = "Copied Successfully!";
+            copyBtn.classList.replace('bg-blue-600', 'bg-emerald-600');
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+                copyBtn.classList.replace('bg-emerald-600', 'bg-blue-600');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

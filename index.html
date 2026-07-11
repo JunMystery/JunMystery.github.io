@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyen Hoang Thanh Tu - IT Systems Engineer & AI SDLC Orchestrator</title>
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">TU.DEV</a>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#certifications" class="nav-link">Certifications</a>
+                <button id="theme-toggle" class="theme-toggle" title="Toggle Light/Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="btn-print-nav" class="btn-print-nav" title="Print/Export CV">
+                    <i class="fas fa-print"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="hero-subtitle">
+                    <i class="fas fa-terminal"></i> systems_engineer & ai_orchestrator
+                </div>
+                <h1 class="hero-title">NGUYEN HOANG<br><span>THANH TU</span></h1>
+                <p class="hero-desc">
+                    A forward-thinking IT Systems Engineer and AI-Native Developer. I bridge traditional infrastructure operations (Windows Server, SQL, Cisco Networks) with next-generation multi-agent SDLC orchestration workflows.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fas fa-code"></i> View Work
+                    </a>
+                    <button id="btn-print" class="btn btn-secondary">
+                        <i class="fas fa-file-pdf"></i> Get A4 CV / Print
+                    </button>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/junmystery/" target="_blank" class="social-link" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/JunMystery/" target="_blank" class="social-link" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://play.google.com/store/apps/dev?id=6943003088385722005" target="_blank" class="social-link" title="Google Play">
+                        <i class="fab fa-google-play"></i>
+                    </a>
+                    <a href="mailto:darkzeuslk@gmail.com" class="social-link" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="avatar-wrapper">
+                    <img src="professional_portrait.png" alt="Nguyen Hoang Thanh Tu Profile Portrait">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="section container" id="about">
+        <h2 class="section-title">Professional Paradigm</h2>
+        <div class="summary-grid">
+            <div class="summary-card">
+                <i class="fas fa-server"></i>
+                <h3>Infrastructure Strength</h3>
+                <p>
+                    Proven hands-on experience configuration physical server infrastructure, setting up Active Directory, DNS/DHCP networks, VM virtualization, secure local DrayTek/Cisco routing protocols, NAS servers, and managing localized MySQL/MSSQL corporate database deployments.
+                </p>
+            </div>
+            <div class="summary-card">
+                <i class="fas fa-robot"></i>
+                <h3>AI-Native Orchestration</h3>
+                <p>
+                    Pioneering structured SDLC Orchestration over unguided "vibe coding". I act as the System Architect and QA Supervisor directing specialized AI Agents to write clean, fully tested, and secure software applications, speeding up SDLC iteration loops by 80%.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section container" id="skills">
+        <h2 class="section-title">Technical Expertise</h2>
+        
+        <div class="skills-tabs">
+            <button class="skills-tab-btn active" data-filter="all">All Skills</button>
+            <button class="skills-tab-btn" data-filter="ai-ops">AI & SDLC Ops</button>
+            <button class="skills-tab-btn" data-filter="infra">Systems & Network</button>
+            <button class="skills-tab-btn" data-filter="dev">Databases & Code</button>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-card" data-category="ai-ops">
+                <div class="skill-header">
+                    <span class="skill-title">SDLC Orchestration</span>
+                    <span class="skill-category">AI-Ops</span>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">PromptOps</span>
+                    <span class="skill-tag">Multi-Agent Workflows</span>
+                    <span class="skill-tag">System Architecture</span>
+                </div>
+            </div>
+
+            <div class="skill-card" data-category="infra">
+                <div class="skill-header">
+                    <span class="skill-title">Systems Administration</span>
+                    <span class="skill-category">Infrastructure</span>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Windows Server</span>
+                    <span class="skill-tag">Active Directory</span>
+                    <span class="skill-tag">DNS/DHCP</span>
+                    <span class="skill-tag">Linux (Ubuntu)</span>
+                    <span class="skill-tag">VMware</span>
+                </div>
+            </div>
+
+            <div class="skill-card" data-category="infra">
+                <div class="skill-header">
+                    <span class="skill-title">Network Administration</span>
+                    <span class="skill-category">Infrastructure</span>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">LAN/WAN</span>
+                    <span class="skill-tag">VPN/P2P</span>
+                    <span class="skill-tag">Cisco/DrayTek</span>
+                    <span class="skill-tag">Firewalls</span>
+                </div>
+            </div>
+
+            <div class="skill-card" data-category="dev">
+                <div class="skill-header">
+                    <span class="skill-title">Databases</span>
+                    <span class="skill-category">Dev</span>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">Microsoft SQL Server</span>
+                    <span class="skill-tag">Database Administration</span>
+                </div>
+            </div>
+
+            <div class="skill-card" data-category="dev">
+                <div class="skill-header">
+                    <span class="skill-title">Scripting & Coding</span>
+                    <span class="skill-category">Dev</span>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Kotlin (Android)</span>
+                    <span class="skill-tag">FastAPI</span>
+                    <span class="skill-tag">PowerShell</span>
+                    <span class="skill-tag">Bash</span>
+                </div>
+            </div>
+
+            <div class="skill-card" data-category="ai-ops">
+                <div class="skill-header">
+                    <span class="skill-title">Orchestration Tools</span>
+                    <span class="skill-category">AI-Ops</span>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Git/GitHub</span>
+                    <span class="skill-tag">Cursor</span>
+                    <span class="skill-tag">VS Code</span>
+                    <span class="skill-tag">ChromaDB</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section container" id="experience">
+        <h2 class="section-title">Professional Timeline</h2>
+        
+        <div class="timeline">
+            <!-- Sharp -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <span class="timeline-time">May 2026 – Present</span>
+                <div class="timeline-card">
+                    <h3 class="timeline-title">IT Engineer Assistant Supervisor</h3>
+                    <span class="timeline-company">Sharp Manufacturing Vietnam Co., Ltd</span>
+                    <ul class="timeline-bullets">
+                        <li><strong>Database Administration:</strong> Administered relational SQL databases, analyzed HQ architectures, and localized systems to fit manufacturing operations.</li>
+                        <li><strong>AI-Native SDLC Orchestration:</strong> Supervised AI Agents in building localized tools, shortening cycles by 80%.</li>
+                        <li><strong>Infrastructure Management:</strong> Administered Windows Server environments, NAS nodes, and CCTV surveillance to maintain 99.9% uptime.</li>
+                        <li><strong>Network Engineering:</strong> Optimized LAN/WAN topologies across corporate offices and factory floors.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Danu Vina -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <span class="timeline-time">Mar 2024 – Mar 2026</span>
+                <div class="timeline-card">
+                    <h3 class="timeline-title">IT Support & Infrastructure Admin</h3>
+                    <span class="timeline-company">Danu Vina Co., Ltd</span>
+                    <ul class="timeline-bullets">
+                        <li><strong>Automated Task Orchestration:</strong> Scripted network health checks and log parsers in Python utilizing AI agent guidance.</li>
+                        <li><strong>Factory Server Administration:</strong> Managed localized servers and NAS storage networks to maintain zero-loss production streams.</li>
+                        <li><strong>Secure Connectivity:</strong> Deployed secure VPN/P2P connections for encrypted data synchronization across branches.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- YCH -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <span class="timeline-time">Mar 2023 – Feb 2024</span>
+                <div class="timeline-card">
+                    <h3 class="timeline-title">Data Specialist and Warehouse OPS</h3>
+                    <span class="timeline-company">YCH - Protrade Company Limited</span>
+                    <ul class="timeline-bullets">
+                        <li><strong>System Operations:</strong> Maintained transaction log flow integrity within Enterprise Warehouse Management Systems.</li>
+                        <li><strong>Data Reconciliation:</strong> Ran complex SQL diagnostic queries to bridge inventory sync gaps.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section container" id="projects">
+        <h2 class="section-title">Key Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-info">
+                    <span class="project-type">Graduation Project - UIT</span>
+                    <h3>AI-Powered Health Assistant</h3>
+                    <p class="project-desc">
+                        A robust, multi-tiered health ecosystem featuring an offline-first native Android app, FastAPI backend, and PySide6 dashboard.
+                    </p>
+                    <div class="project-meta">
+                        <div class="project-meta-item">
+                            <strong>SDLC Layer:</strong>
+                            <span>Sole architect managing AI-agent code generation.</span>
+                        </div>
+                        <div class="project-meta-item">
+                            <strong>Sync:</strong>
+                            <span>Delta Sync Gen 2 with SHA-256 integrity, saving 90% bandwidth.</span>
+                        </div>
+                        <div class="project-meta-item">
+                            <strong>Security:</strong>
+                            <span>Argon2id password hashing and Fernet payload encryption.</span>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <span class="project-tech-tag">Kotlin</span>
+                        <span class="project-tech-tag">FastAPI</span>
+                        <span class="project-tech-tag">PySide6</span>
+                        <span class="project-tech-tag">MySQL</span>
+                        <span class="project-tech-tag">ChromaDB</span>
+                    </div>
+                </div>
+                <div class="project-visual">
+                    <div class="project-architecture">
+                        <div class="arch-node">
+                            <i class="fab fa-android"></i> Android Native App (Kotlin)
+                        </div>
+                        <div class="arch-arrow"><i class="fas fa-arrows-alt-v"></i></div>
+                        <div class="arch-node">
+                            <i class="fas fa-server"></i> FastAPI Service (Python)
+                        </div>
+                        <div class="arch-arrow"><i class="fas fa-arrows-alt-v"></i></div>
+                        <div class="arch-node">
+                            <i class="fas fa-database"></i> MySQL + ChromaDB
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="section container" id="certifications">
+        <h2 class="section-title">Certifications</h2>
+        <div class="certifications-grid">
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fab fa-google"></i></div>
+                <div class="cert-info">
+                    <h4>IT Automation with Python</h4>
+                    <p>Google Career Certification (2025)</p>
+                    <a href="https://coursera.org/share/470d54b69ed19f56f5245351064fe32d" target="_blank" class="cert-link">Verify Credentials <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fab fa-google"></i></div>
+                <div class="cert-info">
+                    <h4>Google Cybersecurity</h4>
+                    <p>Google Career Certification (2025)</p>
+                    <a href="https://coursera.org/share/93ab286e9f7e890cd756b28312d00005" target="_blank" class="cert-link">Verify Credentials <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fab fa-google"></i></div>
+                <div class="cert-info">
+                    <h4>Google IT Support</h4>
+                    <p>Google Career Certification (2025)</p>
+                    <a href="https://coursera.org/share/2d1da52b4a782102f9c31245b6e263d9" target="_blank" class="cert-link">Verify Credentials <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fab fa-google"></i></div>
+                <div class="cert-info">
+                    <h4>Google UX Design</h4>
+                    <p>Google Career Certification (2025)</p>
+                    <a href="https://coursera.org/share/c7474f23e065dfd225b50aeee75eb834" target="_blank" class="cert-link">Verify Credentials <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section container" id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="edu-grid">
+            <div class="edu-card">
+                <div class="edu-header">
+                    <span class="edu-institution">Univ. of Information Technology (UIT)</span>
+                    <span class="edu-period">2024 – 2026</span>
+                </div>
+                <div class="edu-degree">Major: Information Technology</div>
+                <ul class="edu-bullets">
+                    <li>Accelerated Bachelor's Program.</li>
+                    <li>Core Focus: Data Structures, Database Systems, Computer Networks, Information Security.</li>
+                </ul>
+            </div>
+            
+            <div class="edu-card">
+                <div class="edu-header">
+                    <span class="edu-institution">Industrial Univ. of HCMC (IUH)</span>
+                    <span class="edu-period">2016 – 2018</span>
+                </div>
+                <div class="edu-degree">Major: Software Engineering</div>
+                <ul class="edu-bullets">
+                    <li>Core Studies: Systems Analysis, Database Management (SQL), Software Architectures.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Nguyen Hoang Thanh Tu. Built using premium HTML/CSS/JS. Fully responsive & print-ready.</p>
+        </div>
+    </footer>
+
+    <!-- Print A4 CV Modal / Overlay -->
+    <div id="print-overlay" class="print-cv-overlay">
+        <div class="print-cv-controls">
+            <button id="print-trigger" class="btn btn-primary">
+                <i class="fas fa-print"></i> Print / Save PDF
+            </button>
+            <button id="print-close" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Close Preview
+            </button>
+        </div>
+        
+        <!-- Standard A4 Document Model -->
+        <div class="print-cv-modal" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; line-height: 1.4; color: #1f2937;">
+            <div style="border-bottom: 2px solid #0284c7; padding-bottom: 15px; margin-bottom: 15px; display: grid; grid-template-cols: 1fr auto; gap: 20px; align-items: start;">
+                <div>
+                    <h1 style="font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 2px; text-transform: uppercase;">Nguyen Hoang Thanh Tu</h1>
+                    <p style="font-size: 11px; font-weight: 700; color: #0284c7; text-transform: uppercase; margin-bottom: 8px;">IT Infrastructure Engineer & AI Agent SDLC Orchestrator</p>
+                    <div style="display: grid; grid-template-cols: 1fr 1fr; gap: 4px; font-size: 10px; color: #475569;">
+                        <span><strong>DOB:</strong> Oct 12, 1997</span>
+                        <span><strong>Location:</strong> Ho Chi Minh City, Vietnam</span>
+                        <span><strong>Tel:</strong> (0973) 486 297</span>
+                        <span><strong>Email:</strong> darkzeuslk@gmail.com</span>
+                    </div>
+                    <div style="display: flex; gap: 15px; margin-top: 6px; font-size: 9px; color: #0284c7; font-weight: 600;">
+                        <span><i class="fab fa-linkedin"></i> in/junmystery</span>
+                        <span><i class="fab fa-github"></i> github/JunMystery</span>
+                        <span><i class="fab fa-google-play"></i> play/JunMystery</span>
+                    </div>
+                </div>
+                <div style="width: 80px; height: 100px; border: 1px solid #cbd5e1; border-radius: 4px; overflow: hidden;">
+                    <img src="professional_portrait.png" alt="Profile Picture" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+
+            <!-- Professional Summary -->
+            <div style="margin-bottom: 15px;">
+                <h3 style="font-size: 12px; font-weight: 800; color: #0f172a; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 2px; margin-bottom: 6px;">Professional Summary</h3>
+                <p style="text-align: justify; color: #334155; margin: 0;">
+                    Forward-thinking IT Systems Engineer and AI-Native Developer specializing in system administration and structured SDLC Orchestration. I offer robust hands-on hardware strength, including enterprise physical server configurations, hardware provisioning, and secure network routing alongside active directory infrastructure. Operating a rigorous, systematic software development lifecycle methodology where I act as the System Architect, Technical Designer, and QA Orchestrator while directing specialized AI Agents to write, refactor, and deploy code.
+                </p>
+            </div>
+
+            <!-- Technical Skills -->
+            <div style="margin-bottom: 15px;">
+                <h3 style="font-size: 12px; font-weight: 800; color: #0f172a; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 2px; margin-bottom: 6px;">Technical Skills</h3>
+                <div style="display: grid; grid-template-cols: 130px 1fr; gap: 6px 10px; color: #334155;">
+                    <strong>AI & SDLC Ops:</strong> <span>SDLC Orchestration, PromptOps, Multi-Agent Workflows, System Architecture, Automated QA.</span>
+                    <strong>Systems & Infra:</strong> <span>Windows Server, Active Directory, DNS/DHCP, Linux (Ubuntu), VMware, NAS Storage.</span>
+                    <strong>Network Admin:</strong> <span>LAN/WAN, VPN/P2P, Cisco/DrayTek Routing, Firewalls, CCTV infrastructure.</span>
+                    <strong>Databases & Dev:</strong> <span>SQL (MySQL/MSSQL DB Administration), Python (System & Log Automation), PowerShell & Bash (Infrastructure Scripting).</span>
+                    <strong>Languages:</strong> <span>English (IELTS 6.5 - Professional Working Proficiency).</span>
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div style="margin-bottom: 15px;">
+                <h3 style="font-size: 12px; font-weight: 800; color: #0f172a; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 2px; margin-bottom: 8px;">Work Experience</h3>
+                
+                <div style="margin-bottom: 8px;">
+                    <div style="display: flex; justify-content: space-between; font-weight: 700; color: #0f172a;">
+                        <span>IT Engineer Assistant Supervisor</span>
+                        <span style="font-weight: 500; color: #64748b;">May 2026 – Present</span>
+                    </div>
+                    <div style="color: #0284c7; font-weight: 600; margin-bottom: 3px;">Sharp Manufacturing Vietnam Co., Ltd</div>
+                    <ul style="margin: 0; padding-left: 15px; color: #334155; display: flex; flex-direction: column; gap: 2px;">
+                        <li>Managed enterprise SQL databases, analyzed HQ architectures, and successfully deployed localized relational databases.</li>
+                        <li>Created internal automation tools by guiding specialized AI agents to generate structured code packages, reducing development cycles by 80%.</li>
+                        <li>Administered Windows Server environments, NAS nodes, and CCTV surveillance systems to guarantee 99.9% uptime.</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 8px;">
+                    <div style="display: flex; justify-content: space-between; font-weight: 700; color: #0f172a;">
+                        <span>IT Support & Infrastructure Admin</span>
+                        <span style="font-weight: 500; color: #64748b;">Mar 2024 – Mar 2026</span>
+                    </div>
+                    <div style="color: #0284c7; font-weight: 600; margin-bottom: 3px;">Danu Vina Co., Ltd</div>
+                    <ul style="margin: 0; padding-left: 15px; color: #334155; display: flex; flex-direction: column; gap: 2px;">
+                        <li>Set up automated network health checks and log parsers by writing Python scripts and guiding AI agents.</li>
+                        <li>Maintained local servers (Windows Server, NAS) to centralize data and support uninterrupted production streams.</li>
+                        <li>Deployed DrayTek/Cisco routers, LAN structures, and secure VPN connections.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Key Projects -->
+            <div style="margin-bottom: 15px;">
+                <h3 style="font-size: 12px; font-weight: 800; color: #0f172a; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 2px; margin-bottom: 6px;">Key Projects</h3>
+                <div style="display: flex; justify-content: space-between; font-weight: 700; color: #0f172a; margin-bottom: 2px;">
+                    <span>AI-Powered Health Assistant <span style="font-weight: 500; font-size: 9px; color: #64748b;">(UIT Graduation Project)</span></span>
+                    <span style="font-family: monospace; font-size: 9px; color: #0284c7;">Kotlin, FastAPI, PySide6, MySQL, ChromaDB</span>
+                </div>
+                <ul style="margin: 0; padding-left: 15px; color: #334155; display: flex; flex-direction: column; gap: 2px;">
+                    <li>Orchestrated specialized AI agents to generate, refactor, and test a multi-tiered mobile/desktop application.</li>
+                    <li>Implemented Delta Sync Gen 2 with SHA-256 session integrity checks, saving 90% network bandwidth.</li>
+                </ul>
+            </div>
+
+            <!-- Education -->
+            <div style="margin-bottom: 10px;">
+                <h3 style="font-size: 12px; font-weight: 800; color: #0f172a; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 2px; margin-bottom: 6px;">Education</h3>
+                <div style="display: flex; justify-content: space-between; font-weight: 700; color: #0f172a; margin-bottom: 2px;">
+                    <span>Univ. of Information Technology (UIT) <span style="font-weight: 500; color: #64748b;">- Major: IT</span></span>
+                    <span style="font-weight: 500; color: #64748b;">Feb 2024 – Sep 2026 (Expected)</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-weight: 700; color: #0f172a;">
+                    <span>Industrial Univ. of HCMC (IUH) <span style="font-weight: 500; color: #64748b;">- Major: Software Engineering</span></span>
+                    <span style="font-weight: 500; color: #64748b;">Aug 2016 – Dec 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
