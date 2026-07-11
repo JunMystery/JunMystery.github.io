@@ -33,24 +33,14 @@
     align-items: start;
 }
 
-.cv-photo-placeholder {
+.cv-photo {
     width: 7rem;
     height: 9rem;
-    background: var(--color-gray-100);
+    object-fit: cover;
+    object-position: center;
     border: 1px solid var(--color-gray-300);
     border-radius: 0.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-shrink: 0;
-}
-
-.cv-photo-label {
-    font-size: 0.625rem;
-    color: var(--color-gray-400);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
 }
 
 .cv-name-title {
