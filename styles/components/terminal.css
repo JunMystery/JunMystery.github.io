@@ -76,3 +76,20 @@
 .terminal-variable { color: var(--accent-primary); }
 .terminal-comment { color: var(--text-muted); }
 .terminal-orange { color: var(--accent-orange); }
+
+/* Debug easter-egg button in terminal header */
+.terminal-debug-btn {
+    margin-left: auto;
+    color: var(--accent-primary);
+    font-size: 0.7rem;
+    opacity: 1;
+    transition: color 0.2s ease;
+    text-decoration: none;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+.terminal-debug-btn:hover {
+    color: var(--accent-secondary);
+}
