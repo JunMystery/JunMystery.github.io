@@ -54,7 +54,10 @@ canvas {
 .blink { animation: blinker 1.2s linear infinite; }
 @keyframes blinker { 50% { opacity: 0; } }
 
-/* ─── FLAP Action Button ─── */
+.mobile-controls-panel .console-layout {
+    justify-content: center;
+}
+
 .action-btn-flap {
     width: 90px;
     height: 90px;
