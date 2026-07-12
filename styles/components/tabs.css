@@ -29,4 +29,19 @@
     background: var(--bg-tertiary);
 }
 
+/* Smooth skill group transitions */
+.skill-group {
+    opacity: 1;
+    max-height: 300px;
+    overflow: hidden;
+    transition: opacity 0.25s ease, max-height 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+}
+
+.skill-group.hidden {
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
 

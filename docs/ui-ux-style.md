@@ -225,7 +225,7 @@ function NguyenHoangThanhTu() {
 ```
 
 - Each line starts with a `>` prompt (`accent-secondary` green).
-- Syntax-colored tokens: keywords (`accent-purple`), functions (`accent-blue`), strings (`accent-green`).
+- Syntax-colored tokens: keywords (`accent-purple`), functions (`accent-primary` blue), strings (`accent-secondary` green).
 - Inline tag pills for languages/domains with colored borders.
 
 ### Skills — Tag Cloud by Category

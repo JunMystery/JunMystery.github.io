@@ -17,6 +17,12 @@
     border-radius: var(--border-radius-sm);
     padding: 0.1rem 0.4rem;
     white-space: nowrap;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.project-card:hover .flow-node {
+    border-color: var(--accent-primary);
+    background: var(--bg-secondary);
 }
 
 .flow-arrow {
@@ -24,4 +30,9 @@
     font-weight: 700;
     opacity: 0.7;
     margin: 0 0.1rem;
+    transition: opacity 0.2s ease;
+}
+
+.project-card:hover .flow-arrow {
+    opacity: 1;
 }

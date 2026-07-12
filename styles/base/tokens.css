@@ -2,6 +2,7 @@
     /* Developer Syntax theme (OLED Dark) */
     --bg-primary: #05070a;
     --bg-secondary: #0c1017;
+    --bg-secondary-rgb: 12, 16, 23;
     --bg-tertiary: #161b22;
     --border-color: #21262d;
     --text-primary: #c9d1d9;
@@ -26,12 +27,16 @@
 
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
     --shadow-md: 0 4px 12px rgba(0,0,0,0.2);
+
+    /* Theme crossfade */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 [data-theme="light"] {
     /* Developer Light Syntax theme (GitHub light style) */
     --bg-primary: #ffffff;
     --bg-secondary: #f6f8fa;
+    --bg-secondary-rgb: 246, 248, 250;
     --bg-tertiary: #afb8c133;
     --border-color: #d0d7de;
     --text-primary: #24292f;

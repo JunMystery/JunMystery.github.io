@@ -30,4 +30,41 @@
 .section-title::before {
     content: '##';
     color: var(--text-muted);
+    animation: cursorBlink 1.2s step-end infinite;
+}
+
+@keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Ambient background gradient */
+body {
+    background-image:
+        radial-gradient(ellipse at 25% 15%, rgba(88, 166, 255, 0.035) 0%, transparent 50%),
+        radial-gradient(ellipse at 75% 85%, rgba(34, 211, 238, 0.025) 0%, transparent 50%);
+    background-attachment: fixed;
+}
+
+/* Spotlight cursor overlay */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(600px circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
+        rgba(88, 166, 255, 0.04) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 5000;
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--accent-gradient);
+    width: 0%;
+    z-index: 200;
+    transition: width 0.1s linear;
 }

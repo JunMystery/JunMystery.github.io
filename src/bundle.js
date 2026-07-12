@@ -675,7 +675,7 @@ function initLanguage() {
 }
 
 // ============================================================
-// Source: src/bundle/controllers\nav.js (45 lines)
+// Source: src/bundle/controllers\nav.js (87 lines)
 // ============================================================
 
 // ============================================================
@@ -687,6 +687,7 @@ function initNav() {
     var toggle = $(SELECTORS.NAV_TOGGLE);
     var menu = $(SELECTORS.NAV_MENU);
     var links = $$(SELECTORS.NAV_LINKS);
+    var navbar = $('.navbar');
 
     if (toggle && menu) {
         toggle.addEventListener('click', function (e) {
@@ -721,6 +722,47 @@ function initNav() {
             }
         });
     }
+
+    /* Backdrop blur on scroll */
+    if (navbar) {
+        window.addEventListener('scroll', function () {
+            navbar.classList.toggle('scrolled', window.scrollY > 0);
+        }, { passive: true });
+    }
+}
+
+function initActiveSection() {
+    var links = $$(SELECTORS.NAV_LINKS);
+    var sections = [];
+    links.forEach(function (link) {
+        var href = link.getAttribute('href');
+        if (href && href.indexOf('#') === 0) {
+            var el = document.querySelector(href);
+            if (el) sections.push(el);
+        }
+    });
+    if (!sections.length) return;
+
+    var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var id = entry.target.getAttribute('id');
+            links.forEach(function (l) {
+                l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+            });
+        });
+    }, { threshold: 0.3, rootMargin: '-80px 0px 0px 0px' });
+
+    sections.forEach(function (s) { obs.observe(s); });
+}
+
+function initSpotlight() {
+    document.addEventListener('mousemove', function (e) {
+        var x = (e.clientX / window.innerWidth) * 100;
+        var y = (e.clientY / window.innerHeight) * 100;
+        document.documentElement.style.setProperty('--cursor-x', x + '%');
+        document.documentElement.style.setProperty('--cursor-y', y + '%');
+    }, { passive: true });
 }
 
 // ============================================================
@@ -744,7 +786,7 @@ function initSkillsTabs() {
             var filter = btn.getAttribute('data-filter');
             groups.forEach(function (group) {
                 var category = group.getAttribute('data-category');
-                group.style.display = (filter === 'all' || category === filter) ? '' : 'none';
+                group.classList.toggle('hidden', filter !== 'all' && category !== filter);
             });
         });
     });
@@ -842,7 +884,7 @@ function runTypewriter() {
 }
 
 // ============================================================
-// Source: src/bundle/controllers\reveal.js (19 lines)
+// Source: src/bundle/controllers\reveal.js (61 lines)
 // ============================================================
 
 // ============================================================
@@ -856,16 +898,92 @@ function initReveal() {
             if (!entry.isIntersecting) return;
             entry.target.classList.add('visible');
             observer.unobserve(entry.target);
+
+            if (entry.target.classList.contains('reveal-terminal')) {
+                var title = entry.target.querySelector('.terminal-title');
+                if (title && !title.getAttribute('data-typed')) {
+                    typeCommandInTitle(title);
+                }
+            }
         });
     }, { threshold: TIMING.REVEAL_THRESHOLD, rootMargin: TIMING.REVEAL_MARGIN });
 
-    $$('.reveal, .reveal-stagger, .reveal-hero').forEach(function (el) {
+    $$('.reveal, .reveal-stagger, .reveal-hero, .reveal-terminal').forEach(function (el) {
         observer.observe(el);
     });
 }
 
+function typeCommandInTitle(title) {
+    title.setAttribute('data-typed', 'true');
+    var filename = title.textContent;
+    var command = '$ cat ' + filename;
+    title.textContent = '';
+    var i = 0;
+    function type() {
+        if (i < command.length) {
+            title.textContent += command.charAt(i);
+            i++;
+            setTimeout(type, 35);
+        } else {
+            title.innerHTML = command + '<span class="term-title-cursor"></span>';
+        }
+    }
+    setTimeout(type, 200);
+}
+
+function initScrollProgress() {
+    var bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+        if (!ticking) {
+            window.requestAnimationFrame(function () {
+                var scrollTop = window.scrollY;
+                var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                bar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+}
+
 // ============================================================
-// Source: src/bundle/main.js (15 lines)
+// Source: src/bundle/controllers\hero.js (30 lines)
+// ============================================================
+
+// ============================================================
+// controllers/hero.js — Hero subtitle typewriter effect
+// Depends on: $ (utils.js)
+// ============================================================
+
+function initHeroTypewriter() {
+    var el = $('[data-typewriter]');
+    if (!el) return;
+
+    var text = el.textContent;
+    if (!text) return;
+
+    el.innerHTML = '<span class="typewriter-text"></span><span class="typewriter-cursor">|</span>';
+    var textSpan = el.querySelector('.typewriter-text');
+    if (!textSpan) return;
+
+    var charIdx = 0;
+    var speed = 30;
+
+    function typeChar() {
+        if (charIdx < text.length) {
+            textSpan.textContent += text[charIdx];
+            charIdx++;
+            setTimeout(typeChar, speed);
+        }
+    }
+
+    typeChar();
+}
+
+// ============================================================
+// Source: src/bundle/main.js (19 lines)
 // ============================================================
 
 // ============================================================
@@ -880,9 +998,13 @@ document.addEventListener('DOMContentLoaded', function () {
     initCareerTabs();
     initFooter();
     initReveal();
+    initScrollProgress();
+    initActiveSection();
+    initSpotlight();
     initLanguage();
+    initHeroTypewriter();
 });
 
 // ============================================================
-// End of bundle.js (825 total lines from 13 modules)
+// End of bundle.js (943 total lines from 14 modules)
 // ============================================================

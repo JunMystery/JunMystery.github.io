@@ -7,12 +7,37 @@
 
 .reveal {
     opacity: 0;
-    transform: translateY(var(--reveal-offset));
+    transform: translateY(var(--reveal-offset)) scale(0.97);
     transition: opacity var(--reveal-duration) var(--reveal-easing),
                 transform var(--reveal-duration) var(--reveal-easing);
 }
 
 .reveal.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Terminal window staged reveal — header slides in, body fades up */
+.reveal-terminal .terminal-header {
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 0.4s var(--reveal-easing) 0.1s,
+                transform 0.5s var(--reveal-easing) 0.1s;
+}
+
+.reveal-terminal.visible .terminal-header {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-terminal .terminal-body-raw {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s var(--reveal-easing) 0.2s,
+                transform 0.5s var(--reveal-easing) 0.2s;
+}
+
+.reveal-terminal.visible .terminal-body-raw {
     opacity: 1;
     transform: translateY(0);
 }

@@ -8,7 +8,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    transition: var(--transition);
+    transition: var(--transition), transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn-primary {
@@ -18,6 +18,12 @@
 
 .btn-primary:hover {
     opacity: 0.95;
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 4px 14px rgba(88, 166, 255, 0.25);
+}
+
+.btn-primary:active {
+    transform: scale(0.97);
 }
 
 .btn-secondary {
@@ -28,7 +34,12 @@
 
 .btn-secondary:hover {
     background: var(--bg-tertiary);
-    border-color: var(--text-secondary);
+    border-color: var(--accent-primary);
+    transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+    transform: scale(0.97);
 }
 
 /* Hero Objective & Availability */

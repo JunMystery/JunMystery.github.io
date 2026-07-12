@@ -16,6 +16,7 @@ $modules = @(
     "controllers\career.js",
     "controllers\footer.js",
     "controllers\reveal.js",
+    "controllers\hero.js",
     "main.js"
 )
 

@@ -15,7 +15,7 @@ function initSkillsTabs() {
             var filter = btn.getAttribute('data-filter');
             groups.forEach(function (group) {
                 var category = group.getAttribute('data-category');
-                group.style.display = (filter === 'all' || category === filter) ? '' : 'none';
+                group.classList.toggle('hidden', filter !== 'all' && category !== filter);
             });
         });
     });

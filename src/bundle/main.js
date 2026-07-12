@@ -10,5 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
     initCareerTabs();
     initFooter();
     initReveal();
+    initScrollProgress();
+    initActiveSection();
+    initSpotlight();
     initLanguage();
+    initHeroTypewriter();
 });
