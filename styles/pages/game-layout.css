@@ -19,6 +19,7 @@ body.game-body {
     padding: 8px 4px 6px 4px;
     font-size: 0.72rem;
     color: var(--text-muted);
+    box-sizing: border-box;
 }
 .breadcrumb a {
     color: var(--accent-primary);
@@ -33,4 +34,224 @@ body.game-body {
 }
 .breadcrumb .current {
     color: var(--text-secondary);
+}
+
+/* Classic Handheld Game Boy Retro Casing styling */
+.ide-container, .game-console, .game-window {
+    width: 100%;
+    max-width: 440px;
+    background: #282c34; /* Retro grey plastic */
+    border: 5px solid #1e222a;
+    border-radius: 10px 10px 40px 10px; /* Gameboy-like bottom right corner curve */
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.1), 0 15px 30px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.ide-header, .game-header {
+    background-color: #1e222a;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #15181f;
+    flex-shrink: 0;
+}
+
+.window-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.dot-red { background-color: #ff5f56; }
+.dot-yellow { background-color: #ffbd2e; }
+.dot-green { background-color: #27c93f; }
+
+.file-tab {
+    font-size: 11px;
+    color: #8b949e;
+    background-color: #282c34;
+    padding: 4px 10px;
+    border-radius: 5px 5px 0 0;
+    border: 1px solid #1e222a;
+    border-bottom: none;
+    margin-bottom: -9px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.file-tab span {
+    color: #58a6ff;
+}
+
+.ide-dashboard {
+    padding: 10px 12px;
+    background-color: #1e222a;
+    border-bottom: 2px solid #15181f;
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+/* Virtual Bezel and Screen Frame */
+.canvas-wrapper, .canvas-wrap {
+    position: relative;
+    background-color: #7a828a; /* Dark Bezel color */
+    border: 10px solid #1e222a;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+canvas {
+    background-color: #090c10;
+    border: 2px solid #0f1115;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+    display: block;
+    image-rendering: pixelated;
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    box-sizing: border-box;
+}
+
+/* Full Screen Cover Overlay Dialogs */
+.overlay-screen, .overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(9, 12, 16, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 16px;
+    border: none !important;
+    z-index: 100 !important;
+    box-sizing: border-box !important;
+}
+
+.overlay-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: inherit;
+}
+
+.instructions, .hint {
+    margin-top: 12px;
+    font-size: 10px;
+    color: #8b949e;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Controls Panel */
+.mobile-controls-panel, .controls {
+    background-color: #21252b; /* Dark Gameboy plate face */
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    flex-grow: 1; /* Autoresize on mobile */
+    min-height: 140px;
+}
+
+.console-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 360px;
+    margin: auto;
+    gap: 15px;
+}
+
+/* Ide Footer */
+.ide-footer, .game-footer {
+    background-color: #58a6ff;
+    color: #0d1117;
+    padding: 4px 10px;
+    font-size: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Responsive Mobile Handheld UI override */
+@media (max-width: 480px) {
+    body.game-body {
+        padding: 0;
+        margin: 0;
+        height: 100vh;
+        width: 100vw;
+        justify-content: flex-start;
+        overflow: hidden;
+    }
+
+    .breadcrumb {
+        max-width: 100vw;
+        padding: 5px 12px;
+        background-color: #0d1117;
+        border-bottom: 1px solid #21262d;
+        flex-shrink: 0;
+        font-size: 0.68rem;
+    }
+
+    .ide-container, .game-console, .game-window {
+        max-width: 100vw;
+        width: 100vw;
+        /* Fill exactly: viewport minus breadcrumb (~28px) */
+        height: calc(100vh - 28px);
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        flex-shrink: 0;
+    }
+
+    .canvas-wrapper, .canvas-wrap {
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        border-radius: 0;
+        padding: 6px 10px;
+        flex-shrink: 0;
+    }
+
+    canvas {
+        max-width: 100%;
+    }
+
+    /* Controls panel fills remaining vertical space */
+    .mobile-controls-panel, .controls {
+        flex-grow: 1;
+        padding: 8px 14px;
+        min-height: 0;
+    }
 }

@@ -10,12 +10,11 @@ const gameFrame = document.getElementById('gameFrame');
 const statusText = document.getElementById('statusText');
 const cooldownText = document.getElementById('cooldownText');
 
-// Layout Physics Grid: 28x28
+// -------------------- Grid & Maze --------------------
 const COLS = 28;
 const ROWS = 28;
 const CELL_SIZE = 14;
 
-// Maze: 1 = wall, 0 = pellet, 2 = ghost spawn, 3 = power pellet, 4 = empty
 const MAZE = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -52,29 +51,247 @@ let score = 0;
 let bugsEaten = 0;
 let gameRunning = false;
 
-// Pacman entity
+// -------------------- Pac-Man --------------------
 let pacman = {
     gridX: 13, gridY: 17,
     x: 13 * CELL_SIZE, y: 17 * CELL_SIZE,
     dirX: -1, dirY: 0,
     nextDirX: -1, nextDirY: 0,
-    speed: 1.0, baseSpeed: 1.0,
+    speed: 1.0,
     mouthAngle: 0.2, mouthSpeed: 0.04
 };
 
-// Ghosts: syntax_err (Blinky), type_err (Pinky), link_err (Inky), runtime_err (Clyde)
+// -------------------- Ghost Classes --------------------
+class Ghost {
+    constructor(name, color, startGridX, startGridY, speed, initialState, houseTimer, personality) {
+        this.name = name;
+        this.color = color;
+        this.gridX = startGridX;
+        this.gridY = startGridY;
+        this.x = startGridX * CELL_SIZE;
+        this.y = startGridY * CELL_SIZE;
+        this.speed = speed;
+        this.dirX = 0;
+        this.dirY = 0;
+        this.state = initialState;  // HOUSE, EXITING, CHASE, SCATTER, FRIGHTENED, EATEN
+        this.modeTime = 0;
+        this.houseTimer = houseTimer;
+        this.personality = personality; // 'blinky', 'pinky', 'inky', 'clyde'
+        this.frightenedTimer = 0;
+        this.exitPath = null;
+    }
+
+    reset(startGridX, startGridY, initialState, houseTimer) {
+        this.gridX = startGridX;
+        this.gridY = startGridY;
+        this.x = startGridX * CELL_SIZE;
+        this.y = startGridY * CELL_SIZE;
+        this.state = initialState;
+        this.houseTimer = houseTimer;
+        this.dirX = 0;
+        this.dirY = 0;
+        this.modeTime = 0;
+        this.frightenedTimer = 0;
+    }
+
+    getTargetTile(globalMode, blinkyRef) {
+        // If EXITING, target is cell above the door (13,10)
+        if (this.state === 'EXITING') return { x: 13, y: 10 };
+        // If EATEN, target is the house center (13,13)
+        if (this.state === 'EATEN') return { x: 13, y: 13 };
+        // If FRIGHTENED, random direction will be chosen later
+        if (this.state === 'FRIGHTENED') return null;
+
+        const mode = (this.state === 'SCATTER') ? 'SCATTER' : globalMode;
+        if (mode === 'SCATTER') {
+            if (this.personality === 'blinky') return { x: 27, y: 0 };
+            if (this.personality === 'pinky') return { x: 0, y: 0 };
+            if (this.personality === 'inky') return { x: 27, y: 27 };
+            if (this.personality === 'clyde') return { x: 0, y: 27 };
+        } else { // CHASE
+            if (this.personality === 'blinky') {
+                return { x: pacman.gridX, y: pacman.gridY };
+            } else if (this.personality === 'pinky') {
+                let tx = pacman.gridX + pacman.dirX * 4;
+                let ty = pacman.gridY + pacman.dirY * 4;
+                return { x: Math.max(0, Math.min(COLS - 1, tx)), y: Math.max(0, Math.min(ROWS - 1, ty)) };
+            } else if (this.personality === 'inky') {
+                let aheadX = pacman.gridX + pacman.dirX * 2;
+                let aheadY = pacman.gridY + pacman.dirY * 2;
+                let blinky = blinkyRef;
+                let tx = aheadX + (aheadX - blinky.gridX);
+                let ty = aheadY + (aheadY - blinky.gridY);
+                return { x: Math.max(0, Math.min(COLS - 1, tx)), y: Math.max(0, Math.min(ROWS - 1, ty)) };
+            } else if (this.personality === 'clyde') {
+                let dist = Math.hypot(this.gridX - pacman.gridX, this.gridY - pacman.gridY);
+                if (dist > 8) return { x: pacman.gridX, y: pacman.gridY };
+                else return { x: 0, y: 27 };
+            }
+        }
+        return { x: 13, y: 13 }; // fallback
+    }
+
+    decideDirection(globalMode, ghosts) {
+        // Find blinky (for Inky's targeting)
+        const blinky = ghosts.find(g => g.personality === 'blinky') || this;
+
+        // FRIGHTENED: random valid direction
+        if (this.state === 'FRIGHTENED') {
+            const dirs = this.getValidDirections(false);
+            if (dirs.length > 0) {
+                const rand = dirs[Math.floor(Math.random() * dirs.length)];
+                this.dirX = rand.x; this.dirY = rand.y;
+            }
+            return;
+        }
+
+        // Non‑FRIGHTENED: get target tile
+        let target = this.getTargetTile(globalMode, blinky);
+        if (!target) return;
+
+        // Get possible directions (prefer no reverse)
+        let validDirs = this.getValidDirections(true);
+
+        if (validDirs.length === 0) {
+            validDirs = this.getValidDirections(false);
+        }
+
+        if (validDirs.length === 0) {
+            this.dirX = 0; this.dirY = 0;
+            return;
+        }
+
+        // Choose direction closest to target
+        let bestDir = validDirs[0];
+        let minDist = Infinity;
+        validDirs.forEach(d => {
+            const nx = this.gridX + d.x;
+            const ny = this.gridY + d.y;
+            const dist = Math.hypot(nx - target.x, ny - target.y);
+            if (dist < minDist) {
+                minDist = dist;
+                bestDir = d;
+            }
+        });
+        this.dirX = bestDir.x;
+        this.dirY = bestDir.y;
+    }
+
+    getValidDirections(avoidReverse) {
+        const allDirs = [
+            { x: 0, y: -1 },
+            { x: -1, y: 0 },
+            { x: 0, y: 1 },
+            { x: 1, y: 0 }
+        ];
+        let filtered = allDirs.filter(d => {
+            if (avoidReverse && d.x === -this.dirX && d.y === -this.dirY) return false;
+            const nx = this.gridX + d.x;
+            const ny = this.gridY + d.y;
+            if (isWall(nx, ny)) return false;
+            if (isSpawnerGate(nx, ny, this)) return false;
+            return true;
+        });
+        if (filtered.length === 0 && avoidReverse) {
+            filtered = allDirs.filter(d => {
+                const nx = this.gridX + d.x;
+                const ny = this.gridY + d.y;
+                if (isWall(nx, ny)) return false;
+                if (isSpawnerGate(nx, ny, this)) return false;
+                return true;
+            });
+        }
+        return filtered;
+    }
+
+    update(globalMode, ghosts) {
+        // HOUSE logic (bob up/down)
+        if (this.state === 'HOUSE') {
+            const upperY = 12 * CELL_SIZE + 4;
+            const lowerY = 13 * CELL_SIZE + 4;
+            this.y += this.dirY * 0.5;
+            if (this.y <= upperY) { this.dirY = 1; this.y = upperY; }
+            else if (this.y >= lowerY) { this.dirY = -1; this.y = lowerY; }
+
+            // Releasing countdown and locking rules
+            if (globalFrightenedTimer > 0) {
+                return; // Hold inside base until power-up decays
+            }
+
+            this.houseTimer--;
+            if (this.houseTimer <= 0) {
+                this.state = 'EXITING';
+                this.x = 13 * CELL_SIZE;
+                this.y = 13 * CELL_SIZE;
+                this.gridX = 13; this.gridY = 13;
+                this.dirX = 0; this.dirY = -1; // start moving up smoothly
+            }
+            return;
+        }
+
+        // Movement (non‑HOUSE)
+        let speed = this.speed;
+        if (this.state === 'FRIGHTENED') speed = 0.5;
+        else if (this.state === 'EATEN') speed = 1.5;
+        else if (this.state === 'EXITING') speed = 1.0;
+
+        this.x += this.dirX * speed;
+        this.y += this.dirY * speed;
+
+        // Wrap in tunnel
+        if (Math.abs(this.y - 13 * CELL_SIZE) < CELL_SIZE / 2) {
+            if (this.x < -CELL_SIZE / 2) {
+                this.x = COLS * CELL_SIZE - CELL_SIZE / 2;
+                this.gridX = COLS - 1;
+            } else if (this.x > COLS * CELL_SIZE - CELL_SIZE / 2) {
+                this.x = -CELL_SIZE / 2;
+                this.gridX = 0;
+            }
+        } else {
+            this.x = Math.max(0, Math.min(this.x, (COLS - 1) * CELL_SIZE));
+            this.y = Math.max(0, Math.min(this.y, (ROWS - 1) * CELL_SIZE));
+        }
+
+        // Check grid center alignment
+        const gridCenterX = Math.round(this.x / CELL_SIZE) * CELL_SIZE;
+        const gridCenterY = Math.round(this.y / CELL_SIZE) * CELL_SIZE;
+        if (Math.abs(this.x - gridCenterX) < speed && Math.abs(this.y - gridCenterY) < speed) {
+            this.x = gridCenterX;
+            this.y = gridCenterY;
+            this.gridX = Math.round(this.x / CELL_SIZE);
+            this.gridY = Math.round(this.y / CELL_SIZE);
+
+            // State transitions at specific tiles
+            if (this.state === 'EXITING' && this.gridX === 13 && this.gridY === 10) {
+                this.state = globalMode;
+                this.dirX = -1; this.dirY = 0;
+            } else if (this.state === 'EATEN' && this.gridX === 13 && this.gridY === 13) {
+                this.state = 'HOUSE';
+                this.houseTimer = 60;
+                this.dirX = 0; this.dirY = -1;
+                this.y = 13 * CELL_SIZE + 4; // reset bobbing position
+                return;
+            } else {
+                this.decideDirection(globalMode, ghosts);
+            }
+        }
+    }
+}
+
+// -------------------- Instantiate Ghosts --------------------
 let ghosts = [
-    { name: "syntax_err", color: "#ff7b72", x: 13 * CELL_SIZE, y: 11 * CELL_SIZE, gridX: 13, gridY: 11, speed: 1.05, dirX: -1, dirY: 0, state: "CHASE", modeTime: 0, houseTimer: 0 },
-    { name: "type_err", color: "#ff7dd2", x: 12 * CELL_SIZE, y: 13 * CELL_SIZE, gridX: 12, gridY: 13, speed: 1.0, dirX: -1, dirY: 0, state: "HOUSE", modeTime: 0, houseTimer: 150 },
-    { name: "link_err", color: "#58a6ff", x: 14 * CELL_SIZE, y: 13 * CELL_SIZE, gridX: 14, gridY: 13, speed: 0.95, dirX: 1, dirY: 0, state: "HOUSE", modeTime: 0, houseTimer: 300 },
-    { name: "runtime_err", color: "#ffa657", x: 13 * CELL_SIZE, y: 12 * CELL_SIZE, gridX: 13, gridY: 12, speed: 0.9, dirX: 0, dirY: -1, state: "HOUSE", modeTime: 0, houseTimer: 450 }
+    new Ghost("syntax_err", "#ff7b72", 13, 11, 1.05, "CHASE", 0, 'blinky'),
+    new Ghost("type_err", "#ff7dd2", 12, 13, 1.0, "HOUSE", 150, 'pinky'),
+    new Ghost("link_err", "#58a6ff", 14, 13, 0.95, "HOUSE", 300, 'inky'),
+    new Ghost("runtime_err", "#ffa657", 13, 12, 0.9, "HOUSE", 450, 'clyde')
 ];
 
-let globalMode = "CHASE";           // "CHASE" or "SCATTER"
-let globalModeTimer = 500;          // ticks until mode switch
+// Global state
+let globalMode = "CHASE";
+let globalModeTimer = 500;
+let globalFrightenedTimer = 0; // Synchronized global frightened duration timer
 let ghostsEatenThisPower = 0;
 let particles = [];
-
 let overclockActive = false;
 let overclockTimer = 0;
 let overclockCooldown = 0;
@@ -84,7 +301,30 @@ let lastFrameTime = 0;
 let accumulator = 0;
 const TICK_RATE = 1000 / 62.5;
 
-// ----- Input Handling -----
+// -------------------- Utility Functions --------------------
+function isWall(gx, gy) {
+    if (gy === 13 && (gx < 0 || gx >= COLS)) return false; // tunnel
+    if (gx < 0 || gx >= COLS || gy < 0 || gy >= ROWS) return true;
+    return board[gy][gx] === 1;
+}
+
+function isSpawnerGate(gx, gy, ghost) {
+    if (gy === 11 && (gx === 13 || gx === 14)) {
+        if (ghost && (ghost.state === 'HOUSE' || ghost.state === 'EATEN' || ghost.state === 'EXITING'))
+            return false;
+        return true;
+    }
+    // Block house interior for active chasing/frightened ghosts and Pacman
+    if (gy >= 12 && gy <= 14 && gx >= 11 && gx <= 16) {
+        if (ghost && (ghost.state === 'HOUSE' || ghost.state === 'EATEN' || ghost.state === 'EXITING'))
+            return false;
+        return true;
+    }
+    return false;
+}
+
+// -------------------- Input & Game Flow --------------------
+// (keyboard, touch, and trigger functions remain mostly the same as before)
 window.addEventListener('keydown', handleKeyDown);
 document.querySelectorAll('.dpad-btn').forEach(btn => {
     const dir = btn.getAttribute('data-dir');
@@ -130,7 +370,6 @@ function processDirectionalInput(dir) {
     }
 }
 
-// ----- Game Flow -----
 function triggerOverclock() {
     if (!gameRunning || overclockActive || overclockCooldown > 0) return;
     overclockActive = true;
@@ -162,27 +401,23 @@ function resetWorkspace() {
     pacman.x = 13 * CELL_SIZE; pacman.y = 17 * CELL_SIZE;
     pacman.dirX = -1; pacman.dirY = 0;
     pacman.nextDirX = -1; pacman.nextDirY = 0;
-    pacman.speed = pacman.baseSpeed;
 
     overclockActive = false; overclockTimer = 0; overclockCooldown = 0;
     cooldownText.textContent = "COOLDOWN: READY"; cooldownText.style.color = "";
 
     globalMode = "CHASE"; globalModeTimer = 500;
+    globalFrightenedTimer = 0;
     ghostsEatenThisPower = 0;
     particles = [];
 
-    // reset ghosts
-    ghosts[0].x = 13 * CELL_SIZE; ghosts[0].y = 11 * CELL_SIZE; ghosts[0].gridX = 13; ghosts[0].gridY = 11;
-    ghosts[0].state = "CHASE"; ghosts[0].dirX = -1; ghosts[0].dirY = 0; ghosts[0].houseTimer = 0;
-    ghosts[1].x = 12 * CELL_SIZE; ghosts[1].y = 13 * CELL_SIZE; ghosts[1].gridX = 12; ghosts[1].gridY = 13;
-    ghosts[1].state = "HOUSE"; ghosts[1].dirX = -1; ghosts[1].dirY = 0; ghosts[1].houseTimer = 150;
-    ghosts[2].x = 14 * CELL_SIZE; ghosts[2].y = 13 * CELL_SIZE; ghosts[2].gridX = 14; ghosts[2].gridY = 13;
-    ghosts[2].state = "HOUSE"; ghosts[2].dirX = 1; ghosts[2].dirY = 0; ghosts[2].houseTimer = 300;
-    ghosts[3].x = 13 * CELL_SIZE; ghosts[3].y = 12 * CELL_SIZE; ghosts[3].gridX = 13; ghosts[3].gridY = 12;
-    ghosts[3].state = "HOUSE"; ghosts[3].dirX = 0; ghosts[3].dirY = -1; ghosts[3].houseTimer = 450;
+    // Reset each ghost individually
+    ghosts[0].reset(13, 11, "CHASE", 0);
+    ghosts[1].reset(12, 13, "HOUSE", 150);
+    ghosts[2].reset(14, 13, "HOUSE", 300);
+    ghosts[3].reset(13, 12, "HOUSE", 450);
 }
 
-// ----- Physics & Update -----
+// -------------------- Game Loop --------------------
 function gameLoop(timestamp) {
     if (!gameRunning) return;
     requestAnimationFrame(gameLoop);
@@ -209,12 +444,25 @@ function updatePhysicsStep() {
         cooldownText.style.color = overclockCooldown === 0 ? "" : "var(--syntax-keyword)";
     }
 
+    if (globalFrightenedTimer > 0) {
+        globalFrightenedTimer--;
+        if (globalFrightenedTimer === 0) {
+            statusText.textContent = "STATUS: COMPILED_OK";
+            statusText.style.color = "";
+            ghosts.forEach(g => {
+                if (g.state === "FRIGHTENED") {
+                    g.state = globalMode;
+                }
+            });
+        }
+    }
+
     // Global mode timer
     globalModeTimer--;
     if (globalModeTimer <= 0) {
         globalMode = (globalMode === "CHASE") ? "SCATTER" : "CHASE";
         globalModeTimer = (globalMode === "CHASE") ? 700 : 300;
-        // update ghost states that are not in special modes
+        // Update non-special ghost states
         ghosts.forEach(g => {
             if (g.state === "CHASE" || g.state === "SCATTER") {
                 g.state = globalMode;
@@ -223,25 +471,21 @@ function updatePhysicsStep() {
     }
 
     updatePacman();
-    updateGhosts();
+    ghosts.forEach(g => g.update(globalMode, ghosts));
     updateParticles();
     checkInteractions();
     checkVictoryCondition();
 }
 
 function updatePacman() {
+    // same as before, but using CELL_SIZE
     const gridCenterX = Math.round(pacman.x / CELL_SIZE) * CELL_SIZE;
     const gridCenterY = Math.round(pacman.y / CELL_SIZE) * CELL_SIZE;
-    const distX = Math.abs(pacman.x - gridCenterX);
-    const distY = Math.abs(pacman.y - gridCenterY);
-
-    if (distX < pacman.speed && distY < pacman.speed) {
-        pacman.x = gridCenterX;
-        pacman.y = gridCenterY;
+    if (Math.abs(pacman.x - gridCenterX) < pacman.speed && Math.abs(pacman.y - gridCenterY) < pacman.speed) {
+        pacman.x = gridCenterX; pacman.y = gridCenterY;
         pacman.gridX = Math.round(pacman.x / CELL_SIZE);
         pacman.gridY = Math.round(pacman.y / CELL_SIZE);
 
-        // eat pellets
         if (pacman.gridX >= 0 && pacman.gridX < COLS && pacman.gridY >= 0 && pacman.gridY < ROWS) {
             if (board[pacman.gridY][pacman.gridX] === 0) {
                 board[pacman.gridY][pacman.gridX] = 4;
@@ -264,16 +508,13 @@ function updatePacman() {
             pacman.dirX = 0; pacman.dirY = 0;
         }
     }
-
     pacman.x += pacman.dirX * pacman.speed;
     pacman.y += pacman.dirY * pacman.speed;
 
-    // wrap tunnel
     if (pacman.y === 13 * CELL_SIZE) {
         if (pacman.x < -CELL_SIZE) pacman.x = COLS * CELL_SIZE;
         else if (pacman.x > COLS * CELL_SIZE) pacman.x = -CELL_SIZE;
     }
-
     if (pacman.dirX !== 0 || pacman.dirY !== 0) {
         pacman.mouthAngle += pacman.mouthSpeed;
         if (pacman.mouthAngle > 0.4 || pacman.mouthAngle < 0.05) pacman.mouthSpeed = -pacman.mouthSpeed;
@@ -284,11 +525,14 @@ function triggerDebugState() {
     statusText.textContent = "STATUS: DEBUG_MODE_ACTIVE";
     statusText.style.color = "var(--text-accent)";
     ghostsEatenThisPower = 0;
+    
+    globalFrightenedTimer = 400; // Synchronize frightened timer
+    
     ghosts.forEach(g => {
-        if (g.state !== "EATEN" && g.state !== "HOUSE" && g.state !== "EXITING") {
-            g.state = "FRIGHTENED";
-            g.modeTime = 400;
-            // snap to grid and reverse
+        if (g.state !== 'EATEN' && g.state !== 'HOUSE' && g.state !== 'EXITING') {
+            g.state = 'FRIGHTENED';
+            g.frightenedTimer = 400;
+            // snap and reverse
             g.x = Math.round(g.x / CELL_SIZE) * CELL_SIZE;
             g.y = Math.round(g.y / CELL_SIZE) * CELL_SIZE;
             g.gridX = Math.round(g.x / CELL_SIZE);
@@ -298,219 +542,18 @@ function triggerDebugState() {
     });
 }
 
-// ----- Ghost Updates -----
-function updateGhosts() {
-    ghosts.forEach(g => {
-        // frightened timer
-        if (g.state === "FRIGHTENED") {
-            g.modeTime--;
-            if (g.modeTime <= 0) {
-                g.state = globalMode;
-                if (ghosts.filter(gh => gh.state === "FRIGHTENED").length === 0) {
-                    statusText.textContent = "STATUS: COMPILED_OK"; statusText.style.color = "";
-                }
-            }
-        }
-
-        // house bobbing & release
-        if (g.state === "HOUSE") {
-            const upperY = 12 * CELL_SIZE + 4;
-            const lowerY = 13 * CELL_SIZE + 4;
-            g.y += g.dirY * 0.5;
-            if (g.y <= upperY) { g.dirY = 1; g.y = upperY; }
-            else if (g.y >= lowerY) { g.dirY = -1; g.y = lowerY; }
-            g.houseTimer--;
-            if (g.houseTimer <= 0) {
-                // move to exit cell inside house (13,11) and set EXITING
-                g.state = "EXITING";
-                g.x = 13 * CELL_SIZE; g.y = 11 * CELL_SIZE;
-                g.gridX = 13; g.gridY = 11;
-                g.dirX = 0; g.dirY = -1;  // start moving up
-            }
-            return;
-        }
-
-        // movement for non-house ghosts
-        let currentSpeed = g.speed;
-        if (g.state === "FRIGHTENED") currentSpeed = 0.5;
-        if (g.state === "EATEN") currentSpeed = 1.5;
-        if (g.state === "EXITING") currentSpeed = 1.0;
-
-        g.x += g.dirX * currentSpeed;
-        g.y += g.dirY * currentSpeed;
-
-        // wrap in tunnel row
-        if (Math.abs(g.y - 13 * CELL_SIZE) < CELL_SIZE / 2) {
-            if (g.x < -CELL_SIZE / 2) { g.x = COLS * CELL_SIZE - CELL_SIZE / 2; g.gridX = COLS - 1; }
-            else if (g.x > COLS * CELL_SIZE - CELL_SIZE / 2) { g.x = -CELL_SIZE / 2; g.gridX = 0; }
-        } else {
-            g.x = Math.max(0, Math.min(g.x, (COLS - 1) * CELL_SIZE));
-            g.y = Math.max(0, Math.min(g.y, (ROWS - 1) * CELL_SIZE));
-        }
-
-        // align to grid centre for direction decisions
-        const gridCenterX = Math.round(g.x / CELL_SIZE) * CELL_SIZE;
-        const gridCenterY = Math.round(g.y / CELL_SIZE) * CELL_SIZE;
-        if (Math.abs(g.x - gridCenterX) < currentSpeed && Math.abs(g.y - gridCenterY) < currentSpeed) {
-            g.x = gridCenterX; g.y = gridCenterY;
-            g.gridX = Math.round(g.x / CELL_SIZE);
-            g.gridY = Math.round(g.y / CELL_SIZE);
-
-            // state transitions at specific tiles
-            if (g.state === "EXITING" && g.gridX === 13 && g.gridY === 10) {
-                g.state = globalMode;  // now outside house
-                g.dirX = -1; g.dirY = 0;
-            } else if (g.state === "EATEN" && g.gridX === 13 && g.gridY === 13) {
-                g.state = "HOUSE"; g.houseTimer = 60;
-                g.dirX = 0; g.dirY = -1;
-                g.y = 13 * CELL_SIZE + 4;
-                return;
-            } else {
-                decideGhostDirection(g);
-            }
-        }
-    });
-}
-
-function decideGhostDirection(g) {
-    let targetX, targetY;
-
-    if (g.state === "EXITING") {
-        targetX = 13; targetY = 10;  // above the door
-    } else if (g.state === "EATEN") {
-        targetX = 13; targetY = 13;  // house center
-    } else if (g.state === "FRIGHTENED") {
-        // random direction
-        const dirs = getValidDirections(g);
-        if (dirs.length > 0) {
-            const rand = dirs[Math.floor(Math.random() * dirs.length)];
-            g.dirX = rand.x; g.dirY = rand.y;
-        }
-        return;
-    } else {
-        // CHASE or SCATTER (following globalMode unless own state is SCATTER)
-        const mode = (g.state === "SCATTER") ? "SCATTER" : globalMode;
-        if (mode === "SCATTER") {
-            if (g.name === "syntax_err") { targetX = 27; targetY = 0; }
-            else if (g.name === "type_err") { targetX = 0; targetY = 0; }
-            else if (g.name === "link_err") { targetX = 27; targetY = 27; }
-            else if (g.name === "runtime_err") { targetX = 0; targetY = 27; }
-        } else { // CHASE – unique per ghost
-            if (g.name === "syntax_err") {
-                // Blinky: directly targets Pacman
-                targetX = pacman.gridX;
-                targetY = pacman.gridY;
-            } else if (g.name === "type_err") {
-                // Pinky: 4 tiles ahead of Pacman
-                targetX = pacman.gridX + pacman.dirX * 4;
-                targetY = pacman.gridY + pacman.dirY * 4;
-            } else if (g.name === "link_err") {
-                // Inky: uses Blinky's position
-                let blinky = ghosts[0];
-                let aheadX = pacman.gridX + pacman.dirX * 2;
-                let aheadY = pacman.gridY + pacman.dirY * 2;
-                targetX = aheadX + (aheadX - blinky.gridX);
-                targetY = aheadY + (aheadY - blinky.gridY);
-            } else if (g.name === "runtime_err") {
-                // Clyde: chase if far, scatter if close
-                let dist = Math.hypot(g.gridX - pacman.gridX, g.gridY - pacman.gridY);
-                if (dist > 8) {
-                    targetX = pacman.gridX; targetY = pacman.gridY;
-                } else {
-                    targetX = 0; targetY = 27;
-                }
-            }
-            // clamp targets
-            targetX = Math.max(0, Math.min(COLS - 1, targetX));
-            targetY = Math.max(0, Math.min(ROWS - 1, targetY));
-        }
-    }
-
-    // direction selection
-    const directions = [
-        { x: 0, y: -1 }, // up
-        { x: -1, y: 0 }, // left
-        { x: 0, y: 1 },  // down
-        { x: 1, y: 0 }   // right
-    ];
-
-    let validDirs = directions.filter(d => {
-        if (d.x === -g.dirX && d.y === -g.dirY) return false; // no reverse unless forced
-        const nx = g.gridX + d.x, ny = g.gridY + d.y;
-        if (isWall(nx, ny)) return false;
-        if (isSpawnerGate(nx, ny, g)) return false;
-        return true;
-    });
-
-    if (validDirs.length === 0) {
-        validDirs = directions.filter(d => {
-            const nx = g.gridX + d.x, ny = g.gridY + d.y;
-            if (isWall(nx, ny)) return false;
-            if (isSpawnerGate(nx, ny, g)) return false;
-            return true;
-        });
-    }
-
-    if (validDirs.length === 0) { g.dirX = 0; g.dirY = 0; return; }
-
-    let bestDir = validDirs[0];
-    let minDist = Infinity;
-    validDirs.forEach(d => {
-        const nx = g.gridX + d.x, ny = g.gridY + d.y;
-        const dist = Math.hypot(nx - targetX, ny - targetY);
-        if (dist < minDist) { minDist = dist; bestDir = d; }
-    });
-    g.dirX = bestDir.x; g.dirY = bestDir.y;
-}
-
-function getValidDirections(g) {
-    const dirs = [{ x: 0, y: -1 }, { x: -1, y: 0 }, { x: 0, y: 1 }, { x: 1, y: 0 }];
-    let filtered = dirs.filter(d => {
-        if (d.x === -g.dirX && d.y === -g.dirY) return false;
-        const nx = g.gridX + d.x, ny = g.gridY + d.y;
-        if (isWall(nx, ny)) return false;
-        if (isSpawnerGate(nx, ny, g)) return false;
-        return true;
-    });
-    if (filtered.length === 0) {
-        filtered = dirs.filter(d => {
-            const nx = g.gridX + d.x, ny = g.gridY + d.y;
-            if (isWall(nx, ny)) return false;
-            if (isSpawnerGate(nx, ny, g)) return false;
-            return true;
-        });
-    }
-    return filtered;
-}
-
-// ----- Collision & Helpers -----
-function isWall(gridX, gridY) {
-    if (gridY === 13 && (gridX < 0 || gridX >= COLS)) return false; // tunnel
-    if (gridX < 0 || gridX >= COLS || gridY < 0 || gridY >= ROWS) return true;
-    return board[gridY][gridX] === 1;
-}
-
-function isSpawnerGate(gridX, gridY, ghost) {
-    if (gridY === 11 && (gridX === 13 || gridX === 14)) {
-        if (ghost && (ghost.state === "HOUSE" || ghost.state === "EATEN" || ghost.state === "EXITING"))
-            return false;
-        return true; // blocks Pacman and normal ghosts
-    }
-    return false;
-}
-
 function checkInteractions() {
     ghosts.forEach(g => {
         if (Math.hypot(pacman.x - g.x, pacman.y - g.y) < CELL_SIZE * 0.8) {
-            if (g.state === "FRIGHTENED") {
-                g.state = "EATEN";
+            if (g.state === 'FRIGHTENED') {
+                g.state = 'EATEN';
                 g.x = Math.round(g.x / CELL_SIZE) * CELL_SIZE; g.y = Math.round(g.y / CELL_SIZE) * CELL_SIZE;
                 g.gridX = Math.round(g.x / CELL_SIZE); g.gridY = Math.round(g.y / CELL_SIZE);
                 bugsEaten++; ghostsEatenThisPower++;
-                let points = 200 * Math.pow(2, Math.min(3, ghostsEatenThisPower - 1));
-                score += points; scoreEl.textContent = score; bugsEatenEl.textContent = bugsEaten;
+                score += 200 * Math.pow(2, Math.min(3, ghostsEatenThisPower - 1));
+                scoreEl.textContent = score; bugsEatenEl.textContent = bugsEaten;
                 createCompilationParticles(g.x, g.y, "#58a6ff");
-            } else if (g.state !== "EATEN" && g.state !== "HOUSE" && g.state !== "EXITING") {
+            } else if (g.state !== 'EATEN' && g.state !== 'HOUSE' && g.state !== 'EXITING') {
                 triggerCrashDump(g.name, g.color);
             }
         }
@@ -536,7 +579,7 @@ function triggerCrashDump(name, color) {
     gameOverOverlay.style.display = 'flex';
 }
 
-// ----- Particles -----
+// -------------------- Particles --------------------
 function createCompilationParticles(px, py, color) {
     const bits = ["0", "1", ";", "{", "}"];
     for (let i = 0; i < 8; i++) {
@@ -558,7 +601,7 @@ function updateParticles() {
     }
 }
 
-// ----- Rendering -----
+// -------------------- Rendering --------------------
 function render() {
     ctx.fillStyle = '#090c10';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -581,7 +624,7 @@ function render() {
     }
 
     drawPacman();
-    drawGhosts();
+    ghosts.forEach(g => drawGhost(g));
 
     particles.forEach(p => {
         ctx.fillStyle = p.color; ctx.globalAlpha = p.alpha;
@@ -618,39 +661,37 @@ function drawPacman() {
     ctx.restore();
 }
 
-function drawGhosts() {
-    ghosts.forEach(g => {
-        ctx.save();
-        ctx.translate(g.x + CELL_SIZE / 2, g.y + CELL_SIZE / 2);
-        if (g.state === "FRIGHTENED") { ctx.fillStyle = "#58a6ff"; ctx.shadowBlur = 8; ctx.shadowColor = "#58a6ff"; }
-        else if (g.state === "EATEN") ctx.fillStyle = "rgba(139,148,158,0.4)";
-        else ctx.fillStyle = g.color;
+function drawGhost(g) {
+    ctx.save();
+    ctx.translate(g.x + CELL_SIZE / 2, g.y + CELL_SIZE / 2);
+    if (g.state === 'FRIGHTENED') { ctx.fillStyle = '#58a6ff'; ctx.shadowBlur = 8; ctx.shadowColor = '#58a6ff'; }
+    else if (g.state === 'EATEN') ctx.fillStyle = 'rgba(139,148,158,0.4)';
+    else ctx.fillStyle = g.color;
 
-        if (g.state !== "EATEN") {
-            ctx.beginPath();
-            ctx.arc(0, -1, CELL_SIZE / 2 - 1.5, Math.PI, 0, false);
-            ctx.lineTo(CELL_SIZE / 2 - 1.5, CELL_SIZE / 2 - 1);
-            ctx.lineTo(CELL_SIZE / 4, CELL_SIZE / 3);
-            ctx.lineTo(0, CELL_SIZE / 2 - 1);
-            ctx.lineTo(-CELL_SIZE / 4, CELL_SIZE / 3);
-            ctx.lineTo(-CELL_SIZE / 2 + 1.5, CELL_SIZE / 2 - 1);
-            ctx.closePath();
-            ctx.fill();
-        }
+    if (g.state !== 'EATEN') {
+        ctx.beginPath();
+        ctx.arc(0, -1, CELL_SIZE / 2 - 1.5, Math.PI, 0, false);
+        ctx.lineTo(CELL_SIZE / 2 - 1.5, CELL_SIZE / 2 - 1);
+        ctx.lineTo(CELL_SIZE / 4, CELL_SIZE / 3);
+        ctx.lineTo(0, CELL_SIZE / 2 - 1);
+        ctx.lineTo(-CELL_SIZE / 4, CELL_SIZE / 3);
+        ctx.lineTo(-CELL_SIZE / 2 + 1.5, CELL_SIZE / 2 - 1);
+        ctx.closePath();
+        ctx.fill();
+    }
 
-        ctx.fillStyle = "#fff"; ctx.font = "bold 8px var(--font-stack)";
-        ctx.textAlign = "center"; ctx.textBaseline = "middle";
-        if (g.state === "FRIGHTENED") ctx.fillText("!?", 0, -1);
-        else if (g.state === "EATEN") ctx.fillText("👁👁", 0, -1);
-        else {
-            if (g.name === "syntax_err") ctx.fillText("SYN", 0, -1);
-            if (g.name === "type_err") ctx.fillText("TYP", 0, -1);
-            if (g.name === "link_err") ctx.fillText("LNK", 0, -1);
-            if (g.name === "runtime_err") ctx.fillText("RUN", 0, -1);
-        }
-        ctx.restore();
-    });
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 8px var(--font-stack)';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    if (g.state === 'FRIGHTENED') ctx.fillText('!?', 0, -1);
+    else if (g.state === 'EATEN') ctx.fillText('👁👁', 0, -1);
+    else {
+        if (g.name === 'syntax_err') ctx.fillText('SYN', 0, -1);
+        if (g.name === 'type_err') ctx.fillText('TYP', 0, -1);
+        if (g.name === 'link_err') ctx.fillText('LNK', 0, -1);
+        if (g.name === 'runtime_err') ctx.fillText('RUN', 0, -1);
+    }
+    ctx.restore();
 }
 
-// initial draw
+// -------------------- Start --------------------
 window.onload = () => render();

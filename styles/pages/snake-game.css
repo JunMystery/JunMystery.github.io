@@ -1,222 +1,103 @@
+/* ─── Snake: Game-specific styles (layout handled by game-layout.css) ─── */
 
-.game-window {
-    width: 100%;
-    max-width: 440px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
-}
-
-.game-header {
-    background: var(--bg-tertiary);
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.game-header .dots {
-    display: flex;
-    gap: 8px;
-}
-.game-header .dots span {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
-
-.file-tab {
-    font-size: 11px;
-    color: var(--text-muted);
-    background: var(--bg-secondary);
-    padding: 6px 14px;
-    border-radius: 6px 6px 0 0;
-    border: 1px solid var(--border-color);
-    border-bottom: none;
-    margin-bottom: -13px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-.file-tab span {
-    color: var(--accent-primary);
-}
-
-.settings-btn {
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    font-size: 1.25rem;
-    cursor: pointer;
-    padding: 4px;
-    line-height: 1;
-    transition: color 0.2s;
-}
-.settings-btn:hover {
-    color: var(--accent-primary);
-}
-
-.game-stats {
-    padding: 12px 16px;
-    background: var(--bg-tertiary);
-    border-bottom: 1px solid var(--border-color);
-    font-size: 13px;
-    display: flex;
-    justify-content: space-between;
-}
-.game-stats .num {
-    color: var(--accent-purple);
-}
-
-.canvas-wrap {
-    position: relative;
-    background: #090c10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 12px;
-}
-
+/* Canvas */
 canvas {
-    background: #090c10;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 0 18px rgba(88, 166, 255, 0.12), 0 0 40px rgba(88, 166, 255, 0.06);
-    display: block;
-    image-rendering: pixelated;
-    width: 100%;
-    max-width: 400px;
-    height: auto;
     aspect-ratio: 1 / 1;
+    max-width: 400px;
 }
 
-.overlay {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    width: calc(100% - 32px);
-    max-width: 400px;
-    aspect-ratio: 1 / 1;
-    background: rgba(13, 17, 23, 0.92);
+/* Stats bar */
+.game-stats {
+    padding: 10px 12px;
+    background-color: #1e222a;
+    border-bottom: 2px solid #15181f;
+    font-size: 12px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    border: 1px solid var(--border-color);
-    z-index: 10;
+    justify-content: space-between;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    flex-shrink: 0;
 }
-.overlay h2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 12px;
-}
-.overlay .err { color: var(--accent-orange); }
-.overlay .ok  { color: var(--accent-secondary); }
+.game-stats .num { color: #bc8cff; }
 
-.blink {
-    animation: blinker 1.2s linear infinite;
-}
-@keyframes blinker {
-    50% { opacity: 0; }
-}
+/* Overlay content */
+.overlay h2 { font-size: 16px; font-weight: bold; margin-bottom: 10px; }
+.overlay .err { color: #f0883e; }
+.overlay .ok  { color: #3fb950; }
+.blink { animation: blinker 1.2s linear infinite; }
+@keyframes blinker { 50% { opacity: 0; } }
 
-.overlay .hint {
-    margin-top: 15px;
-    font-size: 11px;
-    color: var(--text-muted);
-    line-height: 1.6;
-}
-
+/* Settings panel */
 .settings-panel {
     text-align: left;
     width: 100%;
-    max-width: 280px;
+    max-width: 260px;
 }
-.settings-panel .setting-group {
-    margin-bottom: 16px;
-}
+.settings-panel .setting-group { margin-bottom: 14px; }
 .settings-panel label {
     display: block;
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    margin-bottom: 6px;
+    font-size: 0.72rem;
+    color: #8b949e;
+    margin-bottom: 5px;
 }
-.settings-panel .value {
-    color: var(--accent-primary);
-    font-weight: bold;
-}
+.settings-panel .value { color: #58a6ff; font-weight: bold; }
 .settings-panel input[type="range"] {
     width: 100%;
     -webkit-appearance: none;
-    appearance: none;
     height: 4px;
-    background: var(--border-color);
+    background: #21262d;
     border-radius: 2px;
     outline: none;
 }
 .settings-panel input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 14px;
-    height: 14px;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
-    background: var(--accent-primary);
+    background: #58a6ff;
     cursor: pointer;
 }
-.settings-panel input[type="range"]::-moz-range-thumb {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--accent-primary);
-    cursor: pointer;
-    border: none;
-}
-
-.grid-opts {
-    display: flex;
-    gap: 8px;
-}
+.grid-opts { display: flex; gap: 6px; }
 .grid-opts button {
     flex: 1;
-    padding: 6px;
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
+    padding: 5px;
+    background: #161b22;
+    border: 1px solid #21262d;
+    color: #8b949e;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
     border-radius: 4px;
     cursor: pointer;
     transition: border-color 0.2s, color 0.2s;
 }
-.grid-opts button.active {
-    border-color: var(--accent-primary);
-    color: var(--accent-primary);
-}
+.grid-opts button.active { border-color: #58a6ff; color: #58a6ff; }
 
 .settings-close {
-    margin-top: 12px;
-    padding: 8px 24px;
-    background: var(--accent-primary);
-    color: var(--bg-primary);
+    margin-top: 10px;
+    padding: 7px 20px;
+    background: #58a6ff;
+    color: #0d1117;
     border: none;
     border-radius: 4px;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
     cursor: pointer;
     font-weight: bold;
 }
 
-.controls {
-    position: relative;
-    background: var(--bg-tertiary);
-    padding: 24px 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Settings button (in header) */
+.settings-btn {
+    background: none;
+    border: none;
+    color: #484f58;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 2px 4px;
+    line-height: 1;
+    transition: color 0.2s;
 }
+.settings-btn:hover { color: #58a6ff; }
+
+/* Controls - side panel for settings icon */
 .controls-side {
     position: absolute;
     left: 12px;
@@ -224,12 +105,12 @@ canvas {
     transform: translateY(-50%);
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 .controls-divider {
     width: 1px;
-    height: 80px;
-    background: repeating-linear-gradient(180deg, var(--border-color) 0px, var(--border-color) 1px, transparent 1px, transparent 5px);
+    height: 70px;
+    background: repeating-linear-gradient(180deg, #21262d 0, #21262d 1px, transparent 1px, transparent 5px);
 }
 .controls-center {
     display: flex;
@@ -237,42 +118,31 @@ canvas {
     align-items: center;
 }
 
+/* D-Pad cross layout */
 .controller {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
 }
 .controller .dpad-btn {
     position: absolute;
-    width: 62px;
-    height: 62px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    color: var(--accent-primary);
-    border-radius: 10px;
-    font-size: 22px;
-    font-family: var(--font-mono);
+    width: 58px;
+    height: 58px;
+    background: #0c1017;
+    border: 1px solid #21262d;
+    color: #58a6ff;
+    border-radius: 9px;
+    font-size: 20px;
+    font-family: 'Fira Code', monospace;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     user-select: none;
+    transition: background 0.1s;
 }
-.controller .dpad-btn:active {
-    background: var(--bg-primary);
-    color: var(--accent-secondary);
-}
-.controller .dpad-btn.up { top: 0; left: 50%; transform: translateX(-50%); }
-.controller .dpad-btn.lf { top: 50%; left: 0; transform: translateY(-50%); }
-.controller .dpad-btn.dn { bottom: 0; left: 50%; transform: translateX(-50%); }
-.controller .dpad-btn.rt { top: 50%; right: 0; transform: translateY(-50%); }
-
-.game-footer {
-    background: var(--accent-primary);
-    color: var(--bg-primary);
-    padding: 6px 12px;
-    font-size: 11px;
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-}
+.controller .dpad-btn:active { background: #05070a; color: #3fb950; }
+.controller .dpad-btn.up  { top: 0;      left: 50%; transform: translateX(-50%); }
+.controller .dpad-btn.lf  { top: 50%;    left: 0;   transform: translateY(-50%); }
+.controller .dpad-btn.dn  { bottom: 0;   left: 50%; transform: translateX(-50%); }
+.controller .dpad-btn.rt  { top: 50%;    right: 0;  transform: translateY(-50%); }
