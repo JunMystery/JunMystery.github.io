@@ -146,7 +146,7 @@ Renders as: `## Technical Expertise` — mimicking a Markdown H2 inside a code f
 
 ### Subsection Titles (Projects)
 
-Used to split project lists into Personal / Work categories:
+Used to split project lists into Personal / Work categories. Uses text-prefixed `###` rather than a CSS pseudo (unlike `.section-title` which uses `::before`):
 
 ```css
 .subsection-title {
@@ -159,7 +159,33 @@ Used to split project lists into Personal / Work categories:
 }
 ```
 
-Renders as: `# Personal Projects` — mimicking a Markdown H3 with a left accent bar.
+Renders as: `### Personal Projects` — mimicking a Markdown H3 with a left accent bar.
+
+### Project Card
+
+```css
+.project-card {
+  background: --bg-secondary;
+  border: 1px solid --border-color;
+  border-radius: --border-radius-md;
+  padding: 1.25rem 1.5rem;
+  position: relative;
+  box-shadow: --shadow-sm;
+  transition: --transition;
+}
+.project-card::before {
+  content: '';
+  width: 3px;
+  background: --accent-gradient;
+  border-radius: --border-radius-sm 0 0 --border-radius-sm;
+}
+.project-card:hover {
+  border-color: --accent-primary;
+  box-shadow: --shadow-md;
+}
+```
+
+Cards have a left gradient accent bar (mirroring the career `.exp-card` style), subtle shadow, and a hover glow that shifts border + shadow.
 
 ### Hero — Photo + Text
 
@@ -228,11 +254,11 @@ Each `.project-card` is a single column layout containing:
 - **Title row**: project name (Noto Sans Mono, bold) + optional GitHub link icon.
 - **Type label**: uppercase monospace label in `accent-orange`.
 - **Description**: paragraph in `text-secondary`.
-- **Metadata**: bordered left-accent panel with key-value rows.
-- **Tech stack**: monospace tags in `accent-secondary`.
+- **Metadata panel (optional)**: bordered left-accent panel with key-value rows. Only Personal projects (`project1`, `project2`) have these — Work projects (`project3`–`project6`) do not.
 - **Flow diagram**: horizontal `[node] → [node] → [node]` chain representing architecture.
+- **Card accent**: 3px gradient bar on the left edge, matching the Career `.exp-card` style.
 
-Projects split into two subsections with `.subsection-title` — `# Personal Projects` and `# Work Projects`.
+Projects split into two subsections with `.subsection-title` — `### Personal Projects` and `### Work Projects` (3 `#` in text, no CSS pseudo). The parent `.section-title` uses CSS `::before { content: '##' }` for its markdown heading prefix.
 
 ### Certifications — Compact Terminal List
 

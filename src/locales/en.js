@@ -61,7 +61,7 @@ const LOCALE_EN = {
   "skills.tag_script": "Scripting & Automation",
   "skills.tag_ai_sdlc": "Structured AI-Assisted Development",
   "projects.filename": "projects.py",
-  "projects.title": "## Projects",
+  "projects.title": "Projects",
   "projects.personal": "### Personal Projects",
   "projects.work": "### Work Projects",
   "project1.type": "Open Source \u2014 Python Package \u00b7 MIT License",

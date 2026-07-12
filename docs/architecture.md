@@ -161,17 +161,42 @@ Single scrollable page. Organized as:
 
 ### Section key: Projects
 
-The projects section is split into two subsections:
+The projects section is split into two subsections with a hierarchical heading scheme:
+
+| Element | Markdown Level | Source |
+|---|---|---|
+| `h2.section-title` | `## Projects` | CSS `::before { content: '##' }` — text is just "Projects" |
+| `h3.subsection-title` | `### Personal Projects` | Text content — no CSS pseudo, 3 `#` in the locale value |
+
+HTML structure:
 
 ```
-<h3 class="subsection-title"># Personal Projects</h3>
-<div class="projects-grid">...</div>
+<h2 class="section-title" data-i18n="projects.title">Projects</h2>
 
-<h3 class="subsection-title"># Work Projects</h3>
-<div class="projects-grid">...</div>
+<h3 class="subsection-title" data-i18n="projects.personal">### Personal Projects</h3>
+<div class="projects-grid">
+  <div class="project-card">  ...  </div>   <!-- project1: Agent-Guidance-MCP -->
+  <div class="project-card">  ...  </div>   <!-- project2: AI-Powered Health Assistant -->
+</div>
+
+<h3 class="subsection-title" data-i18n="projects.work">### Work Projects</h3>
+<div class="projects-grid">
+  <div class="project-card">  ...  </div>   <!-- project3: NAS & Domain Infra -->
+  <div class="project-card">  ...  </div>   <!-- project4: Site-to-Site VPN -->
+  <div class="project-card">  ...  </div>   <!-- project5: CCTV Surveillance -->
+  <div class="project-card">  ...  </div>   <!-- project6: Business Software -->
+</div>
 ```
+
+6 projects total — 2 personal, 4 work. All `.project-card` share a uniform card style with:
+- Left gradient accent bar (`::before` 3px `var(--accent-gradient)`)
+- Subtle shadow + hover glow (`--shadow-sm` → `--shadow-md`, `--accent-primary` border)
+- **Inconsistency**: Personal projects (`project1`, `project2`) have rich `.project-meta` panels with 3 key-value rows + optional `.project-tech` tags. Work projects (`project3`–`project6`) have only a description and flow diagram.
+
+Each card ends with a `.project-flow` — three `[node] → [node] → [node]` chain describing the architecture or process flow.
 
 `.subsection-title` is styled in `styles/content/projects.css` with a left accent border and monospace font.
+`.section-title` is styled in `styles/layout/sections.css` with a `::before` pseudo that renders the `##` prefix.
 
 ### Terminal Window Pattern
 

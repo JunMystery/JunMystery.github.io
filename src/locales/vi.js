@@ -61,7 +61,7 @@ const LOCALE_VI = {
   "skills.tag_script": "Script & T\u1ef1 \u0110\u1ed9ng H\u00f3a",
   "skills.tag_ai_sdlc": "Ph\u00e1t Tri\u1ec3n H\u1ed7 Tr\u1ee3 AI C\u00f3 C\u1ea5u Tr\u00fac",
   "projects.filename": "projects.py",
-  "projects.title": "## D\u1ef1 \u00c1n",
+  "projects.title": "D\u1ef1 \u00c1n",
   "projects.personal": "### D\u1ef1 \u00c1n C\u00e1 Nh\u00e2n",
   "projects.work": "### D\u1ef1 \u00c1n C\u00f4ng Vi\u1ec7c",
   "project1.type": "M\u00e3 Ngu\u1ed3n M\u1edf \u2014 G\u00f3i Python \u00b7 Gi\u1ea5y ph\u00e9p MIT",
