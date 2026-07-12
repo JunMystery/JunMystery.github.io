@@ -36,7 +36,7 @@ function typeCommandInTitle(title) {
             i++;
             setTimeout(type, 35);
         } else {
-            title.innerHTML = command + '<span class="term-title-cursor"></span>';
+            title.innerHTML = command;
         }
     }
     setTimeout(type, 200);

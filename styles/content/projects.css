@@ -34,17 +34,6 @@
     box-shadow: var(--shadow-md);
 }
 
-.project-card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--accent-gradient);
-    border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
-}
-
 .project-info h3 {
     font-family: var(--font-mono);
     font-size: 1.1rem;
@@ -82,15 +71,27 @@
     line-height: 1.55;
 }
 
+/* Meta block — collapsed by default, expands on card hover */
 .project-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    margin-bottom: 0.65rem;
-    padding: 0.6rem 0.75rem;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0 0.75rem;
+    margin-bottom: 0;
     border-left: 2px solid var(--border-color);
     background: var(--bg-tertiary);
     border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    transition: max-height 0.4s ease, padding 0.35s ease, opacity 0.3s ease, margin-bottom 0.3s ease;
+}
+
+.project-card:hover .project-meta {
+    max-height: 300px;
+    opacity: 1;
+    padding: 0.6rem 0.75rem;
+    margin-bottom: 0.65rem;
 }
 
 .project-meta-item {
@@ -125,6 +126,69 @@
     border: 1px solid var(--border-color);
     padding: 0.15rem 0.5rem;
     border-radius: var(--border-radius-sm);
+}
+
+/* Flow node sequential highlight on card hover */
+.project-card:hover .flow-node {
+    animation: nodePulse 2s ease-in-out infinite;
+}
+
+.project-card:hover .flow-arrow {
+    animation: arrowPulse 2s ease-in-out infinite;
+}
+
+.flow-node:nth-child(1) { animation-delay: 0s; }
+.flow-arrow:nth-child(2) { animation-delay: 0.4s; }
+.flow-node:nth-child(3) { animation-delay: 0.8s; }
+.flow-arrow:nth-child(4) { animation-delay: 1.2s; }
+.flow-node:nth-child(5) { animation-delay: 1.6s; }
+
+@keyframes nodePulse {
+    0%, 65%, 100% {
+        border-color: var(--border-color);
+        background: var(--bg-tertiary);
+        box-shadow: none;
+    }
+    15%, 35% {
+        border-color: var(--accent-primary);
+        background: var(--bg-secondary);
+        box-shadow: 0 0 6px rgba(88, 166, 255, 0.2);
+    }
+}
+
+@keyframes arrowPulse {
+    0%, 65%, 100% { opacity: 0.5; }
+    15%, 35% { opacity: 1; }
+}
+
+/* Background grid accent for projects terminal */
+#projects .terminal-body-raw {
+    position: relative;
+}
+
+#projects .terminal-body-raw::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(88, 166, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(88, 166, 255, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.3s;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.reveal-terminal.visible#projects .terminal-body-raw::before {
+    opacity: 1;
+}
+
+#projects .section-title,
+#projects .subsection-title,
+#projects .projects-grid {
+    position: relative;
+    z-index: 1;
 }
 
 @media (max-width: 768px) {

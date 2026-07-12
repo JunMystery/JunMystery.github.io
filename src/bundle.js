@@ -925,7 +925,7 @@ function typeCommandInTitle(title) {
             i++;
             setTimeout(type, 35);
         } else {
-            title.innerHTML = command + '<span class="term-title-cursor"></span>';
+            title.innerHTML = command;
         }
     }
     setTimeout(type, 200);
@@ -983,7 +983,64 @@ function initHeroTypewriter() {
 }
 
 // ============================================================
-// Source: src/bundle/main.js (19 lines)
+// Source: src/bundle/controllers\projects.js (53 lines)
+// ============================================================
+
+// ============================================================
+// controllers/projects.js — Project card animations
+// Depends on: $$ (utils.js)
+// ============================================================
+
+function initProjectTyping() {
+    var descs = $$('.project-desc');
+    if (!descs.length) return;
+
+    // Store full text on each description
+    descs.forEach(function (d) {
+        d.setAttribute('data-fulltext', d.textContent);
+    });
+
+    // Observe the first card in each grid for typing trigger
+    var grids = $$('.projects-grid');
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var card = entry.target;
+            var desc = card.querySelector('.project-desc');
+            if (desc && !desc.getAttribute('data-typed')) {
+                typeDescription(desc);
+            }
+            observer.unobserve(card);
+        });
+    }, { threshold: 0.4 });
+
+    grids.forEach(function (grid) {
+        var first = grid.querySelector('.project-card');
+        if (first) observer.observe(first);
+    });
+}
+
+function typeDescription(el) {
+    el.setAttribute('data-typed', 'true');
+    var text = el.getAttribute('data-fulltext') || '';
+    el.textContent = '';
+
+    var i = 0;
+
+    function type() {
+        if (i < text.length) {
+            el.textContent += text.charAt(i);
+            i++;
+            var delay = (text.charAt(i - 1) === ' ' || text.charAt(i - 1) === ',') ? 12 : 22;
+            setTimeout(type, delay);
+        }
+    }
+
+    setTimeout(type, 400);
+}
+
+// ============================================================
+// Source: src/bundle/main.js (20 lines)
 // ============================================================
 
 // ============================================================
@@ -1003,8 +1060,9 @@ document.addEventListener('DOMContentLoaded', function () {
     initSpotlight();
     initLanguage();
     initHeroTypewriter();
+    initProjectTyping();
 });
 
 // ============================================================
-// End of bundle.js (943 total lines from 14 modules)
+// End of bundle.js (997 total lines from 15 modules)
 // ============================================================

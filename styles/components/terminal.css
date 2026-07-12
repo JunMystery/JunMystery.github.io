@@ -76,18 +76,3 @@
 .terminal-variable { color: var(--accent-primary); }
 .terminal-comment { color: var(--text-muted); }
 .terminal-orange { color: var(--accent-orange); }
-
-/* Typing cursor in terminal title */
-.term-title-cursor {
-    display: inline-block;
-    width: 0.5em;
-    height: 1.1em;
-    background: var(--accent-primary);
-    margin-left: 2px;
-    animation: titleBlink 0.8s step-end infinite;
-    vertical-align: text-bottom;
-}
-
-@keyframes titleBlink {
-    50% { opacity: 0; }
-}
