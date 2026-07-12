@@ -54,11 +54,13 @@ settingsBtn.addEventListener('pointerdown', function (e) {
 
 settingsClose.addEventListener('pointerdown', function (e) {
     e.preventDefault();
+    TARGET_FPS = parseInt(speedSlider.value, 10);
     settingsOverlay.style.display = 'none';
 });
 
 speedSlider.addEventListener('input', function () {
     speedValue.textContent = this.value;
+    TARGET_FPS = parseInt(this.value, 10);
 });
 
 gridOpts.forEach(function (btn) {

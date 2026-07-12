@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Developer Tetris Compiler v2.4.0</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/pages/tetris-game.css">
+    <link rel="stylesheet" href="../styles/pages/game-layout.css">
+</head>
+
+<body class="game-body">
+
+    <div class="breadcrumb">
+        <a href="../index.html">~/portfolio</a>
+        <span class="sep">/</span>
+        <span class="current">Tetris.js</span>
+    </div>
+
+    <div class="ide-container">
+        <!-- Window Bar -->
+        <div class="ide-header">
+            <div class="window-controls">
+                <div class="dot dot-red"></div>
+                <div class="dot dot-yellow"></div>
+                <div class="dot dot-green"></div>
+            </div>
+            <div class="file-tab">
+                <span>JS</span> Tetris.js
+            </div>
+            <div style="width: 40px;"></div>
+        </div>
+
+        <!-- Metric Scoreboard -->
+        <div class="ide-dashboard">
+            <div class="code-line">
+                <span class="keyword">const</span> <span class="variable">score</span> = <span class="number"
+                    id="score">0</span>;
+            </div>
+            <div class="code-line">
+                <span class="keyword">let</span> <span class="variable">lines</span> = <span class="number"
+                    id="lines">0</span>;
+            </div>
+        </div>
+
+        <!-- Core Game Display Canvas Frame -->
+        <div class="canvas-wrapper" id="gameFrame" style="cursor: pointer;">
+            <canvas id="gameCanvas" width="360" height="480"></canvas>
+            <div class="scanlines"></div>
+
+            <!-- Pre-Execution Welcome Frame -->
+            <div class="overlay-screen" id="menuOverlay">
+                <div class="overlay-title success-text">&gt; npm run compile-tetris</div>
+                <p class="blink">Tap Screen or Space to Play</p>
+                <div class="instructions">
+                    D-PAD / Keyboard to steer blocks.<br>
+                    Press <span class="keyword">Space</span> or <span class="keyword">Center Button</span> to Immediate
+                    Drop.<br>
+                    Hold <span class="keyword">Down</span> or <span class="keyword">D-PAD Down</span> to Speed Up.
+                </div>
+            </div>
+
+            <!-- Fatal Runtime Crash Screen Overlay -->
+            <div class="overlay-screen" id="gameOverOverlay" style="display: none;">
+                <div class="overlay-title error-text">&gt; CORE_DUMPED</div>
+                <p style="margin-bottom: 5px; font-size: 13px;">FATAL_EXCEPTION: Execution out of grid memory.</p>
+                <p class="blink" style="font-size: 12px; color: var(--syntax-var);">Tap Screen to Re-Compile</p>
+                <div class="instructions" id="finalMetrics"></div>
+            </div>
+        </div>
+
+        <!-- Mobile Controls Workspace Panel -->
+        <div class="mobile-controls-panel">
+            <div class="console-layout">
+                <!-- Left Hand D-Pad cross -->
+                <div class="dpad-cross">
+                    <div class="dpad-empty"></div>
+                    <button class="dpad-btn btn-up" data-action="rotate">▲</button>
+                    <div class="dpad-empty"></div>
+
+                    <button class="dpad-btn btn-left" data-action="left">◀</button>
+                    <div class="dpad-empty"></div>
+                    <button class="dpad-btn btn-right" data-action="right">▶</button>
+
+                    <div class="dpad-empty"></div>
+                    <button class="dpad-btn btn-down" data-action="down">▼</button>
+                    <div class="dpad-empty"></div>
+                </div>
+
+                <!-- Right Hand Circular Action Button -->
+                <div class="action-buttons">
+                    <button class="action-btn-hard dpad-btn" data-action="hard">
+                        <span>⚡</span>
+                        <span class="drop-text">DROP</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Metrics Line -->
+        <div class="ide-footer">
+            <div id="statusText">STATUS: SLEEP</div>
+            <div id="levelText">LEVEL: 1</div>
+        </div>
+    </div>
+
+    <script src="../src/tetris-game.js"></script>
+</body>
+
+</html>

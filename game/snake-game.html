@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Developer Snake Engine v1.1.0</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/pages/snake-game.css">
+    <link rel="stylesheet" href="../styles/pages/game-layout.css">
+</head>
+
+<body class="game-body">
+
+    <div class="breadcrumb">
+        <a href="../index.html">~/portfolio</a>
+        <span class="sep">/</span>
+        <span class="current">snake_core.md</span>
+    </div>
+
+    <div class="game-window">
+        <div class="game-header">
+            <div class="dots">
+                <span style="background:#ff5f56"></span>
+                <span style="background:#ffbd2e"></span>
+                <span style="background:#27c93f"></span>
+            </div>
+            <div class="file-tab"><span>MD</span> snake_core.md</div>
+        </div>
+
+        <div class="game-stats">
+            <div><span style="color:var(--accent-orange)">loc</span> = <span class="num" id="score">0</span></div>
+            <div><span style="color:var(--accent-purple)">max_commits</span> = <span class="num" id="highScore">0</span>
+            </div>
+        </div>
+
+        <div class="canvas-wrap">
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+            <div class="overlay" id="menuOverlay">
+                <h2 class="ok">&gt; npm run core-init</h2>
+                <p class="blink">Tap to Start or Press Space</p>
+                <div class="hint">
+                    WASD / Arrows / Keys to move.<br>
+                    Debug bugs (<span style="color:var(--accent-orange)">&lt;/&gt;</span>) to score.<br>
+                    Avoid boundary exceptions.
+                </div>
+            </div>
+
+            <div class="overlay" id="gameOverOverlay" style="display:none">
+                <h2 class="err">&gt; SEGMENTATION_FAULT</h2>
+                <p style="margin-bottom:5px;font-size:13px">Process exited with status 1.</p>
+                <p class="blink" style="font-size:12px;color:var(--accent-orange)">Tap to Restart</p>
+                <div class="hint" id="finalMetrics"></div>
+            </div>
+
+            <div class="overlay" id="settingsOverlay" style="display:none">
+                <h2 style="font-size:16px;color:var(--accent-primary)">&gt; engine.config</h2>
+                <div class="settings-panel">
+                    <div class="setting-group">
+                        <label>Snake Speed: <span class="value" id="speedValue">10</span> FPS</label>
+                        <input type="range" id="speedSlider" min="5" max="20" value="10" step="1">
+                    </div>
+                    <div class="setting-group">
+                        <label>Grid Scale</label>
+                        <div class="grid-opts">
+                            <button data-grid="15">15px &bull; Fast</button>
+                            <button data-grid="20" class="active">20px &bull; Normal</button>
+                            <button data-grid="30">30px &bull; Large</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="settings-close" id="settingsClose">APPLY</button>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="controls-side">
+                <button class="settings-btn" id="settingsBtn" title="Engine Settings">&#9881;</button>
+                <div class="controls-divider"></div>
+            </div>
+            <div class="controls-center">
+                <div class="controller">
+                    <button class="dpad-btn up" data-dir="up">▲</button>
+                    <button class="dpad-btn lf" data-dir="left">◀</button>
+                    <button class="dpad-btn dn" data-dir="down">▼</button>
+                    <button class="dpad-btn rt" data-dir="right">▶</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <span>STATUS: INITIALIZED</span>
+            <span>PORT: 8080</span>
+        </div>
+    </div>
+
+    <script src="../src/snake-game.js"></script>
+</body>
+
+</html>

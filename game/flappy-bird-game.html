@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Flappy Compiler: Pipeline Run v1.1.0</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/pages/flappy-bird-game.css">
+    <link rel="stylesheet" href="../styles/pages/game-layout.css">
+</head>
+
+<body class="game-body">
+
+    <div class="breadcrumb">
+        <a href="../index.html">~/portfolio</a>
+        <span class="sep">/</span>
+        <span class="current">pipeline_flappy.sh</span>
+    </div>
+
+    <div class="ide-container">
+        <div class="ide-header">
+            <div class="window-controls">
+                <div class="dot dot-red"></div>
+                <div class="dot dot-yellow"></div>
+                <div class="dot dot-green"></div>
+            </div>
+            <div class="file-tab">
+                <span>SHELL</span> flappy_bird.sh
+            </div>
+            <div style="width: 40px;"></div>
+        </div>
+
+        <div class="ide-dashboard">
+            <div style="display: flex; justify-content: space-between; width: 100%;">
+                <div class="code-line">
+                    <span class="keyword">const</span> <span class="variable">commits_pushed</span> = <span
+                        class="number" id="score">0</span>;
+                </div>
+                <div class="code-line">
+                    <span class="keyword">let</span> <span class="variable">warnings_resolved</span> = <span
+                        class="number" id="warnings">0</span>;
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper" id="gameFrame" style="cursor: pointer;">
+            <canvas id="gameCanvas" width="380" height="460"></canvas>
+            <div class="scanlines"></div>
+
+            <div class="overlay-screen" id="menuOverlay">
+                <div class="overlay-title success-text">&gt; git push origin main</div>
+                <p class="blink">Tap Screen or FLAP Button to Fly</p>
+                <div class="instructions">
+                    Steer the Flying Code Bug (🐞) through the pipelines.<br>
+                    Score is increased by safely clearing syntax gaps.<br>
+                    Consume semicolons (<span class="comment">;</span>) to resolve compiler warnings.<br>
+                    Avoid nested Scope Brackets forming collision walls.<br>
+                    Pipeline speed increases as commits are pushed!
+                </div>
+            </div>
+
+            <div class="overlay-screen" id="gameOverOverlay" style="display: none;">
+                <div class="overlay-title error-text">&gt; PIPELINE_FAILED: Exit Code 1</div>
+                <p style="margin-bottom: 5px; font-size: 13px;">FATAL_EXCEPTION: Build crashed on unexpected symbol
+                    reference.</p>
+                <p class="blink" style="font-size: 12px; color: var(--syntax-var);">Tap Screen to Deploy Fix (Restart)
+                </p>
+                <div class="instructions" id="finalMetrics"></div>
+            </div>
+        </div>
+
+        <div class="mobile-controls-panel">
+            <div class="console-layout">
+                <button class="action-btn-flap" id="flapBtn">
+                    <span>⚡</span>
+                    <span class="boost-text">FLAP</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="ide-footer">
+            <div id="statusText">STATUS: SLEEP</div>
+            <div id="fpsText">PIPELINE: INERT</div>
+        </div>
+    </div>
+
+    <script src="../src/flappy-bird-game.js"></script>
+</body>
+
+</html>

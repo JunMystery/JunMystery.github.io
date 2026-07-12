@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Developer Pacman Compiler v4.2.0</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/pages/pacman-game.css">
+    <link rel="stylesheet" href="../styles/pages/game-layout.css">
+</head>
+
+<body class="game-body">
+
+    <div class="breadcrumb">
+        <a href="../index.html">~/portfolio</a>
+        <span class="sep">/</span>
+        <span class="current">compiler_pacman.py</span>
+    </div>
+
+    <div class="ide-container">
+        <!-- Tab Bar -->
+        <div class="ide-header">
+            <div class="window-controls">
+                <div class="dot dot-red"></div>
+                <div class="dot dot-yellow"></div>
+                <div class="dot dot-green"></div>
+            </div>
+            <div class="file-tab">
+                <span>PY</span> compiler_pacman.py
+            </div>
+            <div style="width: 40px;"></div>
+        </div>
+
+        <!-- Metrics Workspace Dashboard -->
+        <div class="ide-dashboard">
+            <div style="display: flex; justify-content: space-between; width: 100%;">
+                <div class="code-line">
+                    <span class="keyword">const</span> <span class="variable">files_compiled</span> = <span
+                        class="number" id="score">0</span>;
+                </div>
+                <div class="code-line">
+                    <span class="keyword">let</span> <span class="variable">bugs_isolated</span> = <span class="number"
+                        id="bugsEaten">0</span>;
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Canvas Environment Area -->
+        <div class="canvas-wrapper" id="gameFrame" style="cursor: pointer;">
+            <canvas id="gameCanvas" width="392" height="392"></canvas>
+            <div class="scanlines"></div>
+
+            <!-- Welcome Screen Screen Overlay -->
+            <div class="overlay-screen" id="menuOverlay">
+                <div class="overlay-title success-text">&gt; python -m compile_pacman</div>
+                <p class="blink">Tap Game Screen or Space to Boot</p>
+                <div class="instructions">
+                    D-PAD / Keyboard to direct Pac-Compiler.<br>
+                    Consume semicolons (<span class="comment">;</span>) to map lines of code.<br>
+                    Eat curly brackets (<span class="keyword">{ }</span>) to trigger <span class="number">DEBUG
+                        MODE</span>.<br>
+                    Hit <span class="variable">⚡ OVERCLOCK</span> on mobile for a <span class="keyword">1.5x</span>
+                    speed boost!
+                </div>
+            </div>
+
+            <!-- Failure Screen Screen Overlay -->
+            <div class="overlay-screen" id="gameOverOverlay" style="display: none;">
+                <div class="overlay-title error-text">&gt; SYNTAX_ERROR: CRASH</div>
+                <p style="margin-bottom: 5px; font-size: 13px;">FATAL_EXCEPTION: Execution encountered unhandled threat.
+                </p>
+                <p class="blink" style="font-size: 12px; color: var(--syntax-var);">Tap Screen to Re-Compile</p>
+                <div class="instructions" id="finalMetrics"></div>
+            </div>
+        </div>
+
+        <!-- Classic Handheld layout Control Console Panel -->
+        <div class="mobile-controls-panel">
+            <div class="console-layout">
+                <!-- Left Hand Directional D-pad Cross -->
+                <div class="dpad-cross">
+                    <div class="dpad-empty"></div>
+                    <button class="dpad-btn btn-up" data-dir="up">▲</button>
+                    <div class="dpad-empty"></div>
+
+                    <button class="dpad-btn btn-left" data-dir="left">◀</button>
+                    <div class="dpad-empty"></div>
+                    <button class="dpad-btn btn-right" data-dir="right">▶</button>
+
+                    <div class="dpad-empty"></div>
+                    <button class="dpad-btn btn-down" data-dir="down">▼</button>
+                    <div class="dpad-empty"></div>
+                </div>
+
+                <!-- Right Hand Circular Interactive Overclock -->
+                <div class="action-buttons">
+                    <button class="action-btn-overclock dpad-btn" data-action="overclock">
+                        <span>⚡</span>
+                        <span class="boost-text">OVERCLOCK</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Compiler status metrics line -->
+        <div class="ide-footer">
+            <div id="statusText">STATUS: SLEEP</div>
+            <div id="cooldownText">COOLDOWN: READY</div>
+        </div>
+    </div>
+
+    <script src="../src/pacman-game.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+/* Shared layout and breadcrumb styles for retro compilation games */
+
+body.game-body {
+    background-color: #0d1117 !important;
+    color: #c9d1d9;
+    font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 0 10px;
+    overflow-x: hidden;
+}
+
+.breadcrumb {
+    width: 100%;
+    max-width: 440px;
+    padding: 8px 4px 6px 4px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+.breadcrumb a {
+    color: var(--accent-primary);
+    text-decoration: none;
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+.breadcrumb .sep {
+    margin: 0 6px;
+    color: var(--text-muted);
+}
+.breadcrumb .current {
+    color: var(--text-secondary);
+}
