@@ -35,18 +35,5 @@ function initProjectTyping() {
 function typeDescription(el) {
     el.setAttribute('data-typed', 'true');
     var text = el.getAttribute('data-fulltext') || '';
-    el.textContent = '';
-
-    var i = 0;
-
-    function type() {
-        if (i < text.length) {
-            el.textContent += text.charAt(i);
-            i++;
-            var delay = (text.charAt(i - 1) === ' ' || text.charAt(i - 1) === ',') ? 12 : 22;
-            setTimeout(type, delay);
-        }
-    }
-
-    setTimeout(type, 400);
+    el.textContent = text;
 }

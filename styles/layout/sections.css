@@ -11,8 +11,7 @@
 }
 
 .section {
-    padding: 2.5rem 0;
-    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
 }
 
 .section-title {

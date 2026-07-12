@@ -983,7 +983,7 @@ function initHeroTypewriter() {
 }
 
 // ============================================================
-// Source: src/bundle/controllers\projects.js (53 lines)
+// Source: src/bundle/controllers\projects.js (40 lines)
 // ============================================================
 
 // ============================================================
@@ -1023,20 +1023,7 @@ function initProjectTyping() {
 function typeDescription(el) {
     el.setAttribute('data-typed', 'true');
     var text = el.getAttribute('data-fulltext') || '';
-    el.textContent = '';
-
-    var i = 0;
-
-    function type() {
-        if (i < text.length) {
-            el.textContent += text.charAt(i);
-            i++;
-            var delay = (text.charAt(i - 1) === ' ' || text.charAt(i - 1) === ',') ? 12 : 22;
-            setTimeout(type, delay);
-        }
-    }
-
-    setTimeout(type, 400);
+    el.textContent = text;
 }
 
 // ============================================================
@@ -1064,5 +1051,5 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // ============================================================
-// End of bundle.js (997 total lines from 15 modules)
+// End of bundle.js (984 total lines from 15 modules)
 // ============================================================
