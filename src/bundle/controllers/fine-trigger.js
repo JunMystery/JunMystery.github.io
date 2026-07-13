@@ -101,7 +101,7 @@ function initFineTrigger() {
         });
 
         var iframe = document.createElement('iframe');
-        iframe.src = 'this-is-fine.html';
+        iframe.src = 'src/this-is-fine.html';
         iframe.style.cssText = [
             'width:100%',
             'height:460px',
