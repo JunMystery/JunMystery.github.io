@@ -34,7 +34,7 @@ var FOOTER_LINES = [
         { text: 'production-grade', cls: 'terminal-orange' },
         { text: '; }', cls: '' },
         { text: ' [404]', cls: 'trigger-404' },
-        { text: ' [fine]', cls: 'trigger-fine' }
+        { text: ' [fine]' }
     ]}
 ];
 

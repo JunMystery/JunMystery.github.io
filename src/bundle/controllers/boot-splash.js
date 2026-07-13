@@ -23,7 +23,7 @@ function initBootSplash() {
         'align-items:center;justify-content:center;',
         'font-family:"Fira Code","Consolas",monospace;',
         'font-size:14px;color:#33FF00;',
-        'opacity:1;transition:opacity 0.5s;',
+        'opacity:1;transition:opacity 0.33s;',
         'padding:2rem;'
     ].join('');
 
@@ -42,8 +42,8 @@ function initBootSplash() {
                 overlay.style.opacity = '0';
                 setTimeout(function () {
                     if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                }, 500);
-            }, 400);
+                }, 330);
+            }, 265);
             return;
         }
 
@@ -56,10 +56,10 @@ function initBootSplash() {
             if (charIdx < line.length) {
                 p.textContent += line[charIdx];
                 charIdx++;
-                setTimeout(typeChar, 15 + Math.random() * 20);
+                setTimeout(typeChar, 10 + Math.random() * 13);
             } else {
                 lineIdx++;
-                setTimeout(typeLine, 250);
+                setTimeout(typeLine, 165);
             }
         }
         typeChar();
