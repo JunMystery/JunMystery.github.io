@@ -45,7 +45,7 @@ function initKonami() {
         title.addEventListener('click', function (e) {
             tapCount++;
             if (tapCount === 1) {
-                tapTimer = setTimeout(function () { tapCount = 0; }, 2000);
+                tapTimer = setTimeout(function () { tapCount = 0; }, 1000);
             }
             if (tapCount >= 3) {
                 tapCount = 0;

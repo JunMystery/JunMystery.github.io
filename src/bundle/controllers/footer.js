@@ -18,6 +18,22 @@ function initFooter() {
 }
 
 function runTypewriter() {
+    // Skip typewriter animation when user prefers reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        FOOTER_LINES.forEach(function (l) {
+            var el = document.getElementById(l.id);
+            if (el) {
+                el.innerHTML = '';
+                l.tokens.forEach(function (tok) {
+                    var span = document.createElement('span');
+                    if (tok.cls) span.className = tok.cls;
+                    span.textContent = tok.text;
+                    el.appendChild(span);
+                });
+            }
+        });
+        return;
+    }
     FOOTER_LINES.forEach(function (l) {
         var el = document.getElementById(l.id);
         if (el) { el.innerHTML = ''; el.classList.remove('typing'); }

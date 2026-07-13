@@ -5,6 +5,7 @@
 
 function initBootSplash() {
     if (sessionStorage.getItem('boot_played')) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     var bootLines = [
         '> INITIALIZING KERNEL............ [OK]',
@@ -23,7 +24,7 @@ function initBootSplash() {
         'align-items:center;justify-content:center;',
         'font-family:"Fira Code","Consolas",monospace;',
         'font-size:14px;color:#33FF00;',
-        'opacity:1;transition:opacity 0.1s;',
+        'opacity:1;transition:opacity 0.05s;',
         'padding:2rem;'
     ].join('');
 
@@ -42,8 +43,8 @@ function initBootSplash() {
                 overlay.style.opacity = '0';
                 setTimeout(function () {
                     if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                }, 120);
-            }, 120);
+                }, 50);
+            }, 50);
             return;
         }
 
@@ -56,10 +57,10 @@ function initBootSplash() {
             if (charIdx < line.length) {
                 p.textContent += line[charIdx];
                 charIdx++;
-                setTimeout(typeChar, 2 + Math.random() * 5);
+                setTimeout(typeChar, 1 + Math.random() * 2);
             } else {
                 lineIdx++;
-                setTimeout(typeLine, 50);
+                setTimeout(typeLine, 20);
             }
         }
         typeChar();

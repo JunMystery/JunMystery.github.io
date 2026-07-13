@@ -55,6 +55,7 @@
     position: relative;
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
     animation: terminalGlow 4s ease-in-out infinite;
+    will-change: box-shadow;
 }
 
 .terminal-window:hover {

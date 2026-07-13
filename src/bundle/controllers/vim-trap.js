@@ -42,7 +42,7 @@ function showVimBar(msg) {
         _vimBarEl.style.transform = 'translateX(-50%) translateY(0)';
     });
     clearTimeout(_vimDismissTimer);
-    _vimDismissTimer = setTimeout(dismissVimBar, 8000);
+    _vimDismissTimer = setTimeout(dismissVimBar, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 4000);
 }
 
 function dismissVimBar() {

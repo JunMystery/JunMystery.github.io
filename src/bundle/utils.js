@@ -35,8 +35,8 @@ var SELECTORS = {
 };
 
 var TIMING = {
-    TYPEWRITER_CHAR: 14,
-    TYPEWRITER_LINE_PAUSE: 160,
+    TYPEWRITER_CHAR: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 10,
+    TYPEWRITER_LINE_PAUSE: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 100,
     REVEAL_THRESHOLD: 0.12,
     REVEAL_MARGIN: '0px 0px -40px 0px'
 };

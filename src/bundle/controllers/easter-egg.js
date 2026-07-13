@@ -33,11 +33,13 @@ function triggerRebootGlitch() {
 
     // Phase 1: Screen glitch — long and dramatic (2500ms)
     document.body.classList.add('glitching');
-    // Pulse intensity mid-glitch
-    setTimeout(function () { document.body.style.filter = 'brightness(1.6) hue-rotate(180deg)'; }, 800);
-    setTimeout(function () { document.body.style.filter = ''; }, 1400);
-    setTimeout(function () { document.body.style.filter = 'brightness(0.3) hue-rotate(90deg)'; }, 1800);
-    setTimeout(function () { document.body.style.filter = ''; }, 2200);
+    // Pulse intensity mid-glitch — skip setTimeout if reduced motion
+    var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var t = rm ? function (fn) { fn(); return 0; } : setTimeout;
+    t(function () { document.body.style.filter = 'brightness(1.6) hue-rotate(180deg)'; }, rm ? 0 : 400);
+    t(function () { document.body.style.filter = ''; }, rm ? 0 : 700);
+    t(function () { document.body.style.filter = 'brightness(0.3) hue-rotate(90deg)'; }, rm ? 0 : 900);
+    t(function () { document.body.style.filter = ''; }, rm ? 0 : 1100);
 
     // Console boot sequence — slower, more dramatic
     console.log('');
@@ -51,12 +53,13 @@ function triggerRebootGlitch() {
         '> System ready. Have a nice day.'
     ];
     bootMsgs.forEach(function (msg, i) {
-        setTimeout(function () {
+        t(function () {
             console.log('%c ' + msg, 'color: #0f0');
-        }, 200 + i * 500);
+        }, rm ? 0 : 100 + i * 250);
     });
 
     // Phase 2: Matrix rain overlay (starts at 2500ms, lasts 3000ms)
+    if (rm) return _eggActive = false;
     var rainTimeout = setTimeout(function () {
         var canvas = createRainCanvas();
         document.body.appendChild(canvas);
@@ -102,14 +105,14 @@ function triggerRebootGlitch() {
                     if (col >= line.length) {
                         lineIdx++;
                         lineY += 30;
-                        setTimeout(typeNextLine, 400);
+                        setTimeout(typeNextLine, 200);
                         return;
                     }
                     ctx.fillStyle = '#0f0';
                     ctx.font = '16px monospace';
                     ctx.fillText(line[col], 60 + col * 10, lineY);
                     col++;
-                    setTimeout(typeChar, 40 + Math.random() * 30);
+                    setTimeout(typeChar, 20 + Math.random() * 15);
                 }
                 typeChar();
             }

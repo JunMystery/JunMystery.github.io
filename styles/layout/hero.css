@@ -17,6 +17,7 @@
     opacity: 0.15;
     pointer-events: none;
     z-index: 0;
+    will-change: transform;
 }
 
 .hero-orb--blue {
@@ -89,6 +90,7 @@
     background-size: cover;
     background-position: center;
     animation: avatarPulse 3s ease-in-out infinite;
+    will-change: box-shadow;
 }
 
 @keyframes avatarPulse {

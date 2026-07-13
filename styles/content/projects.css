@@ -155,17 +155,19 @@
 /* Flow node sequential highlight on card hover */
 .project-card:hover .flow-node {
     animation: nodePulse 2s ease-in-out infinite;
+    will-change: border-color, background;
 }
 
 .project-card:hover .flow-arrow {
     animation: arrowPulse 2s ease-in-out infinite;
+    will-change: border-color, background;
 }
 
 .flow-node:nth-child(1) { animation-delay: 0s; }
-.flow-arrow:nth-child(2) { animation-delay: 0.4s; }
-.flow-node:nth-child(3) { animation-delay: 0.8s; }
-.flow-arrow:nth-child(4) { animation-delay: 1.2s; }
-.flow-node:nth-child(5) { animation-delay: 1.6s; }
+.flow-arrow:nth-child(2) { animation-delay: 0.15s; }
+.flow-node:nth-child(3) { animation-delay: 0.3s; }
+.flow-arrow:nth-child(4) { animation-delay: 0.45s; }
+.flow-node:nth-child(5) { animation-delay: 0.6s; }
 
 @keyframes nodePulse {
     0%, 65%, 100% {

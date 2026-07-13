@@ -12,8 +12,8 @@ html.crt-mode {
 /* ---- 2. Animations: warm-up → flicker → jitter ---- */
 html.crt-mode {
   animation:
-    crt-warmup  2s    ease-out    forwards,
-    crt-flicker 6s    ease-in-out 2.5s  infinite;
+    crt-warmup  1s    ease-out    forwards,
+    crt-flicker 4s    ease-in-out 1s  infinite;
 }
 
 /* Warm-up: flash → overshoot → stabilize (CRT tube power-on) */
@@ -85,7 +85,7 @@ html.crt-mode body::before {
     inset 0 0 50px rgba(0, 0, 0, 0.7);
 
   /* Jitter moved here from html — same drift effect, no page displacement */
-  animation: crt-jitter 4s ease-in-out 2.5s infinite;
+  animation: crt-jitter 3s ease-in-out 1s infinite;
 }
 
 /* ---- 4. Vignette + curvature simulation ---- */

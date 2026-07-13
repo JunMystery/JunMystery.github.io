@@ -25,14 +25,21 @@ function initHeroTypewriter() {
     var textSpan = el.querySelector('.typewriter-text');
     if (!textSpan) return;
 
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        textSpan.textContent = text;
+        sessionStorage.setItem('hero_typed', '1');
+        triggerHeroGlitch();
+        typeTagline();
+        return;
+    }
+
     var charIdx = 0;
-    var speed = 30;
 
     function typeChar() {
         if (charIdx < text.length) {
             textSpan.textContent += text[charIdx];
             charIdx++;
-            setTimeout(typeChar, speed);
+            setTimeout(typeChar, 20);
         } else {
             sessionStorage.setItem('hero_typed', '1');
             triggerHeroGlitch();
@@ -61,14 +68,19 @@ function typeTagline() {
     if (stored) return;
 
     tagline.textContent = '';
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        tagline.textContent = text;
+        sessionStorage.setItem('tagline_typed', '1');
+        return;
+    }
+
     var charIdx = 0;
-    var speed = 18;
 
     function typeChar() {
         if (charIdx < text.length) {
             tagline.textContent += text[charIdx];
             charIdx++;
-            setTimeout(typeChar, speed);
+            setTimeout(typeChar, 12);
         } else {
             sessionStorage.setItem('tagline_typed', '1');
         }

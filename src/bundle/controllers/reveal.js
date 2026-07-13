@@ -28,18 +28,20 @@ function typeCommandInTitle(title) {
     title.setAttribute('data-typed', 'true');
     var filename = title.textContent;
     var command = '$ cat ' + filename;
+    var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     title.textContent = '';
+    if (rm) { title.innerHTML = command; return; }
     var i = 0;
     function type() {
         if (i < command.length) {
             title.textContent += command.charAt(i);
             i++;
-            setTimeout(type, 35);
+            setTimeout(type, 15);
         } else {
             title.innerHTML = command;
         }
     }
-    setTimeout(type, 200);
+    setTimeout(type, 100);
 }
 
 function initScrollProgress() {
