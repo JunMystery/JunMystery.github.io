@@ -79,6 +79,8 @@ class Ghost {
         this.personality = personality; // 'blinky', 'pinky', 'inky', 'clyde'
         this.frightenedTimer = 0;
         this.exitPath = null;
+        this.pendingFrightened = false; // will enter FRIGHTENED after EXITING
+        this.clumsyLost = false;
     }
 
     reset(startGridX, startGridY, initialState, houseTimer) {
@@ -92,43 +94,22 @@ class Ghost {
         this.dirY = 0;
         this.modeTime = 0;
         this.frightenedTimer = 0;
+        this.pendingFrightened = false;
+        this.clumsyLost = false;
     }
 
     getTargetTile(globalMode, blinkyRef) {
-        // If EXITING, target is cell above the door (13,10)
         if (this.state === 'EXITING') return { x: 13, y: 10 };
-        // If EATEN, target is the house center (13,13)
         if (this.state === 'EATEN') return { x: 13, y: 13 };
-        // If FRIGHTENED, random direction will be chosen later
         if (this.state === 'FRIGHTENED') return null;
 
         const mode = (this.state === 'SCATTER') ? 'SCATTER' : globalMode;
         if (mode === 'SCATTER') {
-            if (this.personality === 'blinky') return { x: 27, y: 0 };
-            if (this.personality === 'pinky') return { x: 0, y: 0 };
-            if (this.personality === 'inky') return { x: 27, y: 27 };
-            if (this.personality === 'clyde') return { x: 0, y: 27 };
-        } else { // CHASE
-            if (this.personality === 'blinky') {
-                return { x: pacman.gridX, y: pacman.gridY };
-            } else if (this.personality === 'pinky') {
-                let tx = pacman.gridX + pacman.dirX * 4;
-                let ty = pacman.gridY + pacman.dirY * 4;
-                return { x: Math.max(0, Math.min(COLS - 1, tx)), y: Math.max(0, Math.min(ROWS - 1, ty)) };
-            } else if (this.personality === 'inky') {
-                let aheadX = pacman.gridX + pacman.dirX * 2;
-                let aheadY = pacman.gridY + pacman.dirY * 2;
-                let blinky = blinkyRef;
-                let tx = aheadX + (aheadX - blinky.gridX);
-                let ty = aheadY + (aheadY - blinky.gridY);
-                return { x: Math.max(0, Math.min(COLS - 1, tx)), y: Math.max(0, Math.min(ROWS - 1, ty)) };
-            } else if (this.personality === 'clyde') {
-                let dist = Math.hypot(this.gridX - pacman.gridX, this.gridY - pacman.gridY);
-                if (dist > 8) return { x: pacman.gridX, y: pacman.gridY };
-                else return { x: 0, y: 27 };
-            }
+            return ghostScatterCorners[this.personality] || { x: 13, y: 13 };
         }
-        return { x: 13, y: 13 }; // fallback
+        // CHASE mode — delegate to brain
+        const brain = ghostBrains[this.personality];
+        return brain ? brain(this, pacman, blinkyRef) : { x: 13, y: 13 };
     }
 
     decideDirection(globalMode, ghosts) {
@@ -137,7 +118,7 @@ class Ghost {
 
         // FRIGHTENED: random valid direction
         if (this.state === 'FRIGHTENED') {
-            const dirs = this.getValidDirections(false);
+            const dirs = this.getValidDirections(false, ghosts);
             if (dirs.length > 0) {
                 const rand = dirs[Math.floor(Math.random() * dirs.length)];
                 this.dirX = rand.x; this.dirY = rand.y;
@@ -150,10 +131,10 @@ class Ghost {
         if (!target) return;
 
         // Get possible directions (prefer no reverse)
-        let validDirs = this.getValidDirections(true);
+        let validDirs = this.getValidDirections(true, ghosts);
 
         if (validDirs.length === 0) {
-            validDirs = this.getValidDirections(false);
+            validDirs = this.getValidDirections(false, ghosts);
         }
 
         if (validDirs.length === 0) {
@@ -177,19 +158,25 @@ class Ghost {
         this.dirY = bestDir.y;
     }
 
-    getValidDirections(avoidReverse) {
+    getValidDirections(avoidReverse, allGhosts) {
         const allDirs = [
             { x: 0, y: -1 },
             { x: -1, y: 0 },
             { x: 0, y: 1 },
             { x: 1, y: 0 }
         ];
+        const isOccupiedByGhost = (nx, ny) => {
+            if (!allGhosts) return false;
+            return allGhosts.some(g => g !== this && g.gridX === nx && g.gridY === ny);
+        };
         let filtered = allDirs.filter(d => {
             if (avoidReverse && d.x === -this.dirX && d.y === -this.dirY) return false;
             const nx = this.gridX + d.x;
             const ny = this.gridY + d.y;
             if (isWall(nx, ny)) return false;
             if (isSpawnerGate(nx, ny, this)) return false;
+            // Allow ghost-ghost passthrough (classic Pac-Man behavior)
+            if (isOccupiedByGhost(nx, ny)) return true;
             return true;
         });
         if (filtered.length === 0 && avoidReverse) {
@@ -198,6 +185,7 @@ class Ghost {
                 const ny = this.gridY + d.y;
                 if (isWall(nx, ny)) return false;
                 if (isSpawnerGate(nx, ny, this)) return false;
+                if (isOccupiedByGhost(nx, ny)) return true;
                 return true;
             });
         }
@@ -214,7 +202,7 @@ class Ghost {
             else if (this.y >= lowerY) { this.dirY = -1; this.y = lowerY; }
 
             // Releasing countdown and locking rules
-            if (globalFrightenedTimer > 0) {
+            if (globalFrightenedTimer > 0 && !this.pendingFrightened) {
                 return; // Hold inside base until power-up decays
             }
 
@@ -263,7 +251,13 @@ class Ghost {
 
             // State transitions at specific tiles
             if (this.state === 'EXITING' && this.gridX === 13 && this.gridY === 10) {
-                this.state = globalMode;
+                if (this.pendingFrightened || globalMode === 'FRIGHTENED') {
+                    this.state = 'FRIGHTENED';
+                    this.frightenedTimer = globalFrightenedTimer;
+                } else {
+                    this.state = globalMode;
+                }
+                this.pendingFrightened = false;
                 this.dirX = -1; this.dirY = 0;
             } else if (this.state === 'EATEN' && this.gridX === 13 && this.gridY === 13) {
                 this.state = 'HOUSE';
@@ -278,12 +272,70 @@ class Ghost {
     }
 }
 
+// -------------------- Ghost Brain Registry --------------------
+const ghostBrains = {
+    blinky: (ghost, pacman, blinky) => ({ x: pacman.gridX, y: pacman.gridY }),
+    pinky: (ghost, pacman, blinky) => ({
+        x: Math.max(0, Math.min(COLS - 1, pacman.gridX + pacman.dirX * 4)),
+        y: Math.max(0, Math.min(ROWS - 1, pacman.gridY + pacman.dirY * 4))
+    }),
+    inky: (ghost, pacman, blinky) => {
+        let aheadX = pacman.gridX + pacman.dirX * 2;
+        let aheadY = pacman.gridY + pacman.dirY * 2;
+        return {
+            x: Math.max(0, Math.min(COLS - 1, aheadX + (aheadX - blinky.gridX))),
+            y: Math.max(0, Math.min(ROWS - 1, aheadY + (aheadY - blinky.gridY)))
+        };
+    },
+    clyde: (ghost, pacman, blinky) => {
+        let dist = Math.hypot(ghost.gridX - pacman.gridX, ghost.gridY - pacman.gridY);
+        if (dist > 8) return { x: pacman.gridX, y: pacman.gridY };
+        else return { x: 0, y: 27 };
+    },
+    aggressive: (ghost, pacman, blinky) => ({
+        x: Math.max(0, Math.min(COLS - 1, pacman.gridX - pacman.dirX * 3)),
+        y: Math.max(0, Math.min(ROWS - 1, pacman.gridY - pacman.dirY * 3))
+    }),
+    clumsy: (ghost, pacman, blinky) => {
+        ghost.modeTime--;
+        if (ghost.modeTime <= 0) {
+            ghost.clumsyLost = !ghost.clumsyLost;
+            ghost.modeTime = ghost.clumsyLost ? 150 : 350;
+        }
+        if (ghost.clumsyLost) {
+            const corners = ['blinky', 'pinky', 'inky', 'clyde']
+                .map(p => ghostScatterCorners[p]);
+            return corners[Math.floor(Math.random() * corners.length)];
+        }
+        return { x: pacman.gridX, y: pacman.gridY };
+    },
+    wanderer: (ghost, pacman, blinky) => ({
+        x: Math.floor(Math.random() * COLS),
+        y: Math.floor(Math.random() * ROWS)
+    }),
+    shy: (ghost, pacman, blinky) => ({
+        x: Math.max(0, Math.min(COLS - 1, ghost.gridX + (ghost.gridX - pacman.gridX) * 2)),
+        y: Math.max(0, Math.min(ROWS - 1, ghost.gridY + (ghost.gridY - pacman.gridY) * 2))
+    })
+};
+
+const ghostScatterCorners = {
+    blinky: { x: 27, y: 0 },
+    pinky:  { x: 0, y: 0 },
+    inky:   { x: 27, y: 27 },
+    clyde:  { x: 0, y: 27 },
+    aggressive: { x: 27, y: 27 },
+    clumsy: { x: 0, y: 0 },
+    wanderer: { x: 0, y: 27 },
+    shy: { x: 27, y: 0 }
+};
+
 // -------------------- Instantiate Ghosts --------------------
 let ghosts = [
     new Ghost("syntax_err", "#ff7b72", 13, 11, 1.05, "CHASE", 0, 'blinky'),
-    new Ghost("type_err", "#ff7dd2", 12, 13, 1.0, "HOUSE", 150, 'pinky'),
-    new Ghost("link_err", "#58a6ff", 14, 13, 0.95, "HOUSE", 300, 'inky'),
-    new Ghost("runtime_err", "#ffa657", 13, 12, 0.9, "HOUSE", 450, 'clyde')
+    new Ghost("type_err", "#ff7dd2", 12, 13, 1.0, "HOUSE", 150, 'clumsy'),
+    new Ghost("link_err", "#58a6ff", 14, 13, 0.95, "HOUSE", 300, 'wanderer'),
+    new Ghost("runtime_err", "#ffa657", 13, 12, 0.9, "HOUSE", 450, 'shy')
 ];
 
 // Global state
@@ -453,6 +505,7 @@ function updatePhysicsStep() {
                 if (g.state === "FRIGHTENED") {
                     g.state = globalMode;
                 }
+                g.pendingFrightened = false;
             });
         }
     }
@@ -538,6 +591,13 @@ function triggerDebugState() {
             g.gridX = Math.round(g.x / CELL_SIZE);
             g.gridY = Math.round(g.y / CELL_SIZE);
             g.dirX = -g.dirX; g.dirY = -g.dirY;
+        } else if (g.state === 'HOUSE') {
+            // Mark to become FRIGHTENED upon exit, and expedite release
+            g.pendingFrightened = true;
+            if (g.houseTimer > 30) g.houseTimer = 30;
+        } else if (g.state === 'EXITING') {
+            // Already on the way out — will be scared when transition hits
+            g.pendingFrightened = true;
         }
     });
 }
