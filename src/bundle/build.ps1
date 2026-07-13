@@ -17,9 +17,12 @@ $modules = @(
     "controllers\footer.js",
     "controllers\reveal.js",
     "controllers\hero.js",
+    "controllers\achievements.js",
     "controllers\easter-egg.js",
     "controllers\konami.js",
     "controllers\404-trigger.js",
+    "controllers\vim-trap.js",
+    "controllers\fine-trigger.js",
     "controllers\projects.js",
     "main.js"
 )

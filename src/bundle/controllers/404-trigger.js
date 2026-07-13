@@ -107,5 +107,6 @@ function init404Trigger() {
 }
 
 function go404() {
+    if (typeof _achieve === 'function') _achieve('game_404');
     window.location.href = 'game/404-runner-game.html';
 }

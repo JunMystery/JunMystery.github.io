@@ -1,0 +1,216 @@
+/* ─── This is fine widget — IDE console scene ─── */
+:root {
+    --fine-bg: #0d1117;
+    --fine-terminal-bg: #161b22;
+    --fine-border: #30363d;
+    --fine-accent: #58a6ff;
+    --fine-keyword: #ff7b72;
+    --fine-var: #ffa657;
+    --fine-string: #a5d6ff;
+    --fine-comment: #8b949e;
+    --fine-green: #3fb950;
+    --fine-stack: 'Fira Code', 'Consolas', 'Courier New', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: transparent;
+    font-family: var(--fine-stack);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 10px;
+}
+
+/* ─── IDE Widget Container ─── */
+.ide-widget {
+    width: 320px;
+    background-color: var(--fine-terminal-bg);
+    border: 1.5px solid var(--fine-border);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* ─── Header ─── */
+.widget-header {
+    background-color: var(--fine-bg);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1.5px solid var(--fine-border);
+    user-select: none;
+}
+
+.window-controls {
+    display: flex;
+    gap: 6px;
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.dot-red    { background-color: #ff5f56; }
+.dot-yellow { background-color: #ffbd2e; }
+.dot-green  { background-color: #27c93f; }
+
+.file-tab {
+    font-size: 10px;
+    color: #8b949e;
+    background-color: var(--fine-terminal-bg);
+    padding: 4px 10px;
+    border-radius: 4px 4px 0 0;
+    border: 1px solid var(--fine-border);
+    border-bottom: none;
+    margin-bottom: -9px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.file-tab span { color: var(--fine-accent); }
+
+/* ─── Scene Area ─── */
+.scene-area {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    background-color: #090c10;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.2) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.vector-illustration {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* ─── Speech Bubble ─── */
+.speech-bubble {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    background-color: #0d1117;
+    border: 1.5px solid var(--fine-accent);
+    border-radius: 8px;
+    padding: 8px 12px;
+    max-width: 180px;
+    z-index: 4;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    cursor: pointer;
+    user-select: none;
+    animation: fine-float-pulse 3s ease-in-out infinite;
+}
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 20px;
+    border-width: 8px 8px 0;
+    border-style: solid;
+    border-color: #0d1117 transparent;
+    display: block;
+    width: 0;
+}
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -11px;
+    left: 19px;
+    border-width: 9px 9px 0;
+    border-style: solid;
+    border-color: var(--fine-accent) transparent;
+    display: block;
+    width: 0;
+    z-index: -1;
+}
+.bubble-text {
+    color: var(--fine-accent);
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1.4;
+    text-align: center;
+}
+
+@keyframes fine-float-pulse {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-4px); }
+}
+
+/* ─── Controls Panel ─── */
+.controls-panel {
+    background-color: #0d1117;
+    border-top: 1.5px solid var(--fine-border);
+    padding: 12px;
+    display: flex;
+    gap: 10px;
+    z-index: 6;
+}
+
+.outline-btn {
+    flex: 1;
+    background-color: transparent;
+    font-family: var(--fine-stack);
+    font-size: 10px;
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease;
+}
+.btn-stress {
+    border: 1.5px solid var(--fine-keyword);
+    color: var(--fine-keyword);
+}
+.btn-stress:active {
+    background-color: rgba(255,123,114,0.12);
+}
+.btn-fix {
+    border: 1.5px solid #27c93f;
+    color: #27c93f;
+}
+.btn-fix:active {
+    background-color: rgba(39,201,63,0.12);
+}
+
+/* ─── Status Bar ─── */
+.widget-footer {
+    background-color: var(--fine-accent);
+    color: #0d1117;
+    padding: 4px 10px;
+    font-size: 9px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    user-select: none;
+}

@@ -10,7 +10,7 @@ Static GitHub Pages site. No build step, no framework, no dependencies beyond Go
 ```
 JunMystery.github.io/
 ├── index.html              # Portfolio — single-page markup (source of truth for content)
-├── 404.html                # Catch-all redirect to index.html
+├── 404.html                # Generated stub → redirect to 404-runner-game; source at src/404.html
 ├── cv.html                 # Redirect → cv/index.html (preserves legacy /cv/ path)
 │
 ├── styles/
@@ -61,7 +61,8 @@ JunMystery.github.io/
 │   └── src/
 │       └── print.js        # Print button binding (window.print)
 │
-├── src/                    # Portfolio JavaScript (ES modules → bundle.js)
+├── src/                    # Source files (compiled/concatenated → root)
+│   ├── 404.html            # Terminal-themed 404 page → generated stub at root/404.html
 │   ├── app.js              # Bootstrap — imports all controllers
 │   ├── bundle.js           # Offline-friendly single-file build (no import/export)
 │   ├── controllers/
@@ -253,6 +254,16 @@ User Click → Controller.handle()
                 → Model.read()          (if data needed)
                 → DOM update            (controller applies changes directly)
 ```
+
+### Build Steps
+
+- **`src/bundle.js`**: Regenerated from `src/bundle/` modules. Run:
+  ```
+  powershell.exe -ExecutionPolicy Bypass -File src/bundle/build.ps1
+  ```
+  Or on Linux: concatenate modules in order (see `build.ps1` for sequence).
+
+- **`404.html`** (root): Generated stub. Source is `src/404.html`. Rebuild by copying source to root.
 
 ### Offline Compatibility
 

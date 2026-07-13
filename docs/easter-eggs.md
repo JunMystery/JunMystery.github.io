@@ -87,7 +87,7 @@ Orb explodes into ~25 colored particles that scatter and fade out over 1.5s. Orb
 
 | # | Trigger | How |
 |---|---|---|
-| A | **Broken URL** | Any 404 on the site → `404.html` → auto-redirect to game after 2.5s |
+| A | **Broken URL** | Any 404 on the site → `404.html` → immediate redirect to game |
 | B | **`?game=404` URL param** | `index.html?game=404` — linkable, bookmarkable |
 | C | **`#404` hash fragment** | `index.html#404` — same-page navigation |
 | D | **Type `exit`** | Sequence `e→x→i→t` anywhere on the portfolio page |
@@ -337,3 +337,5 @@ After 8s, everything smoothly returns to normal gameplay.
 | 2026-07-13 | Removed triple-tap hero title → 404 redirect trigger |
 | 2026-07-13 | Updated 404 runner game to dedicated game boy layout page + JUMP button |
 | 2026-07-13 | Implemented egg #4 (404 runner game) + egg #2 (CRT mode) + egg #1 (console glitch) |
+| 2026-07-13 | Added Achievements dialog — trophy button in header, terminal-themed dialog listing 9 discoveries (5 games + 4 eggs) |
+| 2026-07-13 | Refactored 404.html: source moved to src/404.html, root is now a thin generated redirect stub |

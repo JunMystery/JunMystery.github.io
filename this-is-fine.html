@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer "This is fine" Meme Widget - Premium Edition</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/pages/game-layout.css">
+    <link rel="stylesheet" href="styles/pages/this-is-fine.css">
+</head>
+
+<body class="game-body">
+    <div class="breadcrumb">
+        <a href="index.html">~/portfolio</a>
+        <span class="sep">/</span>
+        <span class="current">fine_debugger.sh</span>
+    </div>
+    <div class="ide-widget">
+        <!-- Terminal Header -->
+        <div class="widget-header">
+            <div class="window-controls">
+                <div class="dot dot-red"></div>
+                <div class="dot dot-yellow"></div>
+                <div class="dot dot-green"></div>
+            </div>
+            <div class="file-tab">
+                <span>SH</span> fine_debugger.sh
+            </div>
+            <div style="width: 25px;"></div>
+        </div>
+
+        <!-- Meme Scene Area -->
+        <div class="scene-area" id="sceneArea">
+            <!-- Canvas background for rising compiled flames -->
+            <canvas id="fireCanvas"></canvas>
+
+            <!-- CRT overlay scanlines -->
+            <div class="scanlines"></div>
+
+            <!-- Speech Bubble containing programmer excuses -->
+            <div class="speech-bubble" id="speechBubble">
+                <div class="bubble-text" id="bubbleText">// This is fine.</div>
+            </div>
+
+            <!-- Vector Illustration of the dog using clean outlines -->
+            <svg class="vector-illustration" viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+                <!-- Filters for Hacker Retro Neon Glow -->
+                <defs>
+                    <filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="1.5" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                </defs>
+
+                <!-- 1. Background layer: Dog lower body (behind desk) -->
+                <g filter="url(#neon-glow)">
+                    <!-- Torso -->
+                    <path d="M 115 170 C 105 200, 105 240, 110 280" fill="none" stroke="#c9d1d9" stroke-width="1.8"
+                        stroke-linecap="round" />
+                    <path d="M 165 170 C 175 200, 175 240, 170 280" fill="none" stroke="#c9d1d9" stroke-width="1.8"
+                        stroke-linecap="round" />
+                    <path d="M 130 180 L 130 280" fill="none" stroke="#30363d" stroke-width="1"
+                        stroke-dasharray="3,3" />
+                </g>
+
+                <!-- 2. Desk/Table (overlays the lower body) -->
+                <g filter="url(#neon-glow)">
+                    <line x1="30" y1="215" x2="290" y2="215" stroke="#30363d" stroke-width="3.5"
+                        stroke-linecap="round" />
+                    <line x1="70" y1="215" x2="70" y2="280" stroke="#30363d" stroke-width="2" />
+                    <line x1="250" y1="215" x2="250" y2="280" stroke="#30363d" stroke-width="2" />
+                </g>
+
+                <!-- 3. Desktop Assets: Hot Coffee Mug with bracket steam -->
+                <g filter="url(#neon-glow)">
+                    <rect x="75" y="193" width="18" height="22" rx="4" fill="#090c10" stroke="#ffa657"
+                        stroke-width="1.8" />
+                    <path d="M 93 198 C 98 198, 98 210, 93 210" fill="none" stroke="#ffa657" stroke-width="1.8"
+                        stroke-linecap="round" />
+                    <!-- Code braces as hot steam! -->
+                    <path d="M 79 187 Q 77 182, 81 177" fill="none" stroke="#ffa657" stroke-width="1.2"
+                        stroke-linecap="round" />
+                    <path d="M 87 187 Q 89 182, 85 177" fill="none" stroke="#ffa657" stroke-width="1.2"
+                        stroke-linecap="round" />
+                </g>
+
+                <!-- 4. Desktop Assets: Developer Laptop -->
+                <g filter="url(#neon-glow)">
+                    <rect x="180" y="182" width="48" height="33" rx="3" fill="#090c10" stroke="#58a6ff"
+                        stroke-width="1.8" />
+                    <!-- Visual representation of code lines compiling -->
+                    <line x1="187" y1="189" x2="202" y2="189" stroke="#ff7b72" stroke-width="1.5"
+                        stroke-linecap="round" />
+                    <line x1="187" y1="195" x2="215" y2="195" stroke="#3fb950" stroke-width="1.5"
+                        stroke-linecap="round" />
+                    <line x1="187" y1="201" x2="210" y2="201" stroke="#d2a8ff" stroke-width="1.5"
+                        stroke-linecap="round" />
+                    <line x1="187" y1="207" x2="197" y2="207" stroke="#58a6ff" stroke-width="1.5"
+                        stroke-linecap="round" />
+
+                    <!-- Keyboard panel -->
+                    <polygon points="172,215 238,215 233,219 177,219" fill="#161b22" stroke="#58a6ff"
+                        stroke-width="1.5" />
+                </g>
+
+                <!-- 5. Foreground layer: Redesigned Dog head, snout, hat, and arms on desk -->
+                <g filter="url(#neon-glow)">
+                    <!-- Smooth detailed Dog Head -->
+                    <path d="M 112 142 C 112 120, 168 120, 168 142 C 168 165, 112 165, 112 142 Z" fill="#090c10"
+                        stroke="#c9d1d9" stroke-width="2" />
+
+                    <!-- Dog Ears - Floppy and relaxed -->
+                    <path d="M 113 130 C 103 130, 98 152, 107 158" fill="#090c10" stroke="#c9d1d9" stroke-width="1.8"
+                        stroke-linecap="round" />
+                    <path d="M 167 130 C 177 130, 182 152, 173 158" fill="#090c10" stroke="#c9d1d9" stroke-width="1.8"
+                        stroke-linecap="round" />
+
+                    <!-- Snout & Smile of acceptance -->
+                    <ellipse cx="140" cy="153" rx="14" ry="9" fill="#090c10" stroke="#c9d1d9" stroke-width="1.8" />
+                    <ellipse cx="140" cy="149" rx="3.5" ry="2.2" fill="#ff7b72" stroke="#ff7b72" />
+                    <!-- Resigned curve smile -->
+                    <path d="M 134 153 Q 140 159, 146 153" fill="none" stroke="#c9d1d9" stroke-width="1.5"
+                        stroke-linecap="round" />
+
+                    <!-- Blank expressive open eyes (Classic 'This is fine' resignation) -->
+                    <circle cx="129" cy="138" r="4.5" fill="#fff" stroke="#c9d1d9" stroke-width="1.5" />
+                    <circle cx="129" cy="138" r="1.5" fill="#0d1117" />
+
+                    <circle cx="151" cy="138" r="4.5" fill="#fff" stroke="#c9d1d9" stroke-width="1.5" />
+                    <circle cx="151" cy="138" r="1.5" fill="#0d1117" />
+
+                    <!-- Left Arm resting over desk holding mug -->
+                    <path d="M 120 178 Q 90 182, 84 203" fill="none" stroke="#c9d1d9" stroke-width="2"
+                        stroke-linecap="round" />
+                    <!-- Right Arm typing on keyboard -->
+                    <path d="M 160 178 Q 185 190, 192 214" fill="none" stroke="#c9d1d9" stroke-width="2"
+                        stroke-linecap="round" />
+
+                    <!-- Stylish Emerald Bowler Programmer Hat -->
+                    <path d="M 122 121 L 158 121 L 153 111 L 127 111 Z" fill="#090c10" stroke="var(--syntax-green)"
+                        stroke-width="2" />
+                    <line x1="114" y1="121" x2="166" y2="121" stroke="var(--syntax-green)" stroke-width="2.5"
+                        stroke-linecap="round" />
+                </g>
+            </svg>
+        </div>
+
+        <!-- Dashboard Console Control Buttons -->
+        <div class="controls-panel">
+            <button class="outline-btn btn-stress" id="stressBtn">STRESS_TEST()</button>
+            <button class="outline-btn btn-fix" id="fixBtn">DEPLOY_HOTFIX()</button>
+        </div>
+
+        <!-- Terminal Status Bar -->
+        <div class="widget-footer">
+            <div id="statusLabel">STATUS: PROD_ON_FIRE</div>
+            <div id="errorRateLabel">ERRORS: 100%</div>
+        </div>
+    </div>
+
+    <script src="src/this-is-fine-page.js"></script>
+</body>
+
+</html>

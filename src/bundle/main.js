@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
     initLanguage();
     initHeroTypewriter();
     initProjectTyping();
+    initAchievements();
     initEasterEgg();
     initKonami();
     init404Trigger();
+    initFineTrigger();
 });

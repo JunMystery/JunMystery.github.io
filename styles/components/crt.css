@@ -116,11 +116,48 @@ html.crt-mode body::after {
   );
 }
 
-/* ---- 5. Phosphor glow on headings ---- */
+/* ---- 5. CRT tube effect — hero-title always in full CRT style ---- */
+.hero-title {
+  position: relative;
+  text-shadow:
+    0 0 6px  rgba(255, 200, 100, 0.18),
+    0 0 14px rgba(255, 200, 100, 0.10),
+    0 0 30px rgba(255, 200, 100, 0.04);
+  animation: hero-crt-hint 3s ease-in-out infinite;
+}
+
+/* Scanline overlay on hero title text only */
+.hero-title::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+  animation: hero-scan-pulse 3s ease-in-out infinite;
+}
+
+/* Glow pulse: text-shadow intensity oscillates to create a visible "breathe" */
+@keyframes hero-crt-hint {
+  0%, 100% { text-shadow: 0 0 6px rgba(255,200,100,0.18), 0 0 14px rgba(255,200,100,0.10), 0 0 30px rgba(255,200,100,0.04); }
+  50%      { text-shadow: 0 0 8px rgba(255,200,100,0.35), 0 0 20px rgba(255,200,100,0.20), 0 0 40px rgba(255,200,100,0.08); }
+}
+
+/* Scanline fade: overlay opacity shifts to make the texture appear to breathe */
+@keyframes hero-scan-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+
 html.crt-mode h1,
 html.crt-mode h2,
 html.crt-mode h3,
-html.crt-mode .hero-title,
 html.crt-mode .section-title {
   text-shadow:
     0 0 6px  rgba(255, 200, 100, 0.12),

@@ -28,6 +28,7 @@ var _eggActive = false;
 function triggerRebootGlitch() {
     if (_eggActive) return;
     _eggActive = true;
+    if (typeof _achieve === 'function') _achieve('glitch');
     var T0 = Date.now();
 
     // Phase 1: Screen glitch — long and dramatic (2500ms)

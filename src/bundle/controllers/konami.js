@@ -5,10 +5,16 @@
 
 var _crtActive = false;
 
+var _crtAchieved = false;
+
 function _toggleCrt() {
     _crtActive = !_crtActive;
     document.documentElement.classList.toggle('crt-mode', _crtActive);
     console.log('%c 🕹️ CRT mode ' + (_crtActive ? 'ACTIVATED' : 'DEACTIVATED'), 'color: #0f0; font-weight: bold');
+    if (_crtActive && !_crtAchieved) {
+        _crtAchieved = true;
+        if (typeof _achieve === 'function') _achieve('crt');
+    }
     if (_crtActive && window._easter_egg) {
         console.log('%c Tip: try window._easter_egg() for another surprise', 'color: #8b949e');
     }

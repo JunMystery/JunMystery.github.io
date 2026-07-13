@@ -29,6 +29,14 @@
 .fa-brands,.fab { font-family: 'Font Awesome 6 Brands'; font-weight: 400; }
 .fa-chevron-down:before { content: "\f078"; }
 .fa-moon:before { content: "\f186"; }
+.fa-trophy:before { content: "\f091"; }
+.fa-gamepad:before { content: "\f11b"; }
+.fa-running:before { content: "\f70c"; }
+.fa-bolt:before { content: "\f0e7"; }
+.fa-tv:before { content: "\f26c"; }
+.fa-terminal:before { content: "\f120"; }
+.fa-fire:before { content: "\f06d"; }
+.fa-lock:before { content: "\f023"; }
 .fa-sun:before { content: "\f185"; }
 .fa-bars:before { content: "\f0c9"; }
 .fa-times:before { content: "\f00d"; }
@@ -38,4 +46,3 @@
 .fa-linkedin:before { content: "\f08c"; }
 .fa-github:before { content: "\f09b"; }
 .fa-google-play:before { content: "\f3ab"; }
-.fa-moon:before { content: "\f186"; }
