@@ -21,15 +21,17 @@ function initFineTrigger() {
     });
 
     // Two-finger tap
-    var tapTime = 0;
+    var _fineTwoFinger = false;
+    var _fineTapTime = 0;
     document.addEventListener('touchstart', function (e) {
-        if (e.touches.length === 2) tapTime = Date.now();
+        _fineTwoFinger = e.touches.length === 2;
+        if (_fineTwoFinger) _fineTapTime = Date.now();
     }, { passive: true });
     document.addEventListener('touchend', function (e) {
-        if (e.changedTouches.length === 2 && tapTime > 0 && Date.now() - tapTime < 400) {
+        if (_fineTwoFinger && e.touches.length === 0 && Date.now() - _fineTapTime < 400) {
             showFineWidget();
         }
-        tapTime = 0;
+        if (e.touches.length === 0) _fineTwoFinger = false;
     }, { passive: true });
 
     // Click .trigger-fine elements (footer token)

@@ -97,20 +97,14 @@ canvas {
 }
 .settings-btn:hover { color: #58a6ff; }
 
-/* Controls - side panel for settings icon */
-.controls-side {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
+/* Settings button in game-header far left */
+.gh-left {
     display: flex;
     align-items: center;
-    gap: 10px;
 }
-.controls-divider {
-    width: 1px;
-    height: 70px;
-    background: repeating-linear-gradient(180deg, #21262d 0, #21262d 1px, transparent 1px, transparent 5px);
+.gh-left .settings-btn {
+    font-size: 1.1rem;
+    padding: 0 2px;
 }
 .controls-center {
     display: flex;
