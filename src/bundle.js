@@ -6,8 +6,10 @@
  * regenerate by running: pwsh src/bundle/build.ps1
  */
 
+
+
 // ============================================================
-// Source: src/bundle/locales-en.js (188 lines)
+// Source: src/bundle/locales-en.js (187 lines)
 // ============================================================
 
 // ============================================================
@@ -198,8 +200,9 @@ var LOCALE_EN = {
   "print.objective": "Bridging Infrastructure Engineering and AI-Augmented Development. Human judgment drives every successful project."
 };
 
+
 // ============================================================
-// Source: src/bundle/locales-vi.js (188 lines)
+// Source: src/bundle/locales-vi.js (187 lines)
 // ============================================================
 
 // ============================================================
@@ -390,8 +393,9 @@ var LOCALE_VI = {
   "print.objective": "K\u1ebft n\u1ed1i K\u1ef9 thu\u1eadt H\u1ea1 t\u1ea7ng v\u00e0 Ph\u00e1t tri\u1ec3n H\u1ed7 tr\u1ee3 AI. Ph\u00e1n \u0111o\u00e1n con ng\u01b0\u1eddi d\u1eabn d\u1eaft m\u1ecdi d\u1ef1 \u00e1n th\u00e0nh c\u00f4ng."
 };
 
+
 // ============================================================
-// Source: src/bundle/utils.js (89 lines)
+// Source: src/bundle/utils.js (88 lines)
 // ============================================================
 
 // ============================================================
@@ -483,8 +487,9 @@ function createFooterObserver(threshold) {
     return obs;
 }
 
+
 // ============================================================
-// Source: src/bundle/models.js (45 lines)
+// Source: src/bundle/models.js (44 lines)
 // ============================================================
 
 // ============================================================
@@ -532,8 +537,9 @@ var NAV_SECTIONS = [
     { id: 'certifications', label: 'Certifications' }
 ];
 
+
 // ============================================================
-// Source: src/bundle/i18n-service.js (43 lines)
+// Source: src/bundle/i18n-service.js (42 lines)
 // ============================================================
 
 // ============================================================
@@ -579,8 +585,9 @@ Object.defineProperty(I18nService.prototype, 'currentLang', {
 
 var i18n = new I18nService();
 
+
 // ============================================================
-// Source: src/bundle/controllers\theme.js (23 lines)
+// Source: src/bundle/controllers/theme.js (22 lines)
 // ============================================================
 
 // ============================================================
@@ -606,8 +613,9 @@ function initTheme() {
     });
 }
 
+
 // ============================================================
-// Source: src/bundle/controllers\language.js (64 lines)
+// Source: src/bundle/controllers/language.js (63 lines)
 // ============================================================
 
 // ============================================================
@@ -674,8 +682,9 @@ function initLanguage() {
     bindSwitcher();
 }
 
+
 // ============================================================
-// Source: src/bundle/controllers\nav.js (87 lines)
+// Source: src/bundle/controllers/nav.js (86 lines)
 // ============================================================
 
 // ============================================================
@@ -765,8 +774,9 @@ function initSpotlight() {
     }, { passive: true });
 }
 
+
 // ============================================================
-// Source: src/bundle/controllers\skills.js (23 lines)
+// Source: src/bundle/controllers/skills.js (22 lines)
 // ============================================================
 
 // ============================================================
@@ -792,8 +802,9 @@ function initSkillsTabs() {
     });
 }
 
+
 // ============================================================
-// Source: src/bundle/controllers\career.js (25 lines)
+// Source: src/bundle/controllers/career.js (24 lines)
 // ============================================================
 
 // ============================================================
@@ -821,8 +832,9 @@ function initCareerTabs() {
     });
 }
 
+
 // ============================================================
-// Source: src/bundle/controllers\footer.js (58 lines)
+// Source: src/bundle/controllers/footer.js (57 lines)
 // ============================================================
 
 // ============================================================
@@ -883,8 +895,9 @@ function runTypewriter() {
     nextLine();
 }
 
+
 // ============================================================
-// Source: src/bundle/controllers\reveal.js (61 lines)
+// Source: src/bundle/controllers/reveal.js (60 lines)
 // ============================================================
 
 // ============================================================
@@ -948,8 +961,9 @@ function initScrollProgress() {
     }, { passive: true });
 }
 
+
 // ============================================================
-// Source: src/bundle/controllers\hero.js (30 lines)
+// Source: src/bundle/controllers/hero.js (29 lines)
 // ============================================================
 
 // ============================================================
@@ -982,8 +996,362 @@ function initHeroTypewriter() {
     typeChar();
 }
 
+
 // ============================================================
-// Source: src/bundle/controllers\projects.js (40 lines)
+// Source: src/bundle/controllers/easter-egg.js (177 lines)
+// ============================================================
+
+// ============================================================
+// controllers/easter-egg.js — Console greeting + reboot glitch
+// Self-contained (no external deps)
+// ============================================================
+
+function initEasterEgg() {
+    // --- Console greeting ---
+    var greeting = [
+        '',
+        '  __  __           _     _               _  ',
+        ' |  \\/  |_   _  ___(_)___| |_ _ __ __ _ | |___',
+        ' | |\\/| | | | |/ __| / __| __| \'__/ _` || / __|',
+        ' | |  | | |_| |\\__ \\ \\__ \\ |_| | | (_| || \\__ \\',
+        ' |_|  |_|\\__, |___/_|___/\\__|_|  \\__,_|/ |___/',
+        '         |___/  v1.0              |__/ ',
+        '',
+        ' > try window._easter_egg() to unlock a surprise.',
+        ''
+    ].join('\n');
+    console.log(greeting);
+
+    // --- Expose easter egg ---
+    window._easter_egg = triggerRebootGlitch;
+}
+
+var _eggActive = false;
+
+function triggerRebootGlitch() {
+    if (_eggActive) return;
+    _eggActive = true;
+    var T0 = Date.now();
+
+    // Phase 1: Screen glitch — long and dramatic (2500ms)
+    document.body.classList.add('glitching');
+    // Pulse intensity mid-glitch
+    setTimeout(function () { document.body.style.filter = 'brightness(1.6) hue-rotate(180deg)'; }, 800);
+    setTimeout(function () { document.body.style.filter = ''; }, 1400);
+    setTimeout(function () { document.body.style.filter = 'brightness(0.3) hue-rotate(90deg)'; }, 1800);
+    setTimeout(function () { document.body.style.filter = ''; }, 2200);
+
+    // Console boot sequence — slower, more dramatic
+    console.log('');
+    console.log('%c ⚡ INITIALIZING REBOOT SEQUENCE...', 'color: #0f0; font-weight: bold; font-size: 14px');
+    var bootMsgs = [
+        '> [██████░░░░░░░░░░░░]  27%  — scanning node_modules...',
+        '> [██████████░░░░░░░░]  45%  — recompiling skills module...',
+        '> [██████████████░░░░]  67%  — optimizing career trajectory...',
+        '> [████████████████░░]  85%  — rebuilding bundle...',
+        '> [██████████████████] 100%  — done.',
+        '> System ready. Have a nice day.'
+    ];
+    bootMsgs.forEach(function (msg, i) {
+        setTimeout(function () {
+            console.log('%c ' + msg, 'color: #0f0');
+        }, 200 + i * 500);
+    });
+
+    // Phase 2: Matrix rain overlay (starts at 2500ms, lasts 3000ms)
+    var rainTimeout = setTimeout(function () {
+        var canvas = createRainCanvas();
+        document.body.appendChild(canvas);
+        var rainProps = startRain(canvas);
+
+        // Mid-rain wave effect (shift to cyan at 1500ms)
+        setTimeout(function () {
+            rainProps.setColor('#0ff');
+        }, 1500);
+
+        // Phase 3: Boot messages typed onto canvas, then recovery
+        setTimeout(function () {
+            rainProps.stop();
+
+            // Type final messages onto the canvas
+            var bootLines = [
+                '> ALL SYSTEMS NOMINAL.',
+                '> MEMORY: 0xDEADBEEF bytes free.',
+                '> PORTFOLIO KERNEL v1.0 ready.',
+                '> Press any key to continue...'
+            ];
+            var lineY = canvas.height / 2 - 40;
+            var lineIdx = 0;
+            function typeNextLine() {
+                if (lineIdx >= bootLines.length) {
+                    // Fade out
+                    canvas.classList.add('rain-fadeout');
+                    setTimeout(function () {
+                        if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
+                        document.body.classList.remove('glitching');
+                        document.body.classList.add('rebooted');
+                        setTimeout(function () {
+                            document.body.classList.remove('rebooted');
+                            _eggActive = false;
+                        }, 700);
+                    }, 600);
+                    return;
+                }
+                var line = bootLines[lineIdx];
+                var ctx = canvas.getContext('2d');
+                var col = 0;
+                function typeChar() {
+                    if (col >= line.length) {
+                        lineIdx++;
+                        lineY += 30;
+                        setTimeout(typeNextLine, 400);
+                        return;
+                    }
+                    ctx.fillStyle = '#0f0';
+                    ctx.font = '16px monospace';
+                    ctx.fillText(line[col], 60 + col * 10, lineY);
+                    col++;
+                    setTimeout(typeChar, 40 + Math.random() * 30);
+                }
+                typeChar();
+            }
+            typeNextLine();
+        }, 3000);
+    }, 2500);
+
+    // Safety: force cleanup after 12s no matter what
+    setTimeout(function () {
+        if (_eggActive) {
+            var canvases = document.querySelectorAll('.rain-canvas');
+            canvases.forEach(function (c) { if (c.parentNode) c.parentNode.removeChild(c); });
+            document.body.classList.remove('glitching', 'rebooted');
+            document.body.style.filter = '';
+            _eggActive = false;
+        }
+    }, 12000);
+}
+
+// --- Matrix rain ---
+function createRainCanvas() {
+    var canvas = document.createElement('canvas');
+    canvas.className = 'rain-canvas';
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:10000;pointer-events:none;opacity:0;transition:opacity 0.3s;';
+    // Fade in on next frame
+    requestAnimationFrame(function () { canvas.style.opacity = '0.85'; });
+    return canvas;
+}
+
+function startRain(canvas) {
+    var ctx = canvas.getContext('2d');
+    var cols = Math.floor(canvas.width / 14);
+    var drops = [];
+    for (var i = 0; i < cols; i++) drops[i] = 1;
+
+    var chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789';
+    var currentColor = '#0f0';
+    var running = true;
+
+    function draw() {
+        if (!running) return;
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = currentColor;
+        ctx.font = '14px monospace';
+
+        for (var i = 0; i < drops.length; i++) {
+            var char = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillText(char, i * 14, drops[i] * 14);
+            if (drops[i] * 14 > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+        _rainRaf = requestAnimationFrame(draw);
+    }
+
+    var _rainRaf = requestAnimationFrame(draw);
+
+    return {
+        stop: function () { running = false; if (_rainRaf) cancelAnimationFrame(_rainRaf); },
+        setColor: function (c) { currentColor = c; }
+    };
+}
+
+
+// ============================================================
+// Source: src/bundle/controllers/konami.js (56 lines)
+// ============================================================
+
+// ============================================================
+// controllers/konami.js — Konami code + triple-tap toggle CRT mode
+// No external deps
+// ============================================================
+
+var _crtActive = false;
+
+function _toggleCrt() {
+    _crtActive = !_crtActive;
+    document.documentElement.classList.toggle('crt-mode', _crtActive);
+    console.log('%c 🕹️ CRT mode ' + (_crtActive ? 'ACTIVATED' : 'DEACTIVATED'), 'color: #0f0; font-weight: bold');
+    if (_crtActive && window._easter_egg) {
+        console.log('%c Tip: try window._easter_egg() for another surprise', 'color: #8b949e');
+    }
+}
+
+function initKonami() {
+    // --- Desktop: Konami code (↑↑↓↓←→←→) ---
+    var konamiCode = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight'];
+    var idx = 0;
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === konamiCode[idx]) {
+            idx++;
+            if (idx === konamiCode.length) {
+                idx = 0;
+                _toggleCrt();
+            }
+        } else {
+            idx = 0;
+        }
+    });
+
+    // --- Mobile: Triple-tap hero title ---
+    // First tap: toggle CRT on. Second tap (CRT active): redirect to 404 game.
+    var title = document.querySelector('.hero-title');
+    if (title) {
+        var tapCount = 0;
+        var tapTimer = null;
+        title.addEventListener('click', function (e) {
+            tapCount++;
+            if (tapCount === 1) {
+                tapTimer = setTimeout(function () { tapCount = 0; }, 2000);
+            }
+            if (tapCount >= 3) {
+                tapCount = 0;
+                if (tapTimer) clearTimeout(tapTimer);
+                if (_crtActive) {
+                    window.location.href = 'game/404-runner-game.html';
+                } else {
+                    _toggleCrt();
+                }
+            }
+        });
+    }
+}
+
+
+// ============================================================
+// Source: src/bundle/controllers/404-trigger.js (102 lines)
+// ============================================================
+
+// ============================================================
+// controllers/404-trigger.js — Navigation triggers to 404 runner game
+// No external deps
+// ============================================================
+
+function init404Trigger() {
+    var gameUrl = 'game/404-runner-game.html';
+
+    // === Trigger 1: URL param ?game=404 ===
+    if (location.search.indexOf('game=404') !== -1) {
+        location.href = gameUrl;
+        return;
+    }
+
+    // === Trigger 2: Hash fragment #404 ===
+    if (location.hash === '#404') {
+        location.href = gameUrl;
+        return;
+    }
+
+    // === Trigger 3: "exit" key sequence ===
+    var exitSeq = ['e', 'x', 'i', 't'];
+    var exitIdx = 0;
+    document.addEventListener('keydown', function (e) {
+        if (e.key === exitSeq[exitIdx]) {
+            exitIdx++;
+            if (exitIdx === exitSeq.length) {
+                exitIdx = 0;
+                go404();
+            }
+        } else {
+            exitIdx = 0;
+        }
+    });
+
+    // === Trigger 4: Idle 30s → floating [404?] prompt ===
+    var idleTimer = null;
+    var idlePrompt = null;
+    var idleTimeout = 30000;
+
+    function resetIdle() {
+        if (idlePrompt) {
+            if (idlePrompt.parentNode) idlePrompt.parentNode.removeChild(idlePrompt);
+            idlePrompt = null;
+        }
+        if (idleTimer) clearTimeout(idleTimer);
+        idleTimer = setTimeout(showIdlePrompt, idleTimeout);
+    }
+
+    function showIdlePrompt() {
+        if (idlePrompt) return;
+        idlePrompt = document.createElement('a');
+        idlePrompt.href = '#';
+        idlePrompt.textContent = '[404?]';
+        idlePrompt.style.cssText = [
+            'position:fixed',
+            'bottom:20px',
+            'right:20px',
+            'z-index:9999',
+            'font-family:"Fira Code","Cascadia Code","JetBrains Mono",monospace',
+            'font-size:11px',
+            'color:rgba(139,148,158,0.4)',
+            'text-decoration:none',
+            'cursor:pointer',
+            'transition:color 0.3s',
+            'opacity:0',
+        ].join(';') + ';';
+
+        idlePrompt.addEventListener('mouseenter', function () {
+            idlePrompt.style.color = 'rgba(139,148,158,1)';
+        });
+        idlePrompt.addEventListener('mouseleave', function () {
+            idlePrompt.style.color = 'rgba(139,148,158,0.4)';
+        });
+        idlePrompt.addEventListener('click', function (e) {
+            e.preventDefault();
+            go404();
+        });
+        // Make visible on next frame for fade transition
+        document.body.appendChild(idlePrompt);
+        requestAnimationFrame(function () {
+            idlePrompt.style.transition = 'opacity 0.8s';
+            idlePrompt.style.opacity = '1';
+        });
+    }
+
+    // Activity resets the idle timer
+    document.addEventListener('mousemove', resetIdle);
+    document.addEventListener('keydown', resetIdle);
+    document.addEventListener('touchstart', resetIdle);
+    document.addEventListener('scroll', resetIdle);
+
+    // Start idle timer
+    resetIdle();
+
+    // === Trigger 5: Console function ===
+    window._404 = go404;
+}
+
+function go404() {
+    window.location.href = 'game/404-runner-game.html';
+}
+
+
+// ============================================================
+// Source: src/bundle/controllers/projects.js (39 lines)
 // ============================================================
 
 // ============================================================
@@ -1026,8 +1394,9 @@ function typeDescription(el) {
     el.textContent = text;
 }
 
+
 // ============================================================
-// Source: src/bundle/main.js (20 lines)
+// Source: src/bundle/main.js (22 lines)
 // ============================================================
 
 // ============================================================
@@ -1048,8 +1417,12 @@ document.addEventListener('DOMContentLoaded', function () {
     initLanguage();
     initHeroTypewriter();
     initProjectTyping();
+    initEasterEgg();
+    initKonami();
+    init404Trigger();
 });
 
+
 // ============================================================
-// End of bundle.js (984 total lines from 15 modules)
+// End of bundle.js (1307 total lines from 18 modules)
 // ============================================================

@@ -1,0 +1,91 @@
+/* ─── 404 Runner: Game-specific tokens ─── */
+:root {
+    --bg-color: #0d1117;
+    --terminal-bg: #161b22;
+    --border-color: #30363d;
+    --text-accent: #58a6ff;
+    --syntax-keyword: #ff7b72;
+    --syntax-var: #ffa657;
+    --syntax-comment: #8b949e;
+    --syntax-number: #d2a8ff;
+    --syntax-success: #7ee787;
+    --font-stack: 'Fira Code', 'Consolas', 'Courier New', monospace;
+}
+
+* { box-sizing: border-box; touch-action: manipulation; }
+
+/* ─── Syntax coloring ─── */
+.keyword  { color: var(--syntax-keyword); }
+.variable { color: var(--syntax-var); }
+.number   { color: var(--syntax-number); }
+.comment  { color: var(--syntax-comment); }
+.success-text { color: var(--syntax-success); }
+.error-text   { color: var(--syntax-keyword); }
+.code-line { line-height: 1.5; }
+
+/* ─── IDE Dashboard ─── */
+.ide-dashboard {
+    padding: 10px 12px;
+    background-color: #1e222a;
+    border-bottom: 2px solid #15181f;
+    font-size: 11px;
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+    font-family: var(--font-stack);
+}
+
+/* ─── Canvas ─── */
+canvas {
+    aspect-ratio: 19 / 10;
+    max-width: 380px;
+}
+
+/* ─── Scanlines ─── */
+.scanlines {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.25) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* ─── Blink animation ─── */
+.blink { animation: blinker 1.2s linear infinite; }
+@keyframes blinker { 50% { opacity: 0; } }
+
+.mobile-controls-panel .console-layout {
+    justify-content: center;
+}
+
+/* ─── Jump button (flap-style round button) ─── */
+.action-btn-jump {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 2px solid var(--syntax-success);
+    color: var(--syntax-success);
+    font-family: var(--font-stack);
+    font-weight: 900;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.1s, border-color 0.1s, color 0.1s;
+}
+.action-btn-jump * { pointer-events: none; }
+.action-btn-jump:active {
+    background-color: rgba(126, 231, 135, 0.12);
+    border-color: #5cbf6b;
+    color: #5cbf6b;
+}
+.boost-text {
+    font-size: 9px;
+    margin-top: 4px;
+    font-weight: bold;
+}

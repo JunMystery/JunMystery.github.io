@@ -20,7 +20,7 @@
             background: #0d1117;
             border: 1px solid #21262d;
             border-radius: 8px;
-            max-width: 520px;
+            max-width: 480px;
             width: 100%;
             overflow: hidden;
         }
@@ -42,6 +42,8 @@
         .prompt { color: #58a6ff; font-weight: 700; }
         .error { color: #ff6b6b; }
         .muted { color: #484f58; margin: 0.3rem 0; }
+        .cursor { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
         .btn {
             display: inline-block;
             margin-top: 1rem;
@@ -54,8 +56,12 @@
             transition: background 0.15s;
         }
         .btn:hover { background: rgba(88, 166, 255, 0.1); }
-        .cursor { animation: blink 1s step-end infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
+        .btn-success {
+            border-color: #7ee787;
+            color: #7ee787;
+            margin-left: 0.5rem;
+        }
+        .btn-success:hover { background: rgba(126, 231, 135, 0.1); }
     </style>
 </head>
 <body>
@@ -72,8 +78,11 @@
             <p><span class="prompt">$</span> <span id="path-display">curl -I /unknown</span></p>
             <p><span class="error">HTTP/1.1 404 Not Found</span></p>
             <p class="muted">...</p>
-            <p><span class="prompt">$</span> <span id="msg">redirecting to / <span class="cursor">█</span></span></p>
-            <p><a href="/index.html" class="btn">> cd ~ && return</a></p>
+            <p><span class="prompt">$</span> <span id="msg">redirecting to 404_runner.sh <span class="cursor">█</span></span></p>
+            <p>
+                <a href="game/404-runner-game.html" class="btn">> run 404_runner.sh</a>
+                <a href="index.html" class="btn btn-success">> cd ~ && return</a>
+            </p>
         </div>
     </div>
     <script>
@@ -81,13 +90,9 @@
         if (pathEl) {
             pathEl.textContent = 'curl -I ' + window.location.pathname;
         }
-        var redirectMsg = document.getElementById('msg');
-        if (redirectMsg) {
-            redirectMsg.textContent = 'redirecting to / ...';
-        }
         setTimeout(function () {
-            window.location.replace('index.html');
-        }, 800);
+            window.location.replace('game/404-runner-game.html');
+        }, 2500);
     </script>
 </body>
 </html>

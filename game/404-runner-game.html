@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>404 Runner: HTTP Error Escape v1.0.0</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/pages/404-runner-game.css">
+    <link rel="stylesheet" href="../styles/pages/game-layout.css">
+</head>
+
+<body class="game-body">
+
+    <div class="breadcrumb">
+        <a href="../index.html">~/portfolio</a>
+        <span class="sep">/</span>
+        <span class="current">404_runner.sh</span>
+    </div>
+
+    <div class="ide-container">
+        <div class="ide-header">
+            <div class="window-controls">
+                <div class="dot dot-red"></div>
+                <div class="dot dot-yellow"></div>
+                <div class="dot dot-green"></div>
+            </div>
+            <div class="file-tab">
+                <span>SHELL</span> 404_runner.sh
+            </div>
+            <div style="width: 40px;"></div>
+        </div>
+
+        <div class="ide-dashboard">
+            <div style="display: flex; justify-content: space-between; width: 100%;">
+                <div class="code-line">
+                    <span class="keyword">const</span> <span class="variable">lines_compiled</span> = <span
+                        class="number" id="score">0</span>;
+                </div>
+                <div class="code-line">
+                    <span class="keyword">let</span> <span class="variable">warnings_resolved</span> = <span
+                        class="number" id="warnings">0</span>;
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper" id="gameFrame" style="cursor: pointer;">
+            <canvas id="gameCanvas" width="380" height="200"></canvas>
+            <div class="scanlines"></div>
+
+            <div class="overlay-screen" id="menuOverlay">
+                <div class="overlay-title success-text">&gt; ./404_runner.sh --mode=play</div>
+                <p class="blink">Tap Screen or JUMP Button to Start</p>
+                <div class="instructions">
+                    Navigate the <span class="keyword">_cursor</span> through the broken pipeline.<br>
+                    Jump over <span class="error-text">HTTP error codes</span> to reach the next endpoint.<br>
+                    Lines compiled increase as you survive longer.<br>
+                    Pipeline speed increases over each request cycle!
+                </div>
+            </div>
+
+            <div class="overlay-screen" id="gameOverOverlay" style="display: none;">
+                <div class="overlay-title error-text">&gt; HTTP/1.1 404 Not Found</div>
+                <p style="margin-bottom: 5px; font-size: 13px;">FATAL_EXCEPTION: Build crashed on unexpected status
+                    code.</p>
+                <p class="blink" style="font-size: 12px; color: var(--syntax-var);">Tap Screen or Press R to Retry</p>
+                <div class="instructions" id="finalMetrics"></div>
+            </div>
+        </div>
+
+        <div class="mobile-controls-panel">
+            <div class="console-layout">
+                <button class="action-btn-jump" id="jumpBtn">
+                    <span>▲</span>
+                    <span class="boost-text">JUMP</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="ide-footer">
+            <div id="statusText">STATUS: SLEEP</div>
+            <div id="statusRight">RUNNER: INERT</div>
+        </div>
+    </div>
+
+    <script src="../src/404-runner-game.js"></script>
+</body>
+
+</html>

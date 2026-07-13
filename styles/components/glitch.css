@@ -1,0 +1,43 @@
+/* ============================================================
+   components/glitch.css — Easter egg screen shake + recovery
+   ============================================================ */
+
+/* Phase 1: screen shake + hue flash (2.5s dramatic glitch) */
+body.glitching {
+  animation: glitch-shake 2.5s ease-in-out;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes glitch-shake {
+   0%, 100% { transform: translate(0); filter: none; }
+   8% { transform: translate(-4px, 2px); filter: hue-rotate(90deg); }
+  16% { transform: translate(3px, -3px); filter: hue-rotate(180deg); }
+  24% { transform: translate(-2px, 4px); filter: brightness(1.5); }
+  32% { transform: translate(5px, -1px); filter: hue-rotate(270deg); }
+  40% { transform: translate(-3px, -2px); filter: brightness(0.4); }
+  48% { transform: translate(2px, 3px); filter: hue-rotate(45deg); }
+  56% { transform: translate(-5px, 1px); filter: brightness(1.3); }
+  64% { transform: translate(1px, -4px); filter: hue-rotate(315deg); }
+  72% { transform: translate(-2px, 2px); filter: brightness(0.6); }
+  80% { transform: translate(4px, -2px); filter: hue-rotate(135deg); }
+  90% { transform: translate(-1px, 1px); filter: brightness(1.1); }
+}
+
+/* Rain canvas fade-out */
+.rain-canvas {
+  transition: opacity 0.4s ease-out;
+}
+.rain-canvas.rain-fadeout {
+  opacity: 0 !important;
+}
+
+/* Phase 3: recovery pulse */
+body.rebooted {
+  animation: glitch-recover 0.5s ease-out;
+}
+
+@keyframes glitch-recover {
+   0% { filter: brightness(1.5) hue-rotate(120deg); opacity: 0.95; }
+  100% { filter: none; opacity: 1; }
+}
