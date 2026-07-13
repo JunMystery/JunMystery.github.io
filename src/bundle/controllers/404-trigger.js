@@ -95,6 +95,15 @@ function init404Trigger() {
 
     // === Trigger 5: Console function ===
     window._404 = go404;
+
+    // === Trigger 6: Click/tap .trigger-404 elements (footer token + hero badge) ===
+    document.body.addEventListener('click', function (e) {
+        var target = e.target.closest('.trigger-404');
+        if (target) {
+            e.preventDefault();
+            go404();
+        }
+    });
 }
 
 function go404() {

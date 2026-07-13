@@ -489,7 +489,7 @@ function createFooterObserver(threshold) {
 
 
 // ============================================================
-// Source: src/bundle/models.js (44 lines)
+// Source: src/bundle/models.js (45 lines)
 // ============================================================
 
 // ============================================================
@@ -526,7 +526,8 @@ var FOOTER_LINES = [
         { text: 'output', cls: 'terminal-keyword' },
         { text: ': ', cls: '' },
         { text: 'production-grade', cls: 'terminal-orange' },
-        { text: '; }', cls: '' }
+        { text: '; }', cls: '' },
+        { text: ' [404]', cls: 'trigger-404' }
     ]}
 ];
 
@@ -1238,7 +1239,7 @@ function initKonami() {
 
 
 // ============================================================
-// Source: src/bundle/controllers/404-trigger.js (102 lines)
+// Source: src/bundle/controllers/404-trigger.js (111 lines)
 // ============================================================
 
 // ============================================================
@@ -1338,6 +1339,15 @@ function init404Trigger() {
 
     // === Trigger 5: Console function ===
     window._404 = go404;
+
+    // === Trigger 6: Click/tap .trigger-404 elements (footer token + hero badge) ===
+    document.body.addEventListener('click', function (e) {
+        var target = e.target.closest('.trigger-404');
+        if (target) {
+            e.preventDefault();
+            go404();
+        }
+    });
 }
 
 function go404() {
@@ -1419,5 +1429,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // ============================================================
-// End of bundle.js (1302 total lines from 18 modules)
+// End of bundle.js (1312 total lines from 18 modules)
 // ============================================================
