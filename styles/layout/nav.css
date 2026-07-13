@@ -193,7 +193,7 @@
         align-items: flex-start;
         padding: 2rem;
         gap: 2rem;
-        transition: var(--transition);
+        transition: transform 0.2s ease, right 0.2s ease;
         z-index: 99;
     }
     .nav-menu.active {

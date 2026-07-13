@@ -918,7 +918,7 @@ function runTypewriter() {
 }
 
 // ============================================================
-// Source: controllers/reveal.js (62 lines)
+// Source: controllers/reveal.js (65 lines)
 // ============================================================
 
 // ============================================================
@@ -927,6 +927,9 @@ function runTypewriter() {
 // ============================================================
 
 function initReveal() {
+    var isMobile = window.matchMedia('(max-width: 768px)').matches;
+    var threshold = isMobile ? 0.05 : TIMING.REVEAL_THRESHOLD;
+    var rootMargin = isMobile ? '0px 0px -10px 0px' : TIMING.REVEAL_MARGIN;
     var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
             if (!entry.isIntersecting) return;
@@ -940,7 +943,7 @@ function initReveal() {
                 }
             }
         });
-    }, { threshold: TIMING.REVEAL_THRESHOLD, rootMargin: TIMING.REVEAL_MARGIN });
+    }, { threshold: threshold, rootMargin: rootMargin });
 
     $$('.reveal, .reveal-stagger, .reveal-hero, .reveal-terminal').forEach(function (el) {
         observer.observe(el);
@@ -985,7 +988,7 @@ function initScrollProgress() {
 }
 
 // ============================================================
-// Source: controllers/hero.js (90 lines)
+// Source: controllers/hero.js (91 lines)
 // ============================================================
 
 // ============================================================
@@ -994,6 +997,7 @@ function initScrollProgress() {
 // ============================================================
 
 var _heroTyped = sessionStorage.getItem('hero_typed');
+var _isMobile = window.matchMedia('(max-width: 768px)').matches;
 
 function initHeroTypewriter() {
     var el = $('[data-typewriter]');
@@ -1015,7 +1019,7 @@ function initHeroTypewriter() {
     var textSpan = el.querySelector('.typewriter-text');
     if (!textSpan) return;
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || _isMobile) {
         textSpan.textContent = text;
         sessionStorage.setItem('hero_typed', '1');
         triggerHeroGlitch();
@@ -1058,7 +1062,7 @@ function typeTagline() {
     if (stored) return;
 
     tagline.textContent = '';
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || _isMobile) {
         tagline.textContent = text;
         sessionStorage.setItem('tagline_typed', '1');
         return;
@@ -2226,5 +2230,5 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // ============================================================
-// End of bundle.js (2110 total lines from 22 modules)
+// End of bundle.js (2114 total lines from 22 modules)
 // ============================================================

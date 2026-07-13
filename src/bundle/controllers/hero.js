@@ -4,6 +4,7 @@
 // ============================================================
 
 var _heroTyped = sessionStorage.getItem('hero_typed');
+var _isMobile = window.matchMedia('(max-width: 768px)').matches;
 
 function initHeroTypewriter() {
     var el = $('[data-typewriter]');
@@ -25,7 +26,7 @@ function initHeroTypewriter() {
     var textSpan = el.querySelector('.typewriter-text');
     if (!textSpan) return;
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || _isMobile) {
         textSpan.textContent = text;
         sessionStorage.setItem('hero_typed', '1');
         triggerHeroGlitch();
@@ -68,7 +69,7 @@ function typeTagline() {
     if (stored) return;
 
     tagline.textContent = '';
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || _isMobile) {
         tagline.textContent = text;
         sessionStorage.setItem('tagline_typed', '1');
         return;

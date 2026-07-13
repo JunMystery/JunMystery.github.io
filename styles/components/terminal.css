@@ -63,6 +63,13 @@
     box-shadow: 0 4px 20px rgba(88, 166, 255, 0.08);
 }
 
+@media (max-width: 768px) {
+    .terminal-window {
+        animation: none;
+        will-change: auto;
+    }
+}
+
 @keyframes terminalGlow {
     0%, 100% { box-shadow: var(--shadow-md); }
     50% { box-shadow: 0 4px 24px rgba(88, 166, 255, 0.04), var(--shadow-md); }

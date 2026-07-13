@@ -4,6 +4,9 @@
 // ============================================================
 
 function initReveal() {
+    var isMobile = window.matchMedia('(max-width: 768px)').matches;
+    var threshold = isMobile ? 0.05 : TIMING.REVEAL_THRESHOLD;
+    var rootMargin = isMobile ? '0px 0px -10px 0px' : TIMING.REVEAL_MARGIN;
     var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
             if (!entry.isIntersecting) return;
@@ -17,7 +20,7 @@ function initReveal() {
                 }
             }
         });
-    }, { threshold: TIMING.REVEAL_THRESHOLD, rootMargin: TIMING.REVEAL_MARGIN });
+    }, { threshold: threshold, rootMargin: rootMargin });
 
     $$('.reveal, .reveal-stagger, .reveal-hero, .reveal-terminal').forEach(function (el) {
         observer.observe(el);

@@ -235,4 +235,15 @@
     .hero-title {
         font-size: 2.25rem;
     }
+
+    /* Kill continuous blurred-orb + avatar pulse composites on mobile (scroll jank) */
+    .hero-orb {
+        animation: none;
+        will-change: auto;
+    }
+
+    .hero-avatar {
+        animation: none;
+        will-change: auto;
+    }
 }
