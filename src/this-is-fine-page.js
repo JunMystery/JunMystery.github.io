@@ -9,6 +9,7 @@
     var ctx = canvas.getContext('2d');
     var sceneArea = document.getElementById('sceneArea');
 
+    var ideWidget = document.querySelector('.ide-widget');
     var stressBtn = document.getElementById('stressBtn');
     var fixBtn = document.getElementById('fixBtn');
     var speechBubble = document.getElementById('speechBubble');
@@ -23,13 +24,13 @@
 
     var EXCUSES = [
         "// This is fine.",
-        "No chay tot tren may em.",
-        "Khong co test = Khong co loi.",
-        "No chi la Warning thoi ma.",
-        "Cu merge di, khong conflict dau.",
-        "Cai nay tinh nang, khong phai bug.",
-        "De mai ranh em toi uu lai...",
-        "Ki la that, nay vua duoc ma."
+        "It works on my machine.",
+        "No tests = No bugs.",
+        "It's just a warning, relax.",
+        "Just merge it, no conflicts.",
+        "That's a feature, not a bug.",
+        "I'll optimize it later...",
+        "It was working a minute ago."
     ];
 
     function resizeCanvas() {
@@ -44,6 +45,24 @@
         "FATAL_ERROR", "NullPointer", "STACK_OVERFLOW", "500", "PROD_DOWN",
         "TypeError", "SyntaxError", "CRASH_DUMP", "WARN_MEMORY", "EXIT_1"
     ];
+
+    var binaryDigits = ['0', '1'];
+
+    function typewriter(el, text, speed, callback) {
+        el.textContent = '';
+        var i = 0;
+        speed = speed || 30;
+        function tick() {
+            if (i < text.length) {
+                el.textContent += text.charAt(i);
+                i++;
+                setTimeout(tick, speed);
+            } else if (callback) {
+                callback();
+            }
+        }
+        tick();
+    }
 
     function createParticle() {
         if (isExtinguished) return;
@@ -63,6 +82,21 @@
                 : 'rgba(255, ' + Math.floor(100 + Math.random() * 66) + ', 87, ' + (Math.random() * 0.7 + 0.3) + ')',
             fadeRate: Math.random() * 0.01 + 0.005
         });
+        // Binary rain particles during stress
+        if (intensity > 1.5 && Math.random() < 0.4) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: canvas.height + 20,
+                size: Math.random() * 8 + 6,
+                speedY: (Math.random() * 2 + 1) * (1 + intensity * 0.3),
+                speedX: 0,
+                opacity: 0.9,
+                isText: true,
+                text: binaryDigits[Math.floor(Math.random() * 2)],
+                color: 'rgba(51, 255, 0, ' + (Math.random() * 0.6 + 0.2) + ')',
+                fadeRate: Math.random() * 0.008 + 0.003
+            });
+        }
     }
 
     function updateAndRenderParticles() {
@@ -115,12 +149,17 @@
         targetIntensity = 3.0;
         statusLabel.textContent = 'STATUS: STRESS_OVERFLOW_FATAL';
         statusLabel.style.color = 'var(--fine-keyword)';
-        bubbleText.textContent = 'KHONG SAO DAU. THAT DAY!';
+        typewriter(bubbleText, "Wait, i'm debugging");
 
         sceneArea.style.animation = 'none';
         setTimeout(function () {
             sceneArea.style.animation = 'fine-float-pulse 0.2s ease-in-out 4';
         }, 10);
+
+        ideWidget.classList.remove('glitch');
+        void ideWidget.offsetWidth; // reflow
+        ideWidget.classList.add('glitch');
+        ideWidget.classList.add('stressed');
     });
 
     fixBtn.addEventListener('click', function () {
@@ -128,7 +167,9 @@
         targetIntensity = 0.0;
         statusLabel.textContent = 'STATUS: PATCHING_PRODUCTION...';
         statusLabel.style.color = '#27c93f';
-        bubbleText.textContent = 'Cho ti, em hotfix lien...';
+        typewriter(bubbleText, 'Cho ti, em hotfix lien...');
+
+        ideWidget.classList.remove('stressed');
 
         for (var i = 0; i < 40; i++) {
             particles.push({
@@ -150,13 +191,13 @@
             targetIntensity = 1.0;
             statusLabel.textContent = 'STATUS: PROD_ON_FIRE';
             statusLabel.style.color = '';
-            bubbleText.textContent = EXCUSES[excuseIndex];
+            typewriter(bubbleText, EXCUSES[excuseIndex]);
         }, 4500);
     });
 
     speechBubble.addEventListener('click', function () {
         excuseIndex = (excuseIndex + 1) % EXCUSES.length;
-        bubbleText.textContent = EXCUSES[excuseIndex];
+        typewriter(bubbleText, EXCUSES[excuseIndex]);
     });
 
     function mainLoop() {

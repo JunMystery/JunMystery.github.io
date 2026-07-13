@@ -214,3 +214,108 @@ canvas {
     font-weight: bold;
     user-select: none;
 }
+
+/* ─── Glitch Effect ─── */
+@keyframes glitch {
+    0%   { transform: translate(0); }
+    20%  { transform: translate(-2px, 1px) skewX(-1deg); }
+    40%  { transform: translate(2px, -1px) skewX(1deg); }
+    60%  { transform: translate(-1px, 2px) skewX(-0.5deg); }
+    80%  { transform: translate(1px, -2px) skewX(0.5deg); }
+    100% { transform: translate(0); }
+}
+.ide-widget.glitch {
+    animation: glitch 0.3s ease-in-out 4;
+}
+
+/* ─── Neon Text Glow ─── */
+.file-tab,
+.bubble-text,
+.outline-btn {
+    text-shadow: 0 0 6px currentColor;
+}
+
+/* ─── Button Inversion on Press ─── */
+.btn-stress:active {
+    background-color: var(--fine-keyword);
+    color: #090c10;
+}
+.btn-fix:active {
+    background-color: #27c93f;
+    color: #090c10;
+}
+
+/* ─── Blinking Cursor ─── */
+@keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0; }
+}
+.cursor-blink {
+    animation: blink-cursor 500ms step-end infinite;
+    color: var(--fine-accent);
+    margin-left: 2px;
+}
+
+/* ─── Dog SVG Animations ─── */
+@keyframes dog-blink {
+    0%, 2%, 100% { opacity: 1; }
+    1%           { opacity: 0; }
+}
+.dog-eye {
+    animation: dog-blink 4s ease infinite;
+}
+@keyframes steam-rise {
+    0%   { opacity: 0.6; transform: translateY(0) scale(1); }
+    50%  { opacity: 0.8; transform: translateY(-4px) scale(1.1); }
+    100% { opacity: 0;   transform: translateY(-10px) scale(0.8); }
+}
+.steam-path {
+    animation: steam-rise 2s ease-in-out infinite;
+}
+.steam-path:nth-child(2) { animation-delay: 0.7s; }
+.steam-path:nth-child(3) { animation-delay: 1.4s; }
+@keyframes hat-bounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-1.5px); }
+}
+.hat-group {
+    animation: hat-bounce 1.2s ease-in-out infinite;
+    transform-origin: center bottom;
+}
+.dog-sweat {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.ide-widget.stressed .dog-sweat {
+    opacity: 1;
+}
+.ide-widget.stressed .dog-sweat path {
+    fill: var(--fine-accent);
+}
+.fire-reflection {
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+}
+.ide-widget.stressed .fire-reflection {
+    opacity: 0.3;
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+    .speech-bubble,
+    .cursor-blink,
+    .dog-eye,
+    .steam-path,
+    .hat-group,
+    .ide-widget.glitch,
+    .scanlines {
+        animation: none !important;
+    }
+    canvas {
+        display: none;
+    }
+    .fire-reflection {
+        opacity: 0 !important;
+    }
+}
