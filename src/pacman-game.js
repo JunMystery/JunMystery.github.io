@@ -175,8 +175,8 @@ class Ghost {
             const ny = this.gridY + d.y;
             if (isWall(nx, ny)) return false;
             if (isSpawnerGate(nx, ny, this)) return false;
-            // Allow ghost-ghost passthrough (classic Pac-Man behavior)
-            if (isOccupiedByGhost(nx, ny)) return true;
+            // Block ghost-ghost stacking — ghosts push around each other
+            if (isOccupiedByGhost(nx, ny)) return false;
             return true;
         });
         if (filtered.length === 0 && avoidReverse) {
@@ -185,7 +185,7 @@ class Ghost {
                 const ny = this.gridY + d.y;
                 if (isWall(nx, ny)) return false;
                 if (isSpawnerGate(nx, ny, this)) return false;
-                if (isOccupiedByGhost(nx, ny)) return true;
+                if (isOccupiedByGhost(nx, ny)) return false;
                 return true;
             });
         }
@@ -292,50 +292,22 @@ const ghostBrains = {
         if (dist > 8) return { x: pacman.gridX, y: pacman.gridY };
         else return { x: 0, y: 27 };
     },
-    aggressive: (ghost, pacman, blinky) => ({
-        x: Math.max(0, Math.min(COLS - 1, pacman.gridX - pacman.dirX * 3)),
-        y: Math.max(0, Math.min(ROWS - 1, pacman.gridY - pacman.dirY * 3))
-    }),
-    clumsy: (ghost, pacman, blinky) => {
-        ghost.modeTime--;
-        if (ghost.modeTime <= 0) {
-            ghost.clumsyLost = !ghost.clumsyLost;
-            ghost.modeTime = ghost.clumsyLost ? 150 : 350;
-        }
-        if (ghost.clumsyLost) {
-            const corners = ['blinky', 'pinky', 'inky', 'clyde']
-                .map(p => ghostScatterCorners[p]);
-            return corners[Math.floor(Math.random() * corners.length)];
-        }
-        return { x: pacman.gridX, y: pacman.gridY };
-    },
-    wanderer: (ghost, pacman, blinky) => ({
-        x: Math.floor(Math.random() * COLS),
-        y: Math.floor(Math.random() * ROWS)
-    }),
-    shy: (ghost, pacman, blinky) => ({
-        x: Math.max(0, Math.min(COLS - 1, ghost.gridX + (ghost.gridX - pacman.gridX) * 2)),
-        y: Math.max(0, Math.min(ROWS - 1, ghost.gridY + (ghost.gridY - pacman.gridY) * 2))
-    })
+
 };
 
 const ghostScatterCorners = {
     blinky: { x: 27, y: 0 },
     pinky:  { x: 0, y: 0 },
     inky:   { x: 27, y: 27 },
-    clyde:  { x: 0, y: 27 },
-    aggressive: { x: 27, y: 27 },
-    clumsy: { x: 0, y: 0 },
-    wanderer: { x: 0, y: 27 },
-    shy: { x: 27, y: 0 }
+    clyde:  { x: 0, y: 27 }
 };
 
 // -------------------- Instantiate Ghosts --------------------
 let ghosts = [
     new Ghost("syntax_err", "#ff7b72", 13, 11, 1.05, "CHASE", 0, 'blinky'),
-    new Ghost("type_err", "#ff7dd2", 12, 13, 1.0, "HOUSE", 150, 'clumsy'),
-    new Ghost("link_err", "#58a6ff", 14, 13, 0.95, "HOUSE", 300, 'wanderer'),
-    new Ghost("runtime_err", "#ffa657", 13, 12, 0.9, "HOUSE", 450, 'shy')
+    new Ghost("type_err", "#ff7dd2", 12, 13, 1.0, "HOUSE", 45, 'pinky'),
+    new Ghost("link_err", "#58a6ff", 14, 13, 0.95, "HOUSE", 90, 'inky'),
+    new Ghost("runtime_err", "#ffa657", 13, 12, 0.9, "HOUSE", 135, 'clyde')
 ];
 
 // Global state
@@ -464,9 +436,9 @@ function resetWorkspace() {
 
     // Reset each ghost individually
     ghosts[0].reset(13, 11, "CHASE", 0);
-    ghosts[1].reset(12, 13, "HOUSE", 150);
-    ghosts[2].reset(14, 13, "HOUSE", 300);
-    ghosts[3].reset(13, 12, "HOUSE", 450);
+    ghosts[1].reset(12, 13, "HOUSE", 45);
+    ghosts[2].reset(14, 13, "HOUSE", 90);
+    ghosts[3].reset(13, 12, "HOUSE", 135);
 }
 
 // -------------------- Game Loop --------------------
