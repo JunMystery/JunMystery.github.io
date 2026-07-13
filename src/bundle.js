@@ -1181,7 +1181,7 @@ function startRain(canvas) {
 
 
 // ============================================================
-// Source: src/bundle/controllers/konami.js (56 lines)
+// Source: src/bundle/controllers/konami.js (51 lines)
 // ============================================================
 
 // ============================================================
@@ -1217,8 +1217,7 @@ function initKonami() {
         }
     });
 
-    // --- Mobile: Triple-tap hero title ---
-    // First tap: toggle CRT on. Second tap (CRT active): redirect to 404 game.
+    // --- Mobile: Triple-tap hero title toggles CRT ---
     var title = document.querySelector('.hero-title');
     if (title) {
         var tapCount = 0;
@@ -1231,11 +1230,7 @@ function initKonami() {
             if (tapCount >= 3) {
                 tapCount = 0;
                 if (tapTimer) clearTimeout(tapTimer);
-                if (_crtActive) {
-                    window.location.href = 'game/404-runner-game.html';
-                } else {
-                    _toggleCrt();
-                }
+                _toggleCrt();
             }
         });
     }
@@ -1424,5 +1419,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // ============================================================
-// End of bundle.js (1307 total lines from 18 modules)
+// End of bundle.js (1302 total lines from 18 modules)
 // ============================================================
