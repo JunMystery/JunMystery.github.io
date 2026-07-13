@@ -16,6 +16,12 @@
     --accent-purple: #bc8cff;    /* Syntax Purple */
     --accent-gradient: linear-gradient(135deg, #58a6ff, #bc8cff);
 
+    /* Neon cyberpunk accents */
+    --neon-green: #33FF00;
+    --neon-magenta: #FF00FF;
+    --neon-cyan: #00FFFF;
+    --neon-red: #FF3333;
+
     --font-sans: 'Inter', sans-serif;
     --font-mono: 'Fira Code', monospace;
     --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);

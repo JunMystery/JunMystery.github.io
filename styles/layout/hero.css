@@ -132,6 +132,20 @@
     letter-spacing: -0.02em;
 }
 
+/* Glitch hero — triggered once on load via JS */
+@keyframes glitch-hero {
+    0%, 100% { transform: translate(0) skewX(0); }
+    10% { transform: translate(-3px, 1px) skewX(-2deg); }
+    20% { transform: translate(3px, -1px) skewX(2deg); }
+    30% { transform: translate(-2px, 2px) skewX(-1deg); }
+    40% { transform: translate(2px, -2px) skewX(1deg); }
+    50% { transform: translate(-1px, 1px) skewX(-0.5deg); }
+    60% { transform: translate(0) skewX(0); }
+}
+.hero-title.glitch {
+    animation: glitch-hero 0.4s ease-in-out;
+}
+
 .hero-title span {
     color: var(--accent-primary);
 }
@@ -200,6 +214,14 @@
 
 .h-info-val a:hover {
     text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-orb,
+    .hero-avatar,
+    .hero-title.glitch {
+        animation: none !important;
+    }
 }
 
 @media (max-width: 768px) {

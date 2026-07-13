@@ -10,6 +10,10 @@
     transition: background 0.3s ease, border-color 0.3s ease;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .navbar { transition: none !important; }
+}
+
 .navbar.scrolled {
     background: rgba(var(--bg-secondary-rgb), 0.85);
     backdrop-filter: blur(12px);

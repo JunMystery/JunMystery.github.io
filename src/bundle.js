@@ -842,11 +842,11 @@ function initCareerTabs() {
 }
 
 // ============================================================
-// Source: src/bundle/controllers/footer.js (57 lines)
+// Source: src/bundle/controllers/footer.js (84 lines)
 // ============================================================
 
 // ============================================================
-// controllers/footer.js — Typewriter effect for footer lines
+// controllers/footer.js — Terminal status bar + typewriter intro
 // Depends on: $, SELECTORS, FOOTER_LINES, TIMING (utils.js, models.js)
 // ============================================================
 
@@ -898,9 +898,36 @@ function runTypewriter() {
 
     function nextLine() {
         if (lineIdx < FOOTER_LINES.length) typeTokens(FOOTER_LINES[lineIdx++], 0, 0, nextLine);
+        else startStatusBar();
     }
 
     nextLine();
+}
+
+// ─── Terminal Status Bar ───
+
+var _statusInterval = null;
+var _sessionStart = Date.now();
+
+function startStatusBar() {
+    var bar = document.getElementById('footer-status-bar');
+    if (!bar) return;
+
+    updateStatusBar(bar);
+    _statusInterval = setInterval(function () { updateStatusBar(bar); }, 3000);
+}
+
+function updateStatusBar(bar) {
+    var uptime = Math.floor((Date.now() - _sessionStart) / 1000);
+    var days = Math.floor(uptime / 86400);
+    var hours = Math.floor((uptime % 86400) / 3600);
+    var mem = Math.floor(Math.random() * 30 + 30);
+
+    bar.textContent = ''
+        + '[UPTIME: ' + days + 'd ' + hours + 'h]'
+        + ' [NET: v6]'
+        + ' [MEM: ' + mem + '%]'
+        + ' [ERR: ' + Math.floor(Math.random() * 5) + ']';
 }
 
 // ============================================================
@@ -969,13 +996,15 @@ function initScrollProgress() {
 }
 
 // ============================================================
-// Source: src/bundle/controllers/hero.js (29 lines)
+// Source: src/bundle/controllers/hero.js (78 lines)
 // ============================================================
 
 // ============================================================
-// controllers/hero.js — Hero subtitle typewriter effect
+// controllers/hero.js — Hero typewriter + glitch effects
 // Depends on: $ (utils.js)
 // ============================================================
+
+var _heroTyped = sessionStorage.getItem('hero_typed');
 
 function initHeroTypewriter() {
     var el = $('[data-typewriter]');
@@ -983,6 +1012,15 @@ function initHeroTypewriter() {
 
     var text = el.textContent;
     if (!text) return;
+
+    if (_heroTyped) {
+        // Restore full text if already typed this session
+        el.innerHTML = '<span class="typewriter-text"></span><span class="typewriter-cursor">|</span>';
+        var textSpan = el.querySelector('.typewriter-text');
+        if (textSpan) textSpan.textContent = text;
+        typeTagline();
+        return;
+    }
 
     el.innerHTML = '<span class="typewriter-text"></span><span class="typewriter-cursor">|</span>';
     var textSpan = el.querySelector('.typewriter-text');
@@ -996,6 +1034,44 @@ function initHeroTypewriter() {
             textSpan.textContent += text[charIdx];
             charIdx++;
             setTimeout(typeChar, speed);
+        } else {
+            sessionStorage.setItem('hero_typed', '1');
+            triggerHeroGlitch();
+            typeTagline();
+        }
+    }
+
+    typeChar();
+}
+
+function triggerHeroGlitch() {
+    var title = $('.hero-title');
+    if (!title) return;
+    title.classList.remove('glitch');
+    void title.offsetWidth;
+    title.classList.add('glitch');
+}
+
+function typeTagline() {
+    var tagline = $('.hero-tagline');
+    if (!tagline) return;
+    var text = tagline.textContent;
+    if (!text) return;
+
+    var stored = sessionStorage.getItem('tagline_typed');
+    if (stored) return;
+
+    tagline.textContent = '';
+    var charIdx = 0;
+    var speed = 18;
+
+    function typeChar() {
+        if (charIdx < text.length) {
+            tagline.textContent += text[charIdx];
+            charIdx++;
+            setTimeout(typeChar, speed);
+        } else {
+            sessionStorage.setItem('tagline_typed', '1');
         }
     }
 
@@ -1608,6 +1684,80 @@ function startRain(canvas) {
 }
 
 // ============================================================
+// Source: src/bundle/controllers/boot-splash.js (69 lines)
+// ============================================================
+
+// ============================================================
+// controllers/boot-splash.js — Full-screen terminal boot sequence
+// Plays once per session. Self-contained, no external deps.
+// ============================================================
+
+function initBootSplash() {
+    if (sessionStorage.getItem('boot_played')) return;
+
+    var bootLines = [
+        '> INITIALIZING KERNEL............ [OK]',
+        '> MOUNTING FILESYSTEM............ [OK]',
+        '> STARTING NETWORK SERVICES...... [OK]',
+        '> LOADING PORTFOLIO MODULES...... [DONE]'
+    ];
+
+    var overlay = document.createElement('div');
+    overlay.id = 'boot-splash';
+    overlay.style.cssText = [
+        'position:fixed;top:0;left:0;width:100%;height:100%;',
+        'z-index:10001;',
+        'background:#05070a;',
+        'display:flex;flex-direction:column;',
+        'align-items:center;justify-content:center;',
+        'font-family:"Fira Code","Consolas",monospace;',
+        'font-size:14px;color:#33FF00;',
+        'opacity:1;transition:opacity 0.5s;',
+        'padding:2rem;'
+    ].join('');
+
+    var log = document.createElement('div');
+    log.style.cssText = 'text-align:left;max-width:420px;width:100%;line-height:1.8;';
+    overlay.appendChild(log);
+    document.body.appendChild(overlay);
+
+    var lineIdx = 0;
+    var charIdx = 0;
+
+    function typeLine() {
+        if (lineIdx >= bootLines.length) {
+            sessionStorage.setItem('boot_played', '1');
+            setTimeout(function () {
+                overlay.style.opacity = '0';
+                setTimeout(function () {
+                    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                }, 500);
+            }, 400);
+            return;
+        }
+
+        var line = bootLines[lineIdx];
+        var p = document.createElement('div');
+        log.appendChild(p);
+
+        charIdx = 0;
+        function typeChar() {
+            if (charIdx < line.length) {
+                p.textContent += line[charIdx];
+                charIdx++;
+                setTimeout(typeChar, 15 + Math.random() * 20);
+            } else {
+                lineIdx++;
+                setTimeout(typeLine, 250);
+            }
+        }
+        typeChar();
+    }
+
+    typeLine();
+}
+
+// ============================================================
 // Source: src/bundle/controllers/konami.js (57 lines)
 // ============================================================
 
@@ -2041,7 +2191,7 @@ function typeDescription(el) {
 }
 
 // ============================================================
-// Source: src/bundle/main.js (24 lines)
+// Source: src/bundle/main.js (25 lines)
 // ============================================================
 
 // ============================================================
@@ -2063,6 +2213,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initHeroTypewriter();
     initProjectTyping();
     initAchievements();
+    initBootSplash();
     initEasterEgg();
     initKonami();
     init404Trigger();
@@ -2070,5 +2221,5 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // ============================================================
-// End of bundle.js (1958 total lines from 21 modules)
+// End of bundle.js (2104 total lines from 22 modules)
 // ============================================================

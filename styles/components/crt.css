@@ -186,3 +186,16 @@ html.crt-mode::after {
   pointer-events: none;
   text-shadow: 0 0 4px rgba(0, 255, 0, 0.3);
 }
+
+@media (prefers-reduced-motion: reduce) {
+    html.crt-mode {
+        animation: none !important;
+    }
+    html.crt-mode body::before {
+        animation: none !important;
+    }
+    .hero-title,
+    .hero-title::after {
+        animation: none !important;
+    }
+}

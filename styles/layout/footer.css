@@ -29,3 +29,22 @@
 @keyframes cursor-blink {
     50% { opacity: 0; }
 }
+
+/* Terminal status bar */
+.footer-status-bar {
+    font-size: 0.7rem;
+    color: var(--neon-green, #33FF00);
+    letter-spacing: 0.04em;
+    margin-top: 0.3rem;
+    opacity: 0.8;
+}
+.footer-status-bar::before {
+    content: '$ ';
+    color: var(--text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .footer-status-bar {
+        animation: none !important;
+    }
+}

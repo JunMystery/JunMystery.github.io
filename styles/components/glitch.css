@@ -39,5 +39,15 @@ body.rebooted {
 
 @keyframes glitch-recover {
    0% { filter: brightness(1.5) hue-rotate(120deg); opacity: 0.95; }
-  100% { filter: none; opacity: 1; }
+   100% { filter: none; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.glitching,
+    body.rebooted,
+    .rain-canvas {
+        animation: none !important;
+        transition: none !important;
+    }
+    .rain-canvas { display: none !important; }
 }
