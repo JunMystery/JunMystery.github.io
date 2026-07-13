@@ -32,6 +32,7 @@
 .project-card:hover {
     border-color: var(--neon-green, var(--accent-secondary));
     box-shadow: var(--shadow-md);
+    transition: border-color 0s, box-shadow 0.2s ease;
 }
 
 /* [>] prefix on project title */
