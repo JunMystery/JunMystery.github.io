@@ -51,34 +51,7 @@ function runTypewriter() {
 
     function nextLine() {
         if (lineIdx < FOOTER_LINES.length) typeTokens(FOOTER_LINES[lineIdx++], 0, 0, nextLine);
-        else startStatusBar();
     }
 
     nextLine();
-}
-
-// ─── Terminal Status Bar ───
-
-var _statusInterval = null;
-var _sessionStart = Date.now();
-
-function startStatusBar() {
-    var bar = document.getElementById('footer-status-bar');
-    if (!bar) return;
-
-    updateStatusBar(bar);
-    _statusInterval = setInterval(function () { updateStatusBar(bar); }, 3000);
-}
-
-function updateStatusBar(bar) {
-    var uptime = Math.floor((Date.now() - _sessionStart) / 1000);
-    var days = Math.floor(uptime / 86400);
-    var hours = Math.floor((uptime % 86400) / 3600);
-    var mem = Math.floor(Math.random() * 30 + 30);
-
-    bar.textContent = ''
-        + '[UPTIME: ' + days + 'd ' + hours + 'h]'
-        + ' [NET: v6]'
-        + ' [MEM: ' + mem + '%]'
-        + ' [ERR: ' + Math.floor(Math.random() * 5) + ']';
 }
