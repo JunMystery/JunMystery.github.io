@@ -22,7 +22,7 @@
 .project-card {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
+    border-radius: 0;
     padding: 1.25rem 1.5rem;
     position: relative;
     box-shadow: var(--shadow-sm);
