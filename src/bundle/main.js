@@ -22,4 +22,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initKonami();
     init404Trigger();
     initFineTrigger();
+    initMatrixRain();
+    initPipelineSimulator();
 });

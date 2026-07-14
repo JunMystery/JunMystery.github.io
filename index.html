@@ -29,7 +29,7 @@
             <a href="#" class="logo">const Tu = {}</a>
             <div id="nav-menu" class="nav-menu">
                 <div class="nav-links">
-                    <a href="#about" class="nav-link" data-i18n="nav.about">About</a> <a href="#skills" class="nav-link" data-i18n="nav.skills">Skills</a> <a href="#projects" class="nav-link" data-i18n="nav.projects">Projects</a> <a href="#career" class="nav-link" data-i18n="nav.career">Career</a>
+                    <a href="#about" class="nav-link" data-i18n="nav.about">About</a> <a href="#skills" class="nav-link" data-i18n="nav.skills">Skills</a> <a href="#projects" class="nav-link" data-i18n="nav.projects">Projects</a> <a href="#pipeline-section" class="nav-link" data-i18n="nav.pipeline">Pipeline</a> <a href="#career" class="nav-link" data-i18n="nav.career">Career</a>
                 </div>
                 <div class="nav-actions">
                     <div class="lang-switcher">
@@ -310,6 +310,74 @@
         </div>
     </section>
 
+    <!-- Interactive SDLC Pipeline Section -->
+    <section class="section container reveal-terminal" id="pipeline-section">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <span class="terminal-dot dot-red"></span>
+                    <span class="terminal-dot dot-yellow"></span>
+                    <span class="terminal-dot dot-green"></span>
+                </div>
+                <span class="terminal-title" data-i18n="pipeline.filename">sdlc_pipeline.sh</span>
+                <div class="terminal-actions-right">
+                    <span class="pipeline-status" id="pipeline-status-label" data-i18n="pipeline.status_idle">IDLE</span>
+                </div>
+            </div>
+            <div class="terminal-body-raw">
+                <h2 class="section-title" data-i18n="pipeline.title">AI Agent SDLC Pipeline</h2>
+                
+                <div class="pipeline-controls">
+                    <div class="pipeline-selector-group">
+                        <label for="pipeline-preset" class="pipeline-label" data-i18n="pipeline.preset_label">Select Task:</label>
+                        <select id="pipeline-preset" class="pipeline-select">
+                            <option value="ad-deploy" data-i18n="pipeline.preset_ad">Deploy AD Infrastructure</option>
+                            <option value="mcp-feature" data-i18n="pipeline.preset_mcp">Implement MCP Guidance Search</option>
+                        </select>
+                    </div>
+                    <div class="pipeline-buttons">
+                        <button id="pipeline-run" class="btn btn-primary btn-sm"><i class="fas fa-play"></i> <span data-i18n="pipeline.btn_run">Run</span></button>
+                        <button id="pipeline-pause" class="btn btn-secondary btn-sm" disabled><i class="fas fa-pause"></i> <span data-i18n="pipeline.btn_pause">Pause</span></button>
+                        <button id="pipeline-step" class="btn btn-secondary btn-sm"><i class="fas fa-step-forward"></i> <span data-i18n="pipeline.btn_step">Step</span></button>
+                    </div>
+                    <div class="pipeline-speed-group">
+                        <button class="pipeline-speed-btn" data-speed="fast" data-i18n="pipeline.speed_fast">Fast</button>
+                        <button class="pipeline-speed-btn active" data-speed="normal" data-i18n="pipeline.speed_normal">Normal</button>
+                        <button class="pipeline-speed-btn" data-speed="slow" data-i18n="pipeline.speed_slow">Slow</button>
+                    </div>
+                </div>
+
+                <div class="pipeline-visualizer">
+                    <div class="pipeline-node" id="node-plan">
+                        <div class="node-icon"><i class="fas fa-project-diagram"></i></div>
+                        <div class="node-name" data-i18n="pipeline.node_plan">PLAN</div>
+                    </div>
+                    <div class="pipeline-connector" id="conn-plan-code"></div>
+                    <div class="pipeline-node" id="node-code">
+                        <div class="node-icon"><i class="fas fa-code"></i></div>
+                        <div class="node-name" data-i18n="pipeline.node_code">CODE</div>
+                    </div>
+                    <div class="pipeline-connector" id="conn-code-verify"></div>
+                    <div class="pipeline-node" id="node-verify">
+                        <div class="node-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="node-name" data-i18n="pipeline.node_verify">VERIFY</div>
+                    </div>
+                    <div class="pipeline-connector" id="conn-verify-deploy"></div>
+                    <div class="pipeline-node" id="node-deploy">
+                        <div class="node-icon"><i class="fas fa-rocket"></i></div>
+                        <div class="node-name" data-i18n="pipeline.node_deploy">DEPLOY</div>
+                    </div>
+                </div>
+
+                <div class="pipeline-terminal">
+                    <div id="pipeline-terminal-body" class="pipeline-terminal-body">
+                        <!-- Simulated logs go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Career Section (Experience + Education + Certifications) -->
     <section class="section container reveal-terminal" id="career">
         <div class="terminal-window">
@@ -474,6 +542,6 @@
         </div>
     </footer>
 
-    <script src="src/bundle.js"></script>
+    <script src="src/bundle.js?v=1.0.1"></script>
 </body>
 </html>

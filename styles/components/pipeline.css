@@ -1,0 +1,520 @@
+/* Interactive SDLC Pipeline Styling */
+.pipeline-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pipeline-selector-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pipeline-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.pipeline-select {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.pipeline-select:focus {
+    border-color: var(--accent-primary);
+}
+
+.pipeline-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-sm {
+    padding: 0.35rem 0.8rem;
+    font-size: 0.75rem;
+}
+
+.pipeline-visualizer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.pipeline-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.node-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.node-name {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.pipeline-connector {
+    flex-grow: 1;
+    height: 2px;
+    background: var(--border-color);
+    margin: 0 0.5rem;
+    margin-top: -1.5rem; /* Align with node icon centers */
+    position: relative;
+    z-index: 0;
+    transition: background 0.3s ease;
+}
+
+.pipeline-connector {
+    flex-grow: 1;
+    height: 3px;
+    background: var(--border-color);
+    margin: 0 0.5rem;
+    margin-top: -1.5rem; /* Align with node icon centers */
+    position: relative;
+    z-index: 0;
+    transition: all 0.3s ease;
+}
+
+.pipeline-connector.active {
+    background: linear-gradient(to right, #22c55e 0%, var(--accent-primary) 50%, var(--border-color) 100%);
+    background-size: 200% 100%;
+    animation: connectorGlow 1.2s linear infinite;
+    box-shadow: 0 0 8px rgba(88, 166, 255, 0.4);
+}
+
+.pipeline-connector.completed {
+    background: #22c55e;
+    box-shadow: 0 0 5px rgba(34, 197, 94, 0.3);
+}
+
+@keyframes connectorGlow {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+}
+
+/* Active Node State */
+.pipeline-node.active .node-icon {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    box-shadow: 0 0 20px rgba(88, 166, 255, 0.5);
+    transform: scale(1.1);
+    animation: nodePulse 1.2s infinite alternate;
+}
+
+.pipeline-node.active .node-name {
+    color: var(--accent-primary);
+    font-weight: 800;
+}
+
+/* Completed Node State */
+.pipeline-node.completed .node-icon {
+    border-color: #22c55e;
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+}
+
+.pipeline-node.completed .node-name {
+    color: #22c55e;
+}
+
+@keyframes nodePulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.08); }
+}
+
+.pipeline-terminal {
+    background: #0d1117;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    height: 15rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.pipeline-terminal-body {
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    scrollbar-width: thin;
+}
+
+.pipeline-status {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+.terminal-actions-right {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 576px) {
+    .pipeline-visualizer {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+    }
+    
+    .pipeline-connector {
+        display: none;
+    }
+    
+    .pipeline-node {
+        flex-direction: row;
+        width: 100%;
+        justify-content: flex-start;
+        gap: 1.5rem;
+    }
+    
+    .node-icon {
+        width: 2.75rem;
+        height: 2.75rem;
+        font-size: 1rem;
+    }
+}
+
+/* ============================================================
+   Legacy terminal line styles (backward compat)
+   ============================================================ */
+.term-line.agent-user { color: #f1fa8c; font-weight: bold; }
+.term-line.agent-planner { color: #8be9fd; font-weight: bold; }
+.term-line.agent-coder { color: #ff79c6; font-weight: bold; }
+.term-line.agent-verifier { color: #50fa7b; font-weight: bold; }
+.term-line.agent-git { color: #ffb86c; font-weight: bold; }
+
+.term-line.diff-addition { color: #58a6ff; background: rgba(56, 139, 253, 0.1); padding-left: 0.5rem; border-left: 3px solid #58a6ff; }
+.term-line.diff-deletion { color: #ff7b72; background: rgba(248, 81, 73, 0.15); padding-left: 0.5rem; border-left: 3px solid #ff7b72; }
+.term-line.cmd-prompt { color: #58a6ff; font-weight: bold; }
+
+/* ============================================================
+   Chat Message UI — multi-agent conversation layout
+   ============================================================ */
+.chat-message {
+    display: flex;
+    gap: 0.65rem;
+    padding: 0.3rem 0;
+    animation: chatFadeIn 0.25s ease-out;
+    align-items: flex-start;
+}
+
+@keyframes chatFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Agent Avatar */
+.chat-avatar {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: #0d1117;
+    margin-top: 2px;
+}
+
+.chat-avatar.user    { background: #f1fa8c; }
+.chat-avatar.planner { background: #8be9fd; }
+.chat-avatar.coder   { background: #ff79c6; }
+.chat-avatar.verifier{ background: #50fa7b; }
+.chat-avatar.git     { background: #ffb86c; }
+.chat-avatar.system  { background: #6272a4; }
+
+/* Chat Bubble */
+.chat-bubble {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.chat-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.chat-agent-name {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.chat-agent-name[data-agent="user"]     { color: #f1fa8c; }
+.chat-agent-name[data-agent="planner"]  { color: #8be9fd; }
+.chat-agent-name[data-agent="coder"]    { color: #ff79c6; }
+.chat-agent-name[data-agent="verifier"] { color: #50fa7b; }
+.chat-agent-name[data-agent="git"]      { color: #ffb86c; }
+.chat-agent-name[data-agent="system"]   { color: #6272a4; }
+
+.chat-timestamp {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+}
+
+.chat-content {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+    word-break: break-word;
+}
+
+/* Text content — streaming char-by-char */
+.chat-content-text {
+    white-space: pre-wrap;
+}
+
+.chat-cursor {
+    display: inline-block;
+    width: 6px;
+    height: 14px;
+    background: var(--accent-primary);
+    animation: cursorBlink 0.6s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 1px;
+}
+
+@keyframes cursorBlink {
+    50% { opacity: 0; }
+}
+
+/* Code block */
+.chat-code-block {
+    background: #0d1117;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    margin: 0.25rem 0;
+    overflow: hidden;
+}
+
+.chat-code-block .code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 0.65rem;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+}
+
+.chat-code-block .code-header .code-lang {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.chat-code-block pre {
+    margin: 0;
+    padding: 0.65rem;
+    overflow-x: auto;
+    font-size: 0.72rem;
+    line-height: 1.5;
+}
+
+.chat-code-block code {
+    font-family: var(--font-mono);
+    color: var(--text-primary);
+    white-space: pre;
+}
+
+/* Status badge */
+.chat-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.04);
+}
+
+/* Command line */
+.chat-command {
+    display: inline-block;
+    background: rgba(88, 166, 255, 0.08);
+    border: 1px solid rgba(88, 166, 255, 0.15);
+    border-radius: 3px;
+    padding: 0.3rem 0.65rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #58a6ff;
+}
+
+.chat-command .cmd-prompt {
+    color: #22c55e;
+    margin-right: 0.35rem;
+    font-weight: bold;
+}
+
+/* Diff block */
+.chat-diff-block {
+    background: #0d1117;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    margin: 0.25rem 0;
+    overflow: hidden;
+}
+
+.chat-diff-block .diff-header {
+    padding: 0.3rem 0.65rem;
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+    font-family: var(--font-mono);
+}
+
+.chat-diff-line {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.55;
+    padding: 0 0.65rem;
+    white-space: pre;
+}
+
+.chat-diff-line.diff-add {
+    color: #58a6ff;
+    background: rgba(56, 139, 253, 0.08);
+}
+
+.chat-diff-line.diff-del {
+    color: #ff7b72;
+    background: rgba(248, 81, 73, 0.1);
+}
+
+/* Thinking indicator (bouncing dots) */
+.thinking-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0.2rem 0;
+}
+
+.thinking-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    animation: thinkingBounce 1.2s ease-in-out infinite;
+}
+
+.thinking-dots span:nth-child(1) { animation-delay: 0s; }
+.thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+.thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes thinkingBounce {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+    40% { transform: scale(1); opacity: 1; }
+}
+
+/* Divider */
+.chat-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    opacity: 0.5;
+}
+
+.chat-divider::before,
+.chat-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.chat-divider span {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* Speed selector */
+.pipeline-speed-group {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.pipeline-speed-btn {
+    padding: 0.25rem 0.55rem;
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.pipeline-speed-btn:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.pipeline-speed-btn.active {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: #ffffff;
+}
+
