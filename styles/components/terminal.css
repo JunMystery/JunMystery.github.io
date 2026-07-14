@@ -74,13 +74,28 @@
         animation: none;
         will-change: auto;
     }
+    .terminal-header {
+        height: auto;
+        min-height: 2rem;
+        overflow: visible;
+        flex-wrap: wrap;
+        gap: 0;
+        padding-bottom: 0;
+    }
     .terminal-title {
         position: static;
         transform: none;
         flex-shrink: 0;
+        align-self: center;
+        padding: 0 0.4rem;
     }
-    .terminal-header {
-        gap: 0.35rem;
+    .tabs-row {
+        flex: 1 1 100%;
+        margin-left: 0;
+        padding: 0.2rem 0.5rem;
+        justify-content: flex-start;
+        order: 99;
+        border-top: 1px solid var(--border-color);
     }
 }
 
