@@ -74,6 +74,14 @@
         animation: none;
         will-change: auto;
     }
+    .terminal-title {
+        position: static;
+        transform: none;
+        flex-shrink: 0;
+    }
+    .terminal-header {
+        gap: 0.35rem;
+    }
 }
 
 @keyframes terminalGlow {
