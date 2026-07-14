@@ -15,13 +15,17 @@ document.addEventListener('DOMContentLoaded', function () {
     initSpotlight();
     initLanguage();
     initHeroTypewriter();
+    initScrollEffects();
+    initAboutTyping();
     initProjectTyping();
+    initProjectTabs();
     initAchievements();
     initBootSplash();
     initEasterEgg();
     initKonami();
     init404Trigger();
     initFineTrigger();
+    initRedPill();
     initMatrixRain();
     initPipelineSimulator();
 });

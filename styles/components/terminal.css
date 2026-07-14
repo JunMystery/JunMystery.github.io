@@ -7,11 +7,17 @@
     align-items: center;
     padding: 0 1rem;
     position: relative;
+    overflow-x: auto;
+    gap: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
+.terminal-header::-webkit-scrollbar { display: none; }
 
 .terminal-dots {
     display: flex;
     gap: 0.35rem;
+    flex-shrink: 0;
 }
 
 .terminal-dot {
@@ -97,6 +103,7 @@
     display: flex;
     align-items: center;
     gap: 0.3rem;
+    flex-shrink: 0;
 }
 .terminal-debug-btn:hover {
     color: var(--accent-secondary);

@@ -236,11 +236,212 @@
     text-decoration: underline;
 }
 
+/* ============================================================
+   UPGRADE: Staggered entrance — each child animates in with
+   cascade delay after .reveal-hero.visible fires.
+   ============================================================ */
+
+/* Base: children start invisible until hero is revealed */
+.reveal-hero .hero-avatar,
+.reveal-hero .hero-subtitle,
+.reveal-hero .hero-title,
+.reveal-hero .hero-desc,
+.reveal-hero .hero-objective,
+.reveal-hero .hero-buttons,
+.reveal-hero .hero-info-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s var(--reveal-easing),
+                transform 0.5s var(--reveal-easing);
+}
+
+/* Trigger: cascade in when hero becomes visible */
+.reveal-hero.visible .hero-avatar {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: 0s;
+}
+
+.reveal-hero.visible .hero-subtitle {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.15s;
+}
+
+.reveal-hero.visible .hero-title {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+
+.reveal-hero.visible .hero-desc {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.45s;
+}
+
+.reveal-hero.visible .hero-objective {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.6s;
+}
+
+.reveal-hero.visible .hero-buttons {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.75s;
+}
+
+.reveal-hero.visible .hero-info-card {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+
+/* ============================================================
+   UPGRADE: Ambient micro-animations
+   ============================================================ */
+
+/* Avatar: gentle levitate bob (composes with existing pulse) */
+@keyframes avatarFloat {
+    0%, 100% { transform: scale(1) translateY(0); }
+    50%      { transform: scale(1) translateY(-5px); }
+}
+
+.hero-avatar {
+    animation:
+        avatarPulse 3s ease-in-out infinite,
+        avatarFloat 4s ease-in-out infinite 0.8s;
+}
+
+/* Info card: slow border-hue shift */
+@keyframes infoBorderGlow {
+    0%, 100% { border-color: var(--accent-primary); }
+    50%      { border-color: var(--accent-purple); }
+}
+
+.hero-info-card {
+    animation: infoBorderGlow 8s ease-in-out infinite 1.2s;
+}
+
+/* Info card: each line has a staggered reveal pulse */
+.hero-info-card .hero-info-line {
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.4s var(--reveal-easing),
+                transform 0.4s var(--reveal-easing);
+}
+
+.reveal-hero.visible .hero-info-card .hero-info-line {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-hero.visible .hero-info-card .hero-info-line:nth-child(1) { transition-delay: 0.5s; }
+.reveal-hero.visible .hero-info-card .hero-info-line:nth-child(2) { transition-delay: 0.55s; }
+.reveal-hero.visible .hero-info-card .hero-info-line:nth-child(3) { transition-delay: 0.6s; }
+.reveal-hero.visible .hero-info-card .hero-info-line:nth-child(4) { transition-delay: 0.65s; }
+.reveal-hero.visible .hero-info-card .hero-info-line:nth-child(5) { transition-delay: 0.7s; }
+
+/* Badge: shimmer sweep via pseudo-element */
+.hero-badge {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-badge::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.15) 50%,
+        transparent 100%
+    );
+    transform: skewX(-25deg);
+    animation: badgeShimmer 4s ease-in-out infinite 2s;
+}
+
+@keyframes badgeShimmer {
+    0%, 100% { left: -100%; }
+    50%      { left: 150%; }
+}
+
+/* ============================================================
+   UPGRADE: Button hover enhancement — gradient sweep
+   ============================================================ */
+.btn-primary,
+.btn-secondary {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-primary::before,
+.btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.08) 50%,
+        transparent 100%
+    );
+    transition: left 0.4s ease;
+    z-index: -1;
+}
+
+.btn-primary:hover::before,
+.btn-secondary:hover::before {
+    left: 100%;
+}
+
+/* ============================================================
+   UPGRADE: Scroll fade — hero content gently dims + scales
+   as user scrolls past it (JS-driven via hero.js)
+   ============================================================ */
+.hero-content {
+    will-change: opacity, transform;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .hero-orb,
     .hero-avatar,
-    .hero-title.glitch {
+    .hero-title.glitch,
+    .hero-info-card,
+    .hero-badge::after {
         animation: none !important;
+    }
+
+    .reveal-hero .hero-avatar,
+    .reveal-hero .hero-subtitle,
+    .reveal-hero .hero-title,
+    .reveal-hero .hero-desc,
+    .reveal-hero .hero-objective,
+    .reveal-hero .hero-buttons,
+    .reveal-hero .hero-info-card {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .hero-info-card .hero-info-line {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .btn-primary::before,
+    .btn-secondary::before {
+        display: none;
     }
 }
 
@@ -254,7 +455,7 @@
         font-size: 2.25rem;
     }
 
-    /* Kill continuous blurred-orb + avatar pulse composites on mobile (scroll jank) */
+    /* Kill continuous blurred-orb + avatar pulse/floats composites on mobile (scroll jank) */
     .hero-orb {
         animation: none;
         will-change: auto;
@@ -263,5 +464,31 @@
     .hero-avatar {
         animation: none;
         will-change: auto;
+    }
+
+    .hero-info-card {
+        animation: none !important;
+    }
+
+    .hero-badge::after {
+        display: none;
+    }
+
+    /* Instant reveal on mobile — no stagger */
+    .reveal-hero .hero-avatar,
+    .reveal-hero .hero-subtitle,
+    .reveal-hero .hero-title,
+    .reveal-hero .hero-desc,
+    .reveal-hero .hero-objective,
+    .reveal-hero .hero-buttons,
+    .reveal-hero .hero-info-card {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    .reveal-hero .hero-info-card .hero-info-line {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 }

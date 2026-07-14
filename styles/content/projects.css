@@ -1,3 +1,16 @@
+/* Project Tab Panels */
+.project-panels {
+    position: relative;
+}
+
+.project-panel {
+    display: none;
+}
+
+.project-panel.active {
+    display: block;
+}
+
 /* Projects Bento Grid Layout */
 .subsection-title {
     font-family: var(--font-mono);
@@ -220,7 +233,6 @@
 
 @media (max-width: 768px) {
     .project-card {
-        grid-template-cols: 1fr;
         padding: 1.5rem;
     }
 }

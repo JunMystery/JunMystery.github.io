@@ -77,6 +77,7 @@ function initActiveSection() {
 }
 
 function initSpotlight() {
+    if ('ontouchstart' in window) return;
     document.addEventListener('mousemove', function (e) {
         var x = (e.clientX / window.innerWidth) * 100;
         var y = (e.clientY / window.innerHeight) * 100;

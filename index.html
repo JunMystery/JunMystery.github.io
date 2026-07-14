@@ -29,7 +29,7 @@
             <a href="#" class="logo">const Tu = {}</a>
             <div id="nav-menu" class="nav-menu">
                 <div class="nav-links">
-                    <a href="#about" class="nav-link" data-i18n="nav.about">About</a> <a href="#skills" class="nav-link" data-i18n="nav.skills">Skills</a> <a href="#projects" class="nav-link" data-i18n="nav.projects">Projects</a> <a href="#pipeline-section" class="nav-link" data-i18n="nav.pipeline">Pipeline</a> <a href="#career" class="nav-link" data-i18n="nav.career">Career</a>
+                    <a href="#about" class="nav-link" data-i18n="nav.about">About</a> <a href="#skills" class="nav-link" data-i18n="nav.skills">Skills</a> <a href="#projects" class="nav-link" data-i18n="nav.projects">Projects</a> <a href="#projects" class="nav-link nav-project-pipeline" data-i18n="nav.pipeline">Pipeline</a> <a href="#career" class="nav-link" data-i18n="nav.career">Career</a>
                 </div>
                 <div class="nav-actions">
                     <div class="lang-switcher">
@@ -108,18 +108,60 @@
                     <span class="terminal-dot dot-green"></span>
                 </div>
                 <span class="terminal-title" data-i18n="about.filename">about.md</span>
-                <a href="game/snake-game.html" class="terminal-debug-btn" title="snake_core.js"><i class="fas fa-code"></i> debug</a>
             </div>
             <div class="terminal-body-raw">
                 <h2 class="section-title" data-i18n="about.title">Professional Summary</h2>
                 <div class="term-session">
-                    <div class="term-line" data-i18n-html="about.line1"><span class="term-prompt">$</span> <span class="term-fn">cat</span> profile.md</div>
-                    <div class="term-line" data-i18n-html="about.line2"><span class="term-prompt">></span> <span class="term-kw">Seeking</span> a role spanning <span class="term-type">Infrastructure</span> and <span class="term-type">AI-Augmented Development</span>, growing strong across both domains.</div>
-                    <div class="term-line" data-i18n-html="about.line3"><span class="term-prompt">></span> <span class="term-kw">Next</span>: <span class="term-str">AI-Enhanced Infrastructure Engineering</span> — leveraging structured Agentic SDLC to build production-grade tools.</div>
-                    <div class="term-line" data-i18n-html="about.line4"><span class="term-prompt">></span> <span class="term-kw">Infra</span>: 2+ years in IT — AD, DNS/DHCP, VM, Cisco/DrayTek, NAS, MySQL/MSSQL</div>
-                    <div class="term-line" data-i18n-html="about.line5"><span class="term-prompt">></span> <span class="term-kw">AI Ops</span>: Structured SDLC orchestration over vibe coding. AI as tool, not dependency. Human Gate decisive.</div>
-                    <div class="term-line term-line-lang" data-i18n-html="about.line6"><span class="term-prompt">></span> <span class="term-cmt"># Languages</span>  🇻🇳 Vietnamese — Native · 🇬🇧 English — IELTS 6.5 (Professional Working)</div>
-                    <div class="term-line term-line-tags" data-i18n-html="about.line7"><span class="term-prompt">></span> <span class="term-cmt"># tags</span>  <span class="term-tag">7+ Yrs Exp</span> <span class="term-tag">2+ Yrs IT</span> <span class="term-tag">Infra & AI</span> <span class="term-tag">Production-Grade SDLC</span></div>
+                    <div class="term-commands">
+                        <!-- $ whoami -->
+                        <div class="term-cmd-block" data-cmd="whoami">
+                            <div class="term-cmd-header"><span class="term-prompt">$</span> <span class="term-fn">whoami</span></div>
+                            <div class="term-cmd-output">
+                                <div class="term-line" data-i18n-html="about.line2"><span class="term-prompt">></span> <span class="term-kw">Seeking</span> a role spanning <span class="term-type">Infrastructure</span> and <span class="term-type">AI-Augmented Development</span>, growing strong across both domains.</div>
+                                <div class="term-line" data-i18n-html="about.line3"><span class="term-prompt">></span> <span class="term-kw">Next</span>: <span class="term-str">AI-Enhanced Infrastructure Engineering</span> — leveraging structured Agentic SDLC to build production-grade tools.</div>
+                            </div>
+                        </div>
+                        <!-- $ cat experience.md -->
+                        <div class="term-cmd-block" data-cmd="experience">
+                            <div class="term-cmd-header"><span class="term-prompt">$</span> <span class="term-fn">cat</span> <span class="term-str">experience.md</span></div>
+                            <div class="term-cmd-output">
+                                <div class="term-line" data-i18n-html="about.line4"><span class="term-prompt">></span> <span class="term-kw">Infra</span>: 2+ years in IT — AD, DNS/DHCP, VM, Cisco/DrayTek, NAS, MySQL/MSSQL</div>
+                            </div>
+                        </div>
+                        <!-- $ cat philosophy.md -->
+                        <div class="term-cmd-block" data-cmd="philosophy">
+                            <div class="term-cmd-header"><span class="term-prompt">$</span> <span class="term-fn">cat</span> <span class="term-str">philosophy.md</span></div>
+                            <div class="term-cmd-output">
+                                <div class="term-line" data-i18n-html="about.line5"><span class="term-prompt">></span> <span class="term-kw">AI Ops</span>: Structured SDLC orchestration over vibe coding. AI as tool, not dependency. Human Gate decisive.</div>
+                            </div>
+                        </div>
+                        <!-- $ config --info -->
+                        <div class="term-cmd-block" data-cmd="config">
+                            <div class="term-cmd-header"><span class="term-prompt">$</span> <span class="term-fn">config</span> --info</div>
+                            <div class="term-cmd-output">
+                                <div class="term-line term-line-lang" data-i18n-html="about.line6"><span class="term-prompt">></span> <span class="term-cmt"># Languages</span>  🇻🇳 Vietnamese — Native · 🇬🇧 English — IELTS 6.5 (Professional Working)</div>
+                                <div class="term-line term-line-tags" data-i18n-html="about.line7"><span class="term-prompt">></span> <span class="term-cmt"># tags</span>  <span class="term-tag">7+ Yrs Exp</span> <span class="term-tag">2+ Yrs IT</span> <span class="term-tag">Infra & AI</span> <span class="term-tag">Production-Grade SDLC</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sysinfo Panel -->
+                    <div class="term-sysinfo">
+                        <div class="sysinfo-header">
+                            <span class="term-prompt">$</span>
+                            <span>neofetch</span>
+                        </div>
+                        <div class="sysinfo-body">
+                            <div class="sysinfo-row"><span class="sysinfo-key">Name</span><span class="sysinfo-val">Nguyễn Hoàng Thanh Tú</span></div>
+                            <div class="sysinfo-row"><span class="sysinfo-key">Role</span><span class="sysinfo-val">Infrastructure & AI-Augmented Development</span></div>
+                            <div class="sysinfo-row"><span class="sysinfo-key">Experience</span><span class="sysinfo-val">7+ years</span></div>
+                            <hr class="sysinfo-divider">
+                            <div class="sysinfo-row"><span class="sysinfo-key">Stack</span><span class="sysinfo-val">30+ tools across infra, AI, and SDLC</span></div>
+                            <div class="sysinfo-row"><span class="sysinfo-key">Method</span><span class="sysinfo-val">Human Gate — AI as tool, not dependency</span></div>
+                            <div class="sysinfo-row"><span class="sysinfo-key">Status</span><span class="sysinfo-val">Open to full-time · Remote-friendly</span></div>
+                            <hr class="sysinfo-divider">
+                            <div class="sysinfo-row"><span class="sysinfo-key">Uptime</span><span class="sysinfo-val">since 2019</span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -135,7 +177,6 @@
                     <span class="terminal-dot dot-green"></span>
                 </div>
                 <span class="terminal-title" data-i18n="skills.filename">skills.yaml</span>
-                <a href="game/tetris-game.html" class="terminal-debug-btn" title="compiler_engine.tsx"><i class="fas fa-code"></i> debug</a>
             </div>
             <div class="terminal-body-raw">
                 <h2 class="section-title" data-i18n="skills.title">Technical Expertise</h2>
@@ -147,21 +188,21 @@
                 </div>
                 <div class="skill-groups reveal-stagger">
                     <div class="skill-group" data-category="ai-ops">
-                        <h3 class="skill-group-title" data-i18n="skills.group_aiops">AI-Ops</h3>
+                        <h3 class="skill-group-title" data-i18n="skills.group_aiops" data-count="4">AI-Ops</h3>
                         <div class="skill-group-tags">
                             <span class="skill-tag" data-i18n="skills.tag_promptops">PromptOps</span><span class="skill-tag" data-i18n="skills.tag_agents">Multi-Agent Workflows</span><span class="skill-tag" data-i18n="skills.tag_arch">System Architecture</span>
                             <span class="skill-tag" data-i18n="skills.tag_git">Git/GitHub</span>
                         </div>
                     </div>
                     <div class="skill-group" data-category="infra">
-                        <h3 class="skill-group-title" data-i18n="skills.group_infra">Infrastructure</h3>
+                        <h3 class="skill-group-title" data-i18n="skills.group_infra" data-count="8">Infrastructure</h3>
                         <div class="skill-group-tags">
                             <span class="skill-tag" data-i18n="skills.tag_win">Windows Server</span><span class="skill-tag" data-i18n="skills.tag_ad">Active Directory</span><span class="skill-tag" data-i18n="skills.tag_dns">DNS/DHCP</span><span class="skill-tag" data-i18n="skills.tag_linux">Linux</span><span class="skill-tag" data-i18n="skills.tag_vmware">VMware</span>
                             <span class="skill-tag" data-i18n="skills.tag_lanwan">LAN/WAN</span><span class="skill-tag" data-i18n="skills.tag_vpn">VPN/P2P</span><span class="skill-tag" data-i18n="skills.tag_firewall">Firewalls</span>
                         </div>
                     </div>
                     <div class="skill-group" data-category="dev">
-                        <h3 class="skill-group-title" data-i18n="skills.group_dev">Dev</h3>
+                        <h3 class="skill-group-title" data-i18n="skills.group_dev" data-count="4">Dev</h3>
                         <div class="skill-group-tags">
                             <span class="skill-tag" data-i18n="skills.tag_db">Database Administration &amp; SQL</span><span class="skill-tag" data-i18n="skills.tag_api">REST API Development</span>
                             <span class="skill-tag" data-i18n="skills.tag_script">Scripting &amp; Automation</span><span class="skill-tag" data-i18n="skills.tag_ai_sdlc">Structured AI-Assisted Development</span>
@@ -182,9 +223,17 @@
                     <span class="terminal-dot dot-green"></span>
                 </div>
                 <span class="terminal-title" data-i18n="projects.filename">projects.py</span>
-                <a href="game/pacman-game.html" class="terminal-debug-btn" title="compiler_pacman.py"><i class="fas fa-code"></i> debug</a>
+                <div class="tabs-row">
+                    <button class="tab-btn active" data-project-tab="projects" data-i18n="projects.tab_projects">Projects</button>
+                    <button class="tab-btn" data-project-tab="pipeline" data-i18n="projects.tab_pipeline">Pipeline</button>
+                </div>
+                <div class="terminal-actions-right">
+                    <span class="pipeline-status" id="pipeline-status-label" data-i18n="pipeline.status_idle">IDLE</span>
+                </div>
             </div>
             <div class="terminal-body-raw">
+                <div class="project-panels">
+                <div class="project-panel active" data-project-panel="projects">
                 <h2 class="section-title" data-i18n="projects.title">Projects</h2>
 
                 <h3 class="subsection-title" data-i18n="projects.personal">### Personal Projects</h3>
@@ -305,26 +354,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                    </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Interactive SDLC Pipeline Section -->
-    <section class="section container reveal-terminal" id="pipeline-section">
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="terminal-dots">
-                    <span class="terminal-dot dot-red"></span>
-                    <span class="terminal-dot dot-yellow"></span>
-                    <span class="terminal-dot dot-green"></span>
-                </div>
-                <span class="terminal-title" data-i18n="pipeline.filename">sdlc_pipeline.sh</span>
-                <div class="terminal-actions-right">
-                    <span class="pipeline-status" id="pipeline-status-label" data-i18n="pipeline.status_idle">IDLE</span>
-                </div>
-            </div>
-            <div class="terminal-body-raw">
+            <div class="project-panel" data-project-panel="pipeline">
                 <h2 class="section-title" data-i18n="pipeline.title">AI Agent SDLC Pipeline</h2>
                 
                 <div class="pipeline-controls">
@@ -333,6 +365,8 @@
                         <select id="pipeline-preset" class="pipeline-select">
                             <option value="ad-deploy" data-i18n="pipeline.preset_ad">Deploy AD Infrastructure</option>
                             <option value="mcp-feature" data-i18n="pipeline.preset_mcp">Implement MCP Guidance Search</option>
+                            <option value="portfolio-deploy" data-i18n="pipeline.preset_portfolio">Deploy Portfolio to Cloudflare</option>
+                            <option value="game-engine" data-i18n="pipeline.preset_game">Build 2D Canvas Game Engine</option>
                         </select>
                     </div>
                     <div class="pipeline-buttons">
@@ -376,6 +410,8 @@
                 </div>
             </div>
         </div>
+    </div>
+        </div>
     </section>
 
     <!-- Career Section (Experience + Education + Certifications) -->
@@ -388,15 +424,13 @@
                     <span class="terminal-dot dot-green"></span>
                 </div>
                 <span class="terminal-title" data-i18n="career.filename">career.sh</span>
-                <a href="game/flappy-bird-game.html" class="terminal-debug-btn" title="pipeline_flappy.sh"><i class="fas fa-code"></i> debug</a>
+                <div class="tabs-row">
+                    <button class="tab-btn active" data-career-tab="experience" data-i18n="career.tab_experience">Experience</button>
+                    <button class="tab-btn" data-career-tab="education" data-i18n="career.tab_education">Education</button>
+                    <button class="tab-btn" data-career-tab="certifications" data-i18n="career.tab_certifications">Certifications</button>
+                </div>
             </div>
             <div class="terminal-body-raw">
-                <h2 class="section-title" data-i18n="career.title">Career</h2>
-                <div class="career-tabs">
-                    <button class="career-tab-btn active" data-career-tab="experience" data-i18n="career.tab_experience">Experience</button>
-                    <button class="career-tab-btn" data-career-tab="education" data-i18n="career.tab_education">Education</button>
-                    <button class="career-tab-btn" data-career-tab="certifications" data-i18n="career.tab_certifications">Certifications</button>
-                </div>
                 <div class="career-panels">
                     <!-- Experience Tab -->
                     <div class="career-panel active" data-career-panel="experience">
@@ -479,6 +513,7 @@
                         <div class="cert-list reveal-stagger">
                             <a href="https://coursera.org/share/470d54b69ed19f56f5245351064fe32d" target="_blank" class="cert-line">
                                 <span class="cert-name" data-i18n="cert.name1">IT Automation with Python</span>
+                                <span class="cert-badge python">Python</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
                                 <span class="cert-issuer" data-i18n="cert.issuer">Google Career Certification (2025)</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
@@ -486,6 +521,7 @@
                             </a>
                             <a href="https://coursera.org/share/93ab286e9f7e890cd756b28312d00005" target="_blank" class="cert-line">
                                 <span class="cert-name" data-i18n="cert.name2">Google Cybersecurity</span>
+                                <span class="cert-badge security">Security</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
                                 <span class="cert-issuer" data-i18n="cert.issuer">Google Career Certification (2025)</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
@@ -493,6 +529,7 @@
                             </a>
                             <a href="https://coursera.org/share/2d1da52b4a782102f9c31245b6e263d9" target="_blank" class="cert-line">
                                 <span class="cert-name" data-i18n="cert.name3">Google IT Support</span>
+                                <span class="cert-badge it-support">IT Support</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
                                 <span class="cert-issuer" data-i18n="cert.issuer">Google Career Certification (2025)</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
@@ -500,6 +537,7 @@
                             </a>
                             <a href="https://coursera.org/share/c7474f23e065dfd225b50aeee75eb834" target="_blank" class="cert-line">
                                 <span class="cert-name" data-i18n="cert.name4">Google UX Design</span>
+                                <span class="cert-badge ux">UX</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
                                 <span class="cert-issuer" data-i18n="cert.issuer">Google Career Certification (2025)</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
@@ -507,6 +545,7 @@
                             </a>
                             <a href="https://coursera.org/share/d4c431b324f8b0b7a91fe0068535ea43" target="_blank" class="cert-line">
                                 <span class="cert-name" data-i18n="cert.name5">Google Project Management</span>
+                                <span class="cert-badge management">Mgmt</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
                                 <span class="cert-issuer" data-i18n="cert.issuer">Google Career Certification (2025)</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
@@ -514,6 +553,7 @@
                             </a>
                             <a href="https://coursera.org/share/1d1a87f0878dd9bd27c94fecff4f45fa" target="_blank" class="cert-line">
                                 <span class="cert-name" data-i18n="cert.name6">Google Advanced Data Analytics</span>
+                                <span class="cert-badge data">Data</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
                                 <span class="cert-issuer" data-i18n="cert.issuer">Google Career Certification (2025)</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
@@ -521,6 +561,7 @@
                             </a>
                             <a href="https://coursera.org/share/9aafced16e4a7056a1a36b77dd45bd3d" target="_blank" class="cert-line">
                                 <span class="cert-name" data-i18n="cert.name7">Google Data Analytics</span>
+                                <span class="cert-badge data">Data</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
                                 <span class="cert-issuer" data-i18n="cert.issuer">Google Career Certification (2025)</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
@@ -528,6 +569,11 @@
                             </a>
                         </div>
                     </div>
+                </div>
+                <div class="career-status-bar" id="career-status-bar">
+                    <span class="status-prompt">$</span>
+                    <span class="status-path">./experience.sh</span>
+                    <span class="status-count">4 entries</span>
                 </div>
             </div>
         </div>

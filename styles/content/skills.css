@@ -1,64 +1,164 @@
-/* Skills — Category Groups */
+/* ============================================================
+   Skills — Category Cards (Option A)
+   ============================================================ */
+
+/* Category card */
+.skill-group {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 1rem 1.25rem;
+    border-top: 3px solid var(--accent-primary);
+    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1),
+                max-height 0.35s ease, margin 0.3s ease, padding 0.3s ease, border-top-width 0.3s ease;
+    overflow: hidden;
+}
+
+/* Per-category accent colors */
+.skill-group[data-category="ai-ops"] { border-top-color: var(--accent-primary); }
+.skill-group[data-category="infra"]  { border-top-color: var(--accent-secondary); }
+.skill-group[data-category="dev"]    { border-top-color: var(--accent-purple); }
+
+/* Hidden state — slide out left + collapse */
+.skill-group.hidden {
+    opacity: 0;
+    transform: translateX(-24px) scale(0.97);
+    max-height: 0;
+    margin: 0;
+    padding: 0 1.25rem;
+    border-top-width: 0;
+    pointer-events: none;
+}
+
+/* Group container */
+.skill-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Group title with count badge */
 .skill-group-title {
     font-family: var(--font-mono);
     font-size: 0.85rem;
     font-weight: 700;
     color: var(--accent-primary);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.5rem;
 }
 
 .skill-group-title::before {
-    content: "### ";
+    content: "## ";
     color: var(--text-muted);
     font-weight: 400;
+    opacity: 0.5;
 }
 
+/* Count badge via data-count attribute on the title */
+.skill-group-title::after {
+    content: attr(data-count);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    background: var(--bg-tertiary);
+    padding: 0.1rem 0.4rem;
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+    margin-left: auto;
+    opacity: 0.7;
+    font-family: var(--font-mono);
+}
+
+/* Per-category title colors */
+.skill-group[data-category="ai-ops"] .skill-group-title { color: var(--accent-primary); }
+.skill-group[data-category="infra"] .skill-group-title  { color: var(--accent-secondary); }
+.skill-group[data-category="dev"] .skill-group-title    { color: var(--accent-purple); }
+
+/* Tags flex container */
 .skill-group-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.35rem;
 }
 
-/* Skills — Tag Pills */
+/* Tag pills — color-matched to category */
 .skill-tag {
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    color: var(--accent-primary);
     background: var(--bg-tertiary);
-    padding: 0.15rem 0.5rem;
+    padding: 0.2rem 0.6rem;
     border-radius: var(--border-radius-sm);
     border: 1px solid var(--border-color);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: default;
 }
 
+.skill-group[data-category="ai-ops"] .skill-tag {
+    color: var(--accent-primary);
+    border-color: rgba(88, 166, 255, 0.25);
+}
+
+.skill-group[data-category="infra"] .skill-tag {
+    color: var(--accent-secondary);
+    border-color: rgba(80, 200, 120, 0.25);
+}
+
+.skill-group[data-category="dev"] .skill-tag {
+    color: var(--accent-purple);
+    border-color: rgba(139, 126, 211, 0.25);
+}
+
+/* Tag hover — lift + category-colored glow */
 .skill-tag:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    transform: translateY(-3px);
 }
 
+.skill-group[data-category="ai-ops"] .skill-tag:hover {
+    box-shadow: 0 4px 14px rgba(88, 166, 255, 0.3);
+    border-color: var(--accent-primary);
+}
+
+.skill-group[data-category="infra"] .skill-tag:hover {
+    box-shadow: 0 4px 14px rgba(80, 200, 120, 0.3);
+    border-color: var(--accent-secondary);
+}
+
+.skill-group[data-category="dev"] .skill-tag:hover {
+    box-shadow: 0 4px 14px rgba(139, 126, 211, 0.3);
+    border-color: var(--accent-purple);
+}
+
+/* Entrance — tags slide in from right when group becomes visible */
 .skill-group:not(.hidden) .skill-tag {
-    animation: tagPop 0.3s ease both;
+    animation: tagSlideIn 0.35s cubic-bezier(0.25, 0.1, 0.25, 1) both;
 }
+
 .skill-group:not(.hidden) .skill-tag:nth-child(1) { animation-delay: 0s; }
-.skill-group:not(.hidden) .skill-tag:nth-child(2) { animation-delay: 0.04s; }
-.skill-group:not(.hidden) .skill-tag:nth-child(3) { animation-delay: 0.08s; }
-.skill-group:not(.hidden) .skill-tag:nth-child(4) { animation-delay: 0.12s; }
-.skill-group:not(.hidden) .skill-tag:nth-child(5) { animation-delay: 0.16s; }
-.skill-group:not(.hidden) .skill-tag:nth-child(6) { animation-delay: 0.2s; }
-.skill-group:not(.hidden) .skill-tag:nth-child(7) { animation-delay: 0.24s; }
-.skill-group:not(.hidden) .skill-tag:nth-child(8) { animation-delay: 0.28s; }
+.skill-group:not(.hidden) .skill-tag:nth-child(2) { animation-delay: 0.05s; }
+.skill-group:not(.hidden) .skill-tag:nth-child(3) { animation-delay: 0.1s; }
+.skill-group:not(.hidden) .skill-tag:nth-child(4) { animation-delay: 0.15s; }
+.skill-group:not(.hidden) .skill-tag:nth-child(5) { animation-delay: 0.2s; }
+.skill-group:not(.hidden) .skill-tag:nth-child(6) { animation-delay: 0.25s; }
+.skill-group:not(.hidden) .skill-tag:nth-child(7) { animation-delay: 0.3s; }
+.skill-group:not(.hidden) .skill-tag:nth-child(8) { animation-delay: 0.35s; }
 
-@keyframes tagPop {
-    0% { opacity: 0; transform: scale(0.85); }
-    100% { opacity: 1; transform: scale(1); }
+@keyframes tagSlideIn {
+    from { opacity: 0; transform: translateX(16px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
-/* Groups container */
-.skill-groups {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+@media (prefers-reduced-motion: reduce) {
+    .skill-group {
+        transition: opacity 0.15s ease !important;
+        transform: none !important;
+    }
+    .skill-tag {
+        animation: none !important;
+        transform: none !important;
+    }
+    .skill-tag:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
 }

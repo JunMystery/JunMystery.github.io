@@ -3,26 +3,11 @@
 // Chat-style multi-agent conversation with streaming engine
 // ============================================================
 
-var AGENT_CONFIG = {
-    user:     { name: "User",          initial: "U" },
-    planner:  { name: "PlannerAgent",  initial: "P" },
-    coder:    { name: "CoderAgent",    initial: "C" },
-    verifier: { name: "VerifierAgent", initial: "V" },
-    git:      { name: "GitAgent",      initial: "G" },
-    system:   { name: "System",        initial: "S" }
-};
-
 var SPEED_CONFIG = {
     fast:   { charMs: 30,  msgPauseMs: 200, stepPauseMs: 500, thinkPauseMs: 300 },
     normal: { charMs: 100, msgPauseMs: 500, stepPauseMs: 1000, thinkPauseMs: 600 },
     slow:   { charMs: 200, msgPauseMs: 800, stepPauseMs: 1500, thinkPauseMs: 1000 }
 };
-
-function escapeHtml(str) {
-    var div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-}
 
 function initPipelineSimulator() {
     var runBtn = document.getElementById('pipeline-run');
@@ -61,159 +46,7 @@ function initPipelineSimulator() {
         terminalBody.scrollTop = terminalBody.scrollHeight;
     }
 
-    // --- HTML escaping ---
     function esc(s) { return escapeHtml(s); }
-
-    // --- Render a single chat message element ---
-    function createMessageEl(msg) {
-        var agent = msg.agent || 'system';
-        var cfg = AGENT_CONFIG[agent] || AGENT_CONFIG.system;
-        var el = document.createElement('div');
-        el.className = 'chat-message';
-
-        var avatar = document.createElement('div');
-        avatar.className = 'chat-avatar ' + agent;
-        avatar.textContent = cfg.initial;
-        el.appendChild(avatar);
-
-        var bubble = document.createElement('div');
-        bubble.className = 'chat-bubble';
-
-        var header = document.createElement('div');
-        header.className = 'chat-header';
-        var nameSpan = document.createElement('span');
-        nameSpan.className = 'chat-agent-name';
-        nameSpan.setAttribute('data-agent', agent);
-        nameSpan.textContent = cfg.name;
-        header.appendChild(nameSpan);
-        var ts = document.createElement('span');
-        ts.className = 'chat-timestamp';
-        ts.textContent = 'now';
-        header.appendChild(ts);
-        bubble.appendChild(header);
-
-        var content = document.createElement('div');
-        content.className = 'chat-content';
-
-        switch (msg.type) {
-            case 'code':
-                renderCode(content, msg);
-                break;
-            case 'diff':
-                renderDiff(content, msg);
-                break;
-            case 'command':
-                renderCommand(content, msg);
-                break;
-            case 'status':
-                renderStatus(content, msg);
-                break;
-            case 'thinking':
-                renderThinking(content);
-                break;
-            case 'divider':
-                renderDivider(content, msg);
-                break;
-            default:
-                content.className = 'chat-content chat-content-text';
-                content.textContent = msg.content || '';
-                break;
-        }
-
-        bubble.appendChild(content);
-        el.appendChild(bubble);
-        return el;
-    }
-
-    function renderCode(container, msg) {
-        var block = document.createElement('div');
-        block.className = 'chat-code-block';
-
-        var header = document.createElement('div');
-        header.className = 'code-header';
-        var langSpan = document.createElement('span');
-        langSpan.className = 'code-lang';
-        langSpan.textContent = msg.language || 'code';
-        header.appendChild(langSpan);
-        block.appendChild(header);
-
-        var pre = document.createElement('pre');
-        var code = document.createElement('code');
-        code.textContent = msg.code || msg.content || '';
-        pre.appendChild(code);
-        block.appendChild(pre);
-
-        container.appendChild(block);
-    }
-
-    function renderDiff(container, msg) {
-        var block = document.createElement('div');
-        block.className = 'chat-diff-block';
-
-        var header = document.createElement('div');
-        header.className = 'diff-header';
-        header.textContent = msg.content || 'Diff:';
-        block.appendChild(header);
-
-        var lines = msg.diff || [];
-        for (var i = 0; i < lines.length; i++) {
-            var line = lines[i];
-            var lineEl = document.createElement('div');
-            var cls = 'chat-diff-line';
-            if (line.indexOf('+') === 0) cls += ' diff-add';
-            else if (line.indexOf('-') === 0) cls += ' diff-del';
-            lineEl.className = cls;
-            lineEl.textContent = line;
-            block.appendChild(lineEl);
-        }
-
-        container.appendChild(block);
-    }
-
-    function renderCommand(container, msg) {
-        var cmd = document.createElement('div');
-        cmd.className = 'chat-command';
-        var prompt = document.createElement('span');
-        prompt.className = 'cmd-prompt';
-        prompt.textContent = '$';
-        cmd.appendChild(prompt);
-        cmd.appendChild(document.createTextNode(' ' + (msg.content || '')));
-        container.appendChild(cmd);
-    }
-
-    function renderStatus(container, msg) {
-        var badge = document.createElement('span');
-        badge.className = 'chat-status';
-        var iconName = 'fa-check-circle';
-        var color = '#22c55e';
-        if (msg.status === 'fail') { iconName = 'fa-times-circle'; color = '#ff4d4d'; }
-        else if (msg.status === 'warn') { iconName = 'fa-exclamation-circle'; color = '#f59e0b'; }
-        badge.style.color = color;
-        var icon = document.createElement('i');
-        icon.className = 'fas ' + iconName;
-        badge.appendChild(icon);
-        badge.appendChild(document.createTextNode(' ' + (msg.content || '')));
-        container.appendChild(badge);
-    }
-
-    function renderThinking(container) {
-        var dots = document.createElement('div');
-        dots.className = 'thinking-dots';
-        for (var i = 0; i < 3; i++) {
-            var dot = document.createElement('span');
-            dots.appendChild(dot);
-        }
-        container.appendChild(dots);
-    }
-
-    function renderDivider(container, msg) {
-        var div = document.createElement('div');
-        div.className = 'chat-divider';
-        var span = document.createElement('span');
-        span.textContent = msg.content || '';
-        div.appendChild(span);
-        container.appendChild(div);
-    }
 
     // --- Stream a text message char by char ---
     function streamText(msgEl, text, speed, done) {
@@ -289,7 +122,7 @@ function initPipelineSimulator() {
             if (!isRunning) duration = 100;
             timerId = setTimeout(function () {
                 if (msgEl.parentNode) {
-                    msgEl.querySelector('.thinking-dots').innerHTML = '<span style="color:var(--text-muted);font-size:0.7rem">done</span>';
+                    msgEl.querySelector('.thinking-dots').innerHTML = '<span style="color:var(--text-muted);font-size:0.7rem;width:auto;height:auto;border-radius:0;background:none">done</span>';
                 }
                 timerId = setTimeout(executeNextMessage, speed.thinkPauseMs);
             }, Math.min(duration, speed === SPEED_CONFIG.fast ? 300 : duration));
@@ -345,12 +178,54 @@ function initPipelineSimulator() {
         statusLabel.textContent = lang === 'vi' ? 'CH\u1EDC' : 'IDLE';
         statusLabel.style.color = 'var(--text-secondary)';
         updateNodes();
+        removeDebugButton();
+    }
+
+    function appendDebugButton(presetKey) {
+        removeDebugButton();
+        if (!presetKey) return;
+        var lang = i18n.currentLang || 'en';
+        var preset = presets[lang] && presets[lang][presetKey];
+        var gameId = preset && preset.gameOutput;
+        if (!gameId || !GAME_MAP[gameId]) return;
+
+        var info = GAME_MAP[gameId];
+        var msgEl = document.createElement('div');
+        msgEl.className = 'chat-message chat-debug-btn-wrap';
+
+        var avatar = document.createElement('div');
+        avatar.className = 'chat-avatar system';
+        avatar.textContent = 'S';
+        msgEl.appendChild(avatar);
+
+        var bubble = document.createElement('div');
+        bubble.className = 'chat-bubble';
+
+        var content = document.createElement('div');
+        content.className = 'chat-content';
+
+        var btn = document.createElement('a');
+        btn.className = 'chat-debug-btn';
+        btn.href = info.url;
+        btn.target = '_blank';
+        btn.setAttribute('title', info.label);
+        var icon = document.createElement('i');
+        icon.className = 'fas fa-code';
+        btn.appendChild(icon);
+        btn.appendChild(document.createTextNode(' Debug: ' + info.label));
+        content.appendChild(btn);
+        bubble.appendChild(content);
+        msgEl.appendChild(bubble);
+        terminalBody.appendChild(msgEl);
+        scrollBottom();
     }
 
     function finish() {
         isRunning = false;
         updateNodes();
         var lang = i18n.currentLang || 'en';
+        var presetKey = presetSelect.value;
+        appendDebugButton(presetKey);
         statusLabel.textContent = lang === 'vi' ? 'TH\u00c0NH C\u00d4NG' : 'IDLE';
         statusLabel.style.color = '#22c55e';
         runBtn.disabled = false;

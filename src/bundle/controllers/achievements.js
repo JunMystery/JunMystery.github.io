@@ -14,7 +14,8 @@ var ACHIEVEMENTS = [
     { id: 'glitch',   name: 'Reboot Initiated', desc: 'Trigger the reboot glitch',  icon: 'fa-bolt' },
     { id: 'crt',      name: 'CRT Mode',         desc: 'Activate retro CRT mode',    icon: 'fa-tv' },
     { id: 'vim',      name: 'Vim Trap',         desc: 'Toggle theme and see vim',   icon: 'fa-terminal' },
-    { id: 'fine',     name: 'This is Fine',     desc: 'Summon the dog in flames',   icon: 'fa-fire' }
+    { id: 'fine',     name: 'This is Fine',     desc: 'Summon the dog in flames',   icon: 'fa-fire' },
+    { id: 'matrix',   name: 'Red Pill',          desc: 'Take the red pill. See how deep the rabbit hole goes.', icon: 'fa-code' }
 ];
 
 var _achieveState = null;  // lazy-loaded: { id: timestamp }

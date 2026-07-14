@@ -7,7 +7,7 @@
  */
 
 // ============================================================
-// Source: src/bundle/locales-en.js (206 lines)
+// Source: src/bundle/locales-en.js (211 lines)
 // ============================================================
 
 // ============================================================
@@ -30,6 +30,8 @@ var LOCALE_EN = {
   "pipeline.preset_label": "Select Task:",
   "pipeline.preset_ad": "Deploy AD Infrastructure",
   "pipeline.preset_mcp": "Implement MCP Guidance Search",
+  "pipeline.preset_portfolio": "Deploy Portfolio to Cloudflare",
+  "pipeline.preset_game": "Build 2D Canvas Game Engine",
   "pipeline.btn_run": "Run",
   "pipeline.btn_pause": "Pause",
   "pipeline.btn_step": "Step",
@@ -40,6 +42,7 @@ var LOCALE_EN = {
   "pipeline.speed_fast": "Fast",
   "pipeline.speed_normal": "Normal",
   "pipeline.speed_slow": "Slow",
+  "pipeline.artifacts_title": "Build Artifacts",
   "nav.certifications": "Certifications",
   "hero.subtitle": "~ systems_engineer & ai_workflow_architect",
   "hero.name_first": "NGUYỄN HOÀNG",
@@ -98,6 +101,8 @@ var LOCALE_EN = {
   "skills.tag_ai_sdlc": "Structured AI-Assisted Development",
   "projects.filename": "projects.py",
   "projects.title": "Projects",
+  "projects.tab_projects": "Projects",
+  "projects.tab_pipeline": "Pipeline",
   "projects.personal": "### Personal Projects",
   "projects.work": "### Work Projects",
   "project1.type": "Open Source \u2014 Python Package \u00b7 MIT License",
@@ -219,7 +224,7 @@ var LOCALE_EN = {
 
 
 // ============================================================
-// Source: src/bundle/locales-vi.js (206 lines)
+// Source: src/bundle/locales-vi.js (211 lines)
 // ============================================================
 
 // ============================================================
@@ -242,6 +247,8 @@ var LOCALE_VI = {
   "pipeline.preset_label": "Chọn nhiệm vụ:",
   "pipeline.preset_ad": "Triển khai Hạ tầng AD",
   "pipeline.preset_mcp": "Tích hợp Tìm kiếm MCP",
+  "pipeline.preset_portfolio": "Triển khai Portfolio lên Cloudflare",
+  "pipeline.preset_game": "Xây dựng Công cụ Game Canvas 2D",
   "pipeline.btn_run": "Chạy",
   "pipeline.btn_pause": "Tạm dừng",
   "pipeline.btn_step": "Bước",
@@ -252,6 +259,7 @@ var LOCALE_VI = {
   "pipeline.speed_fast": "Nhanh",
   "pipeline.speed_normal": "Thường",
   "pipeline.speed_slow": "Chậm",
+  "pipeline.artifacts_title": "Sản phẩm Xây dựng",
   "nav.certifications": "Ch\u1ee9ng Ch\u1ec9",
   "hero.subtitle": "~ k\u1ef9_s\u01b0_h\u1ea1_t\u1ea7ng & ki\u1ebfn_tr\u00fac_s\u01b0_quy_tr\u00ecnh_ai",
   "hero.name_first": "NGUY\u1ec4N HO\u00c0NG",
@@ -310,6 +318,8 @@ var LOCALE_VI = {
   "skills.tag_ai_sdlc": "Ph\u00e1t tri\u1ec3n c\u00f3 AI c\u1ea5u tr\u00fac",
   "projects.filename": "projects.py",
   "projects.title": "D\u1ef1 \u00c1n",
+  "projects.tab_projects": "D\u1ef1 \u00c1n",
+  "projects.tab_pipeline": "Pipeline",
   "projects.personal": "### D\u1ef1 \u00c1n C\u00e1 Nh\u00e2n",
   "projects.work": "### D\u1ef1 \u00c1n C\u00f4ng Vi\u1ec7c",
   "project1.type": "M\u00e3 Ngu\u1ed3n M\u1edf \u2014 G\u00f3i Python \u00b7 MIT License",
@@ -739,7 +749,7 @@ function initLanguage() {
 
 
 // ============================================================
-// Source: src/bundle/controllers/nav.js (86 lines)
+// Source: src/bundle/controllers/nav.js (87 lines)
 // ============================================================
 
 // ============================================================
@@ -821,6 +831,7 @@ function initActiveSection() {
 }
 
 function initSpotlight() {
+    if ('ontouchstart' in window) return;
     document.addEventListener('mousemove', function (e) {
         var x = (e.clientX / window.innerWidth) * 100;
         var y = (e.clientY / window.innerHeight) * 100;
@@ -859,32 +870,100 @@ function initSkillsTabs() {
 
 
 // ============================================================
-// Source: src/bundle/controllers/career.js (24 lines)
+// Source: src/bundle/controllers/career.js (92 lines)
 // ============================================================
 
 // ============================================================
-// controllers/career.js — Career section tab switching
-// Depends on: $$ (utils.js)
+// controllers/career.js — Tabbed career section with
+// directional transitions and sequenced timeline reveal
 // ============================================================
+
+var CAREER_DIRECTION = {
+    experience: 'left',
+    education: 'right',
+    certifications: 'down'
+};
+
+var CAREER_STATUS = {
+    experience: { count: '4 entries', path: 'experience.sh' },
+    education: { count: '2 entries', path: 'education.sh' },
+    certifications: { count: '7 entries', path: 'certifications.sh' }
+};
 
 function initCareerTabs() {
-    var tabs = $$('.career-tab-btn');
-    var panels = $$('.career-panel');
+    var container = document.getElementById('career');
+    if (!container) return;
+    var tabs = container.querySelectorAll('.tab-btn');
+    var panels = container.querySelectorAll('.career-panel');
+    var statusBar = document.getElementById('career-status-bar');
 
     if (!tabs.length || !panels.length) return;
+
+    // Set initial direction attributes
+    panels.forEach(function (p) {
+        var tab = p.getAttribute('data-career-panel');
+        p.setAttribute('data-direction', CAREER_DIRECTION[tab] || 'left');
+    });
+
+    function updateStatus(tab) {
+        if (!statusBar) return;
+        var info = CAREER_STATUS[tab];
+        if (!info) return;
+        var prompt = statusBar.querySelector('.status-prompt');
+        var path = statusBar.querySelector('.status-path');
+        var count = statusBar.querySelector('.status-count');
+        if (prompt) prompt.textContent = '$';
+        if (path) path.textContent = './' + info.path;
+        if (count) count.textContent = info.count;
+    }
+
+    function switchTab(tabId) {
+        // Update tab buttons
+        tabs.forEach(function (b) {
+            b.classList.toggle('active', b.getAttribute('data-career-tab') === tabId);
+        });
+
+        // Update panels with directional transition
+        panels.forEach(function (p) {
+            var isActive = p.getAttribute('data-career-panel') === tabId;
+
+            if (isActive) {
+                p.classList.remove('active');
+                p.style.display = 'none';
+                void p.offsetHeight;
+                p.style.display = '';
+                p.classList.add('active');
+            } else {
+                p.classList.remove('active');
+            }
+        });
+
+        // Re-trigger reveal animations on the new panel
+        var activePanel = container.querySelector('.career-panel.active');
+        if (activePanel) {
+            var staggers = activePanel.querySelectorAll('.reveal-stagger, .edu-grid, .cert-list');
+            staggers.forEach(function (el) {
+                el.classList.remove('visible');
+                void el.offsetWidth;
+                el.classList.add('visible');
+            });
+        }
+
+        updateStatus(tabId);
+    }
 
     tabs.forEach(function (btn) {
         btn.addEventListener('click', function () {
             var tab = btn.getAttribute('data-career-tab');
-
-            tabs.forEach(function (b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-
-            panels.forEach(function (p) {
-                p.classList.toggle('active', p.getAttribute('data-career-panel') === tab);
-            });
+            switchTab(tab);
         });
     });
+
+    // Init status on page load
+    var activeTab = container.querySelector('.tab-btn.active');
+    if (activeTab) {
+        updateStatus(activeTab.getAttribute('data-career-tab'));
+    }
 }
 
 
@@ -1039,7 +1118,7 @@ function initScrollProgress() {
 
 
 // ============================================================
-// Source: src/bundle/controllers/hero.js (91 lines)
+// Source: src/bundle/controllers/hero.js (118 lines)
 // ============================================================
 
 // ============================================================
@@ -1048,7 +1127,7 @@ function initScrollProgress() {
 // ============================================================
 
 var _heroTyped = sessionStorage.getItem('hero_typed');
-var _isMobile = window.matchMedia('(max-width: 768px)').matches;
+function _isMobile() { return window.matchMedia('(max-width: 768px)').matches; }
 
 function initHeroTypewriter() {
     var el = $('[data-typewriter]');
@@ -1070,7 +1149,7 @@ function initHeroTypewriter() {
     var textSpan = el.querySelector('.typewriter-text');
     if (!textSpan) return;
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || _isMobile) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || _isMobile()) {
         textSpan.textContent = text;
         sessionStorage.setItem('hero_typed', '1');
         triggerHeroGlitch();
@@ -1103,6 +1182,33 @@ function triggerHeroGlitch() {
     title.classList.add('glitch');
 }
 
+function initScrollEffects() {
+    var hero = document.querySelector('.hero');
+    var content = document.querySelector('.hero-content');
+    if (!hero || !content) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || _isMobile()) return;
+
+    var ticking = false;
+
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(function () {
+                var rect = hero.getBoundingClientRect();
+                var vh = window.innerHeight;
+                // progress: 0 = hero fully visible, 1 = hero scrolled past viewport
+                var progress = Math.max(0, Math.min(1, -rect.top / (rect.height * 0.4)));
+
+                content.style.opacity = (1 - progress * 0.15).toFixed(3);
+                content.style.transform = 'scale(' + (1 - progress * 0.015).toFixed(4) + ')';
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+}
+
 function typeTagline() {
     var tagline = $('.hero-tagline');
     if (!tagline) return;
@@ -1113,7 +1219,7 @@ function typeTagline() {
     if (stored) return;
 
     tagline.textContent = '';
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || _isMobile) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || _isMobile()) {
         tagline.textContent = text;
         sessionStorage.setItem('tagline_typed', '1');
         return;
@@ -1129,6 +1235,90 @@ function typeTagline() {
         } else {
             sessionStorage.setItem('tagline_typed', '1');
         }
+    }
+
+    typeChar();
+}
+
+
+// ============================================================
+// Source: src/bundle/controllers/about.js (78 lines)
+// ============================================================
+
+// ============================================================
+// controllers/about.js — Command header typing animation
+// On scroll reveal, each $ command types out char by char
+// Depends on: $$ (utils.js)
+// ============================================================
+
+function initAboutTyping() {
+    var terminal = document.querySelector('#about .terminal-window');
+    var headers = document.querySelectorAll('#about .term-cmd-header');
+    if (!headers.length) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        // Skip animation, show fully rendered
+        headers.forEach(function (h) { h.setAttribute('data-typed', 'done'); });
+        return;
+    }
+
+    // Store originals and clear headers
+    headers.forEach(function (h) {
+        var html = h.getAttribute('data-orig-html');
+        if (!html) {
+            html = h.innerHTML;
+            h.setAttribute('data-orig-html', html);
+        }
+        h.textContent = '';
+    });
+
+    // Observe terminal visibility to trigger typing cascade
+    if (!('IntersectionObserver' in window)) {
+        typeAllHeaders(headers);
+        return;
+    }
+
+    var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            obs.disconnect();
+            typeAllHeaders(headers);
+        });
+    }, { threshold: 0.3 });
+
+    obs.observe(terminal);
+}
+
+function typeAllHeaders(headers) {
+    var delay = 0;
+    headers.forEach(function (h) {
+        var html = h.getAttribute('data-orig-html') || h.innerHTML;
+        var text = h.textContent || html.replace(/<[^>]+>/g, '');
+        if (!text.trim()) return;
+
+        // Use a separate timer per header for staggered start
+        setTimeout(function () {
+            typeHeader(h, html, text);
+        }, delay);
+        delay += 400; // stagger each command header by 400ms
+    });
+}
+
+function typeHeader(header, origHtml, fullText) {
+    var idx = 0;
+    var display = '';
+
+    function typeChar() {
+        if (idx >= fullText.length) {
+            // Done — swap to styled HTML
+            header.innerHTML = origHtml;
+            header.setAttribute('data-typed', 'done');
+            return;
+        }
+        display += fullText[idx];
+        header.textContent = display;
+        idx++;
+        setTimeout(typeChar, 25 + Math.random() * 10);
     }
 
     typeChar();
@@ -1212,7 +1402,7 @@ function initBootSplash() {
 
 
 // ============================================================
-// Source: src/bundle/controllers/achievements.js (153 lines)
+// Source: src/bundle/controllers/achievements.js (154 lines)
 // ============================================================
 
 // ============================================================
@@ -1231,7 +1421,8 @@ var ACHIEVEMENTS = [
     { id: 'glitch',   name: 'Reboot Initiated', desc: 'Trigger the reboot glitch',  icon: 'fa-bolt' },
     { id: 'crt',      name: 'CRT Mode',         desc: 'Activate retro CRT mode',    icon: 'fa-tv' },
     { id: 'vim',      name: 'Vim Trap',         desc: 'Toggle theme and see vim',   icon: 'fa-terminal' },
-    { id: 'fine',     name: 'This is Fine',     desc: 'Summon the dog in flames',   icon: 'fa-fire' }
+    { id: 'fine',     name: 'This is Fine',     desc: 'Summon the dog in flames',   icon: 'fa-fire' },
+    { id: 'matrix',   name: 'Red Pill',          desc: 'Take the red pill. See how deep the rabbit hole goes.', icon: 'fa-code' }
 ];
 
 var _achieveState = null;  // lazy-loaded: { id: timestamp }
@@ -2222,7 +2413,309 @@ function initFineTrigger() {
 
 
 // ============================================================
-// Source: src/bundle/controllers/projects.js (39 lines)
+// Source: src/bundle/controllers/red-pill.js (296 lines)
+// ============================================================
+
+// ============================================================
+// controllers/red-pill.js — Red Pill / Blue Pill easter egg
+// Trigger: click any terminal-dots 3× within 3 seconds
+// Reveals floating pill widget → Red pill toggles Matrix rain
+// ============================================================
+
+var _rpClickCount = 0;
+var _rpClickTimer = null;
+var _rpWidget = null;
+var _rpRainActive = false;
+var _rpRainCtrl = null;
+var _rpAchieved = false;
+
+function initRedPill() {
+    // Listen for 3 rapid clicks on terminal-dots
+    document.body.addEventListener('click', function (e) {
+        var dots = e.target.closest('.terminal-dots');
+        if (!dots) return;
+        _rpClickCount++;
+        if (_rpClickTimer) clearTimeout(_rpClickTimer);
+        _rpClickTimer = setTimeout(function () { _rpClickCount = 0; }, 3000);
+        if (_rpClickCount >= 3) {
+            _rpClickCount = 0;
+            clearTimeout(_rpClickTimer);
+            showPillWidget();
+        }
+    });
+}
+
+function showPillWidget() {
+    if (_rpWidget) return;
+
+    // Backdrop (click to dismiss)
+    var backdrop = document.createElement('div');
+    backdrop.style.cssText = [
+        'position:fixed', 'inset:0',
+        'z-index:99998',
+        'background:rgba(0,0,0,0.3)',
+        'opacity:0',
+        'transition:opacity 0.25s ease',
+    ].join(';') + ';';
+
+    // Widget container — floating terminal frame
+    var widget = document.createElement('div');
+    widget.style.cssText = [
+        'position:fixed',
+        'bottom:40px',
+        'left:50%',
+        'transform:translateX(-50%) translateY(30px)',
+        'z-index:99999',
+        'background:var(--bg-secondary)',
+        'border:1px solid var(--border-color)',
+        'border-radius:var(--border-radius-lg)',
+        'padding:18px 24px',
+        'box-shadow:0 8px 32px rgba(0,0,0,0.5)',
+        'opacity:0',
+        'transition:opacity 0.3s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1)',
+        'font-family:var(--font-mono)',
+        'text-align:center',
+        'min-width:220px',
+    ].join(';') + ';';
+
+    // Prompt line
+    var prompt = document.createElement('div');
+    prompt.style.cssText = 'color:var(--text-muted);font-size:0.7rem;margin-bottom:12px;letter-spacing:0.08em;';
+    prompt.textContent = '> choose __';
+
+    // Pill buttons row
+    var row = document.createElement('div');
+    row.style.cssText = 'display:flex;gap:12px;justify-content:center;';
+
+    // Red pill
+    var red = document.createElement('button');
+    red.textContent = 'Red Pill';
+    red.style.cssText = [
+        'font-family:var(--font-mono)',
+        'font-size:0.75rem',
+        'font-weight:600',
+        'padding:6px 18px',
+        'border:none',
+        'border-radius:999px',
+        'background:#e74c3c',
+        'color:#fff',
+        'cursor:pointer',
+        'transition:transform 0.15s ease, box-shadow 0.15s ease',
+        'box-shadow:0 2px 8px rgba(231,76,60,0.3)',
+    ].join(';') + ';';
+    red.addEventListener('mouseenter', function () {
+        red.style.transform = 'scale(1.08)';
+        red.style.boxShadow = '0 4px 16px rgba(231,76,60,0.5)';
+    });
+    red.addEventListener('mouseleave', function () {
+        red.style.transform = '';
+        red.style.boxShadow = '0 2px 8px rgba(231,76,60,0.3)';
+    });
+    red.addEventListener('click', function () { handlePill('red'); });
+
+    // Blue pill
+    var blue = document.createElement('button');
+    blue.textContent = 'Blue Pill';
+    blue.style.cssText = [
+        'font-family:var(--font-mono)',
+        'font-size:0.75rem',
+        'font-weight:600',
+        'padding:6px 18px',
+        'border:none',
+        'border-radius:999px',
+        'background:#3498db',
+        'color:#fff',
+        'cursor:pointer',
+        'transition:transform 0.15s ease, box-shadow 0.15s ease',
+        'box-shadow:0 2px 8px rgba(52,152,219,0.3)',
+    ].join(';') + ';';
+    blue.addEventListener('mouseenter', function () {
+        blue.style.transform = 'scale(1.08)';
+        blue.style.boxShadow = '0 4px 16px rgba(52,152,219,0.5)';
+    });
+    blue.addEventListener('mouseleave', function () {
+        blue.style.transform = '';
+        blue.style.boxShadow = '0 2px 8px rgba(52,152,219,0.3)';
+    });
+    blue.addEventListener('click', function () { handlePill('blue'); });
+
+    row.appendChild(red);
+    row.appendChild(blue);
+    widget.appendChild(prompt);
+    widget.appendChild(row);
+    document.body.appendChild(backdrop);
+    document.body.appendChild(widget);
+
+    _rpWidget = { widget: widget, backdrop: backdrop };
+
+    // Animate in
+    requestAnimationFrame(function () {
+        backdrop.style.opacity = '1';
+        widget.style.opacity = '1';
+        widget.style.transform = 'translateX(-50%) translateY(0)';
+    });
+
+    // Click backdrop to dismiss
+    backdrop.addEventListener('click', function () { dismissPillWidget(); });
+}
+
+var _rpRainTimer = null;
+
+function handlePill(color) {
+    if (color === 'red') {
+        if (_rpRainActive) return;
+        startMatrixRain();
+        if (!_rpAchieved && typeof _achieve === 'function') {
+            _rpAchieved = true;
+            _achieve('matrix');
+        }
+        dismissPillWidget();
+    } else if (color === 'blue') {
+        if (_rpRainActive) {
+            stopMatrixRain();
+        } else {
+            console.log('%c 💊 Blue pill taken. Ignorance is bliss.', 'color: #3498db');
+            showPillToast('nothing happens');
+        }
+        dismissPillWidget();
+    }
+}
+
+// --- Matrix Rain Overlay (auto-dismiss after 5s) ---
+
+function startMatrixRain() {
+    if (_rpRainActive) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var canvas = document.createElement('canvas');
+    canvas.className = 'pill-rain-canvas';
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.cssText = [
+        'position:fixed', 'top:0', 'left:0',
+        'width:100%', 'height:100%',
+        'z-index:99997',
+        'pointer-events:none',
+        'opacity:0',
+        'transition:opacity 0.4s ease',
+    ].join(';') + ';';
+
+    document.body.appendChild(canvas);
+
+    var ctx = canvas.getContext('2d');
+    var cols = Math.floor(canvas.width / 14);
+    var drops = [];
+    for (var i = 0; i < cols; i++) drops[i] = 1;
+    var chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789';
+    var running = true;
+    var rafId = null;
+
+    function draw() {
+        if (!running) return;
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#0f0';
+        ctx.font = '14px monospace';
+
+        for (var i = 0; i < drops.length; i++) {
+            var ch = chars.charAt(Math.floor(Math.random() * chars.length));
+            ctx.fillText(ch, i * 14, drops[i] * 14);
+            if (drops[i] * 14 > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+        rafId = requestAnimationFrame(draw);
+    }
+
+    // Fade in then start
+    requestAnimationFrame(function () { canvas.style.opacity = '0.85'; });
+    setTimeout(function () {
+        rafId = requestAnimationFrame(draw);
+    }, 400);
+
+    _rpRainCtrl = {
+        stop: function () {
+            running = false;
+            if (rafId) cancelAnimationFrame(rafId);
+        },
+        canvas: canvas
+    };
+    _rpRainActive = true;
+
+    // Auto-dismiss after 5 seconds
+    _rpRainTimer = setTimeout(function () {
+        stopMatrixRain();
+    }, 5000);
+}
+
+function stopMatrixRain() {
+    if (!_rpRainActive || !_rpRainCtrl) return;
+    if (_rpRainTimer) { clearTimeout(_rpRainTimer); _rpRainTimer = null; }
+    _rpRainCtrl.stop();
+    var canvas = _rpRainCtrl.canvas;
+    if (canvas) {
+        canvas.style.opacity = '0';
+        setTimeout(function () {
+            if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
+        }, 400);
+    }
+    _rpRainCtrl = null;
+    _rpRainActive = false;
+}
+
+// --- Widget Dismissal ---
+
+function dismissPillWidget() {
+    if (!_rpWidget) return;
+    var widget = _rpWidget.widget;
+    var backdrop = _rpWidget.backdrop;
+
+    widget.style.opacity = '0';
+    widget.style.transform = 'translateX(-50%) translateY(30px)';
+    backdrop.style.opacity = '0';
+
+    setTimeout(function () {
+        if (widget.parentNode) widget.parentNode.removeChild(widget);
+        if (backdrop.parentNode) backdrop.parentNode.removeChild(backdrop);
+        _rpWidget = null;
+    }, 300);
+}
+
+// --- Toast notification ---
+
+function showPillToast(msg) {
+    var toast = document.createElement('div');
+    toast.style.cssText = [
+        'position:fixed', 'bottom:100px', 'left:50%',
+        'transform:translateX(-50%)',
+        'z-index:100000',
+        'background:var(--bg-secondary)',
+        'border:1px solid var(--border-color)',
+        'border-radius:var(--border-radius-sm)',
+        'padding:6px 16px',
+        'font:12px/1.6 var(--font-mono)',
+        'color:var(--text-muted)',
+        'opacity:0',
+        'transition:opacity 0.2s ease',
+        'pointer-events:none',
+    ].join(';') + ';';
+    toast.textContent = '> ' + msg;
+
+    document.body.appendChild(toast);
+    requestAnimationFrame(function () { toast.style.opacity = '1'; });
+
+    setTimeout(function () {
+        toast.style.opacity = '0';
+        setTimeout(function () {
+            if (toast.parentNode) toast.parentNode.removeChild(toast);
+        }, 200);
+    }, 1500);
+}
+
+
+// ============================================================
+// Source: src/bundle/controllers/projects.js (63 lines)
 // ============================================================
 
 // ============================================================
@@ -2263,6 +2756,30 @@ function typeDescription(el) {
     el.setAttribute('data-typed', 'true');
     var text = el.getAttribute('data-fulltext') || '';
     el.textContent = text;
+}
+
+function initProjectTabs() {
+    var container = document.getElementById('projects');
+    if (!container) return;
+    var tabs = container.querySelectorAll('.tab-btn');
+    var panels = container.querySelectorAll('.project-panel');
+    if (!tabs.length || !panels.length) return;
+
+    function switchTab(tabId) {
+        tabs.forEach(function (b) {
+            b.classList.toggle('active', b.getAttribute('data-project-tab') === tabId);
+        });
+        panels.forEach(function (p) {
+            p.classList.toggle('active', p.getAttribute('data-project-panel') === tabId);
+        });
+    }
+
+    tabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var tab = btn.getAttribute('data-project-tab');
+            switchTab(tab);
+        });
+    });
 }
 
 
@@ -2379,238 +2896,403 @@ function initMatrixRain() {
 
 
 // ============================================================
-// Source: src/bundle/controllers/pipeline-data.js (220 lines)
+// Source: src/bundle/controllers/pipeline-data.js (8 lines)
 // ============================================================
 
 // ============================================================
 // controllers/pipeline-data.js — SDLC Pipeline preset data
 // Structured message format: { agent, type, content, ... }
 // Types: text, code, diff, command, status, thinking, divider
+// EN presets → pipeline-data-en.js, VI presets → pipeline-data-vi.js
 // ============================================================
 
-var PIPELINE_PRESETS = {
-    en: {
-        "ad-deploy": {
-            name: "Staging Active Directory VM & DNS Infrastructure",
-            steps: [
-                {
-                    title: "PLANNING PHASE",
-                    phase: "plan",
-                    messages: [
-                        { agent: "user", type: "text", content: "Stage a new Windows Server Active Directory controller for local operations." },
-                        { agent: "planner", type: "thinking", content: "Analyzing request...", duration: 1200 },
-                        { agent: "planner", type: "text", content: "Parsing request. Target Domain: factory.internal. Subnet: 10.0.10.0/24." },
-                        { agent: "planner", type: "text", content: "Formulated deployment DAG. Delegating script creation to CoderAgent." },
-                        { agent: "planner", type: "status", content: "Architecture plan finalized.", status: "pass" }
-                    ]
-                },
-                {
-                    title: "CODING / AUTOMATION PHASE",
-                    phase: "code",
-                    messages: [
-                        { agent: "coder", type: "text", content: "Creating PowerShell bootstrap script: build_ad.ps1..." },
-                        { agent: "coder", type: "code", content: "Generating directory configuration diff:", language: "powershell", code: "# PowerShell Active Directory Staging Script\nImport-Module ADDSDeployment\nInstall-WindowsFeature AD-Domain-Services -IncludeManagementTools\nInstall-ADDSForest -DomainName \"factory.internal\" -SafeModeAdministratorPassword $pass" },
-                        { agent: "coder", type: "thinking", content: "Validating syntax...", duration: 800 },
-                        { agent: "coder", type: "status", content: "Code synthesis complete. Handing over to VerifierAgent.", status: "pass" }
-                    ]
-                },
-                {
-                    title: "VERIFICATION PHASE",
-                    phase: "verify",
-                    messages: [
-                        { agent: "verifier", type: "thinking", content: "Running syntax checks...", duration: 1500 },
-                        { agent: "verifier", type: "text", content: "Running syntax parser & compiler linter..." },
-                        { agent: "verifier", type: "status", content: "[Linter] Syntax check: OK. 0 errors, 0 warnings.", status: "pass" },
-                        { agent: "verifier", type: "text", content: "Dry-running Active Directory setup in sandboxed hypervisor..." },
-                        { agent: "verifier", type: "status", content: "[DNS test] Resolution checked. OUs validated. All checks PASSED.", status: "pass" }
-                    ]
-                },
-                {
-                    title: "DEPLOYMENT & GIT COMMIT PHASE",
-                    phase: "deploy",
-                    messages: [
-                        { agent: "git", type: "thinking", content: "Staging changes...", duration: 600 },
-                        { agent: "git", type: "text", content: "Staging changes and committing to local repository..." },
-                        { agent: "git", type: "command", content: "git add -A && git commit -m \"infra: bootstrap staging Active Directory Domain Controller\"" },
-                        { agent: "git", type: "diff", content: "Diff summary:", diff: [
-                            "+ # PowerShell Active Directory Staging Script",
-                            "+ Import-Module ADDSDeployment",
-                            "+ Install-WindowsFeature AD-Domain-Services -IncludeManagementTools",
-                            "+ Install-ADDSForest -DomainName \"factory.internal\" -SafeModeAdministratorPassword $pass"
-                        ]},
-                        { agent: "git", type: "text", content: "[main 9d2f8a1] infra: bootstrap staging Active Directory Domain Controller" },
-                        { agent: "git", type: "text", content: "1 file changed, 45 insertions(+), 0 deletions(-)" },
-                        { agent: "system", type: "status", content: "Initializing deployment on host VM... Domain services ONLINE & healthy.", status: "pass" }
-                    ]
-                }
-            ]
-        },
-        "mcp-feature": {
-            name: "Implementing Token-Optimized Guidance Search in MCP Server",
-            steps: [
-                {
-                    title: "PLANNING PHASE",
-                    phase: "plan",
-                    messages: [
-                        { agent: "user", type: "text", content: "Add local guidance query search functionality to the agent-guidance-mcp server." },
-                        { agent: "planner", type: "thinking", content: "Analyzing requirement...", duration: 1000 },
-                        { agent: "planner", type: "text", content: "Analyzing requirement. Index 168 local skills using SQLite FTS5." },
-                        { agent: "planner", type: "text", content: "Constraint: Strict 150 token output limit per lookup to prevent client blowout." },
-                        { agent: "planner", type: "status", content: "Plan approved. Delegating to CoderAgent.", status: "pass" }
-                    ]
-                },
-                {
-                    title: "CODING / AUTOMATION PHASE",
-                    phase: "code",
-                    messages: [
-                        { agent: "coder", type: "text", content: "Writing search algorithm in python..." },
-                        { agent: "coder", type: "code", content: "Staging search.py modifications:", language: "python", code: "# Before: simple LIKE query\ndef search_skills(query):\n    return db.query(\"SELECT * FROM skills WHERE desc LIKE ?\", ('%' + query + '%',))\n\n# After: SQLite FTS5 weighted query\ndef search_skills(query):\n    # SQLite FTS5 weighted query\n    return db.query(\"SELECT id, desc, rank FROM skills_fts WHERE skills_fts MATCH ? ORDER BY rank LIMIT 5\", (query,))" },
-                        { agent: "coder", type: "thinking", content: "Running tests...", duration: 900 },
-                        { agent: "coder", type: "status", content: "Code generated. Requesting verification checks.", status: "pass" }
-                    ]
-                },
-                {
-                    title: "VERIFICATION PHASE",
-                    phase: "verify",
-                    messages: [
-                        { agent: "verifier", type: "thinking", content: "Running Ruff checks...", duration: 1200 },
-                        { agent: "verifier", type: "text", content: "Running code formatting checking via Ruff..." },
-                        { agent: "verifier", type: "status", content: "[Ruff] 0 format violations detected.", status: "pass" },
-                        { agent: "verifier", type: "text", content: "Running unit tests..." },
-                        { agent: "verifier", type: "status", content: "[pytest] TestSuite: 12 tests passed, 0 failed. Execution time: 0.22s.", status: "pass" }
-                    ]
-                },
-                {
-                    title: "DEPLOYMENT & GIT COMMIT PHASE",
-                    phase: "deploy",
-                    messages: [
-                        { agent: "git", type: "thinking", content: "Committing feature...", duration: 500 },
-                        { agent: "git", type: "text", content: "Committing feature code..." },
-                        { agent: "git", type: "command", content: "git commit -a -m \"feat(search): implement weighted FTS5 search with token caps\"" },
-                        { agent: "git", type: "text", content: "[main 4c1d2e8] feat(search): implement weighted FTS5 search with token caps" },
-                        { agent: "git", type: "text", content: "2 files changed, 24 insertions(+), 8 deletions(-)" },
-                        { agent: "system", type: "status", content: "Re-linking Stdio MCP Server... Server up and listening on Stdio.", status: "pass" }
-                    ]
-                }
-            ]
-        }
+var PIPELINE_PRESETS = {};
+
+
+// ============================================================
+// Source: src/bundle/controllers/pipeline-data-en.js (182 lines)
+// ============================================================
+
+// ============================================================
+// controllers/pipeline-data-en.js — EN preset data
+// ============================================================
+
+PIPELINE_PRESETS.en = {
+    "ad-deploy": {
+        name: "Staging Active Directory VM & DNS Infrastructure",
+        gameOutput: "snake",
+        steps: [
+            {
+                title: "PLANNING PHASE",
+                phase: "plan",
+                messages: [
+                    { agent: "user", type: "text", content: "Need to set up AD DS + DNS on Windows Server 2022 in our test lab before prod rollout." },
+                    { agent: "system", type: "thinking", duration: 1200 },
+                    { agent: "planner", type: "text", content: "Breaking down the AD deployment into phases:\n1. Validate hardware prerequisites (8 vCPU / 32 GB RAM / 200 GB SSD)\n2. Install AD Domain Services role + DNS Server role\n3. Configure a new forest (domain: lab.corp.example.com)\n4. Create OUs: CorpUsers, CorpComputers, ServiceAccounts\n5. Set up reverse lookup zones + dynamic DNS updates\n6. Promote secondary DC for fault tolerance" },
+                    { agent: "system", type: "divider", content: "Plan finalized" }
+                ]
+            },
+            {
+                title: "DEVELOPMENT EXECUTION",
+                phase: "code",
+                messages: [
+                    { agent: "coder", type: "thinking", duration: 800 },
+                    { agent: "coder", type: "code", language: "powershell", code: "# Install AD DS + DNS roles\nInstall-WindowsFeature -Name AD-Domain-Services,DNS -IncludeManagementTools\n\n# Promote to Domain Controller (new forest)\nInstall-ADDSForest -DomainName \"lab.corp.example.com\" `\n  -SafeModeAdministratorPassword (ConvertTo-SecureString \"P@ssw0rd!\" -AsPlainText -Force) `\n  -Force:$true -Confirm:$false\n\n# Create OUs\nNew-ADOrganizationalUnit -Name \"CorpUsers\" -Path \"DC=lab,DC=corp,DC=example,DC=com\"\nNew-ADOrganizationalUnit -Name \"CorpComputers\" -Path \"DC=lab,DC=corp,DC=example,DC=com\"\nNew-ADOrganizationalUnit -Name \"ServiceAccounts\" -Path \"DC=lab,DC=corp,DC=example,DC=com\"" }
+                ]
+            },
+            {
+                title: "VERIFICATION",
+                phase: "verify",
+                messages: [
+                    { agent: "verifier", type: "thinking", duration: 600 },
+                    { agent: "verifier", type: "diff", content: "Config validation:", diff: ["+ DNS zone 'lab.corp.example.com' created", "+ Reverse lookup zone '10.0.0.x' configured", "+ SRV records registered (_ldap._tcp.dc._msdcs)", "+ 3 OUs structured under domain root"] },
+                    { agent: "verifier", type: "status", content: "AD health check: OK. DNS resolution: OK. Replication: OK.", status: "pass" }
+                ]
+            },
+            {
+                title: "DEPLOYMENT",
+                phase: "deploy",
+                messages: [
+                    { agent: "system", type: "thinking", duration: 400 },
+                    { agent: "git", type: "command", content: "terraform apply -auto-approve" },
+                    { agent: "git", type: "text", content: "Output: Apply complete! Resources: 6 added, 0 changed, 0 destroyed." },
+                    { agent: "git", type: "text", content: "Secondary DC promotion queued for off-hours." },
+                    { agent: "system", type: "status", content: "AD DS + DNS deployed lab.corp.example.com (Build artifact: snake-game.html)", status: "pass" }
+                ]
+            }
+        ]
     },
-    vi: {
-        "ad-deploy": {
-            name: "Tri\u1ec3n khai M\u00e1y ch\u1ee7 \u1ea2o Active Directory & C\u1ea5u h\u00ecnh DNS",
-            steps: [
-                {
-                    title: "B\u01af\u1edaC L\u1eacP K\u1ebe HO\u1ea0CH",
-                    phase: "plan",
-                    messages: [
-                        { agent: "user", type: "text", content: "D\u1ef1ng m\u00e1y ch\u1ee7 qu\u1ea3n l\u00fd t\u00ean mi\u1ec1n Active Directory m\u1edbi cho v\u1eadn h\u00e0nh n\u1ed9i b\u1ed9." },
-                        { agent: "planner", type: "thinking", content: "\u0110ang ph\u00e2n t\u00edch y\u00eau c\u1ea7u...", duration: 1200 },
-                        { agent: "planner", type: "text", content: "Ph\u00e2n t\u00edch y\u00eau c\u1ea7u. T\u00ean mi\u1ec1n: factory.internal. M\u1ea1ng: 10.0.10.0/24." },
-                        { agent: "planner", type: "text", content: "L\u1eadp s\u01a1 \u0111\u1ed3 tri\u1ec3n khai DAG. Giao vi\u1ec7c vi\u1ebft t\u1eadp l\u1ec7nh cho CoderAgent." },
-                        { agent: "planner", type: "status", content: "K\u1ebf ho\u1ea1ch ki\u1ebfn tr\u00fac \u0111\u00e3 \u0111\u01b0\u1ee3c th\u00f4ng qua.", status: "pass" }
-                    ]
-                },
-                {
-                    title: "B\u01af\u1edaC VI\u1ebeT CODE / T\u1ef0 \u0110\u1ed8NG H\u00d3A",
-                    phase: "code",
-                    messages: [
-                        { agent: "coder", type: "text", content: "T\u1ea1o m\u00e3 t\u1ef1 \u0111\u1ed9ng h\u00f3a PowerShell: build_ad.ps1..." },
-                        { agent: "coder", type: "code", content: "B\u1ea3n thay \u0111\u1ed5i m\u00e3 ngu\u1ed3n:", language: "powershell", code: "# PowerShell Active Directory Staging Script\nImport-Module ADDSDeployment\nInstall-WindowsFeature AD-Domain-Services -IncludeManagementTools\nInstall-ADDSForest -DomainName \"factory.internal\" -SafeModeAdministratorPassword $pass" },
-                        { agent: "coder", type: "thinking", content: "\u0110ang x\u00e1c th\u1ef1c c\u00fa ph\u00e1p...", duration: 800 },
-                        { agent: "coder", type: "status", content: "T\u1ed5ng h\u1ee3p m\u00e3 ho\u00e0n t\u1ea5t. Chuy\u1ec3n giao sang VerifierAgent.", status: "pass" }
-                    ]
-                },
-                {
-                    title: "B\u01af\u1edaC X\u00c1C MINH KI\u1ec2M TH\u1eec",
-                    phase: "verify",
-                    messages: [
-                        { agent: "verifier", type: "thinking", content: "\u0110ang ch\u1ea1y ki\u1ec3m tra c\u00fa ph\u00e1p...", duration: 1500 },
-                        { agent: "verifier", type: "text", content: "Ch\u1ea1y tr\u00ecnh ki\u1ec3m tra c\u00fa ph\u00e1p v\u00e0 quy chu\u1ea9n m\u00e3 l\u1ec7nh..." },
-                        { agent: "verifier", type: "status", content: "[Linter] Ki\u1ec3m \u0111\u1ecbnh c\u00fa ph\u00e1p: OK. 0 l\u1ed7i, 0 c\u1ea3nh b\u00e1o.", status: "pass" },
-                        { agent: "verifier", type: "text", content: "Ch\u1ea1y th\u1eed thi\u1ebft l\u1eadp AD trong m\u00e1y \u1ea3o gi\u1ea3 l\u1eadp c\u00f4 l\u1eadp..." },
-                        { agent: "verifier", type: "status", content: "[DNS test] Ph\u00e2n gi\u1ea3i DNS ho\u1ea1t \u0111\u1ed9ng. OUs h\u1ee3p l\u1ec7. Ki\u1ec3m tra TH\u00d4NG QUA.", status: "pass" }
-                    ]
-                },
-                {
-                    title: "Tri\u1ec3n khai & Commit Git",
-                    phase: "deploy",
-                    messages: [
-                        { agent: "git", type: "thinking", content: "\u0110ang chu\u1ea9n b\u1ecb commit...", duration: 600 },
-                        { agent: "git", type: "text", content: "\u0110\u01b0a c\u00e1c t\u1ec7p v\u00e0o h\u00e0ng ch\u1edd v\u00e0 commit v\u00e0o kho l\u01b0u tr\u1eef..." },
-                        { agent: "git", type: "command", content: "git add -A && git commit -m \"infra: bootstrap staging Active Directory Domain Controller\"" },
-                        { agent: "git", type: "diff", content: "T\u00f3m t\u1eaft thay \u0111\u1ed5i:", diff: [
-                            "+ # PowerShell Active Directory Staging Script",
-                            "+ Import-Module ADDSDeployment",
-                            "+ Install-WindowsFeature AD-Domain-Services -IncludeManagementTools",
-                            "+ Install-ADDSForest -DomainName \"factory.internal\" -SafeModeAdministratorPassword $pass"
-                        ]},
-                        { agent: "git", type: "text", content: "[main 9d2f8a1] infra: bootstrap staging Active Directory Domain Controller" },
-                        { agent: "git", type: "text", content: "1 t\u1ec7p thay \u0111\u1ed5i, 45 d\u00f2ng th\u00eam (+), 0 d\u00f2ng x\u00f3a (-)" },
-                        { agent: "system", type: "status", content: "Kh\u1edfi t\u1ea1o tri\u1ec3n khai d\u1ecbch v\u1ee5 AD tr\u00ean VM... Tr\u1ea1ng th\u00e1i ONLINE v\u00e0 kh\u1ecfe m\u1ea1nh.", status: "pass" }
-                    ]
-                }
-            ]
-        },
-        "mcp-feature": {
-            name: "T\u00edch h\u1ee3p T\u00ecm ki\u1ebfm T\u1ed1i \u01b0u Token v\u00e0o M\u00e1y ch\u1ee7 MCP",
-            steps: [
-                {
-                    title: "B\u01af\u1edaC L\u1eacP K\u1ebe HO\u1ea0CH",
-                    phase: "plan",
-                    messages: [
-                        { agent: "user", type: "text", content: "T\u00edch h\u1ee3p ch\u1ee9c n\u0103ng t\u00ecm ki\u1ebfm k\u1ef9 n\u0103ng v\u00e0o m\u00e1y ch\u1ee7 agent-guidance-mcp." },
-                        { agent: "planner", type: "thinking", content: "\u0110ang ph\u00e2n t\u00edch y\u00eau c\u1ea7u...", duration: 1000 },
-                        { agent: "planner", type: "text", content: "Ph\u00e2n t\u00edch y\u00eau c\u1ea7u. Ch\u1ec9 m\u1ee5c h\u00f3a 168 k\u1ef9 n\u0103ng b\u1eb1ng SQLite FTS5." },
-                        { agent: "planner", type: "text", content: "R\u00e0ng bu\u1ed9c: Gi\u1edbi h\u1ea1n 150 token m\u1ed7i truy v\u1ea5n \u0111\u1ec3 tr\u00e1nh qu\u00e1 t\u1ea3i d\u1eef li\u1ec7u." },
-                        { agent: "planner", type: "status", content: "Ph\u00ea duy\u1ec7t k\u1ebf ho\u1ea1ch. Giao vi\u1ec7c cho CoderAgent.", status: "pass" }
-                    ]
-                },
-                {
-                    title: "B\u01af\u1edaC VI\u1ebeT CODE / T\u1ef0 \u0110\u1ed8NG H\u00d3A",
-                    phase: "code",
-                    messages: [
-                        { agent: "coder", type: "text", content: "Vi\u1ebft thu\u1eadt to\u00e1n t\u00ecm ki\u1ebfm b\u1eb1ng Python..." },
-                        { agent: "coder", type: "code", content: "B\u1ea3n thay \u0111\u1ed5i m\u00e3 ngu\u1ed3n trong search.py:", language: "python", code: "# Before: simple LIKE query\ndef search_skills(query):\n    return db.query(\"SELECT * FROM skills WHERE desc LIKE ?\", ('%' + query + '%',))\n\n# After: SQLite FTS5 weighted query\ndef search_skills(query):\n    # SQLite FTS5 weighted query\n    return db.query(\"SELECT id, desc, rank FROM skills_fts WHERE skills_fts MATCH ? ORDER BY rank LIMIT 5\", (query,))" },
-                        { agent: "coder", type: "thinking", content: "\u0110ang ch\u1ea1y ki\u1ec3m th\u1eed...", duration: 900 },
-                        { agent: "coder", type: "status", content: "\u0110\u00e3 sinh m\u00e3 ngu\u1ed3n. Y\u00eau c\u1ea7u ch\u1ea1y ki\u1ec3m th\u1eed.", status: "pass" }
-                    ]
-                },
-                {
-                    title: "B\u01af\u1edaC X\u00c1C MINH KI\u1ec2M TH\u1eec",
-                    phase: "verify",
-                    messages: [
-                        { agent: "verifier", type: "thinking", content: "\u0110ang ch\u1ea1y Ruff...", duration: 1200 },
-                        { agent: "verifier", type: "text", content: "Ch\u1ea1y tr\u00ecnh ki\u1ec3m tra quy chu\u1ea9n Ruff..." },
-                        { agent: "verifier", type: "status", content: "[Ruff] 0 l\u1ed7i quy chu\u1ea9n \u0111\u01b0\u1ee3c ph\u00e1t hi\u1ec7n.", status: "pass" },
-                        { agent: "verifier", type: "text", content: "Th\u1ef1c thi c\u00e1c ca ki\u1ec3m th\u1eed t\u1ef1 \u0111\u1ed9ng..." },
-                        { agent: "verifier", type: "status", content: "[pytest] TestSuite: 12 b\u00e0i test \u0111\u00e3 th\u00f4ng qua. Th\u1eddi gian ch\u1ea1y: 0.22s.", status: "pass" }
-                    ]
-                },
-                {
-                    title: "Tri\u1ec3n khai & Commit Git",
-                    phase: "deploy",
-                    messages: [
-                        { agent: "git", type: "thinking", content: "\u0110ang commit...", duration: 500 },
-                        { agent: "git", type: "text", content: "\u0110ang commit m\u00e3 ngu\u1ed3n t\u00ednh n\u0103ng..." },
-                        { agent: "git", type: "command", content: "git commit -a -m \"feat(search): implement weighted FTS5 search with token caps\"" },
-                        { agent: "git", type: "text", content: "[main 4c1d2e8] feat(search): implement weighted FTS5 search with token caps" },
-                        { agent: "git", type: "text", content: "2 t\u1ec7p thay \u0111\u1ed5i, 24 d\u00f2ng th\u00eam (+), 8 d\u00f2ng x\u00f3a (-)" },
-                        { agent: "system", type: "status", content: "Kh\u1edfi \u0111\u1ed9ng l\u1ea1i li\u00ean k\u1ebft m\u00e1y ch\u1ee7 MCP... Tr\u1ea1ng th\u00e1i k\u1ebft n\u1ed1i s\u1eb5n s\u00e0ng.", status: "pass" }
-                    ]
-                }
-            ]
-        }
+    "mcp-feature": {
+        name: "Implement MCP Guidance Search",
+        gameOutput: "tetris",
+        steps: [
+            {
+                title: "PLANNING PHASE",
+                phase: "plan",
+                messages: [
+                    { agent: "user", type: "text", content: "We need a MCP-based guidance search that lets users query skills via natural language." },
+                    { agent: "system", type: "thinking", duration: 1200 },
+                    { agent: "planner", type: "text", content: "Architecture breakdown:\n1. Define skill metadata schema (name, description, tags, category)\n2. Implement vector similarity search using embeddings (sentence-transformers)\n3. Build MCP tool wrapper: guidance_search(query, limit, category?)\n4. Wire into existing prompt pipeline as a skill-lookup step\n5. Add caching layer (LRU, TTL 5 min) for frequent queries" },
+                    { agent: "system", type: "divider", content: "Plan finalized" }
+                ]
+            },
+            {
+                title: "DEVELOPMENT EXECUTION",
+                phase: "code",
+                messages: [
+                    { agent: "coder", type: "thinking", duration: 800 },
+                    { agent: "coder", type: "code", language: "typescript", code: "// guidance-search.ts — MCP-powered skill lookup\ninterface SkillDoc {\n  id: string;\n  name: string;\n  description: string;\n  tags: string[];\n  category: string;\n  embedding?: number[];\n}\n\nconst cache = new LRUCache<string, SkillDoc[]>({ max: 100, ttl: 300_000 });\n\nasync function guidanceSearch(\n  query: string,\n  limit = 5,\n  category?: string\n): Promise<SkillDoc[]> {\n  const cacheKey = `${query}:${limit}:${category ?? '*'}`;\n  const cached = cache.get(cacheKey);\n  if (cached) return cached;\n\n  const embedding = await embed(query);\n  const results = await vectorDB.search(embedding, { limit, filter: category ? { category } : undefined });\n  cache.set(cacheKey, results);\n  return results;\n}" }
+                ]
+            },
+            {
+                title: "VERIFICATION",
+                phase: "verify",
+                messages: [
+                    { agent: "verifier", type: "thinking", duration: 600 },
+                    { agent: "verifier", type: "diff", content: "Test results:", diff: ["+ guidance_search('authentication') returns 5 results in 42ms", "+ category filter 'security' narrows to 3 results", "+ Cache hit reduces latency to 2ms", "+ 0 false positives in 20-sample eval"] },
+                    { agent: "verifier", type: "status", content: "Precision: 0.95. Recall: 0.92. Latency p95: 68ms.", status: "pass" }
+                ]
+            },
+            {
+                title: "DEPLOYMENT",
+                phase: "deploy",
+                messages: [
+                    { agent: "system", type: "thinking", duration: 400 },
+                    { agent: "git", type: "command", content: "npm run build && npm publish" },
+                    { agent: "git", type: "text", content: "Published @org/guidance-search v1.0.0 to internal registry." },
+                    { agent: "git", type: "text", content: "Integration PR merged into main pipeline." },
+                    { agent: "system", type: "status", content: "MCP Guidance Search deployed v1.0.0 (Build artifact: tetris-game.html)", status: "pass" }
+                ]
+            }
+        ]
+    },
+    "portfolio-deploy": {
+        name: "Deploy Portfolio to Cloudflare",
+        gameOutput: "pacman",
+        steps: [
+            {
+                title: "PLANNING PHASE",
+                phase: "plan",
+                messages: [
+                    { agent: "user", type: "text", content: "We need to deploy the static portfolio site to Cloudflare Pages with custom domain." },
+                    { agent: "system", type: "thinking", duration: 1200 },
+                    { agent: "planner", type: "text", content: "Deployment plan:\n1. Build static site (Jekyll/Hugo/vanilla — confirm stack)\n2. Configure cloudflare.toml for build settings\n3. Set up Cloudflare Pages project via Wrangler CLI\n4. Configure custom domain (junmystery.dev) + SSL\n5. Enable D1 database for contact form submissions\n6. Set up branch preview deployments" },
+                    { agent: "system", type: "divider", content: "Plan finalized" }
+                ]
+            },
+            {
+                title: "DEVELOPMENT EXECUTION",
+                phase: "code",
+                messages: [
+                    { agent: "coder", type: "thinking", duration: 800 },
+                    { agent: "coder", type: "code", language: "toml", code: "# cloudflare.toml\nname = \"junmystery-portfolio\"\ncompatibility_date = \"2025-01-01\"\n\n[build]\ncommand = \"bash src/bundle/build.sh\"\npublish = \"./\"\n\n[env.production]\nroutes = [{ pattern = \"junmystery.dev\", zone = \"<zone_id>\" }]\n\n[env.preview]\nroutes = [{ pattern = \"preview.junmystery.dev\" }]\n\n[[d1_databases]]\nbinding = \"CONTACT_DB\"\ndatabase_name = \"portfolio-contact\"\ndatabase_id = \"<db_id>\"" }
+                ]
+            },
+            {
+                title: "VERIFICATION",
+                phase: "verify",
+                messages: [
+                    { agent: "verifier", type: "thinking", duration: 600 },
+                    { agent: "verifier", type: "diff", content: "Deploy validation:", diff: ["+ Build output: 47 files, 2.3 MB total", "+ All internal links resolve (0 dead links)", "+ Lighthouse score: 98 Performance / 100 Accessibility", "+ Custom domain SSL: Active (TLS 1.3)", "+ D1 database: Connected"] },
+                    { agent: "verifier", type: "status", content: "Preview deployment: OK. Production ready.", status: "pass" }
+                ]
+            },
+            {
+                title: "DEPLOYMENT",
+                phase: "deploy",
+                messages: [
+                    { agent: "system", type: "thinking", duration: 400 },
+                    { agent: "git", type: "command", content: "wrangler pages deploy --branch=main" },
+                    { agent: "git", type: "text", content: "✨ Deployment complete! https://junmystery.dev" },
+                    { agent: "git", type: "text", content: "Cache purged. CDN propagation: 12s." },
+                    { agent: "system", type: "status", content: "Portfolio deployed to Cloudflare Pages (Build artifact: pacman-game.html)", status: "pass" }
+                ]
+            }
+        ]
+    },
+    "game-engine": {
+        name: "Build 2D Canvas Game Engine",
+        gameOutput: "flappy",
+        steps: [
+            {
+                title: "PLANNING PHASE",
+                phase: "plan",
+                messages: [
+                    { agent: "user", type: "text", content: "Design a lightweight 2D canvas engine for simple browser games (snake, tetris, pacman, flappy)." },
+                    { agent: "system", type: "thinking", duration: 1200 },
+                    { agent: "planner", type: "text", content: "Engine architecture:\n1. Canvas2D renderer with auto-scaling and HiDPI support\n2. Entity-component system (ECS): Position, Velocity, Sprite, Collider, Health\n3. Input manager (keyboard + touch) with action mapping\n4. Physics subsystem: AABB collision, gravity, bounce easing\n5. Audio manager for Web Audio API (SFX + music tracks)\n6. Scene graph with camera transform, layers, and parallax" },
+                    { agent: "system", type: "divider", content: "Plan finalized" }
+                ]
+            },
+            {
+                title: "DEVELOPMENT EXECUTION",
+                phase: "code",
+                messages: [
+                    { agent: "coder", type: "thinking", duration: 800 },
+                    { agent: "coder", type: "code", language: "javascript", code: "// engine.js — 2D canvas game engine core\nclass Engine {\n  constructor(canvasId) {\n    this.canvas = document.getElementById(canvasId);\n    this.ctx = this.canvas.getContext('2d');\n    this.scenes = new Map();\n    this.activeScene = null;\n    this.lastTime = 0;\n    this.running = false;\n  }\n\n  addScene(name, scene) {\n    this.scenes.set(name, scene);\n    scene.engine = this;\n  }\n\n  start(name) {\n    this.activeScene = this.scenes.get(name);\n    this.running = true;\n    this.lastTime = performance.now();\n    requestAnimationFrame(t => this.loop(t));\n  }\n\n  loop(now) {\n    if (!this.running) return;\n    const dt = (now - this.lastTime) / 1000;\n    this.lastTime = now;\n    this.activeScene.update(dt);\n    this.activeScene.render(this.ctx);\n    requestAnimationFrame(t => this.loop(t));\n  }\n}" }
+                ]
+            },
+            {
+                title: "VERIFICATION",
+                phase: "verify",
+                messages: [
+                    { agent: "verifier", type: "thinking", duration: 600 },
+                    { agent: "verifier", type: "diff", content: "Benchmark results:", diff: ["+ 60 FPS sustained at 500 entities (collision + render)", "+ Memory: 12 MB baseline, no leaks after 10 min run", "+ Input latency: <16ms (single frame)", "+ Audio: 4 simultaneous SFX channels, zero glitching", "+ Scene transitions: <8ms"] },
+                    { agent: "verifier", type: "status", content: "Engine benchmark: 60 FPS / 500 entities. Memory: stable.", status: "pass" }
+                ]
+            },
+            {
+                title: "DEPLOYMENT",
+                phase: "deploy",
+                messages: [
+                    { agent: "system", type: "thinking", duration: 400 },
+                    { agent: "git", type: "command", content: "npm run build:engine" },
+                    { agent: "git", type: "text", content: "Build output: dist/engine.min.js (44 KB gzipped: 12 KB)" },
+                    { agent: "git", type: "text", content: "Published as @org/canvas-engine v1.0.0" },
+                    { agent: "system", type: "status", content: "2D Canvas Engine deployed v1.0.0 (Build artifact: flappy-bird-game.html)", status: "pass" }
+                ]
+            }
+        ]
     }
 };
 
 
 // ============================================================
-// Source: src/bundle/controllers/pipeline.js (406 lines)
+// Source: src/bundle/controllers/pipeline-data-vi.js (182 lines)
 // ============================================================
 
 // ============================================================
-// controllers/pipeline.js — Interactive SDLC Pipeline simulator
-// Chat-style multi-agent conversation with streaming engine
+// controllers/pipeline-data-vi.js — VI preset data
+// ============================================================
+
+PIPELINE_PRESETS.vi = {
+    "ad-deploy": {
+        name: "Tri\u1ec3n khai M\u00e1y ch\u1ee7 \u1ea2o Active Directory & C\u1ea5u h\u00ecnh DNS",
+        gameOutput: "snake",
+        steps: [
+            {
+                title: "GIAI \u0110O\u1ea0N L\u1eacP K\u1ebe HO\u1ea0CH",
+                phase: "plan",
+                messages: [
+                    { agent: "user", type: "text", content: "C\u1ea7n thi\u1ebft l\u1eadp AD DS + DNS tr\u00ean Windows Server 2022 trong ph\u00f2ng lab tr\u01b0\u1edbc khi tri\u1ec3n khai s\u1ea3n xu\u1ea5t." },
+                    { agent: "system", type: "thinking", duration: 1200 },
+                    { agent: "planner", type: "text", content: "Ph\u00e2n t\u00edch tri\u1ec3n khai AD theo c\u00e1c giai \u0111o\u1ea1n:\n1. Ki\u1ec3m tra ph\u1ea7n c\u1ee9ng (8 vCPU / 32 GB RAM / 200 GB SSD)\n2. C\u00e0i \u0111\u1eb7t vai tr\u00f2 AD Domain Services + DNS Server\n3. C\u1ea5u h\u00ecnh forest m\u1edbi (domain: lab.corp.example.com)\n4. T\u1ea1o OU: CorpUsers, CorpComputers, ServiceAccounts\n5. Thi\u1ebft l\u1eadp v\u00f9ng tra c\u1ee9u ng\u01b0\u1ee3c + c\u1eadp nh\u1eadt DNS \u0111\u1ed9ng\n6. Th\u0103m d\u00f2 DC ph\u1ee5 \u0111\u1ec3 ch\u1ecbu l\u1ed7i" },
+                    { agent: "system", type: "divider", content: "K\u1ebf ho\u1ea1ch \u0111\u00e3 ho\u00e0n t\u1ea5t" }
+                ]
+            },
+            {
+                title: "TH\u1ef0C THI PH\u00c1T TRI\u1ec2N",
+                phase: "code",
+                messages: [
+                    { agent: "coder", type: "thinking", duration: 800 },
+                    { agent: "coder", type: "code", language: "powershell", code: "# C\u00e0i \u0111\u1eb7t vai tr\u00f2 AD DS + DNS\nInstall-WindowsFeature -Name AD-Domain-Services,DNS -IncludeManagementTools\n\n# Th\u0103ng c\u1ea5p th\u00e0nh Domain Controller (forest m\u1edbi)\nInstall-ADDSForest -DomainName \"lab.corp.example.com\" `\n  -SafeModeAdministratorPassword (ConvertTo-SecureString \"P@ssw0rd!\" -AsPlainText -Force) `\n  -Force:$true -Confirm:$false\n\n# T\u1ea1o OU\nNew-ADOrganizationalUnit -Name \"CorpUsers\" -Path \"DC=lab,DC=corp,DC=example,DC=com\"\nNew-ADOrganizationalUnit -Name \"CorpComputers\" -Path \"DC=lab,DC=corp,DC=example,DC=com\"\nNew-ADOrganizationalUnit -Name \"ServiceAccounts\" -Path \"DC=lab,DC=corp,DC=example,DC=com\"" }
+                ]
+            },
+            {
+                title: "X\u00c1C MINH",
+                phase: "verify",
+                messages: [
+                    { agent: "verifier", type: "thinking", duration: 600 },
+                    { agent: "verifier", type: "diff", content: "X\u00e1c th\u1ef1c c\u1ea5u h\u00ecnh:", diff: ["+ DNS zone 'lab.corp.example.com' \u0111\u00e3 t\u1ea1o", "+ Reverse lookup zone '10.0.0.x' \u0111\u00e3 c\u1ea5u h\u00ecnh", "+ SRV records \u0111\u00e3 \u0111\u0103ng k\u00fd (_ldap._tcp.dc._msdcs)", "+ 3 OU \u0111\u00e3 c\u1ea5u tr\u00fac d\u01b0\u1edbi g\u1ed1c mi\u1ec1n"] },
+                    { agent: "verifier", type: "status", content: "Ki\u1ec3m tra AD: OK. DNS: OK. Nh\u00e2n b\u1ea3n: OK.", status: "pass" }
+                ]
+            },
+            {
+                title: "TRI\u1ec2N KHAI",
+                phase: "deploy",
+                messages: [
+                    { agent: "system", type: "thinking", duration: 400 },
+                    { agent: "git", type: "command", content: "terraform apply -auto-approve" },
+                    { agent: "git", type: "text", content: "K\u1ebft qu\u1ea3: \u00c1p d\u1ee5ng th\u00e0nh c\u00f4ng! 6 t\u00e0i nguy\u00ean \u0111\u00e3 th\u00eam, 0 thay \u0111\u1ed5i, 0 x\u00f3a." },
+                    { agent: "git", type: "text", content: "Th\u0103ng c\u1ea5p DC ph\u1ee5 \u0111\u00e3 x\u1ebfp h\u00e0ng ch\u1edd ngo\u00e0i gi\u1edd." },
+                    { agent: "system", type: "status", content: "AD DS + DNS \u0111\u00e3 tri\u1ec3n khai lab.corp.example.com (Build artifact: snake-game.html)", status: "pass" }
+                ]
+            }
+        ]
+    },
+    "mcp-feature": {
+        name: "Tri\u1ec3n khai T\u00ecm ki\u1ebfm H\u01b0\u1edbng d\u1eabn MCP",
+        gameOutput: "tetris",
+        steps: [
+            {
+                title: "GIAI \u0110O\u1ea0N L\u1eacP K\u1ebe HO\u1ea0CH",
+                phase: "plan",
+                messages: [
+                    { agent: "user", type: "text", content: "Ch\u00fang ta c\u1ea7n m\u1ed9t t\u00ecm ki\u1ebfm h\u01b0\u1edbng d\u1eabn d\u1ef1a tr\u00ean MCP cho ph\u00e9p ng\u01b0\u1eddi d\u00f9ng truy v\u1ea5n k\u1ef9 n\u0103ng b\u1eb1ng ng\u00f4n ng\u1eef t\u1ef1 nhi\u00ean." },
+                    { agent: "system", type: "thinking", duration: 1200 },
+                    { agent: "planner", type: "text", content: "Ph\u00e2n t\u00edch ki\u1ebfn tr\u00fac:\n1. X\u00e1c \u0111\u1ecbnh schema si\u00eau d\u1eef li\u1ec7u k\u1ef9 n\u0103ng (t\u00ean, m\u00f4 t\u1ea3, th\u1ebb, danh m\u1ee5c)\n2. Tri\u1ec3n khai t\u00ecm ki\u1ebfm t\u01b0\u01a1ng t\u1ef1 vector b\u1eb1ng embeddings (sentence-transformers)\n3. X\u00e2y d\u1ef1ng wrapper c\u00f4ng c\u1ee5 MCP: guidance_search(truy_v\u1ea5n, gi\u1edbi_h\u1ea1n, danh_m\u1ee5c?)\n4. T\u00edch h\u1ee3p v\u00e0o \u0111\u01b0\u1eddng \u1ed1ng prompt hi\u1ec7n t\u1ea1i nh\u01b0 m\u1ed9t b\u01b0\u1edbc tra c\u1ee9u k\u1ef9 n\u0103ng\n5. Th\u00eam l\u1edbp b\u1ed9 nh\u1edb \u0111\u1ec7m (LRU, TTL 5 ph\u00fat) cho c\u00e1c truy v\u1ea5n th\u01b0\u1eddng xuy\u00ean" },
+                    { agent: "system", type: "divider", content: "K\u1ebf ho\u1ea1ch \u0111\u00e3 ho\u00e0n t\u1ea5t" }
+                ]
+            },
+            {
+                title: "TH\u1ef0C THI PH\u00c1T TRI\u1ec2N",
+                phase: "code",
+                messages: [
+                    { agent: "coder", type: "thinking", duration: 800 },
+                    { agent: "coder", type: "code", language: "typescript", code: "// guidance-search.ts \u2014 Tra c\u1ee9u k\u1ef9 n\u0103ng h\u1ed7 tr\u1ee3 MCP\ninterface SkillDoc {\n  id: string;\n  name: string;\n  description: string;\n  tags: string[];\n  category: string;\n  embedding?: number[];\n}\n\nconst cache = new LRUCache<string, SkillDoc[]>({ max: 100, ttl: 300_000 });\n\nasync function guidanceSearch(\n  query: string,\n  limit = 5,\n  category?: string\n): Promise<SkillDoc[]> {\n  const cacheKey = `${query}:${limit}:${category ?? '*'}`;\n  const cached = cache.get(cacheKey);\n  if (cached) return cached;\n\n  const embedding = await embed(query);\n  const results = await vectorDB.search(embedding, { limit, filter: category ? { category } : undefined });\n  cache.set(cacheKey, results);\n  return results;\n}" }
+                ]
+            },
+            {
+                title: "X\u00c1C MINH",
+                phase: "verify",
+                messages: [
+                    { agent: "verifier", type: "thinking", duration: 600 },
+                    { agent: "verifier", type: "diff", content: "K\u1ebft qu\u1ea3 ki\u1ec3m tra:", diff: ["+ guidance_search('authentication') tr\u1ea3 v\u1ec1 5 k\u1ebft qu\u1ea3 trong 42ms", "+ B\u1ed9 l\u1ecdc danh m\u1ee5c 'security' thu h\u1eb9p xu\u1ed1ng 3 k\u1ebft qu\u1ea3", "+ Cache hit gi\u1ea3m \u0111\u1ed9 tr\u1ec5 xu\u1ed1ng 2ms", "+ 0 d\u01b0\u01a1ng t\u00ednh gi\u1ea3 trong 20 m\u1eabu \u0111\u00e1nh gi\u00e1"] },
+                    { agent: "verifier", type: "status", content: "\u0110\u1ed9 ch\u00ednh x\u00e1c: 0.95. \u0110\u1ed9 thu h\u1ed3i: 0.92. \u0110\u1ed9 tr\u1ec5 p95: 68ms.", status: "pass" }
+                ]
+            },
+            {
+                title: "TRI\u1ec2N KHAI",
+                phase: "deploy",
+                messages: [
+                    { agent: "system", type: "thinking", duration: 400 },
+                    { agent: "git", type: "command", content: "npm run build && npm publish" },
+                    { agent: "git", type: "text", content: "\u0110\u00e3 xu\u1ea5t b\u1ea3n @org/guidance-search v1.0.0 l\u00ean kho n\u1ed9i b\u1ed9." },
+                    { agent: "git", type: "text", content: "PR t\u00edch h\u1ee3p \u0111\u00e3 \u0111\u01b0\u1ee3c merge v\u00e0o \u0111\u01b0\u1eddng \u1ed1ng ch\u00ednh." },
+                    { agent: "system", type: "status", content: "MCP Guidance Search \u0111\u00e3 tri\u1ec3n khai v1.0.0 (Build artifact: tetris-game.html)", status: "pass" }
+                ]
+            }
+        ]
+    },
+    "portfolio-deploy": {
+        name: "Tri\u1ec3n khai Portfolio l\u00ean Cloudflare",
+        gameOutput: "pacman",
+        steps: [
+            {
+                title: "GIAI \u0110O\u1ea0N L\u1eacP K\u1ebe HO\u1ea0CH",
+                phase: "plan",
+                messages: [
+                    { agent: "user", type: "text", content: "C\u1ea7n tri\u1ec3n khai trang portfolio t\u0129nh l\u00ean Cloudflare Pages v\u1edbi t\u00ean mi\u1ec1n t\u00f9y ch\u1ec9nh." },
+                    { agent: "system", type: "thinking", duration: 1200 },
+                    { agent: "planner", type: "text", content: "K\u1ebf ho\u1ea1ch tri\u1ec3n khai:\n1. X\u00e2y d\u1ef1ng site t\u0129nh (Jekyll/Hugo/vanilla \u2014 x\u00e1c nh\u1eadn stack)\n2. C\u1ea5u h\u00ecnh cloudflare.toml cho c\u00e0i \u0111\u1eb7t build\n3. Thi\u1ebft l\u1eadp d\u1ef1 \u00e1n Cloudflare Pages qua Wrangler CLI\n4. C\u1ea5u h\u00ecnh t\u00ean mi\u1ec1n t\u00f9y ch\u1ec9nh (junmystery.dev) + SSL\n5. B\u1eadt c\u01a1 s\u1edf d\u1eef li\u1ec7u D1 cho bi\u1ec3u m\u1eabu li\u00ean h\u1ec7\n6. Thi\u1ebft l\u1eadp tri\u1ec3n khai xem tr\u01b0\u1edbc theo nh\u00e1nh" },
+                    { agent: "system", type: "divider", content: "K\u1ebf ho\u1ea1ch \u0111\u00e3 ho\u00e0n t\u1ea5t" }
+                ]
+            },
+            {
+                title: "TH\u1ef0C THI PH\u00c1T TRI\u1ec2N",
+                phase: "code",
+                messages: [
+                    { agent: "coder", type: "thinking", duration: 800 },
+                    { agent: "coder", type: "code", language: "toml", code: "# cloudflare.toml\nname = \"junmystery-portfolio\"\ncompatibility_date = \"2025-01-01\"\n\n[build]\ncommand = \"bash src/bundle/build.sh\"\npublish = \"./\"\n\n[env.production]\nroutes = [{ pattern = \"junmystery.dev\", zone = \"<zone_id>\" }]\n\n[env.preview]\nroutes = [{ pattern = \"preview.junmystery.dev\" }]\n\n[[d1_databases]]\nbinding = \"CONTACT_DB\"\ndatabase_name = \"portfolio-contact\"\ndatabase_id = \"<db_id>\"" }
+                ]
+            },
+            {
+                title: "X\u00c1C MINH",
+                phase: "verify",
+                messages: [
+                    { agent: "verifier", type: "thinking", duration: 600 },
+                    { agent: "verifier", type: "diff", content: "X\u00e1c th\u1ef1c tri\u1ec3n khai:", diff: ["+ \u0110\u1ea7u ra build: 47 t\u1ec7p, t\u1ed5ng 2.3 MB", "+ T\u1ea5t c\u1ea3 li\u00ean k\u1ebft n\u1ed9i b\u1ed9 ho\u1ea1t \u0111\u1ed9ng (0 li\u00ean k\u1ebft ch\u1ebft)", "+ \u0110i\u1ec3m Lighthouse: 98 Hi\u1ec7u su\u1ea5t / 100 Kh\u1ea3 n\u0103ng ti\u1ebfp c\u1eadn", "+ SSL t\u00ean mi\u1ec1n t\u00f9y ch\u1ec9nh: Ho\u1ea1t \u0111\u1ed9ng (TLS 1.3)", "+ D1 database: \u0110\u00e3 k\u1ebft n\u1ed1i"] },
+                    { agent: "verifier", type: "status", content: "Tri\u1ec3n khai xem tr\u01b0\u1edbc: OK. S\u1eb5n s\u00e0ng s\u1ea3n xu\u1ea5t.", status: "pass" }
+                ]
+            },
+            {
+                title: "TRI\u1ec2N KHAI",
+                phase: "deploy",
+                messages: [
+                    { agent: "system", type: "thinking", duration: 400 },
+                    { agent: "git", type: "command", content: "wrangler pages deploy --branch=main" },
+                    { agent: "git", type: "text", content: "\u2728 Tri\u1ec3n khai ho\u00e0n t\u1ea5t! https://junmystery.dev" },
+                    { agent: "git", type: "text", content: "\u0110\u00e3 x\u00f3a b\u1ed9 nh\u1edb \u0111\u1ec7m. Ph\u00e2n ph\u1ed1i CDN: 12s." },
+                    { agent: "system", type: "status", content: "Portfolio \u0111\u00e3 tri\u1ec3n khai l\u00ean Cloudflare Pages (Build artifact: pacman-game.html)", status: "pass" }
+                ]
+            }
+        ]
+    },
+    "game-engine": {
+        name: "X\u00e2y d\u1ef1ng C\u00f4ng c\u1ee5 Game Canvas 2D",
+        gameOutput: "flappy",
+        steps: [
+            {
+                title: "GIAI \u0110O\u1ea0N L\u1eacP K\u1ebe HO\u1ea0CH",
+                phase: "plan",
+                messages: [
+                    { agent: "user", type: "text", content: "Thi\u1ebft k\u1ebf m\u1ed9t c\u00f4ng c\u1ee5 canvas 2D nh\u1eb9 cho c\u00e1c game tr\u00ecnh duy\u1ec7t \u0111\u01a1n gi\u1ea3n (snake, tetris, pacman, flappy)." },
+                    { agent: "system", type: "thinking", duration: 1200 },
+                    { agent: "planner", type: "text", content: "Ki\u1ebfn tr\u00fac c\u00f4ng c\u1ee5:\n1. Tr\u00ecnh k\u1ebft xu\u1ea5t Canvas2D v\u1edbi t\u1ef1 \u0111\u1ed9ng chia t\u1ef7 l\u1ec7 v\u00e0 h\u1ed7 tr\u1ee3 HiDPI\n2. H\u1ec7 th\u1ed1ng th\u00e0nh ph\u1ea7n th\u1ef1c th\u1ec3 (ECS): V\u1ecb tr\u00ed, V\u1eadn t\u1ed1c, Sprite, Va ch\u1ea1m, S\u1ee9c kh\u1ecfe\n3. Tr\u00ecnh qu\u1ea3n l\u00fd \u0111\u1ea7u v\u00e0o (b\u00e0n ph\u00edm + c\u1ea3m \u1ee9ng) v\u1edbi \u00e1nh x\u1ea1 h\u00e0nh \u0111\u1ed9ng\n4. H\u1ec7 th\u1ed1ng con v\u1eadt l\u00fd: Va ch\u1ea1m AABB, tr\u1ecdng l\u1ef1c, gi\u1ea3m ch\u1ea5n n\u1ea3y\n5. Tr\u00ecnh qu\u1ea3n l\u00fd \u00e2m thanh cho Web Audio API (SFX + nh\u1ea1c n\u1ec1n)\n6. \u0110\u1ed3 th\u1ecb c\u1ea3nh v\u1edbi bi\u1ebfn \u0111\u1ed5i camera, l\u1edbp v\u00e0 parallax" },
+                    { agent: "system", type: "divider", content: "K\u1ebf ho\u1ea1ch \u0111\u00e3 ho\u00e0n t\u1ea5t" }
+                ]
+            },
+            {
+                title: "TH\u1ef0C THI PH\u00c1T TRI\u1ec2N",
+                phase: "code",
+                messages: [
+                    { agent: "coder", type: "thinking", duration: 800 },
+                    { agent: "coder", type: "code", language: "javascript", code: "// engine.js \u2014 L\u00f5i c\u00f4ng c\u1ee5 game canvas 2D\nclass Engine {\n  constructor(canvasId) {\n    this.canvas = document.getElementById(canvasId);\n    this.ctx = this.canvas.getContext('2d');\n    this.scenes = new Map();\n    this.activeScene = null;\n    this.lastTime = 0;\n    this.running = false;\n  }\n\n  addScene(name, scene) {\n    this.scenes.set(name, scene);\n    scene.engine = this;\n  }\n\n  start(name) {\n    this.activeScene = this.scenes.get(name);\n    this.running = true;\n    this.lastTime = performance.now();\n    requestAnimationFrame(t => this.loop(t));\n  }\n\n  loop(now) {\n    if (!this.running) return;\n    const dt = (now - this.lastTime) / 1000;\n    this.lastTime = now;\n    this.activeScene.update(dt);\n    this.activeScene.render(this.ctx);\n    requestAnimationFrame(t => this.loop(t));\n  }\n}" }
+                ]
+            },
+            {
+                title: "X\u00c1C MINH",
+                phase: "verify",
+                messages: [
+                    { agent: "verifier", type: "thinking", duration: 600 },
+                    { agent: "verifier", type: "diff", content: "K\u1ebft qu\u1ea3 \u0111o \u0111\u1ea1c:", diff: ["+ Duy tr\u00ec 60 FPS \u1edf 500 th\u1ef1c th\u1ec3 (va ch\u1ea1m + k\u1ebft xu\u1ea5t)", "+ B\u1ed9 nh\u1edb: 12 MB c\u01a1 s\u1edf, kh\u00f4ng r\u00f2 r\u1ec9 sau 10 ph\u00fat ch\u1ea1y", "+ \u0110\u1ed9 tr\u1ec5 \u0111\u1ea7u v\u00e0o: <16ms (m\u1ed9t khung h\u00ecnh)", "+ \u00c2m thanh: 4 k\u00eanh SFX \u0111\u1ed3ng th\u1eddi, kh\u00f4ng gi\u1eadt", "+ Chuy\u1ec3n c\u1ea3nh: <8ms"] },
+                    { agent: "verifier", type: "status", content: "\u0110o \u0111\u1ea1c c\u00f4ng c\u1ee5: 60 FPS / 500 th\u1ef1c th\u1ec3. B\u1ed9 nh\u1edb: \u1ed5n \u0111\u1ecbnh.", status: "pass" }
+                ]
+            },
+            {
+                title: "TRI\u1ec2N KHAI",
+                phase: "deploy",
+                messages: [
+                    { agent: "system", type: "thinking", duration: 400 },
+                    { agent: "git", type: "command", content: "npm run build:engine" },
+                    { agent: "git", type: "text", content: "\u0110\u1ea7u ra build: dist/engine.min.js (44 KB n\u00e9n: 12 KB)" },
+                    { agent: "git", type: "text", content: "\u0110\u00e3 xu\u1ea5t b\u1ea3n @org/canvas-engine v1.0.0" },
+                    { agent: "system", type: "status", content: "C\u00f4ng c\u1ee5 Canvas 2D \u0111\u00e3 tri\u1ec3n khai v1.0.0 (Build artifact: flappy-bird-game.html)", status: "pass" }
+                ]
+            }
+        ]
+    }
+};
+
+
+// ============================================================
+// Source: src/bundle/controllers/pipeline-render.js (182 lines)
+// ============================================================
+
+// ============================================================
+// controllers/pipeline-render.js — Chat message render helpers
+// Extracted from pipeline.js to stay under 300 LOC.
+// Module-level globals; no closure dependencies.
 // ============================================================
 
 var AGENT_CONFIG = {
@@ -2622,17 +3304,189 @@ var AGENT_CONFIG = {
     system:   { name: "System",        initial: "S" }
 };
 
-var SPEED_CONFIG = {
-    fast:   { charMs: 30,  msgPauseMs: 200, stepPauseMs: 500, thinkPauseMs: 300 },
-    normal: { charMs: 100, msgPauseMs: 500, stepPauseMs: 1000, thinkPauseMs: 600 },
-    slow:   { charMs: 200, msgPauseMs: 800, stepPauseMs: 1500, thinkPauseMs: 1000 }
-};
-
 function escapeHtml(str) {
     var div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
 }
+
+var GAME_MAP = {
+    snake:  { url: 'game/snake-game.html',       label: 'snake_core.js' },
+    tetris: { url: 'game/tetris-game.html',       label: 'compiler_engine.tsx' },
+    pacman: { url: 'game/pacman-game.html',       label: 'compiler_pacman.py' },
+    flappy: { url: 'game/flappy-bird-game.html',  label: 'pipeline_flappy.sh' }
+};
+
+function removeDebugButton() {
+    var existing = document.querySelector('.chat-debug-btn-wrap');
+    if (existing) existing.parentNode.removeChild(existing);
+}
+
+function createMessageEl(msg) {
+    var agent = msg.agent || 'system';
+    var cfg = AGENT_CONFIG[agent] || AGENT_CONFIG.system;
+    var el = document.createElement('div');
+    el.className = 'chat-message';
+
+    var avatar = document.createElement('div');
+    avatar.className = 'chat-avatar ' + agent;
+    avatar.textContent = cfg.initial;
+    el.appendChild(avatar);
+
+    var bubble = document.createElement('div');
+    bubble.className = 'chat-bubble';
+
+    var header = document.createElement('div');
+    header.className = 'chat-header';
+    var nameSpan = document.createElement('span');
+    nameSpan.className = 'chat-agent-name';
+    nameSpan.setAttribute('data-agent', agent);
+    nameSpan.textContent = cfg.name;
+    header.appendChild(nameSpan);
+    var ts = document.createElement('span');
+    ts.className = 'chat-timestamp';
+    ts.textContent = 'now';
+    header.appendChild(ts);
+    bubble.appendChild(header);
+
+    var content = document.createElement('div');
+    content.className = 'chat-content';
+
+    switch (msg.type) {
+        case 'code':
+            renderCode(content, msg);
+            break;
+        case 'diff':
+            renderDiff(content, msg);
+            break;
+        case 'command':
+            renderCommand(content, msg);
+            break;
+        case 'status':
+            renderStatus(content, msg);
+            break;
+        case 'thinking':
+            renderThinking(content);
+            break;
+        case 'divider':
+            renderDivider(content, msg);
+            break;
+        default:
+            content.className = 'chat-content chat-content-text';
+            content.textContent = msg.content || '';
+            break;
+    }
+
+    bubble.appendChild(content);
+    el.appendChild(bubble);
+    return el;
+}
+
+function renderCode(container, msg) {
+    var block = document.createElement('div');
+    block.className = 'chat-code-block';
+
+    var header = document.createElement('div');
+    header.className = 'code-header';
+    var langSpan = document.createElement('span');
+    langSpan.className = 'code-lang';
+    langSpan.textContent = msg.language || 'code';
+    header.appendChild(langSpan);
+    block.appendChild(header);
+
+    var pre = document.createElement('pre');
+    var code = document.createElement('code');
+    code.textContent = msg.code || msg.content || '';
+    pre.appendChild(code);
+    block.appendChild(pre);
+
+    container.appendChild(block);
+}
+
+function renderDiff(container, msg) {
+    var block = document.createElement('div');
+    block.className = 'chat-diff-block';
+
+    var header = document.createElement('div');
+    header.className = 'diff-header';
+    header.textContent = msg.content || 'Diff:';
+    block.appendChild(header);
+
+    var lines = msg.diff || [];
+    for (var i = 0; i < lines.length; i++) {
+        var line = lines[i];
+        var lineEl = document.createElement('div');
+        var cls = 'chat-diff-line';
+        if (line.indexOf('+') === 0) cls += ' diff-add';
+        else if (line.indexOf('-') === 0) cls += ' diff-del';
+        lineEl.className = cls;
+        lineEl.textContent = line;
+        block.appendChild(lineEl);
+    }
+
+    container.appendChild(block);
+}
+
+function renderCommand(container, msg) {
+    var cmd = document.createElement('div');
+    cmd.className = 'chat-command';
+    var prompt = document.createElement('span');
+    prompt.className = 'cmd-prompt';
+    prompt.textContent = '$';
+    cmd.appendChild(prompt);
+    cmd.appendChild(document.createTextNode(' ' + (msg.content || '')));
+    container.appendChild(cmd);
+}
+
+function renderStatus(container, msg) {
+    var badge = document.createElement('span');
+    badge.className = 'chat-status';
+    var iconName = 'fa-check-circle';
+    var color = '#22c55e';
+    if (msg.status === 'fail') { iconName = 'fa-times-circle'; color = '#ff4d4d'; }
+    else if (msg.status === 'warn') { iconName = 'fa-exclamation-circle'; color = '#f59e0b'; }
+    badge.style.color = color;
+    var icon = document.createElement('i');
+    icon.className = 'fas ' + iconName;
+    badge.appendChild(icon);
+    badge.appendChild(document.createTextNode(' ' + (msg.content || '')));
+    container.appendChild(badge);
+}
+
+function renderThinking(container) {
+    var dots = document.createElement('div');
+    dots.className = 'thinking-dots';
+    for (var i = 0; i < 3; i++) {
+        var dot = document.createElement('span');
+        dots.appendChild(dot);
+    }
+    container.appendChild(dots);
+}
+
+function renderDivider(container, msg) {
+    var div = document.createElement('div');
+    div.className = 'chat-divider';
+    var span = document.createElement('span');
+    span.textContent = msg.content || '';
+    div.appendChild(span);
+    container.appendChild(div);
+}
+
+
+// ============================================================
+// Source: src/bundle/controllers/pipeline.js (281 lines)
+// ============================================================
+
+// ============================================================
+// controllers/pipeline.js — Interactive SDLC Pipeline simulator
+// Chat-style multi-agent conversation with streaming engine
+// ============================================================
+
+var SPEED_CONFIG = {
+    fast:   { charMs: 30,  msgPauseMs: 200, stepPauseMs: 500, thinkPauseMs: 300 },
+    normal: { charMs: 100, msgPauseMs: 500, stepPauseMs: 1000, thinkPauseMs: 600 },
+    slow:   { charMs: 200, msgPauseMs: 800, stepPauseMs: 1500, thinkPauseMs: 1000 }
+};
 
 function initPipelineSimulator() {
     var runBtn = document.getElementById('pipeline-run');
@@ -2671,159 +3525,7 @@ function initPipelineSimulator() {
         terminalBody.scrollTop = terminalBody.scrollHeight;
     }
 
-    // --- HTML escaping ---
     function esc(s) { return escapeHtml(s); }
-
-    // --- Render a single chat message element ---
-    function createMessageEl(msg) {
-        var agent = msg.agent || 'system';
-        var cfg = AGENT_CONFIG[agent] || AGENT_CONFIG.system;
-        var el = document.createElement('div');
-        el.className = 'chat-message';
-
-        var avatar = document.createElement('div');
-        avatar.className = 'chat-avatar ' + agent;
-        avatar.textContent = cfg.initial;
-        el.appendChild(avatar);
-
-        var bubble = document.createElement('div');
-        bubble.className = 'chat-bubble';
-
-        var header = document.createElement('div');
-        header.className = 'chat-header';
-        var nameSpan = document.createElement('span');
-        nameSpan.className = 'chat-agent-name';
-        nameSpan.setAttribute('data-agent', agent);
-        nameSpan.textContent = cfg.name;
-        header.appendChild(nameSpan);
-        var ts = document.createElement('span');
-        ts.className = 'chat-timestamp';
-        ts.textContent = 'now';
-        header.appendChild(ts);
-        bubble.appendChild(header);
-
-        var content = document.createElement('div');
-        content.className = 'chat-content';
-
-        switch (msg.type) {
-            case 'code':
-                renderCode(content, msg);
-                break;
-            case 'diff':
-                renderDiff(content, msg);
-                break;
-            case 'command':
-                renderCommand(content, msg);
-                break;
-            case 'status':
-                renderStatus(content, msg);
-                break;
-            case 'thinking':
-                renderThinking(content);
-                break;
-            case 'divider':
-                renderDivider(content, msg);
-                break;
-            default:
-                content.className = 'chat-content chat-content-text';
-                content.textContent = msg.content || '';
-                break;
-        }
-
-        bubble.appendChild(content);
-        el.appendChild(bubble);
-        return el;
-    }
-
-    function renderCode(container, msg) {
-        var block = document.createElement('div');
-        block.className = 'chat-code-block';
-
-        var header = document.createElement('div');
-        header.className = 'code-header';
-        var langSpan = document.createElement('span');
-        langSpan.className = 'code-lang';
-        langSpan.textContent = msg.language || 'code';
-        header.appendChild(langSpan);
-        block.appendChild(header);
-
-        var pre = document.createElement('pre');
-        var code = document.createElement('code');
-        code.textContent = msg.code || msg.content || '';
-        pre.appendChild(code);
-        block.appendChild(pre);
-
-        container.appendChild(block);
-    }
-
-    function renderDiff(container, msg) {
-        var block = document.createElement('div');
-        block.className = 'chat-diff-block';
-
-        var header = document.createElement('div');
-        header.className = 'diff-header';
-        header.textContent = msg.content || 'Diff:';
-        block.appendChild(header);
-
-        var lines = msg.diff || [];
-        for (var i = 0; i < lines.length; i++) {
-            var line = lines[i];
-            var lineEl = document.createElement('div');
-            var cls = 'chat-diff-line';
-            if (line.indexOf('+') === 0) cls += ' diff-add';
-            else if (line.indexOf('-') === 0) cls += ' diff-del';
-            lineEl.className = cls;
-            lineEl.textContent = line;
-            block.appendChild(lineEl);
-        }
-
-        container.appendChild(block);
-    }
-
-    function renderCommand(container, msg) {
-        var cmd = document.createElement('div');
-        cmd.className = 'chat-command';
-        var prompt = document.createElement('span');
-        prompt.className = 'cmd-prompt';
-        prompt.textContent = '$';
-        cmd.appendChild(prompt);
-        cmd.appendChild(document.createTextNode(' ' + (msg.content || '')));
-        container.appendChild(cmd);
-    }
-
-    function renderStatus(container, msg) {
-        var badge = document.createElement('span');
-        badge.className = 'chat-status';
-        var iconName = 'fa-check-circle';
-        var color = '#22c55e';
-        if (msg.status === 'fail') { iconName = 'fa-times-circle'; color = '#ff4d4d'; }
-        else if (msg.status === 'warn') { iconName = 'fa-exclamation-circle'; color = '#f59e0b'; }
-        badge.style.color = color;
-        var icon = document.createElement('i');
-        icon.className = 'fas ' + iconName;
-        badge.appendChild(icon);
-        badge.appendChild(document.createTextNode(' ' + (msg.content || '')));
-        container.appendChild(badge);
-    }
-
-    function renderThinking(container) {
-        var dots = document.createElement('div');
-        dots.className = 'thinking-dots';
-        for (var i = 0; i < 3; i++) {
-            var dot = document.createElement('span');
-            dots.appendChild(dot);
-        }
-        container.appendChild(dots);
-    }
-
-    function renderDivider(container, msg) {
-        var div = document.createElement('div');
-        div.className = 'chat-divider';
-        var span = document.createElement('span');
-        span.textContent = msg.content || '';
-        div.appendChild(span);
-        container.appendChild(div);
-    }
 
     // --- Stream a text message char by char ---
     function streamText(msgEl, text, speed, done) {
@@ -2899,7 +3601,7 @@ function initPipelineSimulator() {
             if (!isRunning) duration = 100;
             timerId = setTimeout(function () {
                 if (msgEl.parentNode) {
-                    msgEl.querySelector('.thinking-dots').innerHTML = '<span style="color:var(--text-muted);font-size:0.7rem">done</span>';
+                    msgEl.querySelector('.thinking-dots').innerHTML = '<span style="color:var(--text-muted);font-size:0.7rem;width:auto;height:auto;border-radius:0;background:none">done</span>';
                 }
                 timerId = setTimeout(executeNextMessage, speed.thinkPauseMs);
             }, Math.min(duration, speed === SPEED_CONFIG.fast ? 300 : duration));
@@ -2955,12 +3657,54 @@ function initPipelineSimulator() {
         statusLabel.textContent = lang === 'vi' ? 'CH\u1EDC' : 'IDLE';
         statusLabel.style.color = 'var(--text-secondary)';
         updateNodes();
+        removeDebugButton();
+    }
+
+    function appendDebugButton(presetKey) {
+        removeDebugButton();
+        if (!presetKey) return;
+        var lang = i18n.currentLang || 'en';
+        var preset = presets[lang] && presets[lang][presetKey];
+        var gameId = preset && preset.gameOutput;
+        if (!gameId || !GAME_MAP[gameId]) return;
+
+        var info = GAME_MAP[gameId];
+        var msgEl = document.createElement('div');
+        msgEl.className = 'chat-message chat-debug-btn-wrap';
+
+        var avatar = document.createElement('div');
+        avatar.className = 'chat-avatar system';
+        avatar.textContent = 'S';
+        msgEl.appendChild(avatar);
+
+        var bubble = document.createElement('div');
+        bubble.className = 'chat-bubble';
+
+        var content = document.createElement('div');
+        content.className = 'chat-content';
+
+        var btn = document.createElement('a');
+        btn.className = 'chat-debug-btn';
+        btn.href = info.url;
+        btn.target = '_blank';
+        btn.setAttribute('title', info.label);
+        var icon = document.createElement('i');
+        icon.className = 'fas fa-code';
+        btn.appendChild(icon);
+        btn.appendChild(document.createTextNode(' Debug: ' + info.label));
+        content.appendChild(btn);
+        bubble.appendChild(content);
+        msgEl.appendChild(bubble);
+        terminalBody.appendChild(msgEl);
+        scrollBottom();
     }
 
     function finish() {
         isRunning = false;
         updateNodes();
         var lang = i18n.currentLang || 'en';
+        var presetKey = presetSelect.value;
+        appendDebugButton(presetKey);
         statusLabel.textContent = lang === 'vi' ? 'TH\u00c0NH C\u00d4NG' : 'IDLE';
         statusLabel.style.color = '#22c55e';
         runBtn.disabled = false;
@@ -3017,7 +3761,7 @@ function initPipelineSimulator() {
 
 
 // ============================================================
-// Source: src/bundle/main.js (27 lines)
+// Source: src/bundle/main.js (31 lines)
 // ============================================================
 
 // ============================================================
@@ -3037,18 +3781,22 @@ document.addEventListener('DOMContentLoaded', function () {
     initSpotlight();
     initLanguage();
     initHeroTypewriter();
+    initScrollEffects();
+    initAboutTyping();
     initProjectTyping();
+    initProjectTabs();
     initAchievements();
     initBootSplash();
     initEasterEgg();
     initKonami();
     init404Trigger();
     initFineTrigger();
+    initRedPill();
     initMatrixRain();
     initPipelineSimulator();
 });
 
 
 // ============================================================
-// End of bundle.js (2887 total lines from 26 modules)
+// End of bundle.js (3605 total lines from 31 modules)
 // ============================================================

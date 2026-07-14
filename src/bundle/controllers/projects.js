@@ -37,3 +37,27 @@ function typeDescription(el) {
     var text = el.getAttribute('data-fulltext') || '';
     el.textContent = text;
 }
+
+function initProjectTabs() {
+    var container = document.getElementById('projects');
+    if (!container) return;
+    var tabs = container.querySelectorAll('.tab-btn');
+    var panels = container.querySelectorAll('.project-panel');
+    if (!tabs.length || !panels.length) return;
+
+    function switchTab(tabId) {
+        tabs.forEach(function (b) {
+            b.classList.toggle('active', b.getAttribute('data-project-tab') === tabId);
+        });
+        panels.forEach(function (p) {
+            p.classList.toggle('active', p.getAttribute('data-project-panel') === tabId);
+        });
+    }
+
+    tabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var tab = btn.getAttribute('data-project-tab');
+            switchTab(tab);
+        });
+    });
+}

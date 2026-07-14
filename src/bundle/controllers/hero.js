@@ -4,7 +4,7 @@
 // ============================================================
 
 var _heroTyped = sessionStorage.getItem('hero_typed');
-var _isMobile = window.matchMedia('(max-width: 768px)').matches;
+function _isMobile() { return window.matchMedia('(max-width: 768px)').matches; }
 
 function initHeroTypewriter() {
     var el = $('[data-typewriter]');
@@ -26,7 +26,7 @@ function initHeroTypewriter() {
     var textSpan = el.querySelector('.typewriter-text');
     if (!textSpan) return;
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || _isMobile) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || _isMobile()) {
         textSpan.textContent = text;
         sessionStorage.setItem('hero_typed', '1');
         triggerHeroGlitch();
@@ -59,6 +59,33 @@ function triggerHeroGlitch() {
     title.classList.add('glitch');
 }
 
+function initScrollEffects() {
+    var hero = document.querySelector('.hero');
+    var content = document.querySelector('.hero-content');
+    if (!hero || !content) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || _isMobile()) return;
+
+    var ticking = false;
+
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(function () {
+                var rect = hero.getBoundingClientRect();
+                var vh = window.innerHeight;
+                // progress: 0 = hero fully visible, 1 = hero scrolled past viewport
+                var progress = Math.max(0, Math.min(1, -rect.top / (rect.height * 0.4)));
+
+                content.style.opacity = (1 - progress * 0.15).toFixed(3);
+                content.style.transform = 'scale(' + (1 - progress * 0.015).toFixed(4) + ')';
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+}
+
 function typeTagline() {
     var tagline = $('.hero-tagline');
     if (!tagline) return;
@@ -69,7 +96,7 @@ function typeTagline() {
     if (stored) return;
 
     tagline.textContent = '';
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || _isMobile) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || _isMobile()) {
         tagline.textContent = text;
         sessionStorage.setItem('tagline_typed', '1');
         return;

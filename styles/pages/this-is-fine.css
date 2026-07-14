@@ -192,15 +192,9 @@ canvas {
     border: 1.5px solid var(--fine-keyword);
     color: var(--fine-keyword);
 }
-.btn-stress:active {
-    background-color: rgba(255,123,114,0.12);
-}
 .btn-fix {
     border: 1.5px solid #27c93f;
     color: #27c93f;
-}
-.btn-fix:active {
-    background-color: rgba(39,201,63,0.12);
 }
 
 /* ─── Status Bar ─── */
@@ -216,17 +210,8 @@ canvas {
 }
 
 /* ─── Glitch Effect ─── */
-@keyframes glitch {
-    0%   { transform: translate(0); }
-    20%  { transform: translate(-2px, 1px) skewX(-1deg); }
-    40%  { transform: translate(2px, -1px) skewX(1deg); }
-    60%  { transform: translate(-1px, 2px) skewX(-0.5deg); }
-    80%  { transform: translate(1px, -2px) skewX(0.5deg); }
-    100% { transform: translate(0); }
-}
-.ide-widget.glitch {
-    animation: glitch 0.3s ease-in-out 4;
-}
+@keyframes glitch { 0%,100%{transform:translate(0)} 20%{transform:translate(-2px,1px)skewX(-1deg)} 40%{transform:translate(2px,-1px)skewX(1deg)} 60%{transform:translate(-1px,2px)skewX(-.5deg)} 80%{transform:translate(1px,-2px)skewX(.5deg)} }
+.ide-widget.glitch { animation: glitch 0.3s ease-in-out 4; }
 
 /* ─── Neon Text Glow ─── */
 .file-tab,
@@ -236,20 +221,11 @@ canvas {
 }
 
 /* ─── Button Inversion on Press ─── */
-.btn-stress:active {
-    background-color: var(--fine-keyword);
-    color: #090c10;
-}
-.btn-fix:active {
-    background-color: #27c93f;
-    color: #090c10;
-}
+.btn-stress:active { background-color: var(--fine-keyword); color: #090c10; }
+.btn-fix:active { background-color: #27c93f; color: #090c10; }
 
 /* ─── Blinking Cursor ─── */
-@keyframes blink-cursor {
-    0%, 100% { opacity: 1; }
-    50%      { opacity: 0; }
-}
+@keyframes blink-cursor { 0%,100%{opacity:1} 50%{opacity:0} }
 .cursor-blink {
     animation: blink-cursor 500ms step-end infinite;
     color: var(--fine-accent);
@@ -269,9 +245,7 @@ canvas {
     50%  { opacity: 0.8; transform: translateY(-4px) scale(1.1); }
     100% { opacity: 0;   transform: translateY(-10px) scale(0.8); }
 }
-.steam-path {
-    animation: steam-rise 2s ease-in-out infinite;
-}
+.steam-path { animation: steam-rise 2s ease-in-out infinite; }
 .steam-path:nth-child(2) { animation-delay: 0.7s; }
 .steam-path:nth-child(3) { animation-delay: 1.4s; }
 @keyframes hat-bounce {

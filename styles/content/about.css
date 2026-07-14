@@ -1,44 +1,285 @@
-/* Terminal Session Output (compact) */
-.term-session {
-    margin-bottom: 0.25rem;
+/* ============================================================
+   About — Command Block Cards + Syntax Highlighting + Sysinfo
+   ============================================================ */
+
+/* Terminal body font (raw variant lacks these) */
+#about .terminal-body-raw {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--text-primary);
 }
 
-.term-line {
+/* ============================================================
+   Flex layout: commands (left) + sysinfo panel (right)
+   ============================================================ */
+.term-session {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.term-commands {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ============================================================
+   Syntax highlighting for terminal-like inline elements
+   ============================================================ */
+.term-prompt {
+    color: var(--accent-orange);
+    font-weight: 700;
+}
+
+.term-fn {
+    color: #50fa7b;
+}
+
+.term-kw {
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.term-type {
+    color: var(--accent-purple);
+}
+
+.term-str {
+    color: var(--accent-secondary);
+}
+
+.term-cmt {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ============================================================
+   Command block card with left accent bar
+   ============================================================ */
+.term-cmd-block {
+    position: relative;
+    padding: 0.5rem 0 0.5rem 0.85rem;
+    margin-bottom: 0.65rem;
+    border-left: 2px solid var(--accent-primary);
+    border-radius: 0 4px 4px 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+                background 0.2s ease, border-left-color 0.2s ease;
+}
+
+.term-cmd-block:last-child {
+    margin-bottom: 0;
+}
+
+/* Hover lift — subtle background tint + border glow */
+.term-cmd-block:hover {
+    background: rgba(88, 166, 255, 0.03);
+    border-left-width: 3px;
+    transform: translateX(2px);
+}
+
+/* Per-command accent colors */
+.term-cmd-block[data-cmd="whoami"]     { border-left-color: var(--accent-primary); }
+.term-cmd-block[data-cmd="experience"] { border-left-color: var(--accent-purple); }
+.term-cmd-block[data-cmd="philosophy"] { border-left-color: var(--accent-secondary); }
+.term-cmd-block[data-cmd="config"]     { border-left-color: var(--accent-orange); }
+
+/* Entrance cascade triggered by parent reveal */
+.reveal-terminal.visible .term-cmd-block {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-terminal.visible .term-cmd-block:nth-child(1) { transition-delay: 0s; }
+.reveal-terminal.visible .term-cmd-block:nth-child(2) { transition-delay: 0.15s; }
+.reveal-terminal.visible .term-cmd-block:nth-child(3) { transition-delay: 0.3s; }
+.reveal-terminal.visible .term-cmd-block:nth-child(4) { transition-delay: 0.45s; }
+
+/* Typing cursor for command headers (JS-managed, CSS decoration) */
+.term-cmd-header {
     font-family: var(--font-mono);
     font-size: 0.78rem;
-    line-height: 1.65;
+    margin-bottom: 0.25rem;
     color: var(--text-secondary);
+    min-height: 1.2em;
 }
 
-.term-prompt {
-    color: var(--accent-secondary);
-    font-weight: 700;
-    margin-right: 0.3rem;
+.term-cmd-header::after {
+    content: '';
+    display: inline-block;
+    width: 0.45em;
+    height: 1em;
+    background: var(--accent-primary);
+    margin-left: 0.15rem;
+    vertical-align: text-bottom;
+    opacity: 0;
+    animation: typingCursor 0.8s step-end infinite;
 }
 
-.term-fn  { color: var(--accent-primary); }
-.term-kw  { color: var(--accent-purple); font-weight: 700; }
-.term-type { color: var(--accent-primary); }
-.term-str { color: var(--accent-secondary); }
-.term-cmt { color: var(--text-muted); }
-
-.term-line-lang {
-    margin-top: 0.3rem;
+.term-cmd-header[data-typed="done"]::after {
+    display: none;
 }
 
-.term-line-tags {
-    margin-top: 0.3rem;
+@keyframes typingCursor {
+    50% { opacity: 0; }
 }
 
+/* Output indentation under header */
+.term-cmd-output {
+    padding-left: 0.5rem;
+}
+
+/* ============================================================
+   Sysinfo panel — neofetch-style stats card
+   ============================================================ */
+.term-sysinfo {
+    flex-shrink: 0;
+    width: 210px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    background: var(--bg-tertiary);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(12px);
+    transition: opacity 0.4s ease 0.2s, transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) 0.2s;
+}
+
+.reveal-terminal.visible .term-sysinfo {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.sysinfo-header {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+}
+
+.sysinfo-header .term-prompt {
+    font-size: 0.72rem;
+}
+
+.sysinfo-body {
+    padding: 0.6rem 0.75rem;
+}
+
+.sysinfo-row {
+    display: flex;
+    gap: 0.5rem;
+    line-height: 1.7;
+}
+
+.sysinfo-key {
+    color: var(--accent-primary);
+    min-width: 60px;
+    flex-shrink: 0;
+}
+
+.sysinfo-val {
+    color: var(--text-primary);
+    word-break: break-word;
+}
+
+.sysinfo-divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 0.4rem 0;
+    opacity: 0.4;
+}
+
+/* ============================================================
+   Tag cloud — accent-tinted colors
+   ============================================================ */
+/* Tag entrance — slide in from right inside the config block */
+.term-cmd-block[data-cmd="config"] .term-tag {
+    animation: tagSlideIn 0.35s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+
+.term-cmd-block[data-cmd="config"] .term-tag:nth-child(1) { animation-delay: 0.5s; }
+.term-cmd-block[data-cmd="config"] .term-tag:nth-child(2) { animation-delay: 0.56s; }
+.term-cmd-block[data-cmd="config"] .term-tag:nth-child(3) { animation-delay: 0.62s; }
+.term-cmd-block[data-cmd="config"] .term-tag:nth-child(4) { animation-delay: 0.68s; }
+
+@keyframes tagSlideIn {
+    from { opacity: 0; transform: translateX(14px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Tag base */
 .term-tag {
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    padding: 0.1rem 0.45rem;
+    font-size: 0.68rem;
+    padding: 0.15rem 0.5rem;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-sm);
-    color: var(--accent-primary);
-    background: var(--bg-tertiary);
-    margin-right: 0.2rem;
-    line-height: 1.4;
+    margin: 0.1rem 0.15rem;
+    color: var(--text-muted);
+    background: transparent;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Accent-tinted colors per tag */
+.term-tag:nth-child(1) { border-color: rgba(88,166,255,0.3); color: var(--accent-primary); }
+.term-tag:nth-child(2) { border-color: rgba(189,147,249,0.3); color: var(--accent-purple); }
+.term-tag:nth-child(3) { border-color: rgba(80,250,123,0.3); color: #50fa7b; }
+.term-tag:nth-child(4) { border-color: rgba(255,184,108,0.3); color: var(--accent-orange); }
+
+.term-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(88, 166, 255, 0.3);
+    border-color: var(--accent-primary);
+    color: var(--text-primary);
+}
+
+/* ============================================================
+   Responsive: collapse to single column on mobile
+   ============================================================ */
+@media (max-width: 768px) {
+    .term-session {
+        flex-direction: column;
+    }
+
+    .term-sysinfo {
+        width: 100%;
+        transform: translateY(8px);
+    }
+
+    .reveal-terminal.visible .term-sysinfo {
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .term-cmd-block {
+        transition: opacity 0.15s ease !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+    .term-tag {
+        animation: none !important;
+        transform: none !important;
+    }
+    .term-tag:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    .term-cmd-header::after {
+        animation: none;
+        opacity: 0;
+    }
+    .term-sysinfo {
+        transition: none;
+        opacity: 1;
+        transform: none;
+    }
 }

@@ -1,3 +1,35 @@
+/* Shared tab button — used by Projects, Career, etc */
+.tabs-row {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.tab-btn {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    color: var(--text-muted);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    border-color: var(--accent-primary);
+    color: var(--text-secondary);
+}
+
+.tab-btn.active {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    background: rgba(88, 166, 255, 0.08);
+}
+
 /* Skills — Filter Tabs */
 .skills-tabs {
     display: flex;
@@ -28,20 +60,3 @@
     color: var(--text-primary);
     background: var(--bg-tertiary);
 }
-
-/* Smooth skill group transitions */
-.skill-group {
-    opacity: 1;
-    max-height: 300px;
-    overflow: hidden;
-    transition: opacity 0.25s ease, max-height 0.3s ease, margin 0.3s ease, padding 0.3s ease;
-}
-
-.skill-group.hidden {
-    opacity: 0;
-    max-height: 0;
-    margin: 0;
-    padding: 0;
-}
-
-
