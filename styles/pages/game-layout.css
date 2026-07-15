@@ -157,7 +157,7 @@ body.game-body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 12px 12px 12px 28px; /* Left padding for LED room */
+    padding: 12px 24px; /* Symmetrical padding centers canvas */
     width: 100%;
     box-sizing: border-box;
     flex-shrink: 0;
@@ -187,8 +187,8 @@ body.game-body {
 .canvas-wrapper::before {
     content: '';
     position: absolute;
-    left: 10px;
-    top: calc(50% - 6px);
+    left: 8px;
+    top: calc(50% - 5px);
     width: 10px;
     height: 10px;
     border-radius: 50%;
@@ -297,6 +297,21 @@ canvas {
     margin: auto;
     gap: 15px;
 }
+
+/* 3x3 D-Pad Grid Layout */
+.dpad-cross {
+    display: grid !important;
+    grid-template-columns: repeat(3, 46px) !important;
+    grid-template-rows: repeat(3, 46px) !important;
+    gap: 4px !important;
+    flex-shrink: 0;
+}
+
+.btn-up    { grid-column: 2; grid-row: 1; }
+.btn-left  { grid-column: 1; grid-row: 2; }
+.btn-right { grid-column: 3; grid-row: 2; }
+.btn-down  { grid-column: 2; grid-row: 3; }
+.dpad-empty { pointer-events: none; visibility: hidden; }
 
 /* Tactile Retro D-Pad buttons override */
 .dpad-btn {

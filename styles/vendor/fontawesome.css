@@ -1,20 +1,19 @@
 /*!
- * Font Awesome Free 6.4.0 — Local CSS (minimal, icons in use only)
- * Font files loaded from CDN when online; icons cosmetic, page works without them.
+ * Font Awesome Free 6.4.0 — Fully self-hosted (local CSS + local font files)
  */
 @font-face {
   font-family: 'Font Awesome 6 Free';
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2") format("woff2");
+  src: url("../../fonts/fa-solid-900.woff2") format("woff2");
 }
 @font-face {
   font-family: 'Font Awesome 6 Brands';
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2") format("woff2");
+  src: url("../../fonts/fa-brands-400.woff2") format("woff2");
 }
 .fa,.fa-brands,.fa-regular,.fa-solid,.fab,.far,.fas {
   -moz-osx-font-smoothing: grayscale;

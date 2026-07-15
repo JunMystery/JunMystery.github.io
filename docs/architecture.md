@@ -1,7 +1,7 @@
 # Project Architecture
 
 **JunMystery.github.io** — Personal Portfolio Site  
-Static GitHub Pages site. No build step, no framework, no dependencies beyond Google Fonts and Font Awesome CDN.
+Static GitHub Pages site. No build step, no framework, no external dependencies — all fonts and icons are fully self-hosted.
 
 ---
 
