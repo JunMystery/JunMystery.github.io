@@ -350,7 +350,7 @@ function isSpawnerGate(gx, gy, ghost) {
 // -------------------- Input & Game Flow --------------------
 // (keyboard, touch, and trigger functions remain mostly the same as before)
 window.addEventListener('keydown', handleKeyDown);
-document.querySelectorAll('.dpad-btn').forEach(btn => {
+document.querySelectorAll('.dpad-btn, .action-btn').forEach(btn => {
     const dir = btn.getAttribute('data-dir');
     const action = btn.getAttribute('data-action');
     btn.addEventListener('pointerdown', (e) => {

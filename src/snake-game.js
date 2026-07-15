@@ -33,7 +33,15 @@ window.addEventListener('keydown', handleKeyDown);
 document.querySelectorAll('.dpad-btn').forEach(function (btn) {
     btn.addEventListener('pointerdown', function (e) {
         e.preventDefault();
-        setDirection(btn.getAttribute('data-dir'));
+        var dir = btn.getAttribute('data-dir');
+        if (dir) setDirection(dir);
+    });
+});
+
+document.querySelectorAll('.action-btn').forEach(function (btn) {
+    btn.addEventListener('pointerdown', function (e) {
+        e.preventDefault();
+        toggleGame();
     });
 });
 

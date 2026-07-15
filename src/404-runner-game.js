@@ -66,7 +66,9 @@ const handleAction = function(e) {
     e.preventDefault();
     if (!gameRunning) { startGame(); } else { jump(); }
 };
-jumpBtn.addEventListener('pointerdown', handleAction);
+document.querySelectorAll('.action-btn, .dpad-btn').forEach(btn => {
+    btn.addEventListener('pointerdown', handleAction);
+});
 jumpBtn.addEventListener('touchstart', handleAction, { passive: false });
 
 gameFrame.addEventListener('pointerdown', function(e) {

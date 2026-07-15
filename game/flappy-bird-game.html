@@ -72,10 +72,32 @@
 
         <div class="mobile-controls-panel">
             <div class="console-layout">
-                <button class="action-btn-flap" id="flapBtn">
-                    <span>⚡</span>
-                    <span class="boost-text">FLAP</span>
-                </button>
+                <!-- Left Hand D-Pad cross -->
+                <div class="dpad-cross">
+                    <div class="dpad-empty"></div>
+                    <button class="dpad-btn btn-up" data-action="flap">▲</button>
+                    <div class="dpad-empty"></div>
+
+                    <button class="dpad-btn btn-left" data-action="left">◀</button>
+                    <div class="dpad-empty"></div>
+                    <button class="dpad-btn btn-right" data-action="right">▶</button>
+
+                    <div class="dpad-empty"></div>
+                    <button class="dpad-btn btn-down" data-action="down">▼</button>
+                    <div class="dpad-empty"></div>
+                </div>
+
+                <!-- Right Hand Action Buttons (A & B slanted style) -->
+                <div class="action-buttons">
+                    <div class="action-group">
+                        <button class="action-btn action-b" data-action="flap">B</button>
+                        <span class="action-label">FLAP</span>
+                    </div>
+                    <div class="action-group">
+                        <button class="action-btn action-a" data-action="flap">A</button>
+                        <span class="action-label">FLAP</span>
+                    </div>
+                </div>
             </div>
         </div>
 

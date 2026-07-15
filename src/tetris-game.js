@@ -67,7 +67,7 @@ window.addEventListener('keydown', handleKeyDown);
 window.addEventListener('keyup', handleKeyUp);
 
 // Tactile touch interfaces supporting low-latency D-Pad hold and slide mechanics
-document.querySelectorAll('.dpad-btn').forEach(btn => {
+document.querySelectorAll('.dpad-btn, .action-btn').forEach(btn => {
     const action = btn.getAttribute('data-action');
     btn.addEventListener('pointerdown', (e) => {
         e.preventDefault();
@@ -356,6 +356,10 @@ function finalizeLineClears() {
 
     updateDifficultyAndLevel();
 
+    if (linesClearedThisTurn > 0) {
+        triggerShake();
+    }
+
     isClearing = false;
     clearingRows = [];
     spawnNextPiece();
@@ -402,6 +406,13 @@ function updateParticles() {
     }
 }
 
+function triggerShake() {
+    if (!gameFrame) return;
+    gameFrame.classList.remove('shake');
+    void gameFrame.offsetWidth;
+    gameFrame.classList.add('shake');
+}
+
 function triggerGameOver(reason) {
     gameRunning = false;
     isImmediateSliding = false;
@@ -409,6 +420,7 @@ function triggerGameOver(reason) {
     statusText.textContent = "STATUS: STACK CRASH";
     finalMetrics.innerHTML = `<span class="error-text">Exception:</span> ${reason}<br><br><span class="variable">Compiled Rows Count:</span> <span class="number">${lines}</span><br><span class="variable">Final Build Score:</span> <span class="number">${score}</span>`;
     gameOverOverlay.style.display = 'flex';
+    triggerShake();
 }
 
 function gameLoop(timestamp) {
@@ -513,12 +525,11 @@ function hardDropPiece() {
                 style.fill
             );
         }
+        triggerShake();
     }
-    
-    // Lock the piece immediately
+
     lockActivePiece();
-    
-    // Reset flags
+
     isImmediateSliding = false;
 }
 

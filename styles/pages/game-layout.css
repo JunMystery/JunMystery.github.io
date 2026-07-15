@@ -46,17 +46,40 @@ body.game-body {
 .game-window {
     width: 100%;
     max-width: 380px;
-    background: #282c34;
-    /* Retro grey plastic */
-    border: 5px solid #1e222a;
-    border-radius: 10px 10px 40px 10px;
+    background: radial-gradient(circle at 50% 30%, #3e4451 0%, #282c34 100%);
+    /* Retro grey plastic with gradient */
+    border: 6px solid #15181f;
+    border-radius: 12px 12px 50px 12px;
     /* Gameboy-like bottom right corner curve */
-    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.1), 0 15px 30px rgba(0, 0, 0, 0.6);
+    box-shadow: 
+        inset 0 3px 0 rgba(255, 255, 255, 0.12),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.4),
+        0 18px 36px rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     position: relative;
     box-sizing: border-box;
+}
+
+/* Speaker Grill Vents on Console Plate */
+.ide-container::after {
+    content: '';
+    position: absolute;
+    bottom: 22px;
+    right: 25px;
+    width: 55px;
+    height: 35px;
+    background: repeating-linear-gradient(
+        -28deg,
+        transparent,
+        transparent 4px,
+        #15181f 4px,
+        #15181f 8px
+    );
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .ide-header,
@@ -126,24 +149,83 @@ body.game-body {
 .canvas-wrapper,
 .canvas-wrap {
     position: relative;
-    background-color: #7a828a;
+    background-color: #616870;
     /* Dark Bezel color */
-    border: 10px solid #1e222a;
-    border-radius: 6px;
+    border: 12px solid #1c2027;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 12px;
+    padding: 12px 12px 12px 28px; /* Left padding for LED room */
     width: 100%;
     box-sizing: border-box;
     flex-shrink: 0;
+    transition: transform 0.08s ease-in-out;
+}
+
+/* Glass Screen Reflection Glare */
+.canvas-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.06) 20%,
+        rgba(255, 255, 255, 0) 45%
+    );
+    pointer-events: none;
+    z-index: 10;
+    border-radius: 4px;
+}
+
+/* Power LED Indicator */
+.canvas-wrapper::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: calc(50% - 6px);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ff3b30;
+    box-shadow: 0 0 8px rgba(255, 59, 48, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    z-index: 11;
+    animation: led-glow 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes led-glow {
+    0% {
+        background-color: #d32f2f;
+        box-shadow: 0 0 4px rgba(211, 47, 47, 0.5);
+    }
+    100% {
+        background-color: #ff4444;
+        box-shadow: 0 0 10px rgba(255, 68, 68, 0.95);
+    }
+}
+
+/* Screen shake impact class */
+.canvas-wrapper.shake {
+    animation: screen-shake 0.2s ease-in-out;
+}
+
+@keyframes screen-shake {
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(-3px, 2px); }
+    40% { transform: translate(3px, -2px); }
+    60% { transform: translate(-2px, -1px); }
+    80% { transform: translate(2px, 1px); }
 }
 
 canvas {
     background-color: #090c10;
     border: 2px solid #0f1115;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9);
     display: block;
     image-rendering: pixelated;
     width: 100%;
@@ -214,6 +296,112 @@ canvas {
     max-width: 360px;
     margin: auto;
     gap: 15px;
+}
+
+/* Tactile Retro D-Pad buttons override */
+.dpad-btn {
+    background-color: #1a1d24 !important;
+    border: 1px solid #0d0f14 !important;
+    border-radius: 6px !important;
+    color: #8b949e !important;
+    box-shadow: 
+        0 4px 0 #07080a,
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    transform: translateY(0);
+    transition: transform 0.05s ease, box-shadow 0.05s ease, background-color 0.1s !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dpad-btn:active,
+.dpad-btn.active {
+    background-color: #282c34 !important;
+    transform: translateY(3px) !important;
+    box-shadow: 
+        0 1px 0 #07080a,
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    color: #58a6ff !important;
+}
+
+/* Action button hard drop (A/B action button circle shape) */
+.action-btn-hard {
+    width: 75px !important;
+    height: 75px !important;
+    border-radius: 50% !important;
+    background-color: #a12828 !important; /* Retro red action buttons */
+    border: 2px solid #5c0f0f !important;
+    color: #ffcccc !important;
+    box-shadow: 
+        0 5px 0 #3b0505,
+        inset 0 2px 0 rgba(255, 255, 255, 0.25) !important;
+    font-weight: bold !important;
+    transform: translateY(0);
+    transition: transform 0.05s ease, box-shadow 0.05s ease !important;
+}
+
+.action-btn-hard:active {
+    background-color: #bc3636 !important;
+    transform: translateY(4px) !important;
+    box-shadow: 
+        0 1px 0 #3b0505,
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.action-buttons {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    transform: rotate(-15deg); /* Slanted layout */
+    margin-right: 12px;
+}
+
+/* Base style for A/B action buttons */
+.action-btn {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    background-color: #a12828 !important; /* Retro red */
+    border: 2px solid #5c0f0f !important;
+    color: #ffcccc !important;
+    font-family: inherit !important;
+    font-weight: 900 !important;
+    font-size: 13px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    box-shadow: 
+        0 4px 0 #3b0505,
+        inset 0 1.5px 0 rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(0);
+    transition: transform 0.05s ease, box-shadow 0.05s ease !important;
+}
+
+.action-btn:active {
+    background-color: #bc3636 !important;
+    transform: translateY(3px) !important;
+    box-shadow: 
+        0 1px 0 #3b0505,
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.action-group {
+    display: flex;
+    flex-direction: column-reverse; /* Label under button */
+    align-items: center;
+    gap: 6px;
+}
+
+.action-label {
+    font-size: 10px;
+    font-weight: bold;
+    color: #8b949e;
+    font-family: inherit;
+    text-shadow: 0 1px 0 #000;
+    transform: rotate(15deg); /* Counter-rotate label */
 }
 
 /* Ide Footer */

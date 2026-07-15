@@ -49,8 +49,10 @@ const handleTouchAction = (e) => {
         triggerFlap();
     }
 };
-flapBtn.addEventListener('pointerdown', handleTouchAction);
-flapBtn.addEventListener('touchstart', handleTouchAction, { passive: false });
+document.querySelectorAll('.action-btn, .dpad-btn').forEach(btn => {
+    btn.addEventListener('pointerdown', handleTouchAction);
+    btn.addEventListener('touchstart', handleTouchAction, { passive: false });
+});
 
 gameFrame.addEventListener('pointerdown', (e) => {
     // Only trigger if clicking on the overlay or the canvas area, not the overlays' children
