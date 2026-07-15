@@ -139,3 +139,31 @@
 .cv-social-item a:hover {
     text-decoration: underline;
 }
+
+@media (max-width: 640px) {
+    .cv-header-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        text-align: center;
+    }
+    .cv-photo {
+        width: 5rem;
+        height: 6.5rem;
+        margin: 0 auto;
+    }
+    .cv-name {
+        font-size: 1.375rem;
+    }
+    .cv-role {
+        font-size: 0.75rem;
+    }
+    .cv-meta-grid {
+        grid-template-columns: 1fr;
+    }
+    .cv-meta-row {
+        justify-content: center;
+    }
+    .cv-social-row {
+        justify-content: center;
+    }
+}

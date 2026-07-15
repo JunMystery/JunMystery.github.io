@@ -47,5 +47,23 @@
 /* Scroll wrapper for A4 */
 .cv-scroll-wrap {
     overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding-bottom: 3rem;
+}
+
+@media (max-width: 800px) {
+    .cv-scroll-wrap {
+        overflow-x: hidden;
+        overflow-y: visible;
+        padding-bottom: 1.5rem;
+    }
+    .a4-page {
+        width: 100%;
+        min-height: auto;
+        padding: 1rem;
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+    }
 }

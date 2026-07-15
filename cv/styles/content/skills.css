@@ -29,3 +29,10 @@
 .cv-skills-items {
     text-align: justify;
 }
+
+@media (max-width: 640px) {
+    .cv-skills-row {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+}
