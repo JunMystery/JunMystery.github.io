@@ -66,4 +66,7 @@
         box-shadow: none;
         border-radius: 0;
     }
+    .trigger-404 {
+        pointer-events: none;
+    }
 }
