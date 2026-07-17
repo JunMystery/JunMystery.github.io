@@ -30,4 +30,10 @@
     50% { opacity: 0; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .footer-line.typing::after {
+        animation: none;
+    }
+}
+
 

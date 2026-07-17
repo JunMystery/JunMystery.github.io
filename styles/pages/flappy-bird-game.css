@@ -54,6 +54,10 @@ canvas {
 .blink { animation: blinker 1.2s linear infinite; }
 @keyframes blinker { 50% { opacity: 0; } }
 
+@media (prefers-reduced-motion: reduce) {
+    .blink { animation: none; }
+}
+
 .mobile-controls-panel .console-layout {
     justify-content: center;
 }

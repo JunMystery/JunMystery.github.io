@@ -52,6 +52,10 @@ canvas {
 .blink { animation: blinker 1.2s linear infinite; }
 @keyframes blinker { 50% { opacity: 0; } }
 
+@media (prefers-reduced-motion: reduce) {
+    .blink { animation: none; }
+}
+
 /* ─── Controls ─── */
 
 @media (max-width: 480px) {

@@ -126,6 +126,15 @@
     100% { background-position: -100% 0; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .pipeline-connector.active {
+        animation: none;
+    }
+    .pipeline-node.active .node-icon {
+        animation: none;
+    }
+}
+
 /* Active Node State */
 .pipeline-node.active .node-icon {
     border-color: var(--accent-primary);

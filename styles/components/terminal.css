@@ -69,6 +69,12 @@
     box-shadow: 0 4px 20px rgba(88, 166, 255, 0.08);
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .terminal-window {
+        animation: none;
+    }
+}
+
 @media (max-width: 768px) {
     .terminal-window {
         animation: none;

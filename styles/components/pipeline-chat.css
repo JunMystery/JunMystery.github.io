@@ -235,6 +235,13 @@
     40% { transform: scale(1); opacity: 1; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .chat-cursor,
+    .thinking-dots span {
+        animation: none;
+    }
+}
+
 /* Divider */
 .chat-divider {
     display: flex;

@@ -680,7 +680,7 @@ function getBanterMsg(theme, count) {
 
 
 // ============================================================
-// Source: src/bundle/controllers/language.js (63 lines)
+// Source: src/bundle/controllers/language.js (71 lines)
 // ============================================================
 
 // ============================================================
@@ -726,7 +726,7 @@ function bindSwitcher() {
     }
 
     [].slice.call(document.querySelectorAll('.lang-option')).forEach(function (opt) {
-        opt.addEventListener('click', function () {
+        var activate = function () {
             var lang = opt.getAttribute('data-lang');
             if (lang === i18n.currentLang) {
                 if (menu) menu.classList.remove('open');
@@ -736,6 +736,14 @@ function bindSwitcher() {
             i18n.load(lang);
             applyLocale();
             if (menu) menu.classList.remove('open');
+        };
+
+        opt.addEventListener('click', activate);
+        opt.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+                e.preventDefault();
+                activate();
+            }
         });
     });
 }
@@ -3798,5 +3806,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // ============================================================
-// End of bundle.js (3605 total lines from 31 modules)
+// End of bundle.js (3613 total lines from 31 modules)
 // ============================================================

@@ -201,6 +201,13 @@
     15%, 35% { opacity: 1; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .project-card:hover .flow-node,
+    .project-card:hover .flow-arrow {
+        animation: none;
+    }
+}
+
 /* Background grid accent for projects terminal */
 #projects .terminal-body-raw {
     position: relative;

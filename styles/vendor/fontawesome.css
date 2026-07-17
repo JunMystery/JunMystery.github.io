@@ -51,3 +51,5 @@
 .fa-play:before { content: "\f04b"; }
 .fa-pause:before { content: "\f04c"; }
 .fa-step-forward:before { content: "\f051"; }
+.fa-external-link-alt:before { content: "\f35d"; }
+.fa-globe:before { content: "\f0ac"; }

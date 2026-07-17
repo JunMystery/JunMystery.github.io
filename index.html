@@ -33,19 +33,19 @@
                 </div>
                 <div class="nav-actions">
                     <div class="lang-switcher">
-                        <button id="lang-toggle" class="lang-toggle" title="Switch Language">
+                        <button id="lang-toggle" class="lang-toggle" title="Switch Language" aria-label="Switch Language" aria-haspopup="true" aria-expanded="false">
                             <span id="lang-label">EN</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
-                        <ul id="lang-menu" class="lang-menu">
-                            <li data-lang="en" class="lang-option active">EN</li>
-                            <li data-lang="vi" class="lang-option">VI</li>
+                        <ul id="lang-menu" class="lang-menu" role="menu" aria-label="Language">
+                            <li data-lang="en" class="lang-option active" role="menuitem" tabindex="0">EN</li>
+                            <li data-lang="vi" class="lang-option" role="menuitem" tabindex="0">VI</li>
                         </ul>
                     </div>
-                    <button id="theme-toggle" class="theme-toggle" title="Toggle Light/Dark Mode">
+                    <button id="theme-toggle" class="theme-toggle" title="Toggle Light/Dark Mode" aria-label="Toggle Light/Dark Mode">
                         <i class="fas fa-moon"></i>
                     </button>
-                    <button id="achieve-btn" class="theme-toggle" title="Achievements">
+                    <button id="achieve-btn" class="theme-toggle" title="Achievements" aria-label="Achievements">
                         <i class="fas fa-trophy"></i>
                     </button>
                     <a href="cv/index.html" class="btn-print-nav" title="View CV">
@@ -84,14 +84,14 @@
                         A forward-thinking IT Systems Engineer and AI-Native Developer. I bridge traditional infrastructure operations with next-generation multi-agent SDLC orchestration workflows.
                     </p>
                     <div class="hero-objective">
-                        <span class="hero-badge" data-i18n="hero.badge">open to full-time · remote-friendly</span>
+                        <span class="hero-badge" data-i18n="hero.badge">open to full-time · Hybrid / Remote-friendly</span>
                         <p class="hero-tagline" data-i18n="hero.tagline">Bridging Infrastructure Engineering and AI-Augmented Development. Human judgment drives every successful project.</p>
                     </div>
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-primary"><i class="fas fa-code"></i> <span data-i18n="hero.btn_work">View Work</span></a> <a href="cv/index.html" class="btn btn-secondary"><i class="fas fa-file-alt"></i> <span data-i18n="hero.btn_cv">View CV</span></a>
                     </div>
                     <div class="social-links">
-                        <a href="https://www.linkedin.com/in/junmystery/" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a> <a href="https://github.com/JunMystery/" target="_blank" class="social-link" title="GitHub"><i class="fab fa-github"></i></a> <a href="https://play.google.com/store/apps/dev?id=6943003088385722005" target="_blank" class="social-link" title="Google Play"><i class="fab fa-google-play"></i></a> <a href="mailto:darkzeuslk@gmail.com" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="https://www.linkedin.com/in/junmystery/" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a> <a href="https://github.com/JunMystery/" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub"><i class="fab fa-github"></i></a> <a href="https://play.google.com/store/apps/dev?id=6943003088385722005" target="_blank" rel="noopener noreferrer" class="social-link" title="Google Play"><i class="fab fa-google-play"></i></a> <a href="mailto:darkzeuslk@gmail.com" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
     <section class="section container reveal-terminal" id="about">
         <div class="terminal-window">
             <div class="terminal-header">
-                <div class="terminal-dots">
+                <div class="terminal-dots" aria-hidden="true">
                     <span class="terminal-dot dot-red"></span>
                     <span class="terminal-dot dot-yellow"></span>
                     <span class="terminal-dot dot-green"></span>
@@ -171,7 +171,7 @@
     <section class="section container reveal-terminal" id="skills">
         <div class="terminal-window">
             <div class="terminal-header">
-                <div class="terminal-dots">
+                <div class="terminal-dots" aria-hidden="true">
                     <span class="terminal-dot dot-red"></span>
                     <span class="terminal-dot dot-yellow"></span>
                     <span class="terminal-dot dot-green"></span>
@@ -182,7 +182,7 @@
                 <h2 class="section-title" data-i18n="skills.title">Technical Expertise</h2>
                 <div class="skills-tabs">
                     <button class="skills-tab-btn active" data-filter="all" data-i18n="skills.tab_all">All Skills</button>
-                    <button class="skills-tab-btn" data-filter="ai-ops" data-i18n="skills.tab_aiops">AI & SDLC Ops</button>
+                    <button class="skills-tab-btn" data-filter="ai-ops" data-i18n="skills.tab_aiops">AI & DevOps</button>
                     <button class="skills-tab-btn" data-filter="infra" data-i18n="skills.tab_infra">Systems & Network</button>
                     <button class="skills-tab-btn" data-filter="dev" data-i18n="skills.tab_dev">Databases & Code</button>
                 </div>
@@ -217,7 +217,7 @@
     <section class="section container reveal-terminal" id="projects">
         <div class="terminal-window">
             <div class="terminal-header">
-                <div class="terminal-dots">
+                <div class="terminal-dots" aria-hidden="true">
                     <span class="terminal-dot dot-red"></span>
                     <span class="terminal-dot dot-yellow"></span>
                     <span class="terminal-dot dot-green"></span>
@@ -242,7 +242,7 @@
                     <div class="project-card">
                         <div class="project-info">
                             <span class="project-type" data-i18n="project1.type">Open Source — Python Package · MIT License</span>
-                            <h3><span data-i18n="project1.name">Agent-Guidance-MCP</span> <a href="https://github.com/JunMystery/Agent-Guidance-MCP" target="_blank" class="project-gh-link"><i class="fab fa-github"></i></a></h3>
+                            <h3><span data-i18n="project1.name">Agent-Guidance-MCP</span> <a href="https://github.com/JunMystery/Agent-Guidance-MCP" target="_blank" rel="noopener noreferrer" class="project-gh-link"><i class="fab fa-github"></i></a></h3>
                             <p class="project-desc" data-i18n="project1.desc">
                                 MCP server delivering AI agent guidance via a 168-skill catalog, bundled standards corpus, workflow prompts, bounded project-code context tools, and a token optimization engine — over Stdio transport. Compatible with Claude, Cursor, VS Code, Gemini CLI, and 9+ IDEs.
                             </p>
@@ -418,7 +418,7 @@
     <section class="section container reveal-terminal" id="career">
         <div class="terminal-window">
             <div class="terminal-header">
-                <div class="terminal-dots">
+                <div class="terminal-dots" aria-hidden="true">
                     <span class="terminal-dot dot-red"></span>
                     <span class="terminal-dot dot-yellow"></span>
                     <span class="terminal-dot dot-green"></span>
@@ -511,7 +511,7 @@
                     <!-- Certifications Tab -->
                     <div class="career-panel" data-career-panel="certifications">
                         <div class="cert-list reveal-stagger">
-                            <a href="https://coursera.org/share/470d54b69ed19f56f5245351064fe32d" target="_blank" class="cert-line">
+                            <a href="https://coursera.org/share/470d54b69ed19f56f5245351064fe32d" target="_blank" rel="noopener noreferrer" class="cert-line">
                                 <span class="cert-name" data-i18n="cert.name1">IT Automation with Python</span>
                                 <span class="cert-badge python">Python</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
@@ -519,7 +519,7 @@
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
                                 <i class="fas fa-external-link-alt cert-ext-icon"></i>
                             </a>
-                            <a href="https://coursera.org/share/93ab286e9f7e890cd756b28312d00005" target="_blank" class="cert-line">
+                            <a href="https://coursera.org/share/93ab286e9f7e890cd756b28312d00005" target="_blank" rel="noopener noreferrer" class="cert-line">
                                 <span class="cert-name" data-i18n="cert.name2">Google Cybersecurity</span>
                                 <span class="cert-badge security">Security</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
@@ -527,7 +527,7 @@
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
                                 <i class="fas fa-external-link-alt cert-ext-icon"></i>
                             </a>
-                            <a href="https://coursera.org/share/2d1da52b4a782102f9c31245b6e263d9" target="_blank" class="cert-line">
+                            <a href="https://coursera.org/share/2d1da52b4a782102f9c31245b6e263d9" target="_blank" rel="noopener noreferrer" class="cert-line">
                                 <span class="cert-name" data-i18n="cert.name3">Google IT Support</span>
                                 <span class="cert-badge it-support">IT Support</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
@@ -535,7 +535,7 @@
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
                                 <i class="fas fa-external-link-alt cert-ext-icon"></i>
                             </a>
-                            <a href="https://coursera.org/share/c7474f23e065dfd225b50aeee75eb834" target="_blank" class="cert-line">
+                            <a href="https://coursera.org/share/c7474f23e065dfd225b50aeee75eb834" target="_blank" rel="noopener noreferrer" class="cert-line">
                                 <span class="cert-name" data-i18n="cert.name4">Google UX Design</span>
                                 <span class="cert-badge ux">UX</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
@@ -543,7 +543,7 @@
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
                                 <i class="fas fa-external-link-alt cert-ext-icon"></i>
                             </a>
-                            <a href="https://coursera.org/share/d4c431b324f8b0b7a91fe0068535ea43" target="_blank" class="cert-line">
+                            <a href="https://coursera.org/share/d4c431b324f8b0b7a91fe0068535ea43" target="_blank" rel="noopener noreferrer" class="cert-line">
                                 <span class="cert-name" data-i18n="cert.name5">Google Project Management</span>
                                 <span class="cert-badge management">Mgmt</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
@@ -551,7 +551,7 @@
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
                                 <i class="fas fa-external-link-alt cert-ext-icon"></i>
                             </a>
-                            <a href="https://coursera.org/share/1d1a87f0878dd9bd27c94fecff4f45fa" target="_blank" class="cert-line">
+                            <a href="https://coursera.org/share/1d1a87f0878dd9bd27c94fecff4f45fa" target="_blank" rel="noopener noreferrer" class="cert-line">
                                 <span class="cert-name" data-i18n="cert.name6">Google Advanced Data Analytics</span>
                                 <span class="cert-badge data">Data</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
@@ -559,7 +559,7 @@
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
                                 <i class="fas fa-external-link-alt cert-ext-icon"></i>
                             </a>
-                            <a href="https://coursera.org/share/9aafced16e4a7056a1a36b77dd45bd3d" target="_blank" class="cert-line">
+                            <a href="https://coursera.org/share/9aafced16e4a7056a1a36b77dd45bd3d" target="_blank" rel="noopener noreferrer" class="cert-line">
                                 <span class="cert-name" data-i18n="cert.name7">Google Data Analytics</span>
                                 <span class="cert-badge data">Data</span>
                                 <span class="cert-sep" data-i18n="cert.separator">·</span>
