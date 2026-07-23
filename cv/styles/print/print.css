@@ -23,18 +23,4 @@
     .page-break {
         page-break-before: always;
     }
-
-    .cv-avatar-area.interactive {
-        display: none !important;
-    }
-
-    .cv-avatar-area.print-placeholder {
-        display: flex !important;
-    }
-
-    /* Force background-image (profile photo) to print */
-    .cv-photo {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
 }

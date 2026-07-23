@@ -24,25 +24,13 @@
 
 /* Header section (personal info + avatar) */
 .cv-header-grid {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1.5rem;
+    display: block;
     border-bottom: 1px solid var(--color-gray-200);
     padding-bottom: 1.5rem;
     margin-bottom: 1.5rem;
     align-items: start;
 }
 
-.cv-photo {
-    width: 7rem;
-    height: 9rem;
-    border: 1px solid var(--color-gray-300);
-    border-radius: 0.25rem;
-    flex-shrink: 0;
-    background-image: url('../../../docs/images/profile.jpg');
-    background-size: cover;
-    background-position: center;
-}
 
 .cv-name-title {
     min-width: 0;
@@ -145,11 +133,6 @@
         grid-template-columns: 1fr;
         gap: 1rem;
         text-align: center;
-    }
-    .cv-photo {
-        width: 5rem;
-        height: 6.5rem;
-        margin: 0 auto;
     }
     .cv-name {
         font-size: 1.375rem;
