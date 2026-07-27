@@ -183,7 +183,7 @@ var LOCALE_EN = {
   "exp.role2_title": "IT Support & Infrastructure Admin",
   "exp.role2_period": "Mar 2024 \u2013 Mar 2026",
   "exp.role2_company": "Danu Vina Co., Ltd",
-  "exp.role2_b1": "Automated Task Orchestration: Designed scripting logic and directed AI agents to build production-grade Python scripts for automated network health checks and log parsing.",
+  "exp.role2_b1": "AI-Augmented Development & Automation: Architected structured specifications and directed AI agents to generate production-grade Python automation scripts for network health checks and log analysis. Reviewed and verified all outputs for quality compliance, reducing manual diagnostics workload significantly.",
   "exp.role2_b2": "Infrastructure Management: Administered internal IT systems and network devices, maintaining stable daily operations and accurate technical logging.",
   "exp.role2_b3": "Factory Server Administration: Managed local Windows Server and NAS environments to centralize corporate data and support production workflows.",
   "exp.role2_b4": "Network Administration: Deployed LAN/Wi-Fi networks and CCTV systems including IP allocation, routing, and physical cabling.",
