@@ -37,7 +37,7 @@
                 <!-- Right: Name + Contact -->
                 <div class="cv-name-title">
                     <h1 class="cv-name">NGUYỄN HOÀNG THANH TÚ</h1>
-                    <p class="cv-role">IT Infrastructure Engineer &amp; AI Workflows Architect</p>
+                    <p class="cv-role">IT Systems Supervisor &amp; AI-Augmented Developer</p>
 
                     <div class="cv-meta-grid">
                         <div class="cv-meta-row">
@@ -83,16 +83,20 @@
             <div class="cv-section">
                 <h2 class="cv-section-title">Professional Summary</h2>
                 <p class="cv-summary-text">
-                    Forward-thinking IT Systems Engineer and AI-Native Developer specializing in system administration and structured <strong>Software Delivery &amp; DevOps</strong>. I offer robust hands-on hardware strength, including enterprise physical server configurations, hardware provisioning, and secure network routing alongside active directory infrastructure. Rejecting unguided code generation (&ldquo;vibe coding&rdquo;), I operate a rigorous, systematic software delivery methodology where I act as the System Architect, Technical Designer, and QA Orchestrator while directing specialized AI Agents to write, refactor, and deploy code. This operational framework offloads manual development to AI while ensuring robust, high-performance, and secure software. Highly skilled in bridging traditional infrastructure (Windows Server, SQL, Networks) with cutting-edge agentic workflows to build reliable enterprise-grade systems.
+                    Forward-thinking IT Systems Supervisor specializing in infrastructure operations management and structured AI-assisted software delivery. I offer robust hands-on hardware expertise alongside team supervision and process governance. Rejecting unguided "vibe coding", I operate a rigorous delivery methodology where I act as the System Architect, Technical Designer, and QA Governor while employing AI agents as development tools to write, refactor, and deploy code. This operational framework offloads manual development to AI while ensuring robust, high-performance, and secure software. Skilled in bridging traditional infrastructure (Windows Server, SQL, Networks) with AI-assisted workflows to build reliable enterprise-grade systems.
                 </p>
             </div>
 
             <!-- Technical Skills -->
             <div class="cv-section">
                 <h2 class="cv-section-title">Technical Skills</h2>
-                <div class="cv-skills-list">
-                    <div class="cv-skills-row">
-                        <span class="cv-skills-cat">AI &amp; DevOps:</span>
+                    <div class="cv-skills-list">
+                        <div class="cv-skills-row">
+                            <span class="cv-skills-cat">Management &amp; Governance:</span>
+                            <span class="cv-skills-items">Team Supervision &amp; Mentoring, ITIL Framework, AI-Augmented Development &amp; QA, Vendor &amp; Stakeholder Management.</span>
+                        </div>
+                        <div class="cv-skills-row">
+                            <span class="cv-skills-cat">AI &amp; DevOps:</span>
                         <span class="cv-skills-items">Software Delivery, PromptOps, Multi-Agent Workflows, System Architecture, Automated QA &amp; Verification.</span>
                     </div>
                     <div class="cv-skills-row">
@@ -125,7 +129,23 @@
             <!-- Personal Projects -->
             <div class="cv-section">
                 <h2 class="cv-section-title">Personal Projects</h2>
-                <p class="cv-projects-note">* All personal projects (including various automation scripts, system utilities, and production apps) are hosted on GitHub and published on Google Play via the links in the contact header.</p>
+                <p class="cv-projects-note">* All personal projects are hosted on GitHub via the links in the contact header.</p>
+
+                <div class="cv-project">
+                    <div class="cv-project-header">
+                        <span class="cv-project-name">Agent-Guidance-Rust <span class="cv-project-tag">— Open Source (Rust 2024 Edition)</span></span>
+                        <span class="cv-project-stack">Rust · Tokio · Candle · Tree-sitter · SQLite · MCP Protocol</span>
+                    </div>
+                    <p class="cv-project-desc">High-performance Rust 2024 Edition MCP server delivering AI agent guidance via a 185-skill embedded catalog with hybrid semantic search (ML embeddings), an 8-stage token optimization pipeline (40–80% fewer tokens), 7-stage workflow lifecycle enforcement, and a built-in usage dashboard. Achieves &lt;1ms cold startup with ~35MB RAM footprint. Compatible with Claude, Cursor, VS Code, Gemini CLI, OpenCode, and other MCP-compatible IDEs.</p>
+                    <ul class="cv-project-bullets">
+                        <li><strong>185-Skill Catalog with ML Semantic Search:</strong> Embedded catalog with pre-computed embeddings (intfloat/multilingual-e5-small) for instant skill retrieval. Hybrid ranking blending keyword + vector cosine similarity. Workspace-local skills auto-detected from <code>.agents/skills/</code>, <code>.opencode/skills/</code>, or <code>.claude/skills/</code> directories.</li>
+                        <li><strong>8-Stage Token Optimization Pipeline:</strong> ANSI strip, regex collapse, short-circuit empty, line filter, smart truncation (preserves imports/signatures/constants), head/tail keep, max lines cap, and empty guard — delivering 40–80% fewer tokens per MCP response.</li>
+                        <li><strong>Priority Enforcement + 7-Stage Workflow Gate:</strong> 3-layer enforcement (session-start hook + sentinel file + in-process gate) ensures task_pipeline is always called before gated tools. 7-stage lifecycle (Context → Plan → Ask_Revise → Build → Test_Recheck → Fix → Proposal) with circuit breaker after 3 failed fix attempts.</li>
+                        <li><strong>Shared Embedding Daemon:</strong> Multi-IDE support via local HTTP daemon — one ML model load shared across VS Code, Cursor, Claude Desktop, and CLI agents. ~466 MB total regardless of how many IDEs are open. Auto-shutdown after 600s idle.</li>
+                        <li><strong>Built-in Usage Dashboard:</strong> Native web dashboard (<code>--dashboard</code>) with live tool call tracking, token savings visualization, skill load stats, embed query monitoring, and session management.</li>
+                        <li><strong>Single-Command Install + Auto-Update:</strong> Bootstrap via curl/PowerShell with automatic IDE configuration. Scheduled auto-update support (<code>--auto-update weekly|monthly</code>).</li>
+                    </ul>
+                </div>
 
                 <div class="cv-project">
                     <div class="cv-project-header">
@@ -184,7 +204,7 @@
                         <span class="cv-project-stack">Python · SQL · AI SDLC · Web Apps</span>
                     </div>
                     <ul class="cv-project-bullets">
-                        <li>Designed custom software for departmental workflows: analyzed requirements, architected database schemas, directed AI-assisted development of production-grade utilities for inventory, reporting, and data management.</li>
+                        <li>Guided departmental teams in designing and developing custom software applications that streamlined workflows across multiple company departments, employing AI agents to accelerate delivery. Analyzed requirements, architected database schemas, and managed the full development cycle through specification, code review, and quality verification phases.</li>
                     </ul>
                 </div>
             </div>
@@ -195,16 +215,16 @@
 
                 <div class="cv-experience">
                     <div class="cv-exp-header">
-                        <span class="cv-exp-title">IT Engineer Assistant Supervisor</span>
+                        <span class="cv-exp-title">IT Supervisor</span>
                         <span class="cv-exp-period">May 2026 – Present</span>
                     </div>
                     <div class="cv-exp-company">Sharp Manufacturing Vietnam Co., Ltd</div>
                     <ul class="cv-exp-duties">
-                        <li><strong>Database Administration:</strong> Managed enterprise SQL databases, analyzed system architectures provided by parent headquarters, and successfully deployed localized relational databases to support manufacturing plant operations.</li>
-                        <li><strong>AI-Native Software Delivery:</strong> Developed internal software utilities and corporate automation tools by architecting structural specifications, outlining operational models, and supervising specialized AI Agents to write complete codebase packages, reducing development cycles by 80%.</li>
-                        <li><strong>Infrastructure Management:</strong> Administered enterprise-grade Windows Server environments, centralized network-attached storage (NAS) devices, and multi-channel CCTV surveillance systems to guarantee 99.9% operations uptime.</li>
-                        <li><strong>Network Engineering:</strong> Designed and optimized local network topologies (LAN/WAN) to ensure secure, high-bandwidth communication across corporate and factory areas.</li>
-                        <li><strong>Technical Support &amp; Provisioning:</strong> Handled comprehensive L1/L2 technical troubleshooting, PC/laptop assembly, hardware staging, OS deployment, and peripheral setup for end-users.</li>
+                        <li><strong>Database Administration &amp; Architecture:</strong> Analyzed HQ system architectures, designed and deployed localized relational databases for manufacturing operations. Supervised data integrity validation across all production systems.</li>
+                        <li><strong>AI-Augmented Development &amp; Team Guidance:</strong> Guided team members in adopting structured AI-assisted development workflows. Personally architected specifications and directed AI agents to generate production code, then reviewed and verified all outputs for quality and security compliance, reducing delivery cycles by 80%.</li>
+                        <li><strong>Infrastructure Operations Management:</strong> Oversaw enterprise Windows Server environments, centralized NAS storage systems, and multi-channel CCTV surveillance. Led preventive maintenance planning and incident response coordination, achieving 99.9% operations uptime.</li>
+                        <li><strong>Network Architecture &amp; Supervision:</strong> Designed and supervised LAN/WAN topology optimization. Reviewed network change requests and oversaw failover testing for high-availability inter-factory communication.</li>
+                        <li><strong>Technical Support &amp; Provisioning Supervision:</strong> Directed L1/L2 troubleshooting operations, oversaw PC assembly and hardware staging, and supervised OS deployment and peripheral setup for end-users across departments.</li>
                     </ul>
                 </div>
 
