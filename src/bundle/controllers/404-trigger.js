@@ -57,7 +57,7 @@ function init404Trigger() {
             'bottom:20px',
             'right:20px',
             'z-index:9999',
-            'font-family:"Fira Code","Cascadia Code","JetBrains Mono",monospace',
+            'font-family:"Cascadia Code","Cascadia Mono","JetBrains Mono",monospace',
             'font-size:11px',
             'color:rgba(139,148,158,0.4)',
             'text-decoration:none',

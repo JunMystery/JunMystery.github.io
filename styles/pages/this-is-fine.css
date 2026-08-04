@@ -9,7 +9,7 @@
     --fine-string: #a5d6ff;
     --fine-comment: #8b949e;
     --fine-green: #3fb950;
-    --fine-stack: 'Fira Code', 'Consolas', 'Courier New', monospace;
+    --fine-stack: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }

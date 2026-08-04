@@ -22,7 +22,7 @@ function initBootSplash() {
         'background:#05070a;',
         'display:flex;flex-direction:column;',
         'align-items:center;justify-content:center;',
-        'font-family:"Fira Code","Consolas",monospace;',
+        'font-family:"Cascadia Code","Cascadia Mono",monospace;',
         'font-size:14px;color:#33FF00;',
         'opacity:1;transition:opacity 0.05s;',
         'padding:2rem;'

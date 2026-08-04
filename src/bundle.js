@@ -7,7 +7,7 @@
  */
 
 // ============================================================
-// Source: src/bundle/locales-en.js (218 lines)
+// Source: src/bundle/locales-en.js (217 lines)
 // ============================================================
 
 // ============================================================
@@ -97,7 +97,6 @@ var LOCALE_EN = {
   "skills.tag_firewall": "Firewalls",
   "skills.tag_cpp": "C++",
   "skills.tag_db": "Database Administration & SQL",
-  "skills.tag_api": "REST API Development",
   "skills.tag_script": "Scripting & Automation",
   "skills.tag_ai_sdlc": "Structured AI-Assisted Development",
   "skills.group_mgmt": "Management & Governance",
@@ -231,7 +230,7 @@ var LOCALE_EN = {
 
 
 // ============================================================
-// Source: src/bundle/locales-vi.js (218 lines)
+// Source: src/bundle/locales-vi.js (217 lines)
 // ============================================================
 
 // ============================================================
@@ -321,7 +320,6 @@ var LOCALE_VI = {
   "skills.tag_firewall": "Firewall",
   "skills.tag_cpp": "C++",
   "skills.tag_db": "Quản trị CSDL & SQL",
-  "skills.tag_api": "Phát triển REST API",
   "skills.tag_script": "Scripting & Tự động hóa",
   "skills.tag_ai_sdlc": "Quy trình SDLC Tối ưu bằng AI",
   "skills.group_mgmt": "Quản lý & Quản trị",
@@ -455,7 +453,7 @@ var LOCALE_VI = {
 
 
 // ============================================================
-// Source: src/bundle/utils.js (88 lines)
+// Source: src/bundle/utils.js (116 lines)
 // ============================================================
 
 // ============================================================
@@ -488,7 +486,6 @@ var SELECTORS = {
     THEME_TOGGLE: '#theme-toggle',
     NAV_TOGGLE: '#nav-toggle',
     NAV_MENU: '#nav-menu',
-    NAV_LINKS: '.nav-link',
     TAB_BTNS: '.skills-tab-btn',
     SKILL_GROUPS: '.skill-group',
     FOOTER: '.footer'
@@ -518,8 +515,37 @@ function applyTheme(theme) {
     setStoredTheme(theme);
 }
 
-function getToggleIconClass(theme) {
-    return theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+var ICON_PATHS = {
+    sun: '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>',
+    moon: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
+    bars: '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>',
+    times: '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
+    code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+    lock: '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+    check: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+    timesCircle: '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>',
+    exclamation: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',
+    running: '<circle cx="13" cy="4" r="2"/><path d="M13 6v5l-3 2-2 5"/><path d="m13 11 4-1"/>',
+    gamepad: '<line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/><rect x="2" y="6" width="20" height="12" rx="6"/>',
+    bolt: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+    tv: '<rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/>',
+    terminal: '<polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>',
+    fire: '<path d="M12 22c4.4 0 8-3.6 8-8 0-4.4-4-10-8-12-4 2-8 7.6-8 12 0 4.4 3.6 8 8 8z"/>',
+    trophy: '<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>'
+};
+
+function getIconSVG(name, size) {
+    size = size || 14;
+    var inner = ICON_PATHS[name] || '';
+    return '<svg viewBox="0 0 24 24" width="' + size + '" height="' + size + '" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inner + '</svg>';
+}
+
+function setIcon(el, name) {
+    if (el) el.innerHTML = ICON_PATHS[name] || '';
+}
+
+function getToggleIcon(theme) {
+    return theme === 'dark' ? getIconSVG('sun', 16) : getIconSVG('moon', 16);
 }
 
 /* Scroll service */
@@ -660,11 +686,11 @@ function initTheme() {
     var toggle = $(SELECTORS.THEME_TOGGLE);
     if (!toggle) return;
 
-    var icon = toggle.querySelector('i');
+    var icon = toggle.querySelector('svg');
     var saved = getStoredTheme();
     var theme = saved || getPreferredTheme();
     applyTheme(theme);
-    if (icon) icon.className = getToggleIconClass(theme);
+    setIcon(icon, theme === 'dark' ? 'sun' : 'moon');
 
     var banterCount = 0;
     var banterDone = false;
@@ -673,7 +699,7 @@ function initTheme() {
         var current = document.documentElement.getAttribute('data-theme');
         var next = current === 'dark' ? 'light' : 'dark';
         applyTheme(next);
-        if (icon) icon.className = getToggleIconClass(next);
+        if (icon) setIcon(icon, next === 'dark' ? 'sun' : 'moon');
 
         banterCount++;
         if (typeof showVimBar === 'function' && !banterDone) {
@@ -771,50 +797,34 @@ function initLanguage() {
 
 
 // ============================================================
-// Source: src/bundle/controllers/nav.js (87 lines)
+// Source: src/bundle/controllers/nav.js (46 lines)
 // ============================================================
 
 // ============================================================
-// controllers/nav.js — Navigation menu toggle & smooth scroll
-// Depends on: $, $$, SELECTORS (utils.js)
+// controllers/nav.js — Navigation menu toggle & scroll effects
+// Depends on: $, SELECTORS (utils.js)
 // ============================================================
 
 function initNav() {
     var toggle = $(SELECTORS.NAV_TOGGLE);
     var menu = $(SELECTORS.NAV_MENU);
-    var links = $$(SELECTORS.NAV_LINKS);
     var navbar = $('.navbar');
 
     if (toggle && menu) {
         toggle.addEventListener('click', function (e) {
             e.stopPropagation();
             menu.classList.toggle('active');
-            var icon = toggle.querySelector('i');
+            var icon = toggle.querySelector('svg');
             if (icon) {
-                icon.className = menu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+                setIcon(icon, menu.classList.contains('active') ? 'times' : 'bars');
             }
-        });
-
-        links.forEach(function (link) {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                menu.classList.remove('active');
-                var icon = toggle.querySelector('i');
-                if (icon) icon.className = 'fas fa-bars';
-
-                var targetId = link.getAttribute('href');
-                if (targetId && targetId.indexOf('#') === 0) {
-                    var targetEl = document.querySelector(targetId);
-                    if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
         });
 
         document.addEventListener('click', function (e) {
             if (!menu.contains(e.target) && !toggle.contains(e.target)) {
                 menu.classList.remove('active');
-                var icon = toggle.querySelector('i');
-                if (icon) icon.className = 'fas fa-bars';
+                var icon = toggle.querySelector('svg');
+                if (icon) setIcon(icon, 'bars');
             }
         });
     }
@@ -825,31 +835,6 @@ function initNav() {
             navbar.classList.toggle('scrolled', window.scrollY > 0);
         }, { passive: true });
     }
-}
-
-function initActiveSection() {
-    var links = $$(SELECTORS.NAV_LINKS);
-    var sections = [];
-    links.forEach(function (link) {
-        var href = link.getAttribute('href');
-        if (href && href.indexOf('#') === 0) {
-            var el = document.querySelector(href);
-            if (el) sections.push(el);
-        }
-    });
-    if (!sections.length) return;
-
-    var obs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return;
-            var id = entry.target.getAttribute('id');
-            links.forEach(function (l) {
-                l.classList.toggle('active', l.getAttribute('href') === '#' + id);
-            });
-        });
-    }, { threshold: 0.3, rootMargin: '-80px 0px 0px 0px' });
-
-    sections.forEach(function (s) { obs.observe(s); });
 }
 
 function initSpotlight() {
@@ -1375,7 +1360,7 @@ function initBootSplash() {
         'background:#05070a;',
         'display:flex;flex-direction:column;',
         'align-items:center;justify-content:center;',
-        'font-family:"Fira Code","Consolas",monospace;',
+        'font-family:"Cascadia Code","Cascadia Mono",monospace;',
         'font-size:14px;color:#33FF00;',
         'opacity:1;transition:opacity 0.05s;',
         'padding:2rem;'
@@ -1435,16 +1420,16 @@ function initBootSplash() {
 // ============================================================
 
 var ACHIEVEMENTS = [
-    { id: 'game_404', name: '404 Runner',      desc: 'Reach the 404 runner game',  icon: 'fa-running' },
-    { id: 'snake',    name: 'Snake',            desc: 'Play the snake game',        icon: 'fa-gamepad' },
-    { id: 'tetris',   name: 'Tetris',           desc: 'Play tetris',                icon: 'fa-gamepad' },
-    { id: 'pacman',   name: 'Pac-Man',          desc: 'Play pac-man',               icon: 'fa-gamepad' },
-    { id: 'flappy',   name: 'Flappy Bird',      desc: 'Play flappy bird',           icon: 'fa-gamepad' },
-    { id: 'glitch',   name: 'Reboot Initiated', desc: 'Trigger the reboot glitch',  icon: 'fa-bolt' },
-    { id: 'crt',      name: 'CRT Mode',         desc: 'Activate retro CRT mode',    icon: 'fa-tv' },
-    { id: 'vim',      name: 'Vim Trap',         desc: 'Toggle theme and see vim',   icon: 'fa-terminal' },
-    { id: 'fine',     name: 'This is Fine',     desc: 'Summon the dog in flames',   icon: 'fa-fire' },
-    { id: 'matrix',   name: 'Red Pill',          desc: 'Take the red pill. See how deep the rabbit hole goes.', icon: 'fa-code' }
+    { id: 'game_404', name: '404 Runner',      desc: 'Reach the 404 runner game',  icon: 'running' },
+    { id: 'snake',    name: 'Snake',            desc: 'Play the snake game',        icon: 'gamepad' },
+    { id: 'tetris',   name: 'Tetris',           desc: 'Play tetris',                icon: 'gamepad' },
+    { id: 'pacman',   name: 'Pac-Man',          desc: 'Play pac-man',               icon: 'gamepad' },
+    { id: 'flappy',   name: 'Flappy Bird',      desc: 'Play flappy bird',           icon: 'gamepad' },
+    { id: 'glitch',   name: 'Reboot Initiated', desc: 'Trigger the reboot glitch',  icon: 'bolt' },
+    { id: 'crt',      name: 'CRT Mode',         desc: 'Activate retro CRT mode',    icon: 'tv' },
+    { id: 'vim',      name: 'Vim Trap',         desc: 'Toggle theme and see vim',   icon: 'terminal' },
+    { id: 'fine',     name: 'This is Fine',     desc: 'Summon the dog in flames',   icon: 'fire' },
+    { id: 'matrix',   name: 'Red Pill',          desc: 'Take the red pill. See how deep the rabbit hole goes.', icon: 'code' }
 ];
 
 var _achieveState = null;  // lazy-loaded: { id: timestamp }
@@ -1709,13 +1694,13 @@ function openAchieveDialog() {
             ].join(';') + ';';
         }
 
-        var icon = document.createElement('i');
+        var icon = document.createElement('span');
         if (isFound) {
-            icon.className = 'fas ' + def.icon;
-            icon.style.cssText = 'color:var(--accent-secondary);font-size:14px;margin-top:1px;';
+            icon.innerHTML = getIconSVG(def.icon, 14);
+            icon.style.cssText = 'color:var(--accent-secondary);display:inline-flex;margin-top:1px;';
         } else {
-            icon.className = 'fas fa-lock';
-            icon.style.cssText = 'color:var(--text-muted);font-size:14px;margin-top:1px;';
+            icon.innerHTML = getIconSVG('lock', 14);
+            icon.style.cssText = 'color:var(--text-muted);display:inline-flex;margin-top:1px;';
         }
 
         var info = document.createElement('div');
@@ -1827,9 +1812,9 @@ function showAchieveToast(entry) {
         'pointer-events:none',
     ].join(';') + ';';
 
-    var icon = document.createElement('i');
-    icon.className = 'fas ' + entry.icon;
-    icon.style.cssText = 'color:var(--accent-secondary);font-size:14px;';
+    var icon = document.createElement('span');
+    icon.innerHTML = getIconSVG(entry.icon, 14);
+    icon.style.cssText = 'color:var(--accent-secondary);display:inline-flex;';
 
     var txt = document.createElement('span');
     txt.textContent = 'Achievement: ' + entry.name;
@@ -2167,7 +2152,7 @@ function init404Trigger() {
             'bottom:20px',
             'right:20px',
             'z-index:9999',
-            'font-family:"Fira Code","Cascadia Code","JetBrains Mono",monospace',
+            'font-family:"Cascadia Code","Cascadia Mono","JetBrains Mono",monospace',
             'font-size:11px',
             'color:rgba(139,148,158,0.4)',
             'text-decoration:none',
@@ -2258,7 +2243,7 @@ function showVimBar(msg) {
         'border:1px solid #30363d',
         'border-radius:8px',
         'color:#ff7b72',
-        'font:13px/1.4 "Fira Code","Consolas",monospace',
+        'font:13px/1.4 "Cascadia Code","Cascadia Mono",monospace',
         'padding:10px 18px',
         'text-align:center',
         'box-shadow:0 4px 24px rgba(0,0,0,0.5)',
@@ -3463,13 +3448,13 @@ function renderCommand(container, msg) {
 function renderStatus(container, msg) {
     var badge = document.createElement('span');
     badge.className = 'chat-status';
-    var iconName = 'fa-check-circle';
+    var iconName = 'check';
     var color = '#22c55e';
-    if (msg.status === 'fail') { iconName = 'fa-times-circle'; color = '#ff4d4d'; }
-    else if (msg.status === 'warn') { iconName = 'fa-exclamation-circle'; color = '#f59e0b'; }
+    if (msg.status === 'fail') { iconName = 'timesCircle'; color = '#ff4d4d'; }
+    else if (msg.status === 'warn') { iconName = 'exclamation'; color = '#f59e0b'; }
     badge.style.color = color;
-    var icon = document.createElement('i');
-    icon.className = 'fas ' + iconName;
+    var icon = document.createElement('span');
+    icon.innerHTML = getIconSVG(iconName, 12);
     badge.appendChild(icon);
     badge.appendChild(document.createTextNode(' ' + (msg.content || '')));
     container.appendChild(badge);
@@ -3710,8 +3695,8 @@ function initPipelineSimulator() {
         btn.href = info.url;
         btn.target = '_blank';
         btn.setAttribute('title', info.label);
-        var icon = document.createElement('i');
-        icon.className = 'fas fa-code';
+        var icon = document.createElement('span');
+        icon.innerHTML = getIconSVG('code', 12);
         btn.appendChild(icon);
         btn.appendChild(document.createTextNode(' Debug: ' + info.label));
         content.appendChild(btn);
@@ -3783,7 +3768,7 @@ function initPipelineSimulator() {
 
 
 // ============================================================
-// Source: src/bundle/main.js (31 lines)
+// Source: src/bundle/main.js (30 lines)
 // ============================================================
 
 // ============================================================
@@ -3799,7 +3784,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initFooter();
     initReveal();
     initScrollProgress();
-    initActiveSection();
     initSpotlight();
     initLanguage();
     initHeroTypewriter();
@@ -3820,5 +3804,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // ============================================================
-// End of bundle.js (3627 total lines from 31 modules)
+// End of bundle.js (3611 total lines from 31 modules)
 // ============================================================

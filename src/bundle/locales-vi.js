@@ -85,7 +85,6 @@ var LOCALE_VI = {
   "skills.tag_firewall": "Firewall",
   "skills.tag_cpp": "C++",
   "skills.tag_db": "Quản trị CSDL & SQL",
-  "skills.tag_api": "Phát triển REST API",
   "skills.tag_script": "Scripting & Tự động hóa",
   "skills.tag_ai_sdlc": "Quy trình SDLC Tối ưu bằng AI",
   "skills.group_mgmt": "Quản lý & Quản trị",

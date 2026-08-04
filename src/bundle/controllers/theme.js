@@ -7,11 +7,11 @@ function initTheme() {
     var toggle = $(SELECTORS.THEME_TOGGLE);
     if (!toggle) return;
 
-    var icon = toggle.querySelector('i');
+    var icon = toggle.querySelector('svg');
     var saved = getStoredTheme();
     var theme = saved || getPreferredTheme();
     applyTheme(theme);
-    if (icon) icon.className = getToggleIconClass(theme);
+    setIcon(icon, theme === 'dark' ? 'sun' : 'moon');
 
     var banterCount = 0;
     var banterDone = false;
@@ -20,7 +20,7 @@ function initTheme() {
         var current = document.documentElement.getAttribute('data-theme');
         var next = current === 'dark' ? 'light' : 'dark';
         applyTheme(next);
-        if (icon) icon.className = getToggleIconClass(next);
+        if (icon) setIcon(icon, next === 'dark' ? 'sun' : 'moon');
 
         banterCount++;
         if (typeof showVimBar === 'function' && !banterDone) {

@@ -301,8 +301,9 @@
     box-shadow: 0 0 12px rgba(245, 158, 11, 0.15);
 }
 
-.chat-debug-btn i {
-    font-size: 0.7rem;
+.chat-debug-btn svg {
+    width: 0.75rem;
+    height: 0.75rem;
 }
 
 @media (max-width: 576px) {

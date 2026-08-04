@@ -209,8 +209,8 @@ function initPipelineSimulator() {
         btn.href = info.url;
         btn.target = '_blank';
         btn.setAttribute('title', info.label);
-        var icon = document.createElement('i');
-        icon.className = 'fas fa-code';
+        var icon = document.createElement('span');
+        icon.innerHTML = getIconSVG('code', 12);
         btn.appendChild(icon);
         btn.appendChild(document.createTextNode(' Debug: ' + info.label));
         content.appendChild(btn);

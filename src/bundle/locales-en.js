@@ -85,7 +85,6 @@ var LOCALE_EN = {
   "skills.tag_firewall": "Firewalls",
   "skills.tag_cpp": "C++",
   "skills.tag_db": "Database Administration & SQL",
-  "skills.tag_api": "REST API Development",
   "skills.tag_script": "Scripting & Automation",
   "skills.tag_ai_sdlc": "Structured AI-Assisted Development",
   "skills.group_mgmt": "Management & Governance",

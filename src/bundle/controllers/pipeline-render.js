@@ -150,13 +150,13 @@ function renderCommand(container, msg) {
 function renderStatus(container, msg) {
     var badge = document.createElement('span');
     badge.className = 'chat-status';
-    var iconName = 'fa-check-circle';
+    var iconName = 'check';
     var color = '#22c55e';
-    if (msg.status === 'fail') { iconName = 'fa-times-circle'; color = '#ff4d4d'; }
-    else if (msg.status === 'warn') { iconName = 'fa-exclamation-circle'; color = '#f59e0b'; }
+    if (msg.status === 'fail') { iconName = 'timesCircle'; color = '#ff4d4d'; }
+    else if (msg.status === 'warn') { iconName = 'exclamation'; color = '#f59e0b'; }
     badge.style.color = color;
-    var icon = document.createElement('i');
-    icon.className = 'fas ' + iconName;
+    var icon = document.createElement('span');
+    icon.innerHTML = getIconSVG(iconName, 12);
     badge.appendChild(icon);
     badge.appendChild(document.createTextNode(' ' + (msg.content || '')));
     container.appendChild(badge);

@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initFooter();
     initReveal();
     initScrollProgress();
-    initActiveSection();
     initSpotlight();
     initLanguage();
     initHeroTypewriter();

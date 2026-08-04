@@ -164,13 +164,13 @@ html.crt-mode .section-title {
     0 0 14px rgba(255, 200, 100, 0.06);
 }
 
-/* ---- 6. Monospaced font override (code only — body keeps Inter for Vietnamese) ---- */
+/* ---- 6. Monospaced font override (code only — body keeps Cascadia Code for Vietnamese) ---- */
 html.crt-mode code,
 html.crt-mode pre,
 html.crt-mode kbd,
 html.crt-mode samp,
 html.crt-mode .terminal,
-html.crt-mode .typewriter-text { font-family: 'Fira Code', 'Cascadia Code', monospace; }
+html.crt-mode .typewriter-text { font-family: 'Cascadia Code', 'Cascadia Mono', monospace; }
 
 /* ---- 7. CRT badge ---- */
 html.crt-mode::after {
@@ -179,7 +179,7 @@ html.crt-mode::after {
   bottom: 20px;
   right: 20px;
   color: #0f0;
-  font: 11px/1 'Fira Code', monospace;
+  font: 11px/1 'Cascadia Code', monospace;
   letter-spacing: 2px;
   opacity: 0.35;
   z-index: 10001;

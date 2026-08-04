@@ -235,7 +235,7 @@ No card boxes. Skills are grouped by category with a **tag cloud** layout:
 ```
 ### AI-Ops             ### Infrastructure        ### Dev
 [PromptOps]            [Windows Server]          [Database Admin & SQL]
-[Multi-Agent]          [Active Directory]        [REST API Development]
+[Multi-Agent]          [Active Directory]        [Database & SQL]
 [System Architecture]  [DNS/DHCP]                [Scripting & Automation]
 [Git/GitHub]           [Linux]                   [Structured AI-Assisted Dev]
                        [VMware]

@@ -9,7 +9,7 @@
     --syntax-comment: #8b949e;
     --syntax-number: #d2a8ff;
     --syntax-success: #7ee787;
-    --font-stack: 'Fira Code', 'Consolas', 'Courier New', monospace;
+    --font-stack: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
 }
 
 * { box-sizing: border-box; touch-action: manipulation; }

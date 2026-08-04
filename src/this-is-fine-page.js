@@ -129,7 +129,7 @@
 
             if (p.isText) {
                 ctx.fillStyle = p.color;
-                ctx.font = 'bold ' + Math.max(6, p.size) + 'px "Fira Code","Consolas","Courier New",monospace';
+                ctx.font = 'bold ' + Math.max(6, p.size) + 'px "Cascadia Code","Cascadia Mono","Consolas",monospace';
                 ctx.fillText(p.text, p.x, p.y);
             } else {
                 ctx.fillStyle = p.color;

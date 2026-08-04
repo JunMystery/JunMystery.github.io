@@ -6,16 +6,16 @@
 // ============================================================
 
 var ACHIEVEMENTS = [
-    { id: 'game_404', name: '404 Runner',      desc: 'Reach the 404 runner game',  icon: 'fa-running' },
-    { id: 'snake',    name: 'Snake',            desc: 'Play the snake game',        icon: 'fa-gamepad' },
-    { id: 'tetris',   name: 'Tetris',           desc: 'Play tetris',                icon: 'fa-gamepad' },
-    { id: 'pacman',   name: 'Pac-Man',          desc: 'Play pac-man',               icon: 'fa-gamepad' },
-    { id: 'flappy',   name: 'Flappy Bird',      desc: 'Play flappy bird',           icon: 'fa-gamepad' },
-    { id: 'glitch',   name: 'Reboot Initiated', desc: 'Trigger the reboot glitch',  icon: 'fa-bolt' },
-    { id: 'crt',      name: 'CRT Mode',         desc: 'Activate retro CRT mode',    icon: 'fa-tv' },
-    { id: 'vim',      name: 'Vim Trap',         desc: 'Toggle theme and see vim',   icon: 'fa-terminal' },
-    { id: 'fine',     name: 'This is Fine',     desc: 'Summon the dog in flames',   icon: 'fa-fire' },
-    { id: 'matrix',   name: 'Red Pill',          desc: 'Take the red pill. See how deep the rabbit hole goes.', icon: 'fa-code' }
+    { id: 'game_404', name: '404 Runner',      desc: 'Reach the 404 runner game',  icon: 'running' },
+    { id: 'snake',    name: 'Snake',            desc: 'Play the snake game',        icon: 'gamepad' },
+    { id: 'tetris',   name: 'Tetris',           desc: 'Play tetris',                icon: 'gamepad' },
+    { id: 'pacman',   name: 'Pac-Man',          desc: 'Play pac-man',               icon: 'gamepad' },
+    { id: 'flappy',   name: 'Flappy Bird',      desc: 'Play flappy bird',           icon: 'gamepad' },
+    { id: 'glitch',   name: 'Reboot Initiated', desc: 'Trigger the reboot glitch',  icon: 'bolt' },
+    { id: 'crt',      name: 'CRT Mode',         desc: 'Activate retro CRT mode',    icon: 'tv' },
+    { id: 'vim',      name: 'Vim Trap',         desc: 'Toggle theme and see vim',   icon: 'terminal' },
+    { id: 'fine',     name: 'This is Fine',     desc: 'Summon the dog in flames',   icon: 'fire' },
+    { id: 'matrix',   name: 'Red Pill',          desc: 'Take the red pill. See how deep the rabbit hole goes.', icon: 'code' }
 ];
 
 var _achieveState = null;  // lazy-loaded: { id: timestamp }

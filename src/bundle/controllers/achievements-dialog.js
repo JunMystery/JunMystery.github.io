@@ -120,13 +120,13 @@ function openAchieveDialog() {
             ].join(';') + ';';
         }
 
-        var icon = document.createElement('i');
+        var icon = document.createElement('span');
         if (isFound) {
-            icon.className = 'fas ' + def.icon;
-            icon.style.cssText = 'color:var(--accent-secondary);font-size:14px;margin-top:1px;';
+            icon.innerHTML = getIconSVG(def.icon, 14);
+            icon.style.cssText = 'color:var(--accent-secondary);display:inline-flex;margin-top:1px;';
         } else {
-            icon.className = 'fas fa-lock';
-            icon.style.cssText = 'color:var(--text-muted);font-size:14px;margin-top:1px;';
+            icon.innerHTML = getIconSVG('lock', 14);
+            icon.style.cssText = 'color:var(--text-muted);display:inline-flex;margin-top:1px;';
         }
 
         var info = document.createElement('div');
@@ -238,9 +238,9 @@ function showAchieveToast(entry) {
         'pointer-events:none',
     ].join(';') + ';';
 
-    var icon = document.createElement('i');
-    icon.className = 'fas ' + entry.icon;
-    icon.style.cssText = 'color:var(--accent-secondary);font-size:14px;';
+    var icon = document.createElement('span');
+    icon.innerHTML = getIconSVG(entry.icon, 14);
+    icon.style.cssText = 'color:var(--accent-secondary);display:inline-flex;';
 
     var txt = document.createElement('span');
     txt.textContent = 'Achievement: ' + entry.name;

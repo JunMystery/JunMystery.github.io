@@ -30,7 +30,7 @@ function showVimBar(msg) {
         'border:1px solid #30363d',
         'border-radius:8px',
         'color:#ff7b72',
-        'font:13px/1.4 "Fira Code","Consolas",monospace',
+        'font:13px/1.4 "Cascadia Code","Cascadia Mono",monospace',
         'padding:10px 18px',
         'text-align:center',
         'box-shadow:0 4px 24px rgba(0,0,0,0.5)',

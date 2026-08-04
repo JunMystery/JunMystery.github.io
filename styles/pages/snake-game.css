@@ -14,7 +14,7 @@ canvas {
     font-size: 12px;
     display: flex;
     justify-content: space-between;
-    font-family: 'Fira Code', 'Consolas', monospace;
+    font-family: 'Cascadia Code', 'Consolas', monospace;
     flex-shrink: 0;
 }
 .game-stats .num { color: #bc8cff; }
@@ -67,7 +67,7 @@ canvas {
     background: #161b22;
     border: 1px solid #21262d;
     color: #8b949e;
-    font-family: 'Fira Code', monospace;
+    font-family: 'Cascadia Code', monospace;
     font-size: 0.7rem;
     border-radius: 4px;
     cursor: pointer;
@@ -82,7 +82,7 @@ canvas {
     color: #0d1117;
     border: none;
     border-radius: 4px;
-    font-family: 'Fira Code', monospace;
+    font-family: 'Cascadia Code', monospace;
     font-size: 0.78rem;
     cursor: pointer;
     font-weight: bold;
@@ -131,7 +131,7 @@ canvas {
     color: #58a6ff;
     border-radius: 9px;
     font-size: 20px;
-    font-family: 'Fira Code', monospace;
+    font-family: 'Cascadia Code', monospace;
     display: flex;
     align-items: center;
     justify-content: center;

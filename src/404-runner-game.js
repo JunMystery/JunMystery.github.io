@@ -236,7 +236,7 @@ function render() {
     ctx.setLineDash([]);
 
     // Obstacles
-    ctx.font = 'bold 18px "Fira Code", "Consolas", "Courier New", monospace';
+    ctx.font = 'bold 18px "Cascadia Code", "Cascadia Mono", "Consolas", "Courier New", monospace';
     ctx.textAlign = 'center';
     for (var i = 0; i < obstacles.length; i++) {
         var o = obstacles[i];
@@ -255,7 +255,7 @@ function render() {
 
     // Player (underscore cursor)
     ctx.fillStyle = COLORS.player;
-    ctx.font = 'bold 22px "Fira Code", "Consolas", "Courier New", monospace';
+    ctx.font = 'bold 22px "Cascadia Code", "Cascadia Mono", "Consolas", "Courier New", monospace';
     ctx.fillText('_', PLAYER_X, player.y + 16);
 
     // Particles
@@ -264,7 +264,7 @@ function render() {
         var p = particles[i];
         ctx.fillStyle = p.color;
         ctx.globalAlpha = p.alpha;
-        ctx.font = '10px "Fira Code", "Consolas", "Courier New", monospace';
+        ctx.font = '10px "Cascadia Code", "Cascadia Mono", "Consolas", "Courier New", monospace';
         ctx.fillText(p.char, p.x, p.y);
     }
     ctx.globalAlpha = 1.0;
@@ -280,7 +280,7 @@ function render() {
     ctx.lineTo(canvas.width, canvas.height - 24);
     ctx.stroke();
 
-    ctx.font = '9px "Fira Code", "Consolas", "Courier New", monospace';
+    ctx.font = '9px "Cascadia Code", "Cascadia Mono", "Consolas", "Courier New", monospace';
     ctx.fillStyle = COLORS.terminal;
     ctx.fillText('> curl -I ' + window.location.pathname + ' 2>&1', 10, canvas.height - 10);
 }

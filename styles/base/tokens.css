@@ -22,8 +22,8 @@
     --neon-cyan: #00FFFF;
     --neon-red: #FF3333;
 
-    --font-sans: 'Inter', sans-serif;
-    --font-mono: 'Fira Code', monospace;
+    --font-sans: 'Cascadia Code', sans-serif;
+    --font-mono: 'Cascadia Mono', monospace;
     --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
     --container-max: 1100px;
