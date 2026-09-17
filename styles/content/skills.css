@@ -1,0 +1,110 @@
+/* ============================================================
+   Skills — CLI Stream Layout with Card Background Surface
+   Concise, Zero-Highlight, 100% Theme Token Sync
+   ============================================================ */
+
+.skills-cli-stream {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 0.65rem 1.25rem;
+    transition: border-color 0.2s ease;
+}
+
+.skills-cli-stream:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+.cli-row {
+    display: grid;
+    grid-template-columns: 180px 24px 1fr;
+    align-items: baseline;
+    padding: 0.65rem 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.7;
+    transition: background-color 0.15s ease;
+}
+
+[data-theme="light"] .cli-row {
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+}
+
+.cli-row:last-child {
+    border-bottom: none;
+}
+
+.cli-key {
+    color: var(--text-muted);
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    user-select: none;
+}
+
+.cli-op {
+    color: var(--accent-primary);
+    opacity: 0.8;
+    user-select: none;
+}
+
+.cli-val {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.2rem 0.45rem;
+}
+
+.cli-item {
+    color: var(--text-secondary);
+    transition: color 0.15s ease;
+    cursor: default;
+}
+
+.cli-item:hover {
+    color: var(--text-primary);
+}
+
+.cli-dot {
+    color: var(--border-color);
+    font-size: 0.65rem;
+    user-select: none;
+}
+
+/* Category header accent on hover */
+.cli-row:hover .cli-key {
+    color: var(--text-secondary);
+}
+
+/* Responsive: stack header on mobile */
+@media (max-width: 680px) {
+    .skills-cli-stream {
+        padding: 0.5rem 0.85rem;
+    }
+
+    .cli-row {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+        padding: 0.6rem 0;
+    }
+
+    .cli-op {
+        display: none;
+    }
+
+    .cli-key {
+        color: var(--accent-primary);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skills-cli-stream,
+    .cli-row,
+    .cli-item {
+        transition: none !important;
+    }
+}

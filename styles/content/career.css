@@ -1,0 +1,219 @@
+/* Career Tabbed Terminal — Experience, Education, Certifications */
+.career-panels { position: relative; }
+.career-panel { display: none; }
+.career-panel.active { display: block; animation: panelFadeIn 0.25s ease; }
+@keyframes panelFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ============================================================
+   Experience — 100% Full Timeline (Flat Duties, Bold Categories)
+   ============================================================ */
+.exp-timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.exp-card {
+    position: relative;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 1rem;
+    margin-bottom: 0.85rem;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.exp-card:last-child {
+    margin-bottom: 0;
+}
+
+.exp-card:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    transform: translateX(2px);
+}
+
+/* Git Commit Milestone Badge (No line, pure tech icon) */
+.exp-card::before {
+    content: '';
+    position: absolute;
+    left: -1.65rem;
+    top: 1.05rem;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cline x1='1' y1='12' x2='8' y2='12'/%3E%3Cline x1='16' y1='12' x2='23' y2='12'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 13px;
+    z-index: 2;
+    transition: var(--transition);
+}
+
+.exp-card:hover::before {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.45);
+    transform: scale(1.1);
+}
+
+/* Active current role — Emerald Git commit badge */
+.exp-card:has(.current)::before {
+    border-color: rgba(16, 185, 129, 0.6);
+    background-color: rgba(16, 185, 129, 0.12);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cline x1='1' y1='12' x2='8' y2='12'/%3E%3Cline x1='16' y1='12' x2='23' y2='12'/%3E%3C/svg%3E");
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+}
+
+/* Staggered entry */
+.exp-timeline.visible .exp-card {
+    animation: cardSlideIn 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+.exp-timeline.visible .exp-card:nth-child(1) { animation-delay: 0s; }
+.exp-timeline.visible .exp-card:nth-child(2) { animation-delay: 0.08s; }
+.exp-timeline.visible .exp-card:nth-child(3) { animation-delay: 0.16s; }
+.exp-timeline.visible .exp-card:nth-child(4) { animation-delay: 0.24s; }
+.exp-timeline.visible .exp-card:nth-child(5) { animation-delay: 0.32s; }
+
+@keyframes cardSlideIn {
+    from { opacity: 0; transform: translateX(16px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Milestone Header */
+.exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.exp-header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.exp-title {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.exp-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+}
+
+.exp-badge.current {
+    background: rgba(59, 130, 246, 0.15);
+    color: #93c5fd;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.exp-company {
+    font-size: 0.8rem;
+    color: #34d399;
+    font-weight: 500;
+    margin: 0.15rem 0 0.65rem 0;
+}
+
+.exp-period {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+/* Flat Duty List (100% Display, Bold Category, No Icons) */
+.exp-duties {
+    margin: 0.65rem 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.exp-duty-item {
+    font-size: 0.74rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
+}
+
+.exp-duty-bullet {
+    color: var(--accent-primary);
+    font-weight: 700;
+    margin-top: 1px;
+    flex-shrink: 0;
+}
+
+.exp-duty-text strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Tech Chips */
+.exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.65rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.exp-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 1px 7px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--text-muted);
+}
+
+/* Reuse existing edu-grid and cert-list inside panels */
+.career-panel .edu-grid { margin-top: 0; }
+.career-panel .cert-list { margin-top: 0; }
+
+/* Career status line at bottom */
+.career-status-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.career-status-bar .status-prompt { color: var(--accent-secondary); }
+.career-status-bar .status-path { color: var(--accent-primary); }
+.career-status-bar .status-count { color: var(--text-secondary); margin-left: auto; }
+
+/* Responsive & Reduced Motion */
+@media (max-width: 640px) {
+    .exp-timeline { padding-left: 1rem; }
+    .exp-card::before { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .exp-card, .career-panel { animation: none !important; transition: none !important; }
+}

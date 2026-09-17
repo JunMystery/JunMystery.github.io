@@ -1,0 +1,40 @@
+/* Project Flow (horizontal arrows + nodes) */
+.project-flow {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    line-height: 1.5;
+}
+
+.flow-node {
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 0.25rem 0.55rem;
+    white-space: normal;
+    word-break: break-word;
+    font-weight: 600;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.project-card:hover .flow-node {
+    border-color: var(--accent-primary);
+    background: var(--bg-secondary);
+}
+
+.flow-arrow {
+    color: var(--accent-primary);
+    font-weight: 800;
+    opacity: 0.85;
+    margin: 0 0.2rem;
+    transition: opacity 0.2s ease;
+}
+
+.project-card:hover .flow-arrow {
+    opacity: 1;
+}

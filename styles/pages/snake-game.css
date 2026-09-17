@@ -1,0 +1,146 @@
+/* ─── Snake: Game-specific styles (layout handled by game-layout.css) ─── */
+
+/* Canvas */
+canvas {
+    aspect-ratio: 1 / 1;
+    max-width: 400px;
+}
+
+/* Stats bar */
+.game-stats {
+    padding: 10px 12px;
+    background-color: #1e222a;
+    border-bottom: 2px solid #15181f;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Cascadia Code', 'Consolas', monospace;
+    flex-shrink: 0;
+}
+.game-stats .num { color: #bc8cff; }
+
+/* Overlay content */
+.overlay h2 { font-size: 16px; font-weight: bold; margin-bottom: 10px; }
+.overlay .err { color: #f0883e; }
+.overlay .ok  { color: #3fb950; }
+.blink { animation: blinker 1.2s linear infinite; }
+@keyframes blinker { 50% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+    .blink { animation: none; }
+}
+
+/* Settings panel */
+.settings-panel {
+    text-align: left;
+    width: 100%;
+    max-width: 260px;
+}
+.settings-panel .setting-group { margin-bottom: 14px; }
+.settings-panel label {
+    display: block;
+    font-size: 0.72rem;
+    color: #8b949e;
+    margin-bottom: 5px;
+}
+.settings-panel .value { color: #58a6ff; font-weight: bold; }
+.settings-panel input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 4px;
+    background: #21262d;
+    border-radius: 2px;
+    outline: none;
+}
+.settings-panel input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #58a6ff;
+    cursor: pointer;
+}
+.grid-opts { display: flex; gap: 6px; }
+.grid-opts button {
+    flex: 1;
+    padding: 5px;
+    background: #161b22;
+    border: 1px solid #21262d;
+    color: #8b949e;
+    font-family: 'Cascadia Code', monospace;
+    font-size: 0.7rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+}
+.grid-opts button.active { border-color: #58a6ff; color: #58a6ff; }
+
+.settings-close {
+    margin-top: 10px;
+    padding: 7px 20px;
+    background: #58a6ff;
+    color: #0d1117;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Cascadia Code', monospace;
+    font-size: 0.78rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Settings button (in header) */
+.settings-btn {
+    background: none;
+    border: none;
+    color: #484f58;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 2px 4px;
+    line-height: 1;
+    transition: color 0.2s;
+}
+.settings-btn:hover { color: #58a6ff; }
+
+/* Settings button in game-header far left */
+.gh-left {
+    display: flex;
+    align-items: center;
+}
+.gh-left .settings-btn {
+    font-size: 1.1rem;
+    padding: 0 2px;
+}
+.controls-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* D-Pad cross layout */
+.controller {
+    position: relative;
+    width: 180px;
+    height: 180px;
+}
+.controller .dpad-btn {
+    position: absolute;
+    width: 58px;
+    height: 58px;
+    background: #0c1017;
+    border: 1px solid #21262d;
+    color: #58a6ff;
+    border-radius: 9px;
+    font-size: 20px;
+    font-family: 'Cascadia Code', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.1s;
+}
+.controller .dpad-btn:active { background: #05070a; color: #3fb950; }
+.controller .dpad-btn.up  { top: 0;      left: 50%; transform: translateX(-50%); }
+.controller .dpad-btn.lf  { top: 50%;    left: 0;   transform: translateY(-50%); }
+.controller .dpad-btn.dn  { bottom: 0;   left: 50%; transform: translateX(-50%); }
+.controller .dpad-btn.rt  { top: 50%;    right: 0;  transform: translateY(-50%); }

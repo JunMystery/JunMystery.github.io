@@ -1,0 +1,65 @@
+/* ============================================================
+   Shared Tab Components — Universal tab-btn & Filter Tabs
+   Synchronized, Compact, Flat 1px Matte, Zero Glow
+   ============================================================ */
+
+/* Container for header tabs (Projects, Career) */
+.tabs-row {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+}
+
+/* Section Title Bar — Title left, Tabs & Actions right */
+.section-title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.section-title-bar .section-title {
+    margin-bottom: 0;
+}
+
+/* Container for section filter tabs (Skills) */
+.skills-tabs {
+    display: flex;
+    gap: 0.35rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+}
+
+/* Universal tab button styling — applies to both .tab-btn and .skills-tab-btn */
+.tab-btn,
+.skills-tab-btn {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    color: var(--text-muted);
+    background: transparent;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+    white-space: nowrap;
+    line-height: 1.35;
+}
+
+.tab-btn:hover,
+.skills-tab-btn:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.tab-btn.active,
+.skills-tab-btn.active {
+    border-color: var(--accent-primary);
+    color: #93c5fd;
+    background: rgba(59, 130, 246, 0.12);
+    font-weight: 600;
+}
