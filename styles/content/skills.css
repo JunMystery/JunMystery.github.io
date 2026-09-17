@@ -1,0 +1,215 @@
+/* ============================================================
+   Skills — Inline Categorized Pills (Option A)
+   Compact, Clean, Flat 1px Matte, Zero Glow
+   ============================================================ */
+
+/* Group container: compact stack of rows */
+.skill-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Category row: horizontal flex on desktop */
+.skill-group {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 0.65rem 1rem;
+    box-shadow: inset 0 1px 0 0 var(--card-highlight);
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.skill-group:hover {
+    border-color: var(--border-color-hover);
+}
+
+/* Hidden state for tab filtering — collapse smoothly */
+.skill-group.hidden {
+    opacity: 0;
+    transform: translateX(-16px) scale(0.98);
+    max-height: 0;
+    margin: 0;
+    padding: 0 1rem;
+    border-color: transparent;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Category header / domain label */
+.skill-group-title {
+    flex: 0 0 160px;
+    min-width: 145px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    margin: 0;
+    padding-top: 0.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.skill-group-title::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    flex-shrink: 0;
+}
+
+/* Per-category title colors */
+.skill-group[data-category="ai-ops"] .skill-group-title { color: var(--accent-primary); }
+.skill-group[data-category="ai-ops"] .skill-group-title::before { background: var(--accent-primary); }
+
+.skill-group[data-category="infra"] .skill-group-title { color: var(--accent-secondary); }
+.skill-group[data-category="infra"] .skill-group-title::before { background: var(--accent-secondary); }
+
+.skill-group[data-category="dev"] .skill-group-title { color: var(--accent-purple); }
+.skill-group[data-category="dev"] .skill-group-title::before { background: var(--accent-purple); }
+
+.skill-group[data-category="mgmt"] .skill-group-title { color: #f59e0b; }
+.skill-group[data-category="mgmt"] .skill-group-title::before { background: #f59e0b; }
+
+/* Tags flex container */
+.skill-group-tags {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+/* Standard tag pill */
+.skill-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+    transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+    cursor: default;
+    line-height: 1.35;
+    white-space: nowrap;
+}
+
+.skill-tag:hover {
+    transform: translateY(-1px);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+}
+
+/* Highlight tags — Core Strategic Weapons */
+.skill-tag.skill-highlight {
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+}
+
+.skill-tag.skill-highlight::before {
+    content: '●';
+    font-size: 0.45rem;
+    margin-right: 0.3rem;
+    opacity: 0.9;
+}
+
+/* AI-Ops Highlights */
+.skill-group[data-category="ai-ops"] .skill-tag.skill-highlight {
+    background: rgba(59, 130, 246, 0.12);
+    border-color: rgba(59, 130, 246, 0.35);
+    color: #93c5fd;
+}
+
+/* Infra Highlights */
+.skill-group[data-category="infra"] .skill-tag.skill-highlight {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: #6ee7b7;
+}
+
+/* Dev Highlights */
+.skill-group[data-category="dev"] .skill-tag.skill-highlight {
+    background: rgba(168, 85, 247, 0.12);
+    border-color: rgba(168, 85, 247, 0.35);
+    color: #d8b4fe;
+}
+
+/* Management Highlights */
+.skill-group[data-category="mgmt"] .skill-tag.skill-highlight {
+    background: rgba(245, 158, 11, 0.12);
+    border-color: rgba(245, 158, 11, 0.35);
+    color: #fcd34d;
+}
+
+/* Light mode high contrast for skill highlights */
+[data-theme="light"] .skill-group[data-category="ai-ops"] .skill-tag.skill-highlight {
+    color: #1d4ed8;
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="light"] .skill-group[data-category="infra"] .skill-tag.skill-highlight {
+    color: #047857;
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="light"] .skill-group[data-category="dev"] .skill-tag.skill-highlight {
+    color: #7e22ce;
+    background: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.3);
+}
+
+[data-theme="light"] .skill-group[data-category="mgmt"] .skill-tag.skill-highlight {
+    color: #b45309;
+    background: rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.3);
+}
+
+/* Hover on highlight tags */
+.skill-tag.skill-highlight:hover {
+    filter: brightness(1.15);
+}
+
+/* Responsive: stack header on mobile */
+@media (max-width: 680px) {
+    .skill-group {
+        flex-direction: column;
+        gap: 0.4rem;
+        padding: 0.6rem 0.75rem;
+    }
+
+    .skill-group-title {
+        flex: none;
+        width: 100%;
+        padding-top: 0;
+    }
+
+    .skill-tag {
+        white-space: normal;
+        word-break: break-word;
+        max-width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skill-group {
+        transition: none !important;
+        transform: none !important;
+    }
+    .skill-tag {
+        transition: none !important;
+        transform: none !important;
+    }
+}

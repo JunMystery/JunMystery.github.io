@@ -1,0 +1,249 @@
+/* Career Tabbed Terminal — Experience, Education, Certifications */
+.career-panels { position: relative; }
+.career-panel { display: none; }
+.career-panel.active { display: block; animation: panelFadeIn 0.25s ease; }
+@keyframes panelFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ============================================================
+   Experience — Option 1 Structured Milestone Timeline
+   ============================================================ */
+.exp-timeline {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.exp-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 1px;
+    background: var(--border-color);
+}
+
+.exp-card {
+    position: relative;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 1rem;
+    margin-bottom: 0.85rem;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.exp-card:last-child {
+    margin-bottom: 0;
+}
+
+.exp-card:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    transform: translateX(2px);
+}
+
+/* Timeline node on vertical line */
+.exp-card::before {
+    content: '';
+    position: absolute;
+    left: -1.25rem;
+    top: 1.15rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 2px solid var(--accent-primary);
+    z-index: 1;
+    transition: background 0.2s ease;
+}
+
+.exp-card:hover::before {
+    background: var(--accent-primary);
+}
+
+/* Staggered entry */
+.exp-timeline.visible .exp-card {
+    animation: cardSlideIn 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+.exp-timeline.visible .exp-card:nth-child(1) { animation-delay: 0s; }
+.exp-timeline.visible .exp-card:nth-child(2) { animation-delay: 0.12s; }
+.exp-timeline.visible .exp-compact-grid { animation-delay: 0.24s; }
+
+@keyframes cardSlideIn {
+    from { opacity: 0; transform: translateX(16px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Milestone Header */
+.exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.exp-header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.exp-title {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.exp-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+}
+
+.exp-badge.current {
+    background: rgba(59, 130, 246, 0.15);
+    color: #93c5fd;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.exp-company {
+    font-size: 0.8rem;
+    color: #34d399;
+    font-weight: 500;
+    margin: 0.15rem 0 0.65rem 0;
+}
+
+.exp-period {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+/* Key Pillars Grid */
+.exp-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    margin: 0.65rem 0;
+}
+
+.exp-pillar-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 0.65rem 0.75rem;
+}
+
+.exp-pillar-title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.pillar-blue { color: #60a5fa; }
+.pillar-amber { color: #fbbf24; }
+.pillar-purple { color: #c084fc; }
+.pillar-cyan { color: #22d3ee; }
+
+.exp-pillar-desc {
+    font-size: 0.75rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Tech Chips */
+.exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.65rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.exp-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 1px 7px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--text-muted);
+}
+
+/* Compact Grid for Older Roles */
+.exp-compact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.exp-compact-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 0.75rem 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    transition: border-color 0.2s ease;
+}
+
+.exp-compact-card:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+@media (max-width: 768px) {
+    .exp-pillars-grid,
+    .exp-compact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Reuse existing edu-grid and cert-list inside panels */
+.career-panel .edu-grid { margin-top: 0; }
+.career-panel .cert-list { margin-top: 0; }
+
+/* Career status line at bottom */
+.career-status-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.career-status-bar .status-prompt { color: var(--accent-secondary); }
+.career-status-bar .status-path { color: var(--accent-primary); }
+.career-status-bar .status-count { color: var(--text-secondary); margin-left: auto; }
+
+/* Responsive & Reduced Motion */
+@media (max-width: 640px) {
+    .exp-timeline { padding-left: 1rem; }
+    .exp-card::before { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .exp-card, .career-panel { animation: none !important; transition: none !important; }
+}

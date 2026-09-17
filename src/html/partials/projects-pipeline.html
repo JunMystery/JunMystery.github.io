@@ -1,0 +1,133 @@
+                    <div class="project-panel" data-project-panel="pipeline">
+                        <!-- Top Controls & Run Bar -->
+                        <div class="pipeline-controls">
+                            <div class="pipeline-meta-status" id="pipeline-meta-status">
+                                <span class="pipeline-pulse-dot"></span>
+                                <span class="pipeline-status-text font-bold">STANDBY: #AGY-908</span>
+                                <span class="text-muted">|</span>
+                                <span>main @ <span class="accent-primary">8f3a91c</span></span>
+                            </div>
+
+                            <div class="pipeline-actions-group">
+                                <select id="pipeline-preset" class="pipeline-select" aria-label="Select Task Preset">
+                                    <option value="ad-deploy" data-i18n="pipeline.preset_ad">Deploy AD Infrastructure</option>
+                                    <option value="mcp-feature" data-i18n="pipeline.preset_mcp">Implement MCP Guidance Search</option>
+                                    <option value="portfolio-deploy" data-i18n="pipeline.preset_portfolio">Deploy Portfolio to Cloudflare</option>
+                                    <option value="game-engine" data-i18n="pipeline.preset_game">Build 2D Canvas Game Engine</option>
+                                </select>
+                                <div class="pipeline-buttons">
+                                    <button id="pipeline-run" class="btn btn-primary btn-sm"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> <span data-i18n="pipeline.btn_run">Run</span></button>
+                                    <button id="pipeline-pause" class="btn btn-secondary btn-sm" disabled><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg> <span data-i18n="pipeline.btn_pause">Pause</span></button>
+                                    <button id="pipeline-step" class="btn btn-secondary btn-sm"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg> <span data-i18n="pipeline.btn_step">Step</span></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4 Stage Cards Grid -->
+                        <div class="pipeline-stage-grid">
+                            <div class="pipeline-stage-card" id="stage-plan">
+                                <div class="stage-card-top">
+                                    <span class="stage-num-title">01. PLAN &amp; GATE</span>
+                                    <span class="stage-duration">--</span>
+                                </div>
+                                <div class="stage-card-title">Architecture &amp; Blueprint</div>
+                                <div class="stage-card-tags">
+                                    <span class="stage-tag">task_pipeline</span>
+                                    <span class="stage-tag stage-status-badge">QUEUED</span>
+                                </div>
+                                <div class="stage-progress-bar">
+                                    <div class="stage-progress-fill"></div>
+                                </div>
+                            </div>
+
+                            <div class="pipeline-stage-card" id="stage-code">
+                                <div class="stage-card-top">
+                                    <span class="stage-num-title">02. CODE SYNTHESIS</span>
+                                    <span class="stage-duration">--</span>
+                                </div>
+                                <div class="stage-card-title">Multi-file AST Patching</div>
+                                <div class="stage-card-tags">
+                                    <span class="stage-tag">project_context</span>
+                                    <span class="stage-tag stage-status-badge">QUEUED</span>
+                                </div>
+                                <div class="stage-progress-bar">
+                                    <div class="stage-progress-fill"></div>
+                                </div>
+                            </div>
+
+                            <div class="pipeline-stage-card" id="stage-verify">
+                                <div class="stage-card-top">
+                                    <span class="stage-num-title">03. VERIFY &amp; AUDIT</span>
+                                    <span class="stage-duration">--</span>
+                                </div>
+                                <div class="stage-card-title">Anti-Hallucination &amp; Tests</div>
+                                <div class="stage-card-tags">
+                                    <span class="stage-tag">guidance:verify</span>
+                                    <span class="stage-tag stage-status-badge">QUEUED</span>
+                                </div>
+                                <div class="stage-progress-bar">
+                                    <div class="stage-progress-fill"></div>
+                                </div>
+                            </div>
+
+                            <div class="pipeline-stage-card" id="stage-deploy">
+                                <div class="stage-card-top">
+                                    <span class="stage-num-title">04. STAGING DEPLOY</span>
+                                    <span class="stage-duration">--</span>
+                                </div>
+                                <div class="stage-card-title">Bundle Compiler &amp; Cloud</div>
+                                <div class="stage-card-tags">
+                                    <span class="stage-tag">bundle_build</span>
+                                    <span class="stage-tag stage-status-badge">QUEUED</span>
+                                </div>
+                                <div class="stage-progress-bar">
+                                    <div class="stage-progress-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Split Monitor: Left Streaming Log & Right Telemetry Gauges -->
+                        <div class="pipeline-monitor-split">
+                            <div class="pipeline-terminal">
+                                <div id="pipeline-terminal-body" class="pipeline-terminal-body"></div>
+                            </div>
+
+                            <div class="pipeline-telemetry-panel">
+                                <div class="telemetry-header">
+                                    <span>TELEMETRY GAUGES</span>
+                                    <span class="accent-success">HEALTHY</span>
+                                </div>
+                                <div class="telemetry-row">
+                                    <div class="telemetry-label">
+                                        <span>Token Burn Rate</span>
+                                        <span id="telemetry-tps" class="font-bold">0 tps</span>
+                                    </div>
+                                    <div class="telemetry-meter">
+                                        <div id="telemetry-tps-fill" class="telemetry-meter-fill" style="width: 0%; background: #3b82f6;"></div>
+                                    </div>
+                                </div>
+                                <div class="telemetry-row">
+                                    <div class="telemetry-label">
+                                        <span>Inference Latency</span>
+                                        <span id="telemetry-latency" class="font-bold">-- ms</span>
+                                    </div>
+                                    <div class="telemetry-meter">
+                                        <div id="telemetry-latency-fill" class="telemetry-meter-fill" style="width: 0%; background: #22c55e;"></div>
+                                    </div>
+                                </div>
+                                <div class="telemetry-row">
+                                    <div class="telemetry-label">
+                                        <span>Source LOC Budget</span>
+                                        <span class="font-bold">&lt; 300 LOC (OK)</span>
+                                    </div>
+                                    <div class="telemetry-meter">
+                                        <div class="telemetry-meter-fill" style="width: 30%; background: #93c5fd;"></div>
+                                    </div>
+                                </div>
+                                <div class="telemetry-artifact">
+                                    <div class="text-muted text-xs">Target Artifact:</div>
+                                    <div id="telemetry-artifact-name" class="font-bold accent-primary truncate">dist/bundle.js (3764 LOC)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>

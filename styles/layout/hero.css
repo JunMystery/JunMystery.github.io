@@ -1,0 +1,136 @@
+/* Hero Section Layout — Executive Terminal Bento */
+.hero {
+    min-height: auto;
+    display: flex;
+    align-items: center;
+    padding: 5.25rem 0 1.5rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
+}
+.hero-orb { display: none !important; }
+.hero-container-single { width: 100%; }
+.hero-content { position: relative; z-index: 1; width: 100%; }
+
+/* Bento Grid: Left Column 340px, Right Column 1fr */
+.hero-bento-grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 1.25rem;
+    align-items: stretch;
+    width: 100%;
+}
+.hero-bento-left,
+.hero-bento-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Bento Cards */
+.hero-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 1.25rem;
+    position: relative;
+}
+
+/* Left Bento: Identity Card */
+.hero-id-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-avatar {
+    width: 108px;
+    height: 108px;
+    border-radius: 1rem;
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+    background: url('../../docs/images/profile.jpg') center/cover no-repeat;
+    margin: 0.5rem 0 0.65rem;
+    box-shadow: none;
+    transition: var(--transition);
+}
+.hero-avatar:hover { border-color: var(--accent-primary); }
+
+.hero-name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.01em;
+    text-shadow: none !important;
+}
+.hero-handle { font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-primary); margin: 0.25rem 0 0; }
+.hero-card-divider { width: 100%; height: 1px; background: var(--border-color); margin: 0.85rem 0; opacity: 0.6; }
+
+/* Micro-Specs 2x2 Grid */
+.hero-specs-grid { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem; text-align: left; font-family: var(--font-mono); font-size: 0.7rem; }
+.hero-spec-item { background: var(--bg-tertiary); padding: 0.45rem 0.55rem; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 0.15rem; }
+.spec-label { font-size: 0.58rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; }
+.spec-val { color: var(--text-secondary); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.spec-green { color: #34d399; }
+.spec-purple { color: #a78bfa; }
+
+/* Left Bento: System Channels Ledger */
+.hero-ledger-card { font-family: var(--font-mono); font-size: 0.72rem; padding: 0.95rem 1.15rem; }
+.ledger-header { font-size: 0.62rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; border-bottom: 1px solid var(--border-color); padding-bottom: 0.35rem; margin-bottom: 0.5rem; display: flex; justify-content: space-between; }
+.ledger-status { color: var(--accent-primary); }
+.ledger-rows { display: flex; flex-direction: column; gap: 0.35rem; }
+.ledger-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
+.ledger-key { color: var(--text-muted); text-transform: uppercase; font-size: 0.65rem; padding-top: 0.1rem; }
+.ledger-val { color: var(--text-secondary); text-align: right; line-height: 1.4; }
+.ledger-link { color: var(--accent-primary); text-decoration: none; }
+.ledger-link:hover { text-decoration: underline; }
+
+/* Right Bento: Executive Lead Card */
+.hero-lead-card { display: flex; flex-direction: column; gap: 0.9rem; justify-content: space-between; height: 100%; }
+.lead-header-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.lead-badge { padding: 0.2rem 0.5rem; border-radius: var(--border-radius-sm); font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; background: rgba(59, 130, 246, 0.1); color: var(--accent-primary); border: 1px solid rgba(59, 130, 246, 0.25); }
+.lead-terminal-path { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); }
+.hero-title { font-size: 1.85rem; font-weight: 800; line-height: 1.25; margin: 0; letter-spacing: -0.02em; color: var(--text-primary); text-shadow: none !important; }
+.hero-desc { font-size: 0.88rem; line-height: 1.65; color: var(--text-secondary); margin: 0; }
+
+/* Dual Pillars Grid */
+.hero-pillars-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.hero-pillar-card { background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 0.85rem; display: flex; flex-direction: column; gap: 0.35rem; transition: var(--transition); }
+.hero-pillar-card:hover { border-color: rgba(59, 130, 246, 0.35); }
+.pillar-header { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; gap: 0.35rem; }
+.pillar-blue { color: #60a5fa; }
+.pillar-purple { color: #c084fc; }
+.pillar-desc { font-size: 0.75rem; line-height: 1.5; color: var(--text-secondary); margin: 0; flex: 1; }
+.pillar-tags { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.2rem; }
+.pillar-tag { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); padding: 0.12rem 0.35rem; border-radius: 4px; font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-muted); }
+
+/* Action Deck */
+.hero-action-deck { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color); }
+.hero-buttons { display: flex; gap: 0.65rem; }
+.social-pill { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0.65rem; border-radius: 9999px; background: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.68rem; text-decoration: none; transition: var(--transition); }
+.social-pill:hover { color: var(--accent-primary); border-color: var(--accent-primary); }
+
+/* Glitch animation hook */
+@keyframes glitch-hero {
+    0%, 100% { transform: translate(0) skewX(0); }
+    10%, 30%, 50% { transform: translate(-2px, 1px) skewX(-1deg); }
+    20%, 40% { transform: translate(2px, -1px) skewX(1deg); }
+    60% { transform: translate(0) skewX(0); }
+}
+.hero-title.glitch { animation: glitch-hero 0.4s ease-in-out; }
+
+/* Responsive Breakpoints */
+@media (max-width: 960px) {
+    .hero-bento-grid, .hero-pillars-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+    .hero { padding: 4.5rem 0 1.5rem; }
+    .hero-title { font-size: 1.45rem; }
+    .hero-action-deck { flex-direction: column; align-items: stretch; }
+    .hero-buttons { flex-direction: column; width: 100%; }
+    .hero-buttons .btn { width: 100%; justify-content: center; }
+    .hero-action-deck .social-links { justify-content: center; flex-wrap: wrap; }
+}
