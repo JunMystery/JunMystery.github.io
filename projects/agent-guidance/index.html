@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent-Guidance // MCP Simulator & Workbench</title>
+    <meta name="description" content="Interactive Model Context Protocol (stdio) workbench & simulator for Agent-Guidance MCP Server.">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="mcp-container">
+        <!-- Topbar Navigation -->
+        <header class="mcp-topbar">
+            <div class="mcp-topbar-left">
+                <a href="../../index.html#projects" class="back-link" data-mcp-i18n="back_home">← Portfolio</a>
+                <span class="brand-title">Agent-Guidance</span>
+                <span class="brand-badge" data-mcp-i18n="badge_status">● NATIVE RUST &lt;1MS</span>
+            </div>
+            <div class="mcp-topbar-right">
+                <button type="button" id="lang-toggle-btn" class="action-btn-pill" aria-label="Toggle Language">VI</button>
+                <button type="button" id="theme-toggle-btn" class="action-btn-pill" aria-label="Toggle Theme">🌙</button>
+                <a href="https://github.com/JunMystery/Agent-Guidance" target="_blank" rel="noopener noreferrer" class="action-btn-pill" data-mcp-i18n="view_repo">GitHub Repository</a>
+            </div>
+        </header>
+
+        <!-- Executive Banner -->
+        <section class="mcp-banner">
+            <h1 data-mcp-i18n="page_title">Agent-Guidance // MCP Simulator &amp; Workbench</h1>
+            <p data-mcp-i18n="page_sub">Interactive Model Context Protocol (stdio) simulator enforcing architectural discipline on AI agents</p>
+        </section>
+
+        <!-- Live Telemetry Metrics -->
+        <section class="mcp-metrics-grid">
+            <div class="metric-box">
+                <span class="metric-label" data-mcp-i18n="stats_saved">TOKENS SAVED</span>
+                <span class="metric-value val-green" id="metric-tokens-saved">14,230 tok</span>
+            </div>
+            <div class="metric-box">
+                <span class="metric-label" data-mcp-i18n="stats_rate">SAVINGS RATE</span>
+                <span class="metric-value val-green" id="metric-savings-rate">95.8%</span>
+            </div>
+            <div class="metric-box">
+                <span class="metric-label" data-mcp-i18n="stats_latency">STARTUP LATENCY</span>
+                <span class="metric-value">&lt; 0.85 ms</span>
+            </div>
+            <div class="metric-box">
+                <span class="metric-label" data-mcp-i18n="stats_ram">MEMORY USAGE</span>
+                <span class="metric-value">&lt; 32 MB</span>
+            </div>
+        </section>
+
+        <!-- 1-Click Preset Scenarios -->
+        <section class="presets-section">
+            <span class="section-sub-label" data-mcp-i18n="presets_label">QUICK SIMULATION PRESETS</span>
+            <div class="presets-grid" id="presets-list"></div>
+        </section>
+
+        <!-- Interactive Split Workspace -->
+        <main class="mcp-workspace-grid">
+            <!-- Left Panel: Tool Configuration & Trigger -->
+            <div class="workspace-card">
+                <span class="section-sub-label" data-mcp-i18n="tools_label">MCP TOOL REGISTRY</span>
+                <div class="tools-nav-row" id="tools-nav-list"></div>
+
+                <div class="payload-editor-box">
+                    <span class="section-sub-label" data-mcp-i18n="payload_label">TOOL INVOCATION (JSON PAYLOAD)</span>
+                    <textarea id="payload-editor" class="code-textarea" spellcheck="false"></textarea>
+                </div>
+
+                <div class="editor-actions">
+                    <button type="button" id="run-tool-btn" class="btn-run" data-mcp-i18n="run_btn">EXECUTE TOOL (STDIO)</button>
+                    <button type="button" id="clear-log-btn" class="btn-clear" data-mcp-i18n="clear_btn">CLEAR LOGS</button>
+                </div>
+            </div>
+
+            <!-- Right Panel: Live Execution Log & Gate Response -->
+            <div class="workspace-card">
+                <span class="section-sub-label" data-mcp-i18n="stream_label">MCP EXECUTION STREAM &amp; TELEMETRY</span>
+                <div class="log-stream-container" id="log-stream-content"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Simulator Controller Scripts (100% Offline-friendly, zero CORS, no server needed) -->
+    <script src="./js/mock-data.js"></script>
+    <script src="./js/simulator-core.js"></script>
+    <script src="./js/simulator-ui.js"></script>
+</body>
+</html>

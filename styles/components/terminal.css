@@ -1,0 +1,111 @@
+/* Linear Open Canvas: transparent section wrapper, eliminating box-in-box syndrome */
+.terminal-window {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    position: relative;
+}
+
+.terminal-window:hover {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+/* Hide background matrix rain canvas in light mode to keep background pure and clean */
+[data-theme="light"] .terminal-matrix-canvas {
+    display: none !important;
+}
+
+/* Header toolbar for sections that need tab switchers (Projects, Career) */
+.terminal-header {
+    min-height: auto;
+    background: transparent;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+    padding: 0 0 0.5rem 0;
+    position: relative;
+    gap: 1rem;
+    font-family: var(--font-sans);
+}
+
+/* Hide terminal chrome on pure content sections */
+#about .terminal-header,
+#skills .terminal-header {
+    display: none !important;
+}
+
+/* Eliminate nostalgic traffic light dots */
+.terminal-dots,
+.terminal-dot {
+    display: none !important;
+}
+
+/* Hide redundant filename labels */
+.terminal-title {
+    display: none !important;
+}
+
+.terminal-body {
+    padding: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    text-align: left;
+    overflow-x: auto;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.terminal-body-raw {
+    padding: 0;
+}
+
+/* Preserved easter-egg button in header */
+.terminal-debug-btn {
+    margin-left: auto;
+    color: var(--accent-primary);
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    opacity: 0.9;
+    transition: var(--transition);
+    text-decoration: none;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--border-radius-sm);
+    background: rgba(var(--bg-secondary-rgb), 0.6);
+    border: 1px solid var(--border-color);
+}
+
+.terminal-debug-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--accent-primary);
+    background: var(--accent-primary);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .terminal-header {
+        min-height: 2.25rem;
+        padding: 0.35rem 0.85rem;
+        flex-wrap: wrap;
+    }
+    .terminal-body-raw {
+        padding: 1.25rem 1rem;
+    }
+    .tabs-row {
+        flex: 1 1 100%;
+        margin-left: 0;
+        padding: 0.25rem 0;
+        order: 99;
+        border-top: 1px solid var(--border-color);
+    }
+}

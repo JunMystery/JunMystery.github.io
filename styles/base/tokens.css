@@ -1,0 +1,73 @@
+:root {
+    /* Modern Engineering Theme (Deep Charcoal + Cobalt Blue Accent) */
+    --bg-primary: #0b0f17;
+    --bg-secondary: #111827;
+    --bg-secondary-rgb: 17, 24, 39;
+    --bg-tertiary: #1e293b;
+    --border-color: rgba(255, 255, 255, 0.09);
+    --border-color-hover: rgba(59, 130, 246, 0.45);
+    --card-surface: #111827;
+    --card-highlight: rgba(255, 255, 255, 0.03);
+
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    /* Modern Blue Accents (Linear / Stripe Engineering) */
+    --accent-primary: #3b82f6;   /* Modern Cobalt Blue */
+    --accent-secondary: #10b981; /* Emerald Status */
+    --accent-orange: #f59e0b;    /* Warm Amber */
+    --accent-purple: #6366f1;    /* Indigo */
+    --accent-gradient: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    --card-gradient: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%);
+
+    /* Retro/Easter Egg backward-compatibility accents */
+    --neon-green: #10b981;
+    --neon-magenta: #ec4899;
+    --neon-cyan: #06b6d4;
+    --neon-red: #ef4444;
+
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: 'Cascadia Code', 'Cascadia Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+    --container-max: 1140px;
+    --border-radius-sm: 6px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --border-radius-xl: 20px;
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 20px -2px rgba(0, 0, 0, 0.4), 0 2px 6px -1px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 12px 36px -4px rgba(0, 0, 0, 0.6);
+
+    /* Theme crossfade */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="light"] {
+    /* Linear Clean Light Theme */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-secondary-rgb: 248, 250, 252;
+    --bg-tertiary: #f1f5f9;
+    --border-color: #e2e8f0;
+    --border-color-hover: rgba(37, 99, 235, 0.4);
+    --card-surface: #ffffff;
+    --card-highlight: rgba(0, 0, 0, 0.01);
+
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+
+    --accent-primary: #2563eb;
+    --accent-secondary: #059669;
+    --accent-orange: #d97706;
+    --accent-purple: #7c3aed;
+    --accent-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    --card-gradient: linear-gradient(180deg, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0) 100%);
+
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.07);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+}

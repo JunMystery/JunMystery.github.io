@@ -1,0 +1,12 @@
+/* CV Font Themes */
+.font-mono-tech {
+    font-family: var(--font-mono);
+}
+
+.font-sans-pro {
+    font-family: var(--font-sans);
+}
+
+.font-serif-classic {
+    font-family: var(--font-serif);
+}

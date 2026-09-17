@@ -1,0 +1,21 @@
+    <section class="section container reveal-terminal" id="projects">
+        <div class="terminal-window">
+            <div class="section-title-bar">
+                <h2 class="section-title" data-i18n="projects.title">Projects</h2>
+                <div class="tabs-row">
+                    <button class="tab-btn active" data-project-tab="projects"
+                        data-i18n="projects.tab_projects">Projects</button>
+                    <button class="tab-btn" data-project-tab="pipeline"
+                        data-i18n="projects.tab_pipeline">Pipeline</button>
+                    <span class="pipeline-status" id="pipeline-status-label"
+                        data-i18n="pipeline.status_idle">IDLE</span>
+                </div>
+            </div>
+            <div class="terminal-body-raw">
+                <div class="project-panels">
+<!-- @include partials/projects-console.html -->
+<!-- @include partials/projects-pipeline.html -->
+                </div>
+            </div>
+        </div>
+    </section>

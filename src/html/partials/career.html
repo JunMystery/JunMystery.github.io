@@ -1,0 +1,29 @@
+    <!-- Career Section (Experience + Education + Certifications) -->
+    <section class="section container reveal-terminal" id="career">
+        <div class="terminal-window">
+            <div class="section-title-bar">
+                <h2 class="section-title" data-i18n="career.title">Career</h2>
+                <div class="tabs-row">
+                    <button class="tab-btn active" data-career-tab="experience"
+                        data-i18n="career.tab_experience">Experience</button>
+                    <button class="tab-btn" data-career-tab="education"
+                        data-i18n="career.tab_education">Education</button>
+                    <button class="tab-btn" data-career-tab="certifications"
+                        data-i18n="career.tab_certifications">Certifications</button>
+                </div>
+            </div>
+            <div class="terminal-body-raw">
+                <div class="career-panels">
+                    <!-- Experience Tab -->
+<!-- @include partials/career-experience.html -->
+<!-- @include partials/career-education.html -->
+<!-- @include partials/career-certifications.html -->
+                </div>
+                <div class="career-status-bar" id="career-status-bar">
+                    <span class="status-prompt">$</span>
+                    <span class="status-path">./experience.sh</span>
+                    <span class="status-count">4 entries</span>
+                </div>
+            </div>
+        </div>
+    </section>

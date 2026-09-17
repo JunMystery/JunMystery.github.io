@@ -1,0 +1,289 @@
+/* ============================================================
+   About — Executive Bento Dossier (Linear Open Canvas)
+   Concise, Modern Engineering Aesthetic, 100% Token Sync
+   ============================================================ */
+
+#about .terminal-body-raw {
+    font-family: var(--font-sans);
+    padding: 0;
+}
+
+/* Master Card Container */
+.dossier-hub-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    box-shadow: inset 0 1px 0 0 var(--card-highlight), var(--shadow-sm);
+    padding: 1.25rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+.dossier-hub-card:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: inset 0 1px 0 0 var(--card-highlight), var(--shadow-md);
+}
+
+/* Executive Banner */
+.dossier-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.banner-left {
+    flex: 1 1 540px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.banner-role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--border-radius-sm);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    width: fit-content;
+}
+.banner-role-badge .stepper-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-secondary);
+}
+.banner-mission {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+.banner-subtext {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+}
+
+/* Metric Items */
+.banner-metrics {
+    display: flex;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.b-metric-item {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    padding: 0.55rem 0.85rem;
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+    min-width: 82px;
+    transition: border-color 0.15s ease;
+}
+.b-metric-item:hover { border-color: rgba(255, 255, 255, 0.2); }
+.b-metric-val {
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    display: block;
+    line-height: 1.2;
+}
+.b-metric-lbl {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+}
+
+/* 3 Strategic Architecture Pillars — Cyber-HUD Telemetry */
+.dossier-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+.pillar-card {
+    background: rgba(10, 15, 29, 0.75);
+    border: 1px solid var(--border-color);
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    padding: 1.15rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+.pillar-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    border-top: 2px solid;
+    border-right: 2px solid;
+    opacity: 0.5;
+    pointer-events: none;
+}
+.pillar-card.p-blue::after { border-color: #38bdf8; }
+.pillar-card.p-green::after { border-color: #34d399; }
+.pillar-card.p-purple::after { border-color: #a855f7; }
+
+.pillar-card.p-blue:hover { border-color: rgba(56, 189, 248, 0.55); box-shadow: 0 0 24px -6px rgba(56, 189, 248, 0.3); transform: translateY(-2px); }
+.pillar-card.p-green:hover { border-color: rgba(52, 211, 153, 0.55); box-shadow: 0 0 24px -6px rgba(52, 211, 153, 0.3); transform: translateY(-2px); }
+.pillar-card.p-purple:hover { border-color: rgba(168, 85, 247, 0.55); box-shadow: 0 0 24px -6px rgba(168, 85, 247, 0.3); transform: translateY(-2px); }
+.pillar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.pillar-code {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.18rem 0.5rem;
+    border-radius: 2px;
+    letter-spacing: 0.04em;
+    border: 1px solid;
+}
+.pillar-code::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.p-blue .pillar-code { background: rgba(56, 189, 248, 0.1); border-color: rgba(56, 189, 248, 0.35); color: #7dd3fc; }
+.p-blue .pillar-code::before { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+.p-green .pillar-code { background: rgba(52, 211, 153, 0.1); border-color: rgba(52, 211, 153, 0.35); color: #6ee7b7; }
+.p-green .pillar-code::before { background: #34d399; box-shadow: 0 0 6px #34d399; }
+.p-purple .pillar-code { background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.35); color: #d8b4fe; }
+.p-purple .pillar-code::before { background: #c084fc; box-shadow: 0 0 6px #c084fc; }
+
+.pillar-telemetry {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    opacity: 0.75;
+}
+.p-blue .pillar-telemetry { color: #38bdf8; }
+.p-green .pillar-telemetry { color: #34d399; }
+.p-purple .pillar-telemetry { color: #a855f7; }
+
+.pillar-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+.pillar-duties {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+.pillar-duties li {
+    padding: 0.45rem 0.55rem;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.015);
+    border-left: 2px solid;
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    transition: background 0.15s ease;
+}
+.pillar-duties li:hover { background: rgba(255, 255, 255, 0.035); }
+.p-blue .pillar-duties li { border-left-color: rgba(56, 189, 248, 0.65); }
+.p-green .pillar-duties li { border-left-color: rgba(52, 211, 153, 0.65); }
+.p-purple .pillar-duties li { border-left-color: rgba(168, 85, 247, 0.65); }
+.pillar-duties strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+.pillar-chips {
+    margin-top: auto;
+    padding-top: 0.65rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    border-top: 1px solid var(--border-color);
+}
+.p-chip {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    padding: 0.18rem 0.45rem;
+    border-radius: 2px;
+    color: var(--text-muted);
+    clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+.pillar-card:hover .p-chip {
+    border-color: rgba(255, 255, 255, 0.18);
+    color: var(--text-secondary);
+}
+
+/* Dossier Footer / Philosophy */
+.dossier-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.dossier-philosophy-group {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+.dossier-phil-label { color: var(--text-muted); }
+.dossier-philosophy { color: var(--accent-secondary); font-weight: 600; }
+.dossier-framework { color: var(--text-muted); font-size: 0.7rem; letter-spacing: 0.02em; }
+
+/* Responsive & Reduced Motion */
+@media (max-width: 820px) {
+    .dossier-pillars-grid { grid-template-columns: 1fr; }
+    .dossier-banner { flex-direction: column; }
+    .banner-metrics { width: 100%; justify-content: space-between; }
+    .b-metric-item { flex: 1 1 calc(25% - 0.5rem); min-width: 70px; }
+}
+
+@media (max-width: 480px) {
+    .banner-metrics { display: grid; grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dossier-hub-card, .pillar-card { transition: none !important; transform: none !important; }
+}
